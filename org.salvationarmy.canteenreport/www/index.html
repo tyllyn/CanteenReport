@@ -1,5 +1,23 @@
 <!DOCTYPE html>
-<html manifest="canteen.appcache">
+<!--
+    Licensed to the Apache Software Foundation (ASF) under one
+    or more contributor license agreements.  See the NOTICE file
+    distributed with this work for additional information
+    regarding copyright ownership.  The ASF licenses this file
+    to you under the Apache License, Version 2.0 (the
+    "License"); you may not use this file except in compliance
+    with the License.  You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing,
+    software distributed under the License is distributed on an
+    "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+     KIND, either express or implied.  See the License for the
+    specific language governing permissions and limitations
+    under the License.
+-->
+<html>
 
     <head>
         <meta charset="utf-8" />
@@ -56,31 +74,22 @@
         </div>
         -->
 
-        <!-- WE NEED TO DYNAMICALLY CREATE THE UNIQUE ID FOR THE FORM ON "NEW REPORT" -->
-        <form class="form-horizontal" id="form" data-unique="1">
+        <form class="form-horizontal">
 
             <!--
                 INCIDENT
               -->
 
-            <section id="incident" class="canteen-well">
+            <section id="incident" class="well">
 
                 <fieldset>
 
-                    <div class="form-group">
-
-                        <label class="required control-label" for="incident-start">
-                            Unit Number <abbr title="required">*</abbr>
-                        </label>
-
-                        <div class="input-group input-group-lg">
-                            <input class="form-control" placeholder="Unit Number" name="incident-unit-number" type="text" />
-                        </div>
-
-                    </div>
+                    <legend>
+                        Unit Number: <span clas="label unit-number">001</span>
+                    </legend>
 
 
-                    <div class="form-group">
+                    <div class="control-group">
 
                         <label class="required control-label" for="incident-start">
                             Start <abbr title="required">*</abbr>
@@ -93,7 +102,7 @@
 
                     </div>
 
-                    <div class="form-group">
+                    <div class="control-group">
 
                         <label class="required control-label" for="incident-location">
                             Location of Incident <abbr title="required">*</abbr>
@@ -105,7 +114,19 @@
 
                     </div>
 
-                    <div class="form-group">
+                    <div class="control-group">
+
+                        <label class="required control-label" for="incident-route">
+                            Route <abbr title="required">*</abbr>
+                        </label>
+
+                        <div class="input-group input-group-lg">
+                            <input class="input-xlarge form-control" placeholder="Route" name="incident-route" type="text" />
+                        </div>
+
+                    </div>
+
+                    <div class="control-group">
 
                         <label class="required control-label" for="incident-route">
                             Type of Call <abbr title="required">*</abbr>
@@ -143,13 +164,13 @@
                 TEAM
               -->
 
-            <section id="team" class="canteen-well">
+            <section id="team" class="well">
 
                 <fieldset>
 
                     <legend>Salvation Army Team</legend>
 
-                    <div class="form-group">
+                    <div class="control-group">
 
                         <div class="input-group input-group-lg">
                             <input class="form-control" placeholder="Driver" name="team-driver" id="team-driver" type="text" />
@@ -157,14 +178,14 @@
 
                     </div>
 
-                    <div class="form-group members-group">
+                    <div class="control-group members-group">
 
                         <div class="input-group input-group-lg team-member team-member-1">
-                            <input class="form-control" placeholder="Staff/Volunteer" name="team-member-1" id="team-member-1" type="text" />
-                            <span class="input-group-btn js-remove-member-container">
+                            <input class="form-control" placeholder="Staff/Volunteer" name="team-member" id="team-member-1" type="text" />
+                            <span class="input-group-btn">
                                 <button class="btn btn-default glyphicon glyphicon-minus js-remove-member" type="button"></button>
                             </span>
-                            <span class="input-group-btn js-add-member-container">
+                            <span class="input-group-btn">
                                 <button class="btn btn-default glyphicon glyphicon-plus js-add-member" type="button"></button>
                             </span>
                         </div>
@@ -174,7 +195,7 @@
 
                     <legend>Red Cross Refferal</legend>
 
-                    <div class="form-group">
+                    <div class="control-group">
 
                         <div class="input-group input-group-lg">
                             <input class="form-control" placeholder="Name" name="team-refferal-name" type="text" />
@@ -182,7 +203,7 @@
 
                     </div>
 
-                    <div class="form-group">
+                    <div class="control-group">
 
                         <div class="input-group input-group-lg">
                             <input class="form-control" placeholder="Title" name="team-refferal-title" type="text" />
@@ -199,7 +220,7 @@
                 SERVICES
               -->
 
-            <section id="services" class="canteen-well">
+            <section id="services" class="well">
 
                 <fieldset>
 
@@ -485,7 +506,7 @@
 
                     <legend>Counseling/Player</legend>
 
-                    <div class="form-group">
+                    <div class="control-group">
 
                         <label class="required control-label" for="services-administer">
                             Administer
@@ -497,7 +518,7 @@
 
                     </div>
 
-                    <div class="form-group">
+                    <div class="control-group">
 
                         <label class="required control-label" for="services-administer">
                             Individual
@@ -509,7 +530,7 @@
 
                     </div>
 
-                    <div class="form-group">
+                    <div class="control-group">
 
                         <label class="required control-label" for="services-administer">
                             Reason
@@ -521,7 +542,7 @@
 
                     </div>
 
-                    <div class="form-group">
+                    <div class="control-group">
 
                         <label class="required control-label" for="services-administer">
                             Phone Number
@@ -551,13 +572,13 @@
             <!--
                 END
               -->
-            <section id="end" class="canteen-well">
+            <section id="end" class="well">
 
                 <fieldset>
 
                     <legend>End</legend>
 
-                    <div class="form-group">
+                    <div class="control-group">
 
                         <label class="required control-label" for="end-time">
                             End <abbr title="required">*</abbr>
@@ -570,7 +591,7 @@
 
                     </div>
 
-                    <div class="form-group">
+                    <div class="control-group">
 
                         <label class="required control-label" for="end-total-mileage">
                             Total Mileage <abbr title="required">*</abbr>
@@ -582,7 +603,7 @@
 
                     </div>
 
-                    <div class="form-group">
+                    <div class="control-group">
 
                         <label class="required control-label" for="end-route-time">
                             Total Route Time <abbr title="required">*</abbr>
@@ -609,20 +630,17 @@
         <script type="text/javascript" src="cordova.js"></script>
         <script type="text/javascript" src="js/index.js"></script>
         <script type="text/javascript" src="js/form.js"></script>
-        <script type="text/javascript" src="js/storage.js"></script>
         <script type="text/javascript">
             app.initialize();
         </script>
 
         <script type="text/javascript" src="js/jquery.min.js"></script>
-        <script type="text/javascript" src="js/amplify.js"></script>
 
         <script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
 
         <script type="text/javascript">
             $(function () {
                 form.initialize();
-                storage.initialize();
             });
         </script>
 
