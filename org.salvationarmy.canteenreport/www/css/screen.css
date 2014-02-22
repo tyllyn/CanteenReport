@@ -40,49 +40,76 @@
 }
 
 /* line 36, ../sass/_start.scss */
-.glyphicon-remove-circle:after {
-  content: "\e088";
+.glyphicon-remove-sign:before {
   font-size: 1.3em;
   position: relative;
-  top: 4px;
-  margin-left: 10px;
-}
-
-/* line 43, ../sass/_start.scss */
-.glyphicon-remove-circle:before {
-  content: none;
+  margin-right: 10px;
+  color: #B2AEA5;
 }
 
 /* line 1, ../sass/_frame.scss */
 header {
   width: 100%;
   position: fixed;
-  padding: 10px 15px;
-  border-bottom: solid 1px #000;
-  background: #fff;
+  padding: 20px 15px;
+  background: #DAD7D2;
   z-index: 1000;
 }
-/* line 9, ../sass/_frame.scss */
+/* line 8, ../sass/_frame.scss */
+header h1 {
+  font-family: 'Average';
+  display: inline-block;
+  position: relative;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+  margin: 0;
+  padding: 0;
+  text-transform: uppercase;
+  font-size: 1.6em;
+}
+/* line 20, ../sass/_frame.scss */
 header:after {
   display: block;
   content: '';
   clear: both;
 }
-/* line 14, ../sass/_frame.scss */
+/* line 25, ../sass/_frame.scss */
 header .closebtn {
-  float: right;
+  padding: 10px 25px;
+  border-radius: 3px;
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  background: #EBEAE8;
+  color: #000;
+  border: solid 1px #ccc;
+  vertical-align: top;
 }
-/* line 16, ../sass/_frame.scss */
+/* line 37, ../sass/_frame.scss */
 header .closebtn:hover {
   text-decoration: none;
+  background: #E3323A;
+  border-color: #c42d32;
+  color: #fff;
 }
-/* line 20, ../sass/_frame.scss */
+/* line 42, ../sass/_frame.scss */
+header .closebtn:hover:before {
+  color: #fff;
+}
+/* line 47, ../sass/_frame.scss */
 header .sync-btn {
-  display: inline-block;
-  padding: 5px 10px;
-  border-radius: 10px;
+  padding: 10px 25px;
+  border-radius: 3px;
+  position: absolute;
+  left: 15px;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  background: #EBEAE8;
+  color: #000;
+  border: solid 1px #ccc;
 }
-/* line 25, ../sass/_frame.scss */
+/* line 57, ../sass/_frame.scss */
 header .sync-btn.isLoading:after {
   display: inline-block;
   position: relative;
@@ -93,44 +120,58 @@ header .sync-btn.isLoading:after {
   top: 3px;
   margin-left: 10px;
 }
-/* line 35, ../sass/_frame.scss */
+/* line 67, ../sass/_frame.scss */
 header .sync-btn:hover {
   text-decoration: none;
+  background: #E3323A;
+  border-color: #c42d32;
+  color: #fff;
 }
 
-/* line 40, ../sass/_frame.scss */
+/* line 75, ../sass/_frame.scss */
 .left-menu {
-  border-right: solid 1px #000;
+  border-right: solid 1px #DAD7D2;
   width: 100%;
   max-width: 100px;
   position: fixed;
   height: 100%;
-  padding-top: 60px;
+  padding-top: 64px;
+  background: #ECEBE7;
 }
-/* line 47, ../sass/_frame.scss */
+/* line 83, ../sass/_frame.scss */
 .left-menu ul {
   list-style: none;
   padding: 0;
   margin: 0;
 }
-/* line 51, ../sass/_frame.scss */
+/* line 87, ../sass/_frame.scss */
 .left-menu ul li {
   text-align: center;
   margin-top: 25px;
 }
-/* line 54, ../sass/_frame.scss */
-.left-menu ul li:first-child {
-  margin-top: 10px;
+/* line 91, ../sass/_frame.scss */
+.left-menu ul li.isActive a {
+  color: #e3323a;
 }
-/* line 57, ../sass/_frame.scss */
+/* line 94, ../sass/_frame.scss */
+.left-menu ul li a {
+  font-size: 1.4em;
+  width: 100%;
+  color: #9C9992;
+}
+/* line 99, ../sass/_frame.scss */
+.left-menu ul li a:hover {
+  color: #E3323A;
+}
+/* line 103, ../sass/_frame.scss */
 .left-menu ul li a:before {
   display: block;
 }
-/* line 60, ../sass/_frame.scss */
+/* line 106, ../sass/_frame.scss */
 .left-menu ul li a:hover {
   text-decoration: none;
 }
-/* line 66, ../sass/_frame.scss */
+/* line 112, ../sass/_frame.scss */
 .left-menu:after {
   display: block;
   content: '';
