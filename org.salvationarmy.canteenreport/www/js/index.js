@@ -53,18 +53,14 @@ var app = {
              .end().filter("[href=#"+id+"]").parent().addClass("isActive");
         });
 
+        /**
+         * adds increment functionality to the + buttons
+         */
         $('.increment').on('click', function(event)
         {
-
-            console.log('click');
-
             var incrementNumberField = $(event.currentTarget).parent().next();
             var incrementNumberFieldVal = Number(incrementNumberField.val());
-
             incrementNumberField.val(incrementNumberFieldVal + 1);
-
-            console.log(incrementNumberField.val())
-
         });
 
         $('.left-menu').find('a').on({

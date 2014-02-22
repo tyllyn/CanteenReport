@@ -1,50 +1,80 @@
-/* line 2, ../sass/_start.scss */
-.container {
-  width: 100%;
-  max-width: 1200px;
-  min-width: 768px;
-  margin: 0 auto;
+/* line 1, ../sass/_start.scss */
+body {
+  background: #B3AEA8;
+  margin-top: 20px;
 }
 
-/* line 8, ../sass/_start.scss */
+/* line 5, ../sass/_start.scss */
+.container {
+  width: 100%;
+  min-width: 768px;
+  margin: 0 auto;
+  background: #fff;
+}
+
+/* line 11, ../sass/_start.scss */
 .container.framed {
-  padding-left: 100px;
+  padding-left: 120px;
   padding-top: 70px;
 }
 
 /* 
 	added a start class just to center things
 */
-/* line 15, ../sass/_start.scss */
+/* line 18, ../sass/_start.scss */
 .container.start {
   text-align: center;
+  padding-top: 50px;
+  background: #ECEBE7;
+  max-width: 100%;
+  margin-bottom: 100px;
+  padding-bottom: 50px;
 }
-/* line 18, ../sass/_start.scss */
+/* line 26, ../sass/_start.scss */
 .container.start h1 {
   text-transform: uppercase;
-  margin-bottom: 2em;
+  margin-bottom: 1.5em;
+  font-family: 'Average';
 }
-/* line 22, ../sass/_start.scss */
+/* line 31, ../sass/_start.scss */
 .container.start a.btn-primary {
-  display: block;
-  width: 60%;
+  display: inline-block;
   margin: 0 auto;
-  padding: 15px;
+  padding: 10px 60px;
   text-align: center;
   font-size: 1.2em;
   text-transform: uppercase;
 }
-/* line 31, ../sass/_start.scss */
+/* line 39, ../sass/_start.scss */
 .container.start a.btn-primary:hover {
   text-decoration: none;
 }
 
-/* line 36, ../sass/_start.scss */
-.glyphicon-remove-sign:before {
+/* line 44, ../sass/_start.scss */
+.glyphicon-remove-circle:before {
   font-size: 1.3em;
   position: relative;
-  margin-right: 10px;
+  margin-right: 5px;
   color: #B2AEA5;
+}
+
+/* line 51, ../sass/_start.scss */
+.btn-primary {
+  padding: 10px 25px;
+  border-radius: 3px;
+  -webkit-transform: translateY(-50%);
+  background: #E3323A;
+  color: #fff;
+  border: solid 1px #c42d32;
+  vertical-align: top;
+  -webkit-transition: all 0.4s;
+}
+/* line 61, ../sass/_start.scss */
+.btn-primary:hover {
+  text-decoration: none;
+  background: #EBEAE8;
+  border-color: #ccc;
+  color: #000;
 }
 
 /* line 1, ../sass/_frame.scss */
@@ -137,17 +167,17 @@ header .sync-btn:hover {
   height: 100%;
   padding-top: 64px;
   background: #ECEBE7;
+  margin-top: 20px;
 }
-/* line 83, ../sass/_frame.scss */
+/* line 84, ../sass/_frame.scss */
 .left-menu ul {
   list-style: none;
   padding: 0;
   margin: 0;
 }
-/* line 87, ../sass/_frame.scss */
+/* line 88, ../sass/_frame.scss */
 .left-menu ul li {
   text-align: center;
-  margin-top: 25px;
 }
 /* line 91, ../sass/_frame.scss */
 .left-menu ul li.isActive a {
@@ -155,9 +185,9 @@ header .sync-btn:hover {
 }
 /* line 94, ../sass/_frame.scss */
 .left-menu ul li a {
-  font-size: 1.4em;
   width: 100%;
   color: #9C9992;
+  padding: 25px 0;
 }
 /* line 99, ../sass/_frame.scss */
 .left-menu ul li a:hover {
@@ -166,12 +196,14 @@ header .sync-btn:hover {
 /* line 103, ../sass/_frame.scss */
 .left-menu ul li a:before {
   display: block;
+  font-size: 1.6em;
+  margin-bottom: 4px;
 }
-/* line 106, ../sass/_frame.scss */
+/* line 108, ../sass/_frame.scss */
 .left-menu ul li a:hover {
   text-decoration: none;
 }
-/* line 112, ../sass/_frame.scss */
+/* line 114, ../sass/_frame.scss */
 .left-menu:after {
   display: block;
   content: '';
@@ -181,4 +213,44 @@ header .sync-btn:hover {
 /* line 3, ../sass/_form.scss */
 .team-member-1 .js-remove-member-container {
   display: none;
+}
+
+/* line 1, ../sass/_openreport.scss */
+.open-report {
+  margin: 0 auto;
+  max-width: 300px;
+  text-align: left;
+  font-family: 'Lato';
+  font-size: 1.1em;
+  border: solid 1px #c8c4bb;
+  margin-top: 30px;
+  background: #fff;
+}
+/* line 11, ../sass/_openreport.scss */
+.open-report h2 {
+  margin: 0;
+  padding: 0;
+  background: #ECEBE7;
+  font-size: 1.1em;
+  border-bottom: solid 1px #c8c4bb;
+  padding: 15px 10px;
+}
+/* line 19, ../sass/_openreport.scss */
+.open-report a {
+  display: block;
+  padding: 15px 10px;
+}
+/* line 22, ../sass/_openreport.scss */
+.open-report a:hover {
+  text-decoration: none;
+}
+/* line 25, ../sass/_openreport.scss */
+.open-report a:before {
+  content: none;
+}
+/* line 28, ../sass/_openreport.scss */
+.open-report a:after {
+  content: "\e080";
+  position: absolute;
+  right: 10px;
 }
