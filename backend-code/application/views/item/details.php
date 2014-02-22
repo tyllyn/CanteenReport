@@ -17,7 +17,7 @@
 			$(document).ready(function() {
 			
 var ctx = document.getElementById("myChart").getContext("2d");
-var myNewChart = new Chart(ctx).Line(data,options);
+var myNewChart = new Chart(ctx).Line(data);
 
 var data = {
 	labels : [<?php
