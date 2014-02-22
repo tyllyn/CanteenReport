@@ -42,7 +42,7 @@ class Item extends CI_Model {
 		for ($i = 0; $i < 24; $i++) {
 			$start = new DateTime($y."-".$m."-1");
 			$end = $start;
-			date_add($end, date_interval_create_from_date_string(
+			//sdate_add($end, date_interval_create_from_date_string(
 			
 			$data[$month + ' ' + $y] = $this->get_entries_items($itemId, $start->format("Y-m-d"), $end->format("Y-m-d"));
 			$m = $m - 1;
