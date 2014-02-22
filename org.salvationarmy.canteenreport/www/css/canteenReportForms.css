@@ -1,0 +1,15 @@
+section.well {
+	margin-bottom: 10em;
+}
+
+/** bootstrap overrides */
+.control-group {
+	margin-bottom: 1em;
+}
+
+.input-group {
+	width: 100%;
+}
+.input-group .glyphicon {
+	top: 0;
+}

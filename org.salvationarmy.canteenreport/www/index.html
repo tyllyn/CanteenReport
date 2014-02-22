@@ -18,15 +18,30 @@
     under the License.
 -->
 <html>
+
     <head>
         <meta charset="utf-8" />
         <meta name="format-detection" content="telephone=no" />
+
         <!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
-        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, target-densitydpi=device-dpi" />
+
         <link rel="stylesheet" type="text/css" href="css/index.css" />
-        <title>Hello World</title>
+
+        <!-- Replace with final bootstrap code -->
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css" />
+
+        <link rel="stylesheet" href="css/bootstrap-datetimepicker.min.css" />
+        <link rel="stylesheet" href="css/canteenReportForms.css" />
+
+        <title>Emergency Disaster Services - Canteen Report</title>
     </head>
+
     <body>
+
+        <!--
         <div class="app">
             <h1>Apache Cordova</h1>
             <div id="deviceready" class="blink">
@@ -34,10 +49,244 @@
                 <p class="event received">Device is Ready</p>
             </div>
         </div>
+        -->
+
+        <form class="form-horizontal">
+
+            <!--
+                INCIDENT
+              -->
+
+            <section id="incident" class="well">
+
+                <fieldset>
+
+                    <legend>
+                        Unit Number: <span clas="label unit-number">001</span>
+                    </legend>
+
+
+                    <div class="control-group">
+
+                        <label class="required control-label" for="incident-start">
+                            Start <abbr title="required">*</abbr>
+                        </label>
+
+                        <div class="input-group input-group-lg">
+                            <input class="form-control" placeholder="Start Time" name="incident-start" type="datetime-local" />
+                            <span class="input-group-addon glyphicon glyphicon-calendar"></span>
+                        </div>
+
+                    </div>
+
+                    <div class="control-group">
+
+                        <label class="required control-label" for="incident-location">
+                            Location of Incident <abbr title="required">*</abbr>
+                        </label>
+
+                        <div class="input-group input-group-lg">
+                            <input class="input-xlarge form-control" placeholder="Location of Incident" name="incident-location" type="text" />
+                        </div>
+
+                    </div>
+
+                    <div class="control-group">
+
+                        <label class="required control-label" for="incident-route">
+                            Route <abbr title="required">*</abbr>
+                        </label>
+
+                        <div class="input-group input-group-lg">
+                            <input class="input-xlarge form-control" placeholder="Route" name="incident-route" type="text" />
+                        </div>
+
+                    </div>
+
+                    <div class="control-group">
+
+                        <label class="required control-label" for="incident-route">
+                            Type of Call <abbr title="required">*</abbr>
+                        </label>
+
+                        <div class="input-group input-group-lg">
+
+                            <div class="btn-group">
+
+                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                                    Select One <span class="caret"></span>
+                                </button>
+
+                                <ul class="dropdown-menu" role="menu">
+                                    <li><a href="#">Fire/Alarm/Companies</a></li>
+                                    <li><a href="#">Flood</a></li>
+                                    <li><a href="#">Hazmat</a></li>
+                                    <li><a href="#">Special Event</a></li>
+                                    <li><a href="#">Maintenence</a></li>
+                                    <li><a href="#">Other</a></li>
+                                </ul>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </fieldset>
+
+            </section>
+
+
+            <!--
+                TEAM
+              -->
+
+            <section id="team" class="well">
+
+                <fieldset>
+
+                    <legend>Salvation Army Team</legend>
+
+                    <div class="control-group">
+
+                        <div class="input-group input-group-lg">
+                            <input class="form-control" placeholder="Driver" name="team-driver" type="text" />
+                        </div>
+
+                    </div>
+
+                    <div class="control-group">
+
+                        <div class="input-group input-group-lg">
+                            <input class="form-control" placeholder="Staff/Volunteer" name="team-driver" type="text" />
+                            <span class="input-group-btn">
+                                <button class="btn btn-default glyphicon glyphicon-plus" type="button"></button>
+                            </span>
+                        </div>
+
+                    </div>
+
+
+                    <legend>Red Cross Refferal</legend>
+
+                    <div class="control-group">
+
+                        <div class="input-group input-group-lg">
+                            <input class="form-control" placeholder="Name" name="team-refferal-name" type="text" />
+                        </div>
+
+                    </div>
+
+                    <div class="control-group">
+
+                        <div class="input-group input-group-lg">
+                            <input class="form-control" placeholder="Title" name="team-refferal-title" type="text" />
+                        </div>
+
+                    </div>
+
+                </fieldset>
+
+            </section>
+
+
+            <!--
+                SERVICES
+              -->
+
+            <section id="services" class="well">
+
+                <fieldset>
+
+                    <legend>Salvation Army Team</legend>
+
+                    <ul class="nav nav-tabs">
+                        <li class="active"><a href="#beverage" data-toggle="tab">Beverage</a></li>
+                        <li><a href="#food" data-toggle="tab">Food</a></li>
+                        <li><a href="#clothing" data-toggle="tab">Clothing</a></li>
+                        <li><a href="#other" data-toggle="tab">Other</a></li>
+                    </ul>
+
+                    <div class="tab-content">
+
+                        <!--
+                            SERVICES
+                          -->
+                        <div class="tab-pane active" id="beverage">
+
+                            <div>
+
+                                <div>
+                                    <button class="btn btn-default" type="button">
+                                        <span class="glyphicon glyphicon-plus">1</span>
+                                    </button>
+                                </div>
+
+                                <div class="service-amount">0</div>
+
+                                <select class="form-control">
+                                    <option value="volvo">Pot</option>
+                                    <option value="saab">Gallon</option>
+                                </select>
+
+                            </div>
+
+                        </div>
+
+                        <!--
+                            FOOD
+                          -->
+                        <div class="tab-pane" id="food">
+                        </div>
+
+                        <!--
+                            CLOTHING
+                          -->
+                        <div class="tab-pane" id="clothing">
+                        </div>
+
+                        <!--
+                            OTHER
+                          -->
+                        <div class="tab-pane" id="other">
+                        </div>
+
+                    </div>
+
+                </fieldset>
+
+            </section>
+
+        </form>
+
+
+
         <script type="text/javascript" src="cordova.js"></script>
         <script type="text/javascript" src="js/index.js"></script>
         <script type="text/javascript">
             app.initialize();
         </script>
+
+        <script type="text/javascript" src="js/jquery.min.js"></script>
+
+        <script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+
+        <script src="js/bootstrap-datetimepicker.min.js"></script>
+
+        <script type="text/javascript">
+
+            $(function() {
+
+                console.log('asdas')
+
+                $('#datetimepicker1').datetimepicker({
+                    language: 'pt-BR'
+                });
+
+            });
+
+        </script>
+
+
     </body>
 </html>
