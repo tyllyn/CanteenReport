@@ -72,6 +72,18 @@ var storage = {
 
 			console.log('inside');
 
+			if ($field.attr('id').indexOf('team-member') != -1) {
+				if ($field.attr('id') != 'team-member-1') {
+					var id = $field.attr('id').split('-');
+
+					form.addMember(id[2], value);
+				} else {
+					if ($field.val() !== value) {
+						$field.val(value);
+					}
+				}
+			}
+
 			console.log($field.val(), value);
 			if ($field.val() !== value) {
 				$field.val(value);
