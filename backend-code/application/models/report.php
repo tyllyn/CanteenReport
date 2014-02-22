@@ -81,7 +81,7 @@ class Report extends CI_Model {
 			$this->db->where('r.start >= ', $start);
 		}
 		if ($end != null) {
-			$this->db->where('r.start <= ', $end);
+			$this->db->where('r.start < ', $end);
 		}
 		return $this->db->get()->result();
 		
