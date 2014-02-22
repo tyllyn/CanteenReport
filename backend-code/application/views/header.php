@@ -4,8 +4,8 @@
 	<meta charset="utf-8">
 	<title>Welcome to CodeIgniter</title>
 
-	<script type="text/javascript" src="//code.jquery.com/jquery-1.10.2.min.js" />
-	<script type="text/javascript" src="/backend-code/js/Graph.js" />
+	<script type="text/javascript" src="//code.jquery.com/jquery-1.10.2.min.js"></script>
+	<script type="text/javascript" src="/backend-code/js/Graph.js"></script>
 
 	
 	<style type="text/css">
