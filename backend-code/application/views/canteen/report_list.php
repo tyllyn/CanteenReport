@@ -31,7 +31,7 @@ foreach ($query as $key => $value) {
 		print "<td>$val</td>";
 	
 	}
-	print "<td><a href=\"/index.php/canteen/report/" . $id . "\">View</a></td>";
+	print "<td><a href=\"/backend-code/index.php/canteen/viewreport/" . $id . "\">View</a></td>";
 	
 	print "</tr>";
 
@@ -44,8 +44,6 @@ print "</table>";
 	?>
 </div>
 
-
-		?>
 		
 	</div>
 
