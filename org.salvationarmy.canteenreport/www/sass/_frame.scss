@@ -1,0 +1,38 @@
+header{
+	width: 100%;
+	position: relative;
+	padding: 10px 15px;
+	border-bottom: solid 1px #000;
+	background: #fff;
+
+	&:after{
+		display: block;
+		content: '';
+		clear: both;
+	}
+	.closebtn{
+		float: right;
+		&:hover{
+			text-decoration: none;
+		}
+	}
+	.sync-btn{
+		display: inline-block;
+		padding: 5px 10px;
+		border-radius: 10px;
+
+		&.isLoading:after{
+			display: inline-block;
+			position: relative;
+			background: url(../img/ajax-loader.gif) no-repeat;
+			content: '';
+			width: 16px;
+			height: 16px;
+			top: 3px;
+			margin-left: 10px;
+		}
+		&:hover{
+			text-decoration: none;
+		}
+	}
+}
