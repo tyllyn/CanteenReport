@@ -7,7 +7,7 @@ class Canteen extends CI_Controller {
 	}
 	
 	public function add($json) {
-		var $res = json_decode($json);
+		$res = json_decode($json);
 		print_r($res);
 	}
 	
