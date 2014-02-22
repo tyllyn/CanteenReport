@@ -1,9 +1,10 @@
 header{
 	width: 100%;
-	position: relative;
+	position: fixed;
 	padding: 10px 15px;
 	border-bottom: solid 1px #000;
 	background: #fff;
+	z-index: 1000;
 
 	&:after{
 		display: block;
@@ -34,5 +35,37 @@ header{
 		&:hover{
 			text-decoration: none;
 		}
+	}
+}
+.left-menu{
+	border-right: solid 1px #000;
+	width: 100%;
+	max-width: 100px;
+	position: fixed;
+	height: 100%;
+	padding-top: 60px;
+	ul{
+		list-style: none;
+		padding: 0;
+		margin: 0;
+		li{
+			text-align: center;
+			margin-top: 25px;
+			&:first-child{
+				margin-top: 10px;
+			}
+			& a:before{
+				display: block;
+			}
+			a:hover{
+				text-decoration: none;
+			}
+		}
+	}
+
+	&:after{
+		display: block;
+		content: '';
+		clear: both;
 	}
 }

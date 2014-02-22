@@ -34,12 +34,35 @@
         <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css" />
 
         <link rel="stylesheet" href="css/canteenReportForms.css" />
+        <link rel="stylesheet" href="css/screen.css" />
+        <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
 
         <title>Emergency Disaster Services - Canteen Report</title>
     </head>
 
     <body>
 
+        <header>
+            <a href="#" class="btn-primary sync-btn">Sync</a> <!-- add class isLoading, to add the fancy ajax loader. -->
+            <a href="#" class="glyphicon glyphicon-remove-circle closebtn">Close</a>
+        </header>
+        <div class="left-menu">
+            <ul>
+                <li>
+                    <a href="#" class="fa fa-flag">Incident</a>
+                </li>
+                <li>
+                    <a href="#" class="fa fa-users">Team</a>
+                </li>
+                <li>
+                    <a href="#" class="fa fa-clipboard">Services</a>
+                </li>
+                <li>
+                    <a href="#" class="fa fa-check">Finish</a>
+                </li>
+            </ul>
+        </div>
+        <div class="container framed">
         <!--
         <div class="app">
             <h1>Apache Cordova</h1>
@@ -149,17 +172,20 @@
                     <div class="control-group">
 
                         <div class="input-group input-group-lg">
-                            <input class="form-control" placeholder="Driver" name="team-driver" type="text" />
+                            <input class="form-control" placeholder="Driver" name="team-driver" id="team-driver" type="text" />
                         </div>
 
                     </div>
 
-                    <div class="control-group">
+                    <div class="control-group members-group">
 
-                        <div class="input-group input-group-lg">
-                            <input class="form-control" placeholder="Staff/Volunteer" name="team-driver" type="text" />
+                        <div class="input-group input-group-lg team-member team-member-1">
+                            <input class="form-control" placeholder="Staff/Volunteer" name="team-member" id="team-member-1" type="text" />
                             <span class="input-group-btn">
-                                <button class="btn btn-default glyphicon glyphicon-plus" type="button"></button>
+                                <button class="btn btn-default glyphicon glyphicon-minus js-remove-member" type="button"></button>
+                            </span>
+                            <span class="input-group-btn">
+                                <button class="btn btn-default glyphicon glyphicon-plus js-add-member" type="button"></button>
                             </span>
                         </div>
 
@@ -588,8 +614,6 @@
 
                     </div>
 
-
-
                 </fieldset>
 
                 <button type="button" class="btn btn-default">
@@ -600,10 +624,11 @@
 
         </form>
 
-
+    </div>
 
         <script type="text/javascript" src="cordova.js"></script>
         <script type="text/javascript" src="js/index.js"></script>
+        <script type="text/javascript" src="js/form.js"></script>
         <script type="text/javascript">
             app.initialize();
         </script>
@@ -611,6 +636,12 @@
         <script type="text/javascript" src="js/jquery.min.js"></script>
 
         <script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+
+        <script type="text/javascript">
+            $(function () {
+                form.initialize();
+            });
+        </script>
 
 
     </body>

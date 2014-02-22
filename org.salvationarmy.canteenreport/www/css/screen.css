@@ -6,19 +6,25 @@
   margin: 0 auto;
 }
 
+/* line 8, ../sass/_start.scss */
+.container.framed {
+  padding-left: 80px;
+  padding-top: 60px;
+}
+
 /* 
 	added a start class just to center things
 */
-/* line 11, ../sass/_start.scss */
+/* line 15, ../sass/_start.scss */
 .container.start {
   text-align: center;
 }
-/* line 14, ../sass/_start.scss */
+/* line 18, ../sass/_start.scss */
 .container.start h1 {
   text-transform: uppercase;
   margin-bottom: 2em;
 }
-/* line 18, ../sass/_start.scss */
+/* line 22, ../sass/_start.scss */
 .container.start a.btn-primary {
   display: block;
   width: 60%;
@@ -28,12 +34,12 @@
   font-size: 1.2em;
   text-transform: uppercase;
 }
-/* line 27, ../sass/_start.scss */
+/* line 31, ../sass/_start.scss */
 .container.start a.btn-primary:hover {
   text-decoration: none;
 }
 
-/* line 32, ../sass/_start.scss */
+/* line 36, ../sass/_start.scss */
 .glyphicon-remove-circle:after {
   content: "\e088";
   font-size: 1.3em;
@@ -42,7 +48,7 @@
   margin-left: 10px;
 }
 
-/* line 39, ../sass/_start.scss */
+/* line 43, ../sass/_start.scss */
 .glyphicon-remove-circle:before {
   content: none;
 }
@@ -50,32 +56,33 @@
 /* line 1, ../sass/_frame.scss */
 header {
   width: 100%;
-  position: relative;
+  position: fixed;
   padding: 10px 15px;
   border-bottom: solid 1px #000;
   background: #fff;
+  z-index: 1000;
 }
-/* line 8, ../sass/_frame.scss */
+/* line 9, ../sass/_frame.scss */
 header:after {
   display: block;
   content: '';
   clear: both;
 }
-/* line 13, ../sass/_frame.scss */
+/* line 14, ../sass/_frame.scss */
 header .closebtn {
   float: right;
 }
-/* line 15, ../sass/_frame.scss */
+/* line 16, ../sass/_frame.scss */
 header .closebtn:hover {
   text-decoration: none;
 }
-/* line 19, ../sass/_frame.scss */
+/* line 20, ../sass/_frame.scss */
 header .sync-btn {
   display: inline-block;
   padding: 5px 10px;
   border-radius: 10px;
 }
-/* line 24, ../sass/_frame.scss */
+/* line 25, ../sass/_frame.scss */
 header .sync-btn.isLoading:after {
   display: inline-block;
   position: relative;
@@ -86,7 +93,46 @@ header .sync-btn.isLoading:after {
   top: 3px;
   margin-left: 10px;
 }
-/* line 34, ../sass/_frame.scss */
+/* line 35, ../sass/_frame.scss */
 header .sync-btn:hover {
   text-decoration: none;
+}
+
+/* line 40, ../sass/_frame.scss */
+.left-menu {
+  border-right: solid 1px #000;
+  width: 100%;
+  max-width: 100px;
+  position: fixed;
+  height: 100%;
+  padding-top: 60px;
+}
+/* line 47, ../sass/_frame.scss */
+.left-menu ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+/* line 51, ../sass/_frame.scss */
+.left-menu ul li {
+  text-align: center;
+  margin-top: 25px;
+}
+/* line 54, ../sass/_frame.scss */
+.left-menu ul li:first-child {
+  margin-top: 10px;
+}
+/* line 57, ../sass/_frame.scss */
+.left-menu ul li a:before {
+  display: block;
+}
+/* line 60, ../sass/_frame.scss */
+.left-menu ul li a:hover {
+  text-decoration: none;
+}
+/* line 66, ../sass/_frame.scss */
+.left-menu:after {
+  display: block;
+  content: '';
+  clear: both;
 }
