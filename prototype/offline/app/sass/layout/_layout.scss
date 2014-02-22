@@ -1,0 +1,32 @@
+form {
+	display: block;
+	width: 400px;
+}
+
+input {
+	display: block;
+	width: 100%;
+	padding: 1em;
+	margin-bottom: 1em;
+	font-size: 18px;
+}
+
+button {
+	padding: 1em;
+	background-color: #ccc;
+}
+
+.status {
+	display: inline-block;
+	background-color: #5680AD;
+	border-radius: 4px;
+	padding: 0.5em;
+}
+
+.status.on {
+	background-color: #09A855;
+}
+
+.status.off {
+	background-color: #DD4D4D;
+}

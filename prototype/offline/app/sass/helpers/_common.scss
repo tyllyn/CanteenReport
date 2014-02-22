@@ -1,0 +1,43 @@
+body * {
+	word-break: break-word;
+	word-wrap: break-word;
+	
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-ms-box-sizing: border-box;
+	box-sizing: border-box;
+	
+	background-color: transparent;
+	background-position: top center;
+	background-repeat: no-repeat;
+
+	-webkit-font-smoothing: antialiased;
+}
+ 
+a { text-decoration: none; }
+a:hover,
+a:focus { text-decoration: underline; }
+
+input[type='text'],
+input[type='password'],
+input[type='search'] { 
+	word-break: normal;
+}
+ 
+input[type='text'],
+textarea,
+select { background-color: #fff; max-width: 100%; }
+ 
+input[type='radio'],
+input[type='checkbox'] { margin: 0 0.4em; }
+ 
+img { max-width: 100%; }
+ 
+table,
+tbody,
+tr,
+td { border: 1px solid #000; }
+
+.content img { padding: 0.5em; }
+.content img[align=left] { padding: 0.5em 0.5em 0.5em 0; float: left; }
+.content img[align=right] { padding: 0.5em 0 0.5em 0.5em; float: right; }

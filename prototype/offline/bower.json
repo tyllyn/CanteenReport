@@ -1,0 +1,9 @@
+{
+  "name": "codefest",
+  "version": "0.0.0",
+  "dependencies": {
+    "modernizr": "*",
+    "jquery": "~1.x"
+  },
+  "devDependencies": {}
+}
