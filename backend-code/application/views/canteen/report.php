@@ -5,7 +5,7 @@
 		<label>Unit:</label> <?php echo $report['Unit'] ?>
 	</div>
 	<div>
-		<label>Date of Incident:</label> <?php echo $report["start"] ?>
+		<label>Date of Incident:</label> <?php echo $report["Start"] ?>
 	</div>
 	
 	<div>
