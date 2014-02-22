@@ -17,7 +17,7 @@
     specific language governing permissions and limitations
     under the License.
 -->
-<html>
+<html manifest="canteen.appcache">
 
     <head>
         <meta charset="utf-8" />
@@ -181,10 +181,10 @@
 
                         <div class="input-group input-group-lg team-member team-member-1">
                             <input class="form-control" placeholder="Staff/Volunteer" name="team-member" id="team-member-1" type="text" />
-                            <span class="input-group-btn">
+                            <span class="input-group-btn js-remove-member-container">
                                 <button class="btn btn-default glyphicon glyphicon-minus js-remove-member" type="button"></button>
                             </span>
-                            <span class="input-group-btn">
+                            <span class="input-group-btn js-add-member-container">
                                 <button class="btn btn-default glyphicon glyphicon-plus js-add-member" type="button"></button>
                             </span>
                         </div>
@@ -629,6 +629,7 @@
         <script type="text/javascript" src="cordova.js"></script>
         <script type="text/javascript" src="js/index.js"></script>
         <script type="text/javascript" src="js/form.js"></script>
+        <script type="text/javascript" src="js/storage.js"></script>
         <script type="text/javascript">
             app.initialize();
         </script>
@@ -640,6 +641,7 @@
         <script type="text/javascript">
             $(function () {
                 form.initialize();
+                storage.initialize();
             });
         </script>
 

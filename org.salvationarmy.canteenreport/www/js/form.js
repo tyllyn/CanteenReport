@@ -15,22 +15,27 @@ var form = {
 		.on('click', '.js-remove-member', function () {
 			var $this = $(this);
 
-			// Remove current row
-			$this.parents('.team-member').remove();
+			if ($('.team-member').length > 1) {
 
-			// Renumber rows
-			var i = 1;
-			$('.team-member').each(function () {
+				// Remove current row
+				$this.parents('.team-member').remove();
 
-				$(this)
-					.removeClass()
-					.addClass('input-group input-group-lg team-member team-member-' + i)
-					.find('input')
-						.attr('id', 'team-member-' + i);
+				// Renumber rows
+				var i = 1;
+				$('.team-member').each(function () {
 
-				i += 1;
+					$(this)
+						.removeClass()
+						.addClass('input-group input-group-lg team-member team-member-' + i)
+						.find('input')
+							.attr('id', 'team-member-' + i);
 
-			});
+					i += 1;
+
+				});
+
+			}
+
 		});
 	},
 	addNewMember: function (id, val) {

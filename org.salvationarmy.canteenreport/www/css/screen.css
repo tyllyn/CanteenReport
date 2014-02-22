@@ -136,3 +136,8 @@ header .sync-btn:hover {
   content: '';
   clear: both;
 }
+
+/* line 3, ../sass/_form.scss */
+.team-member-1 .js-remove-member-container {
+  display: none;
+}
