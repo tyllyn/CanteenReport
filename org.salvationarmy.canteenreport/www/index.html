@@ -74,7 +74,7 @@
         </div>
         -->
 
-        <form class="form-horizontal">
+        <form class="form-horizontal" id="form" data-unique="1">
 
             <!--
                 INCIDENT
@@ -655,8 +655,10 @@
 
         <script type="text/javascript" src="cordova.js"></script>
         <script type="text/javascript" src="js/jquery.min.js"></script>
+        <script type="text/javascript" src="js/amplify.js"></script>
         <script type="text/javascript" src="js/index.js"></script>
         <script type="text/javascript" src="js/form.js"></script>
+        <script type="text/javascript" src="js/storage.js"></script>
         <script type="text/javascript">
             app.initialize();
         </script>
@@ -667,6 +669,7 @@
         <script type="text/javascript">
             $(function () {
                 form.initialize();
+                storage.initialize();
             });
         </script>
 

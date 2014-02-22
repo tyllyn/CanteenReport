@@ -76,17 +76,21 @@ var storage = {
 				if ($field.attr('id') != 'team-member-1') {
 					var id = $field.attr('id').split('-');
 
+					console.log('ATTEMPTING TO ADD MEMBER', id[2], value);
+
 					form.addMember(id[2], value);
 				} else {
 					if ($field.val() !== value) {
 						$field.val(value);
 					}
 				}
-			}
+			} else {
 
-			console.log($field.val(), value);
-			if ($field.val() !== value) {
-				$field.val(value);
+				console.log($field.val(), value);
+				if ($field.val() !== value) {
+					$field.val(value);
+				}
+
 			}
 
 		}
