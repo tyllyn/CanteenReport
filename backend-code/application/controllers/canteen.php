@@ -21,7 +21,7 @@ class Canteen extends CI_Controller {
 		$this->load->model('Report');
 		$data['query'] = $this->Report->get_entries();
 		$this->load->view('database_output', $data);
-	};
+	}
 	
 }
 
