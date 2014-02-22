@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>8902F0A6-59F5-44E5-A486-6C12A72C48A6</string>
+	<key>IDESourceControlProjectName</key>
+	<string>CanteenReport</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>2A101DD8-40C7-4E74-99C0-39D3AC8A2D06</key>
+		<string>https://github.com/tyllyn/CanteenReport.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>org.salvationarmy.canteenreport/platforms/ios/CanteenReport.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>2A101DD8-40C7-4E74-99C0-39D3AC8A2D06</key>
+		<string>../../../../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/tyllyn/CanteenReport.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>2A101DD8-40C7-4E74-99C0-39D3AC8A2D06</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>2A101DD8-40C7-4E74-99C0-39D3AC8A2D06</string>
+			<key>IDESourceControlWCCName</key>
+			<string>CanteenReport</string>
+		</dict>
+	</array>
+</dict>
+</plist>

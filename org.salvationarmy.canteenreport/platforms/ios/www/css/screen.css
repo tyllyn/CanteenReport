@@ -8,7 +8,7 @@
 
 /* line 8, ../sass/_start.scss */
 .container.framed {
-  padding-left: 100px;
+  padding-left: 80px;
   padding-top: 60px;
 }
 
@@ -120,7 +120,7 @@ header .sync-btn:hover {
 }
 /* line 54, ../sass/_frame.scss */
 .left-menu ul li:first-child {
-  margin-top: 10px;
+  margin-top: 0;
 }
 /* line 57, ../sass/_frame.scss */
 .left-menu ul li a:before {
@@ -135,9 +135,4 @@ header .sync-btn:hover {
   display: block;
   content: '';
   clear: both;
-}
-
-/* line 3, ../sass/_form.scss */
-.team-member-1 .js-remove-member-container {
-  display: none;
 }
