@@ -6,8 +6,8 @@ class Canteen extends CI_Controller {
 		$this->load->view('welcome_message');
 	}
 	
-	public function add(json) {
-		var $res = json_decode(json);
+	public function add($json) {
+		var $res = json_decode($json);
 		print_r($res);
 	}
 	
