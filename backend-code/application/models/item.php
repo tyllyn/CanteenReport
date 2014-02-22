@@ -58,7 +58,7 @@ class Item extends CI_Model {
 			}
 		}
 	
-		return $data;
+		return array_reverse($data);
 	}
 	
 	function get_entries_items($itemId, $start, $end) {

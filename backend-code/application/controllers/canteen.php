@@ -111,9 +111,9 @@ class Canteen extends CI_Controller {
 	public function viewitem($itemId) {
 	
 		$this->load->model('Item');
-		$data = $this->Item->report_last_2y($itemId);
-		print_r($data);
-		//$this->load->view("database_output",$data);
+		$data["result"] = $this->Item->report_last_2y($itemId);
+		//print_r($data);
+		$this->load->view("item/details",$data);
 		
 	}
 	

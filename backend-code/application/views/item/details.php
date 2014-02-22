@@ -20,14 +20,33 @@ var ctx = document.getElementById("myChart").getContext("2d");
 var myNewChart = new Chart(ctx).Line(data,options);
 
 var data = {
-	labels : ["January","February","March","April","May","June","July"],
+	labels : [<?php
+	
+// "January","February","March","April","May","June","July"
+$output = "";
+foreach ($result as $key => $value) {
+	$output = "\"" . $key . "\",";
+}
+echo substr($output, 0, strlen($output)-1);
+	
+	?>],
 	datasets : [
 		{
 			fillColor : "rgba(151,187,205,0.5)",
 			strokeColor : "rgba(151,187,205,1)",
 			pointColor : "rgba(151,187,205,1)",
 			pointStrokeColor : "#fff",
-			data : [28,48,40,19,96,27,100]
+			data : [<?php
+			
+//28,48,40,19,96,27,100
+$output = "";
+foreach ($result as $key => $value) {
+	$output = "\"" . $value . "\",";
+}
+echo substr($output, 0, strlen($output)-1);
+
+			
+			?>]
 		}
 	]
 }
