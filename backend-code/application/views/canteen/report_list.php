@@ -22,14 +22,16 @@ foreach ($query as $key => $value) {
 
 	print "<tr>";
 	
-	
-	
+	$id = 0;
 	foreach ($value as $col => $val) {
 	
+		if ($col == "ID") {
+			$id = $val;
+		}
 		print "<td>$val</td>";
 	
 	}
-	print "<td><a href=\"/index.php/canteen/report/" . $value["ID"] . "\">View</a></td>";
+	print "<td><a href=\"/backend-code/index.php/canteen/viewreport/" . $id . "\">View</a></td>";
 	
 	print "</tr>";
 
@@ -42,8 +44,6 @@ print "</table>";
 	?>
 </div>
 
-
-		?>
 		
 	</div>
 

@@ -17,7 +17,7 @@
     specific language governing permissions and limitations
     under the License.
 -->
-<html>
+<html manifest="canteen.appcache">
 
     <head>
         <meta charset="utf-8" />
@@ -74,22 +74,31 @@
         </div>
         -->
 
-        <form class="form-horizontal">
+        <!-- WE NEED TO DYNAMICALLY CREATE THE UNIQUE ID FOR THE FORM ON "NEW REPORT" -->
+        <form class="form-horizontal" id="form" data-unique="1">
 
             <!--
                 INCIDENT
               -->
 
-            <section id="incident" class="well">
+            <section id="incident" class="canteen-well">
 
                 <fieldset>
 
-                    <legend>
-                        Unit Number: <span clas="label unit-number">001</span>
-                    </legend>
+                    <div class="form-group">
+
+                        <label class="required control-label" for="incident-start">
+                            Unit Number <abbr title="required">*</abbr>
+                        </label>
+
+                        <div class="input-group input-group-lg">
+                            <input class="form-control" placeholder="Unit Number" name="incident-unit-number" type="text" />
+                        </div>
+
+                    </div>
 
 
-                    <div class="control-group">
+                    <div class="form-group">
 
                         <label class="required control-label" for="incident-start">
                             Start <abbr title="required">*</abbr>
@@ -102,7 +111,7 @@
 
                     </div>
 
-                    <div class="control-group">
+                    <div class="form-group">
 
                         <label class="required control-label" for="incident-location">
                             Location of Incident <abbr title="required">*</abbr>
@@ -114,19 +123,7 @@
 
                     </div>
 
-                    <div class="control-group">
-
-                        <label class="required control-label" for="incident-route">
-                            Route <abbr title="required">*</abbr>
-                        </label>
-
-                        <div class="input-group input-group-lg">
-                            <input class="input-xlarge form-control" placeholder="Route" name="incident-route" type="text" />
-                        </div>
-
-                    </div>
-
-                    <div class="control-group">
+                    <div class="form-group">
 
                         <label class="required control-label" for="incident-route">
                             Type of Call <abbr title="required">*</abbr>
@@ -164,13 +161,13 @@
                 TEAM
               -->
 
-            <section id="team" class="well">
+            <section id="team" class="canteen-well">
 
                 <fieldset>
 
                     <legend>Salvation Army Team</legend>
 
-                    <div class="control-group">
+                    <div class="form-group">
 
                         <div class="input-group input-group-lg">
                             <input class="form-control" placeholder="Driver" name="team-driver" id="team-driver" type="text" />
@@ -178,14 +175,14 @@
 
                     </div>
 
-                    <div class="control-group members-group">
+                    <div class="form-group members-group">
 
                         <div class="input-group input-group-lg team-member team-member-1">
-                            <input class="form-control" placeholder="Staff/Volunteer" name="team-member" id="team-member-1" type="text" />
-                            <span class="input-group-btn">
+                            <input class="form-control" placeholder="Staff/Volunteer" name="team-member-1" id="team-member-1" type="text" />
+                            <span class="input-group-btn js-remove-member-container">
                                 <button class="btn btn-default glyphicon glyphicon-minus js-remove-member" type="button"></button>
                             </span>
-                            <span class="input-group-btn">
+                            <span class="input-group-btn js-add-member-container">
                                 <button class="btn btn-default glyphicon glyphicon-plus js-add-member" type="button"></button>
                             </span>
                         </div>
@@ -195,7 +192,7 @@
 
                     <legend>Red Cross Refferal</legend>
 
-                    <div class="control-group">
+                    <div class="form-group">
 
                         <div class="input-group input-group-lg">
                             <input class="form-control" placeholder="Name" name="team-refferal-name" type="text" />
@@ -203,7 +200,7 @@
 
                     </div>
 
-                    <div class="control-group">
+                    <div class="form-group">
 
                         <div class="input-group input-group-lg">
                             <input class="form-control" placeholder="Title" name="team-refferal-title" type="text" />
@@ -220,7 +217,7 @@
                 SERVICES
               -->
 
-            <section id="services" class="well">
+            <section id="services" class="canteen-well">
 
                 <fieldset>
 
@@ -506,7 +503,7 @@
 
                     <legend>Counseling/Player</legend>
 
-                    <div class="control-group">
+                    <div class="form-group">
 
                         <label class="required control-label" for="services-administer">
                             Administer
@@ -518,7 +515,7 @@
 
                     </div>
 
-                    <div class="control-group">
+                    <div class="form-group">
 
                         <label class="required control-label" for="services-administer">
                             Individual
@@ -530,7 +527,7 @@
 
                     </div>
 
-                    <div class="control-group">
+                    <div class="form-group">
 
                         <label class="required control-label" for="services-administer">
                             Reason
@@ -542,7 +539,7 @@
 
                     </div>
 
-                    <div class="control-group">
+                    <div class="form-group">
 
                         <label class="required control-label" for="services-administer">
                             Phone Number
@@ -572,13 +569,13 @@
             <!--
                 END
               -->
-            <section id="end" class="well">
+            <section id="end" class="canteen-well">
 
                 <fieldset>
 
                     <legend>End</legend>
 
-                    <div class="control-group">
+                    <div class="form-group">
 
                         <label class="required control-label" for="end-time">
                             End <abbr title="required">*</abbr>
@@ -591,7 +588,7 @@
 
                     </div>
 
-                    <div class="control-group">
+                    <div class="form-group">
 
                         <label class="required control-label" for="end-total-mileage">
                             Total Mileage <abbr title="required">*</abbr>
@@ -603,7 +600,7 @@
 
                     </div>
 
-                    <div class="control-group">
+                    <div class="form-group">
 
                         <label class="required control-label" for="end-route-time">
                             Total Route Time <abbr title="required">*</abbr>
@@ -630,17 +627,20 @@
         <script type="text/javascript" src="cordova.js"></script>
         <script type="text/javascript" src="js/index.js"></script>
         <script type="text/javascript" src="js/form.js"></script>
+        <script type="text/javascript" src="js/storage.js"></script>
         <script type="text/javascript">
             app.initialize();
         </script>
 
         <script type="text/javascript" src="js/jquery.min.js"></script>
+        <script type="text/javascript" src="js/amplify.js"></script>
 
         <script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
 
         <script type="text/javascript">
             $(function () {
                 form.initialize();
+                storage.initialize();
             });
         </script>
 
