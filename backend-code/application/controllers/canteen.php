@@ -10,22 +10,22 @@ class Canteen extends CI_Controller {
 	//$json=$_POST["data"];
 	$json='[{
     "name": "incident-start",
-    "value": ""
+    "value": "2014-02-22 15:35:00"
 }, {
     "name": "incident-location",
-    "value": ""
+    "value": "South Side"
 }, {
     "name": "incident-route",
     "value": ""
 }, {
     "name": "team-driver",
-    "value": ""
+    "value": "Joshua Petry"
 }, {
     "name": "team-member-1",
-    "value": ""
+    "value": "Prince"
 }, {
     "name": "team-member-2",
-    "value": ""
+    "value": "Wyatt"
 }, {
     "name": "team-member-3",
     "value": ""
@@ -102,9 +102,13 @@ class Canteen extends CI_Controller {
 		$res = json_decode($json);
 		//$data = new array();
 		foreach ($res as $value) {
-			$data[$value->name] = $value->value;
+			$data[str_replace ("-","_", $value->name)] = $value->value;
 		}
-		print_r($data);
+		
+		$this->load->model('Report');
+		$insertId = $this->Report->add($data);
+		
+		print("success:" . $insertId);
 	}
 	
 	public function viewitems() {
