@@ -19,7 +19,10 @@
 * {
     -webkit-tap-highlight-color: rgba(0,0,0,0); /* make transparent link selection, adjust last value opacity 0 to 1.0 */
 }
-
+/* apply a natural box layout model to all elements */
+*, *:before, *:after {
+  -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box;
+ }
 body {
     -webkit-touch-callout: none;                /* prevent callout to copy image, etc when tap to hold */
     -webkit-text-size-adjust: none;             /* prevent webkit from resizing text to fit */
@@ -29,4 +32,16 @@ body {
     margin: 0px;
     padding: 0px;
     width:100%;
+}
+.container{
+	width: 100%;
+	max-width: 1200px;
+	min-width: 768px;
+	margin: 0 auto;
+}
+a.btn-primary{
+	display: block;
+	width: 60%;
+	margin: 0 auto;
+	padding: 15px;
 }
