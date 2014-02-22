@@ -21,11 +21,25 @@
 
             <h2 class="status">Waiting</h2>
 
-            <form action="">
+            <form id="form" action="" data-unique="1337">
                 <div>
                     <label for="firstname">First Name</label><input type="text" id="firstname" name="firstname" placeholder="first name!" />
                     <label for="lastname">Last Name</label><input type="text" id="lastname" name="lastname" placeholder="last name!" />
                     <label for="age">Age</label><input type="text" id="age" name="age" placeholder="age!" />
+                    <label for="choice1">
+                    Choice 1</label>
+                    <input type="checkbox" id="choice1" name="choice1" value="one" />
+                    <label for="choice1">
+                    Choice 2</label>
+                    <input type="checkbox" id="choice2" name="choice2" value="two" />
+                    <label for="">Option</label>
+                    <select id="option1" name="option1">
+                        <option value="choose">choose</option>
+                        <option value="one">one</option>
+                        <option value="two">two</option>
+                        <option value="three">three</option>
+                        <option value="four">four</option>
+                    </select>
                     <button name="submit" id="submit">Submit</button>
                 </div>
             </form>
@@ -33,6 +47,7 @@
 
         <!-- build:js js/main.js -->
         <script src="bower_components/jquery/jquery.min.js"></script>
+        <script src="bower_components/amplify-1.1.2/amplify.js"></script>
         <script src="js/main.js"></script>
         <!-- endbuild -->
 </body>
