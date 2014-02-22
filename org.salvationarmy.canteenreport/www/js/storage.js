@@ -1,6 +1,8 @@
 var storage = {
 	initialize: function () {
 		this.events();
+		this.syncForm();
+
 	},
 	events: function () {
 		var s = this;
@@ -44,12 +46,51 @@ var storage = {
 		var unique = $('#form').attr('data-unique'),
 			formdata = this.getFormJSON();
 
-		//amplify.store(unique, null);
+		// amplify.store(unique, null);
 
 		amplify.store(unique, formdata);
 	},
+	field: function (id, value) {
+		var $field = $('#' + id);
+
+		// console.log('trying', $field, $field.is('input[type=text]'));
+
+		// Text field
+		if ($field.is('input[type=text]')) {
+
+			console.log('inside');
+
+			console.log($field.val(), value);
+			if ($field.val() !== value) {
+				$field.val(value);
+			}
+
+		}
+
+		if ($field.is('input[type=checkbox]')) {
+
+			// console.log('inside');
+
+			console.log($field, $field.val(), value);
+			if ($field.attr('checked') !== 'checked') {
+				$field.attr('checked', 'checked');
+			}
+
+		}
+
+		if ($field.is('select')) {
+
+			// console.log('inside');
+
+			// console.log($field.find('option[value=' + value + ']'), value);
+			if ($field.val() !== value) {
+				$field.val(value);
+			}
+
+		}
+	},
 	getFormJSON: function () {
-		return JSON.stringify($('#form').serializeArray());
+		return JSON.parse(JSON.stringify($('#form').serializeArray()));
 	},
 	goOffline: function () {
 
