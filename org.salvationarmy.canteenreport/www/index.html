@@ -33,7 +33,6 @@
         <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" />
         <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css" />
 
-        <link rel="stylesheet" href="css/bootstrap-datetimepicker.min.css" />
         <link rel="stylesheet" href="css/canteenReportForms.css" />
 
         <title>Emergency Disaster Services - Canteen Report</title>
@@ -214,20 +213,97 @@
                           -->
                         <div class="tab-pane active" id="beverage">
 
-                            <div>
+                            <div class="container-fluid amounts">
 
-                                <div>
-                                    <button class="btn btn-default" type="button">
-                                        <span class="glyphicon glyphicon-plus">1</span>
-                                    </button>
+                                <div class="row">
+
+                                    <div class="col-xs-6">
+                                        <div class="input-group input-group-lg">
+                                            <span class="input-group-addon">Coffee</span>
+                                            <input class="form-control input-lg" placeholder="0" name="team-drink-coffee-amount" type="number" />
+                                        </div>
+                                    </div>
+
+                                    <div class="col-xs-6">
+                                        <select class="form-control input-lg">
+                                            <option value="gallon">Gallon</option>
+                                            <option value="pot">Pot</option>
+                                        </select>
+                                    </div>
+
                                 </div>
 
-                                <div class="service-amount">0</div>
+                                <div class="row">
 
-                                <select class="form-control">
-                                    <option value="volvo">Pot</option>
-                                    <option value="saab">Gallon</option>
-                                </select>
+                                    <div class="col-xs-6">
+                                        <div class="input-group input-group-lg">
+                                            <span class="input-group-addon">Cocoa</span>
+                                            <input class="form-control input-lg" placeholder="0" name="team-drink-cocoa-amount" type="number" />
+                                        </div>
+                                    </div>
+
+                                    <div class="col-xs-6">
+                                        <select class="form-control input-lg">
+                                            <option value="gallon">Gallon</option>
+                                            <option value="pot">Pot</option>
+                                        </select>
+                                    </div>
+
+                                </div>
+
+                                <div class="row">
+
+                                    <div class="col-xs-6">
+                                        <div class="input-group input-group-lg">
+                                            <span class="input-group-addon">Hot Tea</span>
+                                            <input class="form-control input-lg" placeholder="0" name="team-drink-tea-amount" type="number" />
+                                        </div>
+                                    </div>
+
+                                    <div class="col-xs-6">
+                                        <select class="form-control input-lg">
+                                            <option value="gallon">Gallon</option>
+                                            <option value="pot">Pot</option>
+                                        </select>
+                                    </div>
+
+                                </div>
+
+                                <div class="row">
+
+                                    <div class="col-xs-6">
+                                        <div class="input-group input-group-lg">
+                                            <span class="input-group-addon">Cold Drinks</span>
+                                            <input class="form-control input-lg" placeholder="0" name="team-cold-drinks-amount" type="number" />
+                                        </div>
+                                    </div>
+
+                                    <div class="col-xs-6">
+                                        <select class="form-control input-lg">
+                                            <option value="gallon">Gallon</option>
+                                            <option value="pot">Pot</option>
+                                        </select>
+                                    </div>
+
+                                </div>
+
+                                <div class="row">
+
+                                    <div class="col-xs-6">
+                                        <div class="input-group input-group-lg">
+                                            <span class="input-group-addon">Water</span>
+                                            <input class="form-control input-lg" placeholder="0" name="team-water-amount" type="number" />
+                                        </div>
+                                    </div>
+
+                                    <div class="col-xs-6">
+                                        <select class="form-control input-lg">
+                                            <option value="gallon">Gallon</option>
+                                            <option value="pot">Pot</option>
+                                        </select>
+                                    </div>
+
+                                </div>
 
                             </div>
 
@@ -237,12 +313,156 @@
                             FOOD
                           -->
                         <div class="tab-pane" id="food">
+
+                            <div class="container-fluid amounts">
+
+                                <div class="row">
+
+                                    <div class="col-xs-6">
+                                        <div class="input-group input-group-lg">
+                                            <span class="input-group-addon">Donuts</span>
+                                            <input class="form-control input-lg" placeholder="0" name="team-food-donuts-amount" type="number" />
+                                        </div>
+                                    </div>
+
+                                    <div class="col-xs-6">
+                                        <select class="form-control input-lg">
+                                            <option value="gallon">Each</option>
+                                            <option value="pot">Dozen</option>
+                                        </select>
+                                    </div>
+
+                                </div>
+
+                                <div class="row">
+
+                                    <div class="col-xs-6">
+                                        <div class="input-group input-group-lg">
+                                            <span class="input-group-addon">Cookies</span>
+                                            <input class="form-control input-lg" placeholder="0" name="team-food-cookies-amount" type="number" />
+                                        </div>
+                                    </div>
+
+                                    <div class="col-xs-6">
+                                        <select class="form-control input-lg">
+                                            <option value="gallon">Each</option>
+                                            <option value="pot">Dozen</option>
+                                        </select>
+                                    </div>
+
+                                </div>
+
+                                <div class="row">
+
+                                    <div class="col-xs-6">
+                                        <div class="input-group input-group-lg">
+                                            <span class="input-group-addon">Sandwiches</span>
+                                            <input class="form-control input-lg" placeholder="0" name="team-food-sandwiches-amount" type="number" />
+                                        </div>
+                                    </div>
+
+                                    <div class="col-xs-6">
+                                        <select class="form-control input-lg">
+                                            <option value="gallon">Each</option>
+                                            <option value="pot">Dozen</option>
+                                        </select>
+                                    </div>
+
+                                </div>
+
+                                <div class="row">
+
+                                    <div class="col-xs-6">
+                                        <div class="input-group input-group-lg">
+                                            <span class="input-group-addon">Hot Dogs</span>
+                                            <input class="form-control input-lg" placeholder="0" name="team-food-hot-dogs-amount" type="number" />
+                                        </div>
+                                    </div>
+
+                                    <div class="col-xs-6">
+                                        <select class="form-control input-lg">
+                                            <option value="gallon">Each</option>
+                                            <option value="pot">Dozen</option>
+                                        </select>
+                                    </div>
+
+                                </div>
+
+                                <div class="row">
+
+                                    <div class="col-xs-6">
+                                        <div class="input-group input-group-lg">
+                                            <span class="input-group-addon">Snack Items</span>
+                                            <input class="form-control input-lg" placeholder="0" name="team-water-amount" type="number" />
+                                        </div>
+                                    </div>
+
+                                    <div class="col-xs-6">
+                                        <select class="form-control input-lg">
+                                            <option value="gallon">Each</option>
+                                            <option value="pot">Dozen</option>
+                                        </select>
+                                    </div>
+
+                                </div>
+
+                            </div>
+
                         </div>
 
                         <!--
                             CLOTHING
                           -->
                         <div class="tab-pane" id="clothing">
+
+                            <div class="container-fluid amounts">
+
+                                <div class="row">
+
+                                    <div class="col-xs-6">
+                                        <div class="input-group input-group-lg">
+                                            <span class="input-group-addon">Gloves</span>
+                                            <input class="form-control input-lg" placeholder="0" name="team-clothing-gloves-amount" type="number" />
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <div class="row">
+
+                                    <div class="col-xs-6">
+                                        <div class="input-group input-group-lg">
+                                            <span class="input-group-addon">Blankets</span>
+                                            <input class="form-control input-lg" placeholder="0" name="team-clothing-blankets-amount" type="number" />
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <div class="row">
+
+                                    <div class="col-xs-6">
+                                        <div class="input-group input-group-lg">
+                                            <span class="input-group-addon">Clothing</span>
+                                            <input class="form-control input-lg" placeholder="0" name="team-clothing-amount" type="number" />
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <div class="row">
+
+                                    <div class="col-xs-6">
+                                        <div class="input-group input-group-lg">
+                                            <span class="input-group-addon">Hand Warmers</span>
+                                            <input class="form-control input-lg" placeholder="0" name="team-clothing-hand-warmers--amount" type="number" />
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                            </div>
+
                         </div>
 
                         <!--
@@ -254,6 +474,127 @@
                     </div>
 
                 </fieldset>
+
+                <fieldset>
+
+                    <legend>Counseling/Player</legend>
+
+                    <div class="control-group">
+
+                        <label class="required control-label" for="services-administer">
+                            Administer
+                        </label>
+
+                        <div class="input-group input-group-lg">
+                            <input class="input-xlarge form-control" placeholder="Administer" name="services-counseling-administer" type="text" />
+                        </div>
+
+                    </div>
+
+                    <div class="control-group">
+
+                        <label class="required control-label" for="services-administer">
+                            Individual
+                        </label>
+
+                        <div class="input-group input-group-lg">
+                            <input class="input-xlarge form-control" placeholder="Individual" name="services-counseling-individual" type="text" />
+                        </div>
+
+                    </div>
+
+                    <div class="control-group">
+
+                        <label class="required control-label" for="services-administer">
+                            Reason
+                        </label>
+
+                        <div class="input-group input-group-lg">
+                            <input class="input-xlarge form-control" placeholder="Reason" name="services-counseling-reason" type="text" />
+                        </div>
+
+                    </div>
+
+                    <div class="control-group">
+
+                        <label class="required control-label" for="services-administer">
+                            Phone Number
+                        </label>
+
+                        <div class="input-group input-group-lg">
+                            <input class="input-xlarge form-control" placeholder="Phone Number" name="services-counseling-phone-number" type="text" />
+                        </div>
+
+                    </div>
+
+                </fieldset>
+
+                <fieldset>
+
+                    <label class="required control-label" for="services-administer">
+                        Notes
+                    </label>
+                    <textarea class="form-control" rows="3"></textarea>
+
+                </fieldset>
+
+            </section>
+
+
+
+            <!--
+                END
+              -->
+            <section id="end" class="well">
+
+                <fieldset>
+
+                    <legend>End</legend>
+
+                    <div class="control-group">
+
+                        <label class="required control-label" for="end-time">
+                            End <abbr title="required">*</abbr>
+                        </label>
+
+                        <div class="input-group input-group-lg">
+                            <input class="form-control" placeholder="Start Time" name="end-time" type="datetime-local" />
+                            <span class="input-group-addon glyphicon glyphicon-calendar"></span>
+                        </div>
+
+                    </div>
+
+                    <div class="control-group">
+
+                        <label class="required control-label" for="end-total-mileage">
+                            Total Mileage <abbr title="required">*</abbr>
+                        </label>
+
+                        <div class="input-group input-group-lg">
+                            <input class="form-control" placeholder="Total Mileage" name="end-total-mileage" type="text" />
+                        </div>
+
+                    </div>
+
+                    <div class="control-group">
+
+                        <label class="required control-label" for="end-route-time">
+                            Total Route Time <abbr title="required">*</abbr>
+                        </label>
+
+                        <div class="input-group input-group-lg">
+                            <input class="form-control" placeholder="Total Route Time" name="end-route-time" type="text" />
+                        </div>
+
+                    </div>
+
+
+
+                </fieldset>
+
+                <button type="button" class="btn btn-default">
+                    Submit
+                </button>
 
             </section>
 
@@ -270,22 +611,6 @@
         <script type="text/javascript" src="js/jquery.min.js"></script>
 
         <script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
-
-        <script src="js/bootstrap-datetimepicker.min.js"></script>
-
-        <script type="text/javascript">
-
-            $(function() {
-
-                console.log('asdas')
-
-                $('#datetimepicker1').datetimepicker({
-                    language: 'pt-BR'
-                });
-
-            });
-
-        </script>
 
 
     </body>

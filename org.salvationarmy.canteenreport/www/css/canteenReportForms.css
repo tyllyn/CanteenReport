@@ -2,6 +2,11 @@ section.well {
 	margin-bottom: 10em;
 }
 
+.amounts .row {
+	margin-top: 1em;
+	margin-bottom: 1em;
+}
+
 /** bootstrap overrides */
 .control-group {
 	margin-bottom: 1em;
