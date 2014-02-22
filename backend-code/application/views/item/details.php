@@ -9,15 +9,15 @@
 	<div>
 		<label>Category: </label><?php print "Category"; ?>
 	</div>
-	
+	<?php print_r($result); ?>
 	<h2>Usage Over Past 2 Years</div>
 	<div>
 	
-		<script>
+		<script type="text/javascript">
 			$(document).ready(function() {
 			
 var ctx = document.getElementById("myChart").getContext("2d");
-var myNewChart = new Chart(ctx).Line(data,options);
+var myNewChart = new Chart(ctx).Line(data);
 
 var data = {
 	labels : [<?php
@@ -25,7 +25,7 @@ var data = {
 // "January","February","March","April","May","June","July"
 $output = "";
 foreach ($result as $key => $value) {
-	$output = "\"" . $key . "\",";
+	$output .= "\"" . $key . "\",";
 }
 echo substr($output, 0, strlen($output)-1);
 	
@@ -41,7 +41,7 @@ echo substr($output, 0, strlen($output)-1);
 //28,48,40,19,96,27,100
 $output = "";
 foreach ($result as $key => $value) {
-	$output = "\"" . $value . "\",";
+	$output .= "\"" . $value . "\",";
 }
 echo substr($output, 0, strlen($output)-1);
 
@@ -52,15 +52,9 @@ echo substr($output, 0, strlen($output)-1);
 }
 
 			});
-	
+		</script>
 		<canvas id="myChart" width="400" height="400"></canvas>
-		<h2>Items</h2>
-		
-		<?php
-		$data["query"] = $reportitems;
-		$this->load->view("database_output", $data);
 
-		?>
 		
 	</div>
 

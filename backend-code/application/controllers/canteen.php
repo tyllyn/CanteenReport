@@ -38,6 +38,7 @@ class Canteen extends CI_Controller {
 }]"';
 		$res = json_decode($json);
 		//$data = new array();
+		$items = null;
 		foreach ($res as $value) {
 		
 			// hard coding IDs because #yolo
