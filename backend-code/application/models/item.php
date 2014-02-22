@@ -48,7 +48,7 @@ class Item extends CI_Model {
 			if ($res == null) {
 				$res = 0;
 			} else {
-				$res = $res[0];
+				$res = $res[0]->q;
 			}
 			$data[$start->format('F') . ' ' . $y] = $res;
 			$m = $m - 1;
@@ -63,7 +63,7 @@ class Item extends CI_Model {
 	
 	function get_entries_items($itemId, $start, $end) {
 	//die($start . '---' . $end . '---' . $itemId);
-		$this->db->select("sum(l.quantity)");
+		$this->db->select("sum(l.quantity) q");
 		$this->db->from("LinkReportItem l");
 		$this->db->join("Items i","i.ID=l.ItemID","inner");
 		$this->db->join("Reports r","r.ID=l.ReportID","inner");
