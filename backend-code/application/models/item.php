@@ -48,7 +48,7 @@ class Item extends CI_Model {
 			if ($res == null) {
 				$res = 0;
 			} else {
-				$res = $res;
+				$res = $res[0][0];
 			}
 			$data[$start->format('F') . ' ' . $y] = $res;
 			$m = $m - 1;
