@@ -3,7 +3,7 @@
 class Canteen extends CI_Controller {
 
 	public function index() {
-		$this->load->view('welcome_message');
+		$this->load->view('canteen/index');
 	}
 	
 	public function add($json) {
