@@ -68,7 +68,33 @@
 
 <div id="container">
 	<?php
-		print_r($query);
+
+print "<table>";	
+
+print "<th>";
+foreach ($query[0] as $key => $value) {
+	print "<td>$key</td>";
+}
+print "</th>";
+foreach ($query as $key => $value) {
+
+
+	print "<tr>";
+	
+	
+	
+	foreach ($value as $col => $val) {
+	
+		print "<td>$val</td>";
+	
+	}
+	
+	print "</tr>";
+
+}
+print "</table>";
+		
+		//print_r($query);
 	?>
 </div>
 
