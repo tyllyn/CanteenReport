@@ -35,69 +35,6 @@ class Canteen extends CI_Controller {
 }, {
     "name": "team-refferal-title",
     "value": ""
-}, {
-    "name": "team-drink-coffee-amount",
-    "value": ""
-}, {
-    "name": "team-drink-cocoa-amount",
-    "value": ""
-}, {
-    "name": "team-drink-tea-amount",
-    "value": ""
-}, {
-    "name": "team-cold-drinks-amount",
-    "value": ""
-}, {
-    "name": "team-water-amount",
-    "value": ""
-}, {
-    "name": "team-food-donuts-amount",
-    "value": ""
-}, {
-    "name": "team-food-cookies-amount",
-    "value": ""
-}, {
-    "name": "team-food-sandwiches-amount",
-    "value": ""
-}, {
-    "name": "team-food-hot-dogs-amount",
-    "value": ""
-}, {
-    "name": "team-water-amount",
-    "value": ""
-}, {
-    "name": "team-clothing-gloves-amount",
-    "value": ""
-}, {
-    "name": "team-clothing-blankets-amount",
-    "value": ""
-}, {
-    "name": "team-clothing-amount",
-    "value": ""
-}, {
-    "name": "team-clothing-hand-warmers--amount",
-    "value": ""
-}, {
-    "name": "services-counseling-administer",
-    "value": ""
-}, {
-    "name": "services-counseling-individual",
-    "value": ""
-}, {
-    "name": "services-counseling-reason",
-    "value": ""
-}, {
-    "name": "services-counseling-phone-number",
-    "value": ""
-}, {
-    "name": "end-time",
-    "value": ""
-}, {
-    "name": "end-total-mileage",
-    "value": ""
-}, {
-    "name": "end-route-time",
-    "value": ""
 }]"';
 		$res = json_decode($json);
 		//$data = new array();
