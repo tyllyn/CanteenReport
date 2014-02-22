@@ -62,7 +62,7 @@ class Item extends CI_Model {
 	}
 	
 	function get_entries_items($itemId, $start, $end) {
-	
+	die($start . '---' . $end . '---' . $itemId);
 		$this->db->select("sum(l.quantity)");
 		$this->db->from("LinkReportItem l");
 		$this->db->join("Items i","i.ID=l.ItemID","inner");
