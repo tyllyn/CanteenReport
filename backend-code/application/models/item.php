@@ -1,6 +1,6 @@
 <?php
 
-class Itemmodel extends CI_Model {
+class Item extends CI_Model {
 
 	var $name;
 	
