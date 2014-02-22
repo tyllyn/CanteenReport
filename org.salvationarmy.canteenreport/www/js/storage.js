@@ -53,7 +53,7 @@ var storage = {
 	field: function (id, value) {
 		var $field = $('#' + id);
 
-		// console.log('trying', $field, $field.is('input[type=text]'));
+		console.log('trying', $field, $field.is('input[type=text]'));
 
 		// Text field
 		if ($field.is('input[type=text]')) {
@@ -67,6 +67,31 @@ var storage = {
 
 		}
 
+		// Text field
+		if ($field.is('textarea')) {
+
+			console.log('inside');
+
+			console.log($field.val(), value);
+			if ($field.val() !== value) {
+				$field.val(value);
+			}
+
+		}
+
+		// Number field
+		if ($field.is('input[type=number]')) {
+
+			console.log('inside');
+
+			console.log($field.val(), value);
+			if ($field.val() !== value) {
+				$field.val(value);
+			}
+
+		}
+
+		// Checkbox
 		if ($field.is('input[type=checkbox]')) {
 
 			// console.log('inside');
@@ -78,11 +103,24 @@ var storage = {
 
 		}
 
+		// Select
 		if ($field.is('select')) {
 
 			// console.log('inside');
 
 			// console.log($field.find('option[value=' + value + ']'), value);
+			if ($field.val() !== value) {
+				$field.val(value);
+			}
+
+		}
+
+		// DateTime
+		if ($field.is('input[type=datetime-local]')) {
+
+			console.log('inside');
+
+			console.log($field.val(), value);
 			if ($field.val() !== value) {
 				$field.val(value);
 			}
