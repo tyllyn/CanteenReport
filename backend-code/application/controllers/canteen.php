@@ -102,9 +102,13 @@ class Canteen extends CI_Controller {
 		$res = json_decode($json);
 		//$data = new array();
 		foreach ($res as $value) {
-			$data[$value->name] = $value->value;
+			$data[str_replace ("-","_", $value->name)] = $value->value;
 		}
-		print_r($data);
+		
+		$this->load->model('Report');
+		$insertId = $this->Report->add($data);
+		
+		print("success:" . $insertId);
 	}
 	
 	public function viewitems() {
