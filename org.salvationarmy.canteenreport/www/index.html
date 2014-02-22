@@ -73,7 +73,8 @@
         </div>
         -->
 
-        <form class="form-horizontal">
+        <!-- WE NEED TO DYNAMICALLY CREATE THE UNIQUE ID FOR THE FORM ON "NEW REPORT" -->
+        <form class="form-horizontal" id="form" data-unique="1">
 
             <!--
                 INCIDENT
@@ -180,7 +181,7 @@
                     <div class="control-group members-group">
 
                         <div class="input-group input-group-lg team-member team-member-1">
-                            <input class="form-control" placeholder="Staff/Volunteer" name="team-member" id="team-member-1" type="text" />
+                            <input class="form-control" placeholder="Staff/Volunteer" name="team-member-1" id="team-member-1" type="text" />
                             <span class="input-group-btn js-remove-member-container">
                                 <button class="btn btn-default glyphicon glyphicon-minus js-remove-member" type="button"></button>
                             </span>
@@ -635,6 +636,7 @@
         </script>
 
         <script type="text/javascript" src="js/jquery.min.js"></script>
+        <script type="text/javascript" src="js/amplify.js"></script>
 
         <script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
 

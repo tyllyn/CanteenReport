@@ -1,6 +1,6 @@
 var storage = {
 	initialize: function () {
-
+		this.events();
 	},
 	events: function () {
 		var s = this;
@@ -18,7 +18,7 @@ var storage = {
 		});
 
 		$('#form').on('blur keydown', 'input, textarea, select', function () {
-			PROTO.saveForm();
+			s.saveForm();
 		});
 	},
 	syncForm: function () {
@@ -42,11 +42,14 @@ var storage = {
 	},
 	saveForm: function () {
 		var unique = $('#form').attr('data-unique'),
-			formdata = PROTO.getFormJSON();
+			formdata = this.getFormJSON();
 
 		//amplify.store(unique, null);
 
 		amplify.store(unique, formdata);
+	},
+	getFormJSON: function () {
+		return JSON.stringify($('#form').serializeArray());
 	},
 	goOffline: function () {
 

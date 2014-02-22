@@ -28,6 +28,7 @@ var form = {
 						.removeClass()
 						.addClass('input-group input-group-lg team-member team-member-' + i)
 						.find('input')
+							.attr('name', 'team-member-' + i)
 							.attr('id', 'team-member-' + i);
 
 					i += 1;
@@ -49,6 +50,7 @@ var form = {
 			.find('input')
 				.val(val)
 				.attr('id', 'team-member-' + id)
+				.attr('name', 'team-member-' + id)
 				.end()
 			.appendTo($('.members-group'));
 	}
