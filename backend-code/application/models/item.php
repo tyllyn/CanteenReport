@@ -62,18 +62,14 @@ class Item extends CI_Model {
 	}
 	
 	function get_entries_items($itemId, $start, $end) {
-	return 100;
-		$this->db->select("l.quantity");
+	
+		$this->db->select("sum(l.quantity)");
 		$this->db->from("LinkReportItem l");
 		$this->db->join("Items i","i.id=l.ItemID","inner");
 		$this->db->join("Reports r","r.id=l.ReportID","inner");
 		$this->db->group_by("i.ID");
-		if ($start != null) {
-			$this->db->where('r.start >= ', $start);
-		}
-		if ($end != null) {
-			$this->db->where('r.start < ', $end);
-		}
+		$this->db->where('r.incident_start >= ', $start);
+		$this->db->where('r.incident_start < ', $end);
 		$this->db->where('i.ID = ', $itemId);
 		return $this->db->get()->result();
 		
