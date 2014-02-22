@@ -39,13 +39,73 @@ class Canteen extends CI_Controller {
 		$res = json_decode($json);
 		//$data = new array();
 		foreach ($res as $value) {
-			$data[str_replace ("-","_", $value->name)] = $value->value;
+		
+			// hard coding IDs because #yolo
+			switch ($value->name) {
+				case "team-drink-coffee-amount":
+					$items[1] => $value->value;
+					break;
+				case "team-drink-cocoa-amount":
+					$items[2] => $value->value;
+					break;
+				case "team-drink-tea-amount":
+					$items[3] => $value->value;
+					break;
+				case "team-cold-drinks-amount":
+					$items[4] => $value->value;
+					break;
+				case "team-water-amount":
+					$items[5] => $value->value;
+					break;
+					
+					
+				case "team-food-donuts-amount":
+					$items[6] => $value->value;
+					break;
+				case "team-food-cookies-amount":
+					$items[7] => $value->value;
+					break;
+				case "team-food-sandwiches-amount":
+					$items[8] => $value->value;
+					break;
+				case "team-food-hot-dogs-amount":
+					$items[9] => $value->value;
+					break;
+				case "team-food-snacks-amount":
+					$items[12] => $value->value;
+					break;
+					
+					
+				case "team-clothing-gloves-amount":
+					$items[10] => $value->value;
+					break;
+				case "team-clothing-blankets-amount":
+					$items[11] => $value->value;
+					break;
+				case "team-clothing-amount":
+					$items[13] => $value->value;
+					break;
+				case "team-clothing-hand-warmers--amount":
+					$items[14] => $value->value;
+					break;
+					
+					
+				default:
+					$data[str_replace ("-","_", $value->name)] = $value->value;
+			}
 		}
 		
 		$this->load->model('Report');
-		$insertId = $this->Report->add($data);
+		$reportId = $this->Report->add($data);
 		
-		print("success:" . $insertId);
+		$this->load->model('Item');
+		foreach ($item as $key => $value) {
+			if (is_numeric($value) && $value > 0) {
+				$this->Item->link_to_report($reportId, $key, $value);
+			}
+		}
+		
+		print("success:" . $reportId);
 	}
 	
 	public function viewitems() {
