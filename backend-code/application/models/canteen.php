@@ -59,7 +59,7 @@ class Canteenmodel extends CI_Model {
 
         $this->db->update('entries', $this, array('id' => $_POST['id']));
     }
-
+	
 }
 
 ?>
