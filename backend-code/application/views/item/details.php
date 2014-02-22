@@ -15,9 +15,6 @@
 	
 		<script type="text/javascript">
 			$(document).ready(function() {
-			
-var ctx = document.getElementById("myChart").getContext("2d");
-var myNewChart = new Chart(ctx).Line(data);
 
 var data = {
 	labels : [<?php
@@ -50,6 +47,9 @@ echo substr($output, 0, strlen($output)-1);
 		}
 	]
 }
+			
+var ctx = document.getElementById("myChart").getContext("2d");
+var myNewChart = new Chart(ctx).Line(data);
 
 			});
 		</script>
