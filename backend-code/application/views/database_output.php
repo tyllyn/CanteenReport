@@ -69,7 +69,7 @@
 <div id="container">
 	<?php
 
-	if ($query == null || sizeof($arr) <= 1) {
+	if ($query == null || sizeof($query) < 1) {
 		print "NO DATA!";
 	} else {
 	
