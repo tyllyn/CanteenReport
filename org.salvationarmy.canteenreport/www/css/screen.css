@@ -18,9 +18,8 @@
   text-transform: uppercase;
   margin-bottom: 2em;
 }
-
-/* line 19, ../sass/_start.scss */
-a.btn-primary {
+/* line 18, ../sass/_start.scss */
+.container.start a.btn-primary {
   display: block;
   width: 60%;
   margin: 0 auto;
@@ -29,7 +28,65 @@ a.btn-primary {
   font-size: 1.2em;
   text-transform: uppercase;
 }
-/* line 28, ../sass/_start.scss */
-a.btn-primary:hover {
+/* line 27, ../sass/_start.scss */
+.container.start a.btn-primary:hover {
+  text-decoration: none;
+}
+
+/* line 32, ../sass/_start.scss */
+.glyphicon-remove-circle:after {
+  content: "\e088";
+  font-size: 1.3em;
+  position: relative;
+  top: 4px;
+  margin-left: 10px;
+}
+
+/* line 39, ../sass/_start.scss */
+.glyphicon-remove-circle:before {
+  content: none;
+}
+
+/* line 1, ../sass/_frame.scss */
+header {
+  width: 100%;
+  position: relative;
+  padding: 10px 15px;
+  border-bottom: solid 1px #000;
+  background: #fff;
+}
+/* line 8, ../sass/_frame.scss */
+header:after {
+  display: block;
+  content: '';
+  clear: both;
+}
+/* line 13, ../sass/_frame.scss */
+header .closebtn {
+  float: right;
+}
+/* line 15, ../sass/_frame.scss */
+header .closebtn:hover {
+  text-decoration: none;
+}
+/* line 19, ../sass/_frame.scss */
+header .sync-btn {
+  display: inline-block;
+  padding: 5px 10px;
+  border-radius: 10px;
+}
+/* line 24, ../sass/_frame.scss */
+header .sync-btn.isLoading:after {
+  display: inline-block;
+  position: relative;
+  background: url(../img/ajax-loader.gif) no-repeat;
+  content: '';
+  width: 16px;
+  height: 16px;
+  top: 3px;
+  margin-left: 10px;
+}
+/* line 34, ../sass/_frame.scss */
+header .sync-btn:hover {
   text-decoration: none;
 }
