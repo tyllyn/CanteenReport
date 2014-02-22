@@ -47,6 +47,7 @@
             <h1>Canteen Report</h1>
             <a href="#" class="glyphicon glyphicon-remove-sign closebtn">Close</a>
         </header>
+
         <div class="left-menu">
             <ul>
                 <li class="isActive">
@@ -64,18 +65,9 @@
             </ul>
         </div>
         <div class="container framed">
-        <!--
-        <div class="app">
-            <h1>Apache Cordova</h1>
-            <div id="deviceready" class="blink">
-                <p class="event listening">Connecting to Device</p>
-                <p class="event received">Device is Ready</p>
-            </div>
-        </div>
-        -->
 
         <!-- WE NEED TO DYNAMICALLY CREATE THE UNIQUE ID FOR THE FORM ON "NEW REPORT" -->
-        <form class="form-horizontal" id="form" data-unique="1">
+        <form id="form" data-unique="1">
 
             <!--
                 INCIDENT
@@ -86,6 +78,10 @@
                 <fieldset>
 
                     <div class="form-group">
+
+                        <label class="required control-label" for="incident-start">
+                            Unit Number <abbr title="required">*</abbr>
+                        </label>
 
                         <div class="input-group input-group-lg">
                             <input class="form-control" placeholder="Unit Number" name="incident-unit-number" id="incident-unit-number" type="text" />
@@ -679,7 +675,7 @@
                         </label>
 
                         <div class="input-group input-group-lg">
-                            <input class="form-control" placeholder="End Time" name="end-time" id="end-time" type="datetime-local" />
+                            <input class="form-control" placeholder="End Time" name="end-time" id="end-time" type="datetime" />
                             <span class="input-group-addon glyphicon glyphicon-calendar"></span>
                         </div>
 
@@ -716,29 +712,6 @@
                 </button>
 
             </section>
-                <br />
-                <br />
-                <br />
-                <br />
-                <br />
-                <br />
-                <br />
-                <br />
-                <br />
-                <br />
-                <br />
-                <br />
-                <br />
-                <br />
-                <br />
-                <br />
-                <br />
-                <br />
-                <br />
-                <br />
-                <br />
-                <br />
-                <br />
 
         </form>
 
