@@ -215,13 +215,39 @@ header .sync-btn:hover {
 /* line 1, ../sass/_openreport.scss */
 .open-report {
   margin: 0 auto;
-  max-width: 500px;
+  max-width: 300px;
   text-align: left;
-  clear: both;
   font-family: 'Lato';
+  font-size: 1.1em;
+  border: solid 1px #c8c4bb;
+  margin-top: 30px;
+  background: #fff;
 }
-/* line 8, ../sass/_openreport.scss */
+/* line 11, ../sass/_openreport.scss */
 .open-report h2 {
   margin: 0;
   padding: 0;
+  background: #ECEBE7;
+  font-size: 1.1em;
+  border-bottom: solid 1px #c8c4bb;
+  padding: 15px 10px;
+}
+/* line 19, ../sass/_openreport.scss */
+.open-report a {
+  display: block;
+  padding: 15px 10px;
+}
+/* line 22, ../sass/_openreport.scss */
+.open-report a:hover {
+  text-decoration: none;
+}
+/* line 25, ../sass/_openreport.scss */
+.open-report a:before {
+  content: none;
+}
+/* line 28, ../sass/_openreport.scss */
+.open-report a:after {
+  content: "\e080";
+  position: absolute;
+  right: 10px;
 }
