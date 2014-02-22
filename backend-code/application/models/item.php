@@ -44,7 +44,11 @@ class Item extends CI_Model {
 			$end = $start;
 			date_add($end, date_interval_create_from_date_string('1 month'));
 			$month = $start->format("F");
-			$data[$month + ' ' + $y] = $this->get_entries_items($itemId, $start, $end)[0][0];
+			
+			$msstart = date( 'Y-m-d H:i:s', $start );
+			$msend = date( 'Y-m-d H:i:s', $end );
+			
+			$data[$month + ' ' + $y] = $this->get_entries_items($itemId, $msstart, $msend)[0][0];
 			$m = $m - 1;
 			if ($m == 0) {
 				$m = 12;
