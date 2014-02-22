@@ -1,5 +1,6 @@
 body{
 	background: #B3AEA8;
+	margin-top: 20px;
 }
 .container{
 	width: 100%;
@@ -40,10 +41,10 @@ body{
 		}
 	}
 }
-.glyphicon-remove-sign:before {
+.glyphicon-remove-circle:before {
 	font-size: 1.3em;
 	position: relative;
-	margin-right: 10px;
+	margin-right: 5px;
 	color: #B2AEA5;
 }
 

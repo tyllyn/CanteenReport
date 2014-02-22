@@ -17,8 +17,10 @@
  * under the License.
  */
 var app = {
+
     // Application Constructor
     initialize: function() {
+
         this.bindEvents();
 
         // Cache selectors
@@ -51,6 +53,20 @@ var app = {
              .end().filter("[href=#"+id+"]").parent().addClass("isActive");
         });
 
+        $('.increment').on('click', function(event)
+        {
+
+            console.log('click');
+
+            var incrementNumberField = $(event.currentTarget).parent().next();
+            var incrementNumberFieldVal = Number(incrementNumberField.val());
+
+            incrementNumberField.val(incrementNumberFieldVal + 1);
+
+            console.log(incrementNumberField.val())
+
+        });
+
         $('.left-menu').find('a').on({
             click: function(e){
                 var id = $(this).attr('href');
@@ -70,14 +86,18 @@ var app = {
     // Bind any events that are required on startup. Common events are:
     // 'load', 'deviceready', 'offline', and 'online'.
     bindEvents: function() {
+
         document.addEventListener('deviceready', this.onDeviceReady, false);
+
     },
     // deviceready Event Handler
     //
     // The scope of 'this' is the event. In order to call the 'receivedEvent'
     // function, we must explicity call 'app.receivedEvent(...);'
     onDeviceReady: function() {
+
         app.receivedEvent('deviceready');
+
     },
     // Update DOM on a Received Event
     receivedEvent: function(id) {
