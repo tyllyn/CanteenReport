@@ -65,3 +65,7 @@
 	</style>
 </head>
 <body>
+
+	<div>
+		<a href="http://23.239.8.146/backend-code/index.php/canteen/">Home</a>
+	</div>
