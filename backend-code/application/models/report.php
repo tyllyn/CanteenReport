@@ -101,7 +101,7 @@ class Report extends CI_Model {
 	
 	function add($data) {
 		$this->db->trans_start();
-		$this->db->insert('Report',$data);
+		$this->db->insert('Reports',$data);
 		$insert_id = $this->db->insert_id();
 		$this->db->trans_complete();
 		return $insert_id;
