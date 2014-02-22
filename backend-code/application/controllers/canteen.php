@@ -20,7 +20,7 @@ class Canteen extends CI_Controller {
 	public function viewreports() {
 		$this->load->model('Report');
 		$data['query'] = $this->Report->get_entries();
-		$this->load->view('database_output', $data);
+		$this->load->view('canteen/report_list', $data);
 	}
 	
 	public function viewreport($id) {
