@@ -6,9 +6,109 @@ class Canteen extends CI_Controller {
 		$this->load->view('canteen/index');
 	}
 	
-	public function add($json) {
+	public function add() {
+	//$json=$_POST["data"];
+	$json='[{
+    "name": "incident-start",
+    "value": "2014-02-22 15:35:00"
+}, {
+    "name": "incident-location",
+    "value": "South Side"
+}, {
+    "name": "incident-route",
+    "value": ""
+}, {
+    "name": "team-driver",
+    "value": "Joshua Petry"
+}, {
+    "name": "team-member-1",
+    "value": "Prince"
+}, {
+    "name": "team-member-2",
+    "value": "Wyatt"
+}, {
+    "name": "team-member-3",
+    "value": ""
+}, {
+    "name": "team-refferal-name",
+    "value": ""
+}, {
+    "name": "team-refferal-title",
+    "value": ""
+}, {
+    "name": "team-drink-coffee-amount",
+    "value": ""
+}, {
+    "name": "team-drink-cocoa-amount",
+    "value": ""
+}, {
+    "name": "team-drink-tea-amount",
+    "value": ""
+}, {
+    "name": "team-cold-drinks-amount",
+    "value": ""
+}, {
+    "name": "team-water-amount",
+    "value": ""
+}, {
+    "name": "team-food-donuts-amount",
+    "value": ""
+}, {
+    "name": "team-food-cookies-amount",
+    "value": ""
+}, {
+    "name": "team-food-sandwiches-amount",
+    "value": ""
+}, {
+    "name": "team-food-hot-dogs-amount",
+    "value": ""
+}, {
+    "name": "team-water-amount",
+    "value": ""
+}, {
+    "name": "team-clothing-gloves-amount",
+    "value": ""
+}, {
+    "name": "team-clothing-blankets-amount",
+    "value": ""
+}, {
+    "name": "team-clothing-amount",
+    "value": ""
+}, {
+    "name": "team-clothing-hand-warmers--amount",
+    "value": ""
+}, {
+    "name": "services-counseling-administer",
+    "value": ""
+}, {
+    "name": "services-counseling-individual",
+    "value": ""
+}, {
+    "name": "services-counseling-reason",
+    "value": ""
+}, {
+    "name": "services-counseling-phone-number",
+    "value": ""
+}, {
+    "name": "end-time",
+    "value": ""
+}, {
+    "name": "end-total-mileage",
+    "value": ""
+}, {
+    "name": "end-route-time",
+    "value": ""
+}]"';
 		$res = json_decode($json);
-		print_r($res);
+		//$data = new array();
+		foreach ($res as $value) {
+			$data[str_replace ("-","_", $value->name)] = $value->value;
+		}
+		
+		$this->load->model('Report');
+		$insertId = $this->Report->add($data);
+		
+		print("success:" . $insertId);
 	}
 	
 	public function viewitems() {
