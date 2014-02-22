@@ -71,11 +71,11 @@
 
 print "<table>";	
 
-print "<th>";
+print "<tr>";
 foreach ($query[0] as $key => $value) {
-	print "<td>$key</td>";
+	print "<th>$key</th>";
 }
-print "</th>";
+print "</tr>";
 foreach ($query as $key => $value) {
 
 
