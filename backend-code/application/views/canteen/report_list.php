@@ -22,12 +22,16 @@ foreach ($query as $key => $value) {
 
 	print "<tr>";
 	
+	$id = 0;
 	foreach ($value as $col => $val) {
 	
+		if ($col == "ID") {
+			$id = $val;
+		}
 		print "<td>$val</td>";
 	
 	}
-	print "<td><a href=\"/index.php/canteen/report/" . $value[0] . "\">View</a></td>";
+	print "<td><a href=\"/index.php/canteen/report/" . $id . "\">View</a></td>";
 	
 	print "</tr>";
 
