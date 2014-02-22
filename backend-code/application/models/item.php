@@ -41,10 +41,16 @@ class Item extends CI_Model {
 		
 		for ($i = 0; $i < 24; $i++) {
 			$start = new DateTime($y."-".$m."-1");
-			$end = $start;
-			date_add($end, date_interval_create_from_date_string(
+			$end = new DateTime($y."-".$m."-1");
+			date_add($end, date_interval_create_from_date_string('1 month'));
 			
-			$data[$month + ' ' + $y] = $this->get_entries_items($itemId, $start->format("Y-m-d"), $end->format("Y-m-d"))[0][0];
+			$res = $this->get_entries_items($itemId, $start->format("Y-m-d"), $end->format("Y-m-d"));
+			if ($res == null) {
+				$res = 0;
+			} else {
+				$res = $res[0]->q;
+			}
+			$data[$start->format('F') . ' ' . $y] = $res;
 			$m = $m - 1;
 			if ($m == 0) {
 				$m = 12;
@@ -52,22 +58,19 @@ class Item extends CI_Model {
 			}
 		}
 	
-		return $data;
+		return array_reverse($data);
 	}
 	
 	function get_entries_items($itemId, $start, $end) {
-		$this->db->select("l.quantity");
+	//die($start . '---' . $end . '---' . $itemId);
+		$this->db->select("sum(l.quantity) q");
 		$this->db->from("LinkReportItem l");
-		$this->db->join("Items i","i.id=l.ItemID","inner");
-		$this->db->join("Reports r","r.id=l.ReportID","inner");
+		$this->db->join("Items i","i.ID=l.ItemID","inner");
+		$this->db->join("Reports r","r.ID=l.ReportID","inner");
 		$this->db->group_by("i.ID");
-		if ($start != null) {
-			$this->db->where('r.start >= ', $start);
-		}
-		if ($end != null) {
-			$this->db->where('r.start < ', $end);
-		}
-		$this->db->where('i.ID = ', $itemId);
+		$this->db->where('r.incident_start >= ', $start);
+		$this->db->where('r.incident_start < ', $end);
+		$this->db->where('i.ID', $itemId);
 		return $this->db->get()->result();
 		
 	}

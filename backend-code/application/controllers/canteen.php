@@ -98,10 +98,12 @@ class Canteen extends CI_Controller {
 		$this->load->model('Report');
 		$reportId = $this->Report->add($data);
 		
-		$this->load->model('Item');
-		foreach ($item as $key => $value) {
-			if (is_numeric($value) && $value > 0) {
-				$this->Item->link_to_report($reportId, $key, $value);
+		if ($item != null) {
+			$this->load->model('Item');
+			foreach ($item as $key => $value) {
+				if (is_numeric($value) && $value > 0) {
+					$this->Item->link_to_report($reportId, $key, $value);
+				}
 			}
 		}
 		
@@ -111,9 +113,9 @@ class Canteen extends CI_Controller {
 	public function viewitem($itemId) {
 	
 		$this->load->model('Item');
-		$data = $this->Item->report_last_2y($itemId);
-		print_r($data);
-		//$this->load->view("database_output",$data);
+		$data["result"] = $this->Item->report_last_2y($itemId);
+		//print_r($data);
+		$this->load->view("item/details",$data);
 		
 	}
 	
