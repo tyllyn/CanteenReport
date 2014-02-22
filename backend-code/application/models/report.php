@@ -1,8 +1,13 @@
 <?php
 
-class Canteenmodel extends CI_Model {
+class Report extends CI_Model {
 
-    var $unitNumber = "";
+	var $id;
+	var $unit;
+	var $start;
+	var $location;
+
+    /*var $unitNumber = "";
 	var $dateIncident;
 	var $timeIncident
 	var $timeInRoute;
@@ -25,7 +30,7 @@ class Canteenmodel extends CI_Model {
 	var $occurrences;
 	var $individualNumbers;
 	
-	var $remarks;
+	var $remarks;*/
 	
 	
 	
@@ -42,8 +47,8 @@ class Canteenmodel extends CI_Model {
         return $query->result();
     }
 
-    function insert_entry()
-    {
+    function insert_entry() 
+	{
         $this->title   = $_POST['title']; // please read the below note
         $this->content = $_POST['content'];
         $this->date    = time();
@@ -59,6 +64,12 @@ class Canteenmodel extends CI_Model {
 
         $this->db->update('entries', $this, array('id' => $_POST['id']));
     }
+
+	
+	function get_entries() {
+		$query = $this->db->get('Report');
+		return $query->result();
+	}
 	
 }
 
