@@ -18,8 +18,8 @@
 		<table>
 		
 		<?php
-		
-		$this->load->view("database_output", $reportitems);
+		$data["query"] = $reportitems;
+		$this->load->view("database_output", $data);
 
 		?>
 		
