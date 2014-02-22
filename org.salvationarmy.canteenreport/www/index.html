@@ -17,7 +17,7 @@
     specific language governing permissions and limitations
     under the License.
 -->
-<html>
+<html manifest="canteen.appcache">
 
     <head>
         <meta charset="utf-8" />
@@ -629,6 +629,7 @@
         <script type="text/javascript" src="cordova.js"></script>
         <script type="text/javascript" src="js/index.js"></script>
         <script type="text/javascript" src="js/form.js"></script>
+        <script type="text/javascript" src="js/storage.js"></script>
         <script type="text/javascript">
             app.initialize();
         </script>
@@ -640,6 +641,7 @@
         <script type="text/javascript">
             $(function () {
                 form.initialize();
+                storage.initialize();
             });
         </script>
 
