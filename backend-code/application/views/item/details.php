@@ -9,7 +9,7 @@
 	<div>
 		<label>Category: </label><?php print "Category"; ?>
 	</div>
-	
+	<?php print_r($result); ?>
 	<h2>Usage Over Past 2 Years</div>
 	<div>
 	
@@ -54,13 +54,7 @@ echo substr($output, 0, strlen($output)-1);
 			});
 	
 		<canvas id="myChart" width="400" height="400"></canvas>
-		<h2>Items</h2>
-		
-		<?php
-		$data["query"] = $reportitems;
-		$this->load->view("database_output", $data);
 
-		?>
 		
 	</div>
 
