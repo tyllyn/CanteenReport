@@ -29,7 +29,7 @@ foreach ($query as $key => $value) {
 		print "<td>$val</td>";
 	
 	}
-	print "<td><a href=\"/index.php/canteen/report/" . $value["id"] . "\">View</a></td>";
+	print "<td><a href=\"/index.php/canteen/report/" . $value["ID"] . "\">View</a></td>";
 	
 	print "</tr>";
 
