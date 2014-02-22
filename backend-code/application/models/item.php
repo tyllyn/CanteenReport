@@ -33,7 +33,7 @@ class Item extends CI_Model {
 	}
 	
 	function report_last_2y($itemId) {
-	
+		date_default_timezone_set('America/New_York'); 
 		$date = new DateTime();
 		$m = $date->format("m");
 		$y = $date->format("Y");
