@@ -100,7 +100,7 @@ class Canteen extends CI_Controller {
     "value": ""
 }]"';
 		$res = json_decode($json);
-		$data = new array();
+		//$data = new array();
 		foreach ($res as $key => $value) {
 			$data[$key] = $value;
 		}
