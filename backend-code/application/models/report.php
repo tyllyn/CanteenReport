@@ -77,6 +77,12 @@ class Report extends CI_Model {
 		return $q->result_array()[0];
 	}
 	
+	function cs($id) {
+		$this->db->where('ReportID',$id);
+		$q = $this->db->get('LinkReportItem');
+		return $q->result();
+	}
+	
 }
 
 ?>
