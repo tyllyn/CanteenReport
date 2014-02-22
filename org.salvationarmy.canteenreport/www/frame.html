@@ -36,23 +36,41 @@
         <link rel="stylesheet" href="css/bootstrap-datetimepicker.min.css" />
         <link rel="stylesheet" href="css/canteenReportForms.css" />
         <link rel="stylesheet" href="css/screen.css" />
+        <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
 
         <title>Emergency Disaster Services - Canteen Report</title>
     </head>
 
     <body>
         <header>
-            <a href="#" class="btn-primary sync-btn">Sync</a>
+            <a href="#" class="btn-primary sync-btn">Sync</a> <!-- add class isLoading, to add the fancy ajax loader. -->
             <a href="#" class="glyphicon glyphicon-remove-circle closebtn">Close</a>
         </header>
-        <div class="container">
+        <div class="left-menu">
+            <ul>
+                <li>
+                    <a href="#" class="fa fa-flag">Incident</a>
+                </li>
+                <li>
+                    <a href="#" class="fa fa-users">Team</a>
+                </li>
+                <li>
+                    <a href="#" class="fa fa-clipboard">Services</a>
+                </li>
+                <li>
+                    <a href="#" class="fa fa-check">Finish</a>
+                </li>
+            </ul>
+        </div>
+        <div class="container framed">
+            container
 <!--             <div class="open-report">
                 <h2>Open Report</h2>
                 <span class="date chevron">Month, DD, YYYY 0:00 PM</span>
             </div>   -->
         </div>
 
-        <script type="text/javascript" src="cordova.js"></script>
+        <script type="text/javascript" src="js/cordova.js"></script>
         <script type="text/javascript" src="js/index.js"></script>
         <script type="text/javascript">
             app.initialize();
