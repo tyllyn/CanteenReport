@@ -65,12 +65,12 @@ class Item extends CI_Model {
 	
 		$this->db->select("sum(l.quantity)");
 		$this->db->from("LinkReportItem l");
-		$this->db->join("Items i","i.id=l.ItemID","inner");
-		$this->db->join("Reports r","r.id=l.ReportID","inner");
+		$this->db->join("Items i","i.ID=l.ItemID","inner");
+		$this->db->join("Reports r","r.ID=l.ReportID","inner");
 		$this->db->group_by("i.ID");
 		$this->db->where('r.incident_start >= ', $start);
 		$this->db->where('r.incident_start < ', $end);
-		$this->db->where('i.ID = ', $itemId);
+		$this->db->where('i.ID', $itemId);
 		return $this->db->get()->result();
 		
 	}
