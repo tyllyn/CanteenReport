@@ -3,7 +3,6 @@
 	<h1>Reports</h1>
 <div id="container">
 		<?php
-		$query = $reportitems;
 		
 
 	if ($query == null || sizeof($query) < 1) {
