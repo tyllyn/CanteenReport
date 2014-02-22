@@ -30,6 +30,12 @@ class Canteen extends CI_Controller {
 		$this->load->view('canteen/report',$data);
 	}
 	
+	public function aggitems($start, $end) {
+		$this->load->model('Report');
+		$data["query"] = $this->Report->get_entries_items($start, $end);
+		$this->load->view('database_output',$data);
+	}
+	
 }
 
 /* End of file welcome.php */

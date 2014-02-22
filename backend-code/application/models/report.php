@@ -71,6 +71,22 @@ class Report extends CI_Model {
 		return $query->result();
 	}
 	
+	function get_entries_items($start, $end) {
+		$this->db->select("i.ID,i.name,sum(l.quantity)");
+		$this->db->from("LinkReportItem l");
+		$this->db->join("Items i","i.id=l.ItemID","inner");
+		$this->db->join("Reports r","r.id=l.ReportID","inner");
+		$this->db->group_by("i.ID");
+		if ($start != null) {
+			$this->db->where('r.start >= ', $start);
+		}
+		if ($end != null) {
+			$this->db->where('r.start <= ', $end);
+		}
+		return $this->db->get()->result();
+		
+	}
+	
 	function get_entry($id) {
 		$this->db->where('id',$id);
 		$q = $this->db->get('Reports');

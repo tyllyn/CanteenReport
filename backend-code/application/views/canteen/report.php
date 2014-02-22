@@ -7,7 +7,6 @@
 	
 	<div>
 		<h2>Items</h2>
-		<table>
 		
 		<?php
 		$data["query"] = $reportitems;
@@ -15,7 +14,6 @@
 
 		?>
 		
-		</table>
 	</div>
 
 <?php $this->load->view("footer"); ?>
