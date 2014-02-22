@@ -108,6 +108,15 @@ class Canteen extends CI_Controller {
 		print("success:" . $reportId);
 	}
 	
+	public function viewitem($itemId) {
+	
+		$this->load->model('Item');
+		$data = $this->Item->report_last_2y($itemId);
+		print_r($data);
+		//$this->load->view("database_output",$data);
+		
+	}
+	
 	public function viewitems() {
 		$this->load->model('Item');
 		$data['query'] = $this->Item->get_entries();
