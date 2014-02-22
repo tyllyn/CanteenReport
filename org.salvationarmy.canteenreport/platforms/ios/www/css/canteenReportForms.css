@@ -1,3 +1,16 @@
+form {
+	margin-bottom: 50em;
+}
+
+.team-member {
+	margin-bottom: 0.25em;
+}
+
+.tab-content {
+	margin-bottom: 2em;
+}
+
+
 .canteen-well {
 	padding: 2em;
 	border-bottom: 2px solid #ecebe8;
