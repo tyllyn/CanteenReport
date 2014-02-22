@@ -1,4 +1,5 @@
-section.well {
+.canteen-well {
+	padding: 2em;
 	margin-bottom: 10em;
 }
 
@@ -17,4 +18,18 @@ section.well {
 }
 .input-group .glyphicon {
 	top: 0;
+}
+
+
+label {
+	font-size: 16px;
+	color: #332e27;
+}
+.form-control {
+	border: 1px solid #c8c4bb;
+}
+
+.required abbr {
+	border-bottom: none;
+	color: #e3323a;
 }
