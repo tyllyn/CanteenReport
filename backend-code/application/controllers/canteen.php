@@ -6,7 +6,8 @@ class Canteen extends CI_Controller {
 		$this->load->view('canteen/index');
 	}
 	
-	public function add($json) {
+	public function add() {
+	//$json=$_POST["data"];
 	$json='[{
     "name": "incident-start",
     "value": ""
@@ -99,7 +100,11 @@ class Canteen extends CI_Controller {
     "value": ""
 }]"';
 		$res = json_decode($json);
-		print_r($res);
+		$data = new array();
+		foreach ($res as $key => $value) {
+			$data[$key] = $value;
+		}
+		print_r($data);
 	}
 	
 	public function viewitems() {
