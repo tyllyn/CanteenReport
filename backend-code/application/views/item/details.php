@@ -3,11 +3,11 @@
 	<h1>Item Details</h1>
 	
 	<div>
-		<label>Item: </label><?php print $Name; ?>
+		<label>Item: </label><?php print "Name"; ?>
 	</div>
 	
 	<div>
-		<label>Category: </label><?php print $Category; ?>
+		<label>Category: </label><?php print "Category"; ?>
 	</div>
 	
 	<h2>Usage Over Past 2 Years</div>

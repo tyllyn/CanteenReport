@@ -98,10 +98,12 @@ class Canteen extends CI_Controller {
 		$this->load->model('Report');
 		$reportId = $this->Report->add($data);
 		
-		$this->load->model('Item');
-		foreach ($item as $key => $value) {
-			if (is_numeric($value) && $value > 0) {
-				$this->Item->link_to_report($reportId, $key, $value);
+		if ($item != null) {
+			$this->load->model('Item');
+			foreach ($item as $key => $value) {
+				if (is_numeric($value) && $value > 0) {
+					$this->Item->link_to_report($reportId, $key, $value);
+				}
 			}
 		}
 		
