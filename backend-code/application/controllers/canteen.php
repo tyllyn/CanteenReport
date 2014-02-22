@@ -43,50 +43,50 @@ class Canteen extends CI_Controller {
 			// hard coding IDs because #yolo
 			switch ($value->name) {
 				case "team-drink-coffee-amount":
-					$items[1] => $value->value;
+					$items[1] = $value->value;
 					break;
 				case "team-drink-cocoa-amount":
-					$items[2] => $value->value;
+					$items[2] = $value->value;
 					break;
 				case "team-drink-tea-amount":
-					$items[3] => $value->value;
+					$items[3] = $value->value;
 					break;
 				case "team-cold-drinks-amount":
-					$items[4] => $value->value;
+					$items[4] = $value->value;
 					break;
 				case "team-water-amount":
-					$items[5] => $value->value;
+					$items[5] = $value->value;
 					break;
 					
 					
 				case "team-food-donuts-amount":
-					$items[6] => $value->value;
+					$items[6] = $value->value;
 					break;
 				case "team-food-cookies-amount":
-					$items[7] => $value->value;
+					$items[7] = $value->value;
 					break;
 				case "team-food-sandwiches-amount":
-					$items[8] => $value->value;
+					$items[8] = $value->value;
 					break;
 				case "team-food-hot-dogs-amount":
-					$items[9] => $value->value;
+					$items[9] = $value->value;
 					break;
 				case "team-food-snacks-amount":
-					$items[12] => $value->value;
+					$items[12] = $value->value;
 					break;
 					
 					
 				case "team-clothing-gloves-amount":
-					$items[10] => $value->value;
+					$items[10] = $value->value;
 					break;
 				case "team-clothing-blankets-amount":
-					$items[11] => $value->value;
+					$items[11] = $value->value;
 					break;
 				case "team-clothing-amount":
-					$items[13] => $value->value;
+					$items[13] = $value->value;
 					break;
 				case "team-clothing-hand-warmers--amount":
-					$items[14] => $value->value;
+					$items[14] = $value->value;
 					break;
 					
 					
@@ -106,6 +106,15 @@ class Canteen extends CI_Controller {
 		}
 		
 		print("success:" . $reportId);
+	}
+	
+	public function viewitem($itemId) {
+	
+		$this->load->model('Item');
+		$data = $this->Item->report_last_2y($itemId);
+		print_r($data);
+		//$this->load->view("database_output",$data);
+		
 	}
 	
 	public function viewitems() {
