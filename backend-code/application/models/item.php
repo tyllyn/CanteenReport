@@ -42,13 +42,9 @@ class Item extends CI_Model {
 		for ($i = 0; $i < 24; $i++) {
 			$start = new DateTime($y."-".$m."-1");
 			$end = $start;
-			date_add($end, date_interval_create_from_date_string('1 month'));
-			$month = $start->format("F");
+			date_add($end, date_interval_create_from_date_string(
 			
-			$msstart = date( 'Y-m-d H:i:s', strtotime($start) );
-			$msend = date( 'Y-m-d H:i:s', strtotime($end) );
-			
-			$data[$month + ' ' + $y] = $this->get_entries_items($itemId, $msstart, $msend)[0][0];
+			$data[$month + ' ' + $y] = $this->get_entries_items($itemId, $start->format("Y-m-d"), $end->format("Y-m-d"))[0][0];
 			$m = $m - 1;
 			if ($m == 0) {
 				$m = 12;
