@@ -69,6 +69,10 @@
 <div id="container">
 	<?php
 
+	if ($query == null || sizeof($arr) <= 1) {
+		print "NO DATA!";
+	} else {
+	
 print "<table>";	
 
 print "<tr>";
@@ -93,6 +97,8 @@ foreach ($query as $key => $value) {
 
 }
 print "</table>";
+
+}
 		
 		//print_r($query);
 	?>
