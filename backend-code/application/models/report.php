@@ -74,7 +74,7 @@ class Report extends CI_Model {
 	function get_entry($id) {
 		$this->db->where('id',$id);
 		$q = $this->db->get('Reports');
-		return $q->result();
+		return $q->result_array()[0];
 	}
 	
 }
