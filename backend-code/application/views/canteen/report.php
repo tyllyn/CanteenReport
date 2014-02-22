@@ -1,19 +1,19 @@
-<html>
+<?php $this->load->view("header"); ?>
 
-	<head>
-		<style>
-			label { font-weight: bold; }
-		</style>
-	</jead>
-
-<body>
-
-
+	<h2>Report Details</h2>
 	<div>
 		<label>Unit:</label> <?php echo $report['Unit'] ?>
+	</div>
 	
+	<div>
+		<h2>Items</h2>
+		
+		<?php
+		$data["query"] = $reportitems;
+		$this->load->view("database_output", $data);
 
+		?>
+		
+	</div>
 
-</body>
-
-</html>
+<?php $this->load->view("footer"); ?>

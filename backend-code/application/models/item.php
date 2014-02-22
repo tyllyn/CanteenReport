@@ -15,6 +15,7 @@ class Item extends CI_Model {
 
 	function get_entries() {
 		$query = $this->db->get('Items');
+		
 		return $query->result();
 	}
 	

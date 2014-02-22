@@ -1,0 +1,138 @@
+/* line 2, ../sass/_start.scss */
+.container {
+  width: 100%;
+  max-width: 1200px;
+  min-width: 768px;
+  margin: 0 auto;
+}
+
+/* line 8, ../sass/_start.scss */
+.container.framed {
+  padding-left: 80px;
+  padding-top: 60px;
+}
+
+/* 
+	added a start class just to center things
+*/
+/* line 15, ../sass/_start.scss */
+.container.start {
+  text-align: center;
+}
+/* line 18, ../sass/_start.scss */
+.container.start h1 {
+  text-transform: uppercase;
+  margin-bottom: 2em;
+}
+/* line 22, ../sass/_start.scss */
+.container.start a.btn-primary {
+  display: block;
+  width: 60%;
+  margin: 0 auto;
+  padding: 15px;
+  text-align: center;
+  font-size: 1.2em;
+  text-transform: uppercase;
+}
+/* line 31, ../sass/_start.scss */
+.container.start a.btn-primary:hover {
+  text-decoration: none;
+}
+
+/* line 36, ../sass/_start.scss */
+.glyphicon-remove-circle:after {
+  content: "\e088";
+  font-size: 1.3em;
+  position: relative;
+  top: 4px;
+  margin-left: 10px;
+}
+
+/* line 43, ../sass/_start.scss */
+.glyphicon-remove-circle:before {
+  content: none;
+}
+
+/* line 1, ../sass/_frame.scss */
+header {
+  width: 100%;
+  position: fixed;
+  padding: 10px 15px;
+  border-bottom: solid 1px #000;
+  background: #fff;
+  z-index: 1000;
+}
+/* line 9, ../sass/_frame.scss */
+header:after {
+  display: block;
+  content: '';
+  clear: both;
+}
+/* line 14, ../sass/_frame.scss */
+header .closebtn {
+  float: right;
+}
+/* line 16, ../sass/_frame.scss */
+header .closebtn:hover {
+  text-decoration: none;
+}
+/* line 20, ../sass/_frame.scss */
+header .sync-btn {
+  display: inline-block;
+  padding: 5px 10px;
+  border-radius: 10px;
+}
+/* line 25, ../sass/_frame.scss */
+header .sync-btn.isLoading:after {
+  display: inline-block;
+  position: relative;
+  background: url(../img/ajax-loader.gif) no-repeat;
+  content: '';
+  width: 16px;
+  height: 16px;
+  top: 3px;
+  margin-left: 10px;
+}
+/* line 35, ../sass/_frame.scss */
+header .sync-btn:hover {
+  text-decoration: none;
+}
+
+/* line 40, ../sass/_frame.scss */
+.left-menu {
+  border-right: solid 1px #000;
+  width: 100%;
+  max-width: 100px;
+  position: fixed;
+  height: 100%;
+  padding-top: 60px;
+}
+/* line 47, ../sass/_frame.scss */
+.left-menu ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+/* line 51, ../sass/_frame.scss */
+.left-menu ul li {
+  text-align: center;
+  margin-top: 25px;
+}
+/* line 54, ../sass/_frame.scss */
+.left-menu ul li:first-child {
+  margin-top: 0;
+}
+/* line 57, ../sass/_frame.scss */
+.left-menu ul li a:before {
+  display: block;
+}
+/* line 60, ../sass/_frame.scss */
+.left-menu ul li a:hover {
+  text-decoration: none;
+}
+/* line 66, ../sass/_frame.scss */
+.left-menu:after {
+  display: block;
+  content: '';
+  clear: both;
+}
