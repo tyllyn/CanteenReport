@@ -74,19 +74,16 @@
         </div>
         -->
 
+        <!-- WE NEED TO DYNAMICALLY CREATE THE UNIQUE ID FOR THE FORM ON "NEW REPORT" -->
         <form class="form-horizontal" id="form" data-unique="1">
 
             <!--
                 INCIDENT
               -->
 
-            <section id="incident" class="well">
+            <section id="incident" class="canteen-well">
 
                 <fieldset>
-
-                    <legend>
-                        Unit Number: <span clas="label unit-number">001</span>
-                    </legend>
 
                     <div class="form-group">
 
@@ -103,7 +100,7 @@
                         </label>
 
                         <div class="input-group input-group-lg">
-                            <input class="form-control" placeholder="Start Time" name="incident-start" id="incident-start" type="datetime-local" />
+                            <input class="form-control" placeholder="Start Time" name="incident-start" id="incident-start" type="datetime" />
                             <span class="input-group-addon glyphicon glyphicon-calendar"></span>
                         </div>
 
@@ -139,22 +136,84 @@
                             Type of Call <abbr title="required">*</abbr>
                         </label>
 
-                        <div class="input-group input-group-lg">
 
-                            <div class="btn-group">
+                        <div class="type-container">
 
-                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                                    Select One <span class="caret"></span>
-                                </button>
+                            <div class="row">
 
-                                <ul class="dropdown-menu" role="menu">
-                                    <li><a href="#">Fire/Alarm/Companies</a></li>
-                                    <li><a href="#">Flood</a></li>
-                                    <li><a href="#">Hazmat</a></li>
-                                    <li><a href="#">Special Event</a></li>
-                                    <li><a href="#">Maintenence</a></li>
-                                    <li><a href="#">Other</a></li>
-                                </ul>
+                                <div class="col-xs-6">
+
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                            <input type="checkbox" id="incident-type-fire" name="incident-type-fire" />
+                                        </span>
+                                        <label for="incident-type-fire" class="form-control">Fire/Alarm/Companies</label>
+                                    </div>
+
+                                </div>
+
+                                <div class="col-xs-6">
+
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                            <input type="checkbox" id="incident-type-flood" name="incident-type-flood" />
+                                        </span>
+                                        <label for="incident-type-flood" class="form-control">Flood</label>
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                            <div class="row">
+
+                                <div class="col-xs-6">
+
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                            <input type="checkbox" id="incident-type-hazmat" name="incident-type-hazmat" />
+                                        </span>
+                                        <label for="incident-type-hazmat" class="form-control">Hazmat</label>
+                                    </div>
+
+                                </div>
+
+                                <div class="col-xs-6">
+
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                            <input type="checkbox" id="incident-type-pecial-event" name="incident-type-special-event" />
+                                        </span>
+                                        <label for="incident-type-pecial-event" class="form-control">Special Event</label>
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                            <div class="row">
+
+                                <div class="col-xs-6">
+
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                            <input type="checkbox" id="incident-type-maintenence" name="incident-type-maintenence" />
+                                        </span>
+                                        <label for="incident-type-maintenence" class="form-control">Maintenence</label>
+                                    </div>
+
+                                </div>
+
+                                <div class="col-xs-6">
+
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                            <input type="checkbox" id="incident-type-other" name="incident-type-other"  />
+                                        </span>
+                                        <input type="text" class="form-control" placeholder="other" />
+                                    </div>
+
+                                </div>
 
                             </div>
 
@@ -171,11 +230,11 @@
                 TEAM
               -->
 
-            <section id="team" class="well">
+            <section id="team" class="canteen-well">
 
                 <fieldset>
 
-                    <legend>Salvation Army Team</legend>
+                    <h2>Salvation Army Team</h2>
 
                     <div class="form-group">
 
@@ -200,7 +259,7 @@
                     </div>
 
 
-                    <legend>Red Cross Refferal</legend>
+                    <h2>Red Cross Refferal</h2>
 
                     <div class="form-group">
 
@@ -226,11 +285,11 @@
                 SERVICES
               -->
 
-            <section id="services" class="well">
+            <section id="services" class="canteen-well">
 
                 <fieldset>
 
-                    <legend>Salvation Army Team</legend>
+                    <!-- <legend>Salvation Army Team</legend> -->
 
                     <ul class="nav nav-tabs">
                         <li class="active"><a href="#beverage" data-toggle="tab">Beverage</a></li>
@@ -250,15 +309,20 @@
 
                                 <div class="row">
 
-                                    <div class="col-xs-6">
-                                        <div class="input-group input-group-lg">
-                                            <span class="input-group-addon">Coffee</span>
-                                            <input class="form-control input-lg" placeholder="0" name="team-drink-coffee-amount" id="team-drink-coffee-amount" type="number" />
+                                    <div class="col-xs-3">
+                                        <label class="form-control form-control-label">Coffee</label>
+                                    </div>
+
+                                    <div class="col-xs-3">
+                                        <div class="input-group">
+                                            <span class="input-group-btn">
+                                                <button class="btn btn-default glyphicon glyphicon-plus" type="button"></button>
+                                            </span>
                                         </div>
                                     </div>
 
-                                    <div class="col-xs-6">
-                                        <select class="form-control input-lg">
+                                    <div class="col-xs-3">
+                                        <select class="form-control">
                                             <option value="gallon">Gallon</option>
                                             <option value="pot">Pot</option>
                                         </select>
@@ -268,15 +332,21 @@
 
                                 <div class="row">
 
-                                    <div class="col-xs-6">
-                                        <div class="input-group input-group-lg">
-                                            <span class="input-group-addon">Cocoa</span>
-                                            <input class="form-control input-lg" placeholder="0" name="team-drink-cocoa-amount" id="team-drink-cocoa-amount" type="number" />
+                                    <div class="col-xs-3">
+                                        <label class="form-control form-control-label">Cocoa</label>
+                                    </div>
+
+                                    <div class="col-xs-3">
+                                        <div class="input-group">
+                                            <span class="input-group-btn">
+                                                <button class="btn btn-default glyphicon glyphicon-plus" type="button"></button>
+                                            </span>
+                                            <input class="form-control" placeholder="0" name="team-drink-cocoa-amount" type="number" />
                                         </div>
                                     </div>
 
-                                    <div class="col-xs-6">
-                                        <select class="form-control input-lg">
+                                    <div class="col-xs-3">
+                                        <select class="form-control">
                                             <option value="gallon">Gallon</option>
                                             <option value="pot">Pot</option>
                                         </select>
@@ -286,15 +356,21 @@
 
                                 <div class="row">
 
-                                    <div class="col-xs-6">
-                                        <div class="input-group input-group-lg">
-                                            <span class="input-group-addon">Hot Tea</span>
-                                            <input class="form-control input-lg" placeholder="0" name="team-drink-tea-amount" id="team-drink-tea-amount" type="number" />
+                                    <div class="col-xs-3">
+                                        <label class="form-control form-control-label">Hot Tea</label>
+                                    </div>
+
+                                    <div class="col-xs-3">
+                                        <div class="input-group">
+                                            <span class="input-group-btn">
+                                                <button class="btn btn-default glyphicon glyphicon-plus" type="button"></button>
+                                            </span>
+                                            <input class="form-control" placeholder="0" name="team-drink-tea-amount" type="number" />
                                         </div>
                                     </div>
 
-                                    <div class="col-xs-6">
-                                        <select class="form-control input-lg">
+                                    <div class="col-xs-3">
+                                        <select class="form-control">
                                             <option value="gallon">Gallon</option>
                                             <option value="pot">Pot</option>
                                         </select>
@@ -304,15 +380,21 @@
 
                                 <div class="row">
 
-                                    <div class="col-xs-6">
-                                        <div class="input-group input-group-lg">
-                                            <span class="input-group-addon">Cold Drinks</span>
-                                            <input class="form-control input-lg" placeholder="0" name="team-cold-drinks-amount" id="team-cold-drinks-amount" type="number" />
+                                    <div class="col-xs-3">
+                                        <label class="form-control form-control-label">Cold Drinks</label>
+                                    </div>
+
+                                    <div class="col-xs-3">
+                                        <div class="input-group">
+                                            <span class="input-group-btn">
+                                                <button class="btn btn-default glyphicon glyphicon-plus" type="button"></button>
+                                            </span>
+                                            <input class="form-control" placeholder="0" name="team-cold-drinks-amount" type="number" />
                                         </div>
                                     </div>
 
-                                    <div class="col-xs-6">
-                                        <select class="form-control input-lg">
+                                    <div class="col-xs-3">
+                                        <select class="form-control">
                                             <option value="gallon">Gallon</option>
                                             <option value="pot">Pot</option>
                                         </select>
@@ -322,15 +404,21 @@
 
                                 <div class="row">
 
-                                    <div class="col-xs-6">
-                                        <div class="input-group input-group-lg">
-                                            <span class="input-group-addon">Water</span>
-                                            <input class="form-control input-lg" placeholder="0" name="team-water-amount" id="team-water-amount" type="number" />
+                                    <div class="col-xs-3">
+                                        <label class="form-control form-control-label">Water</label>
+                                    </div>
+
+                                    <div class="col-xs-3">
+                                        <div class="input-group">
+                                            <span class="input-group-btn">
+                                                <button class="btn btn-default glyphicon glyphicon-plus" type="button"></button>
+                                            </span>
+                                            <input class="form-control" placeholder="0" name="team-water-amount" type="number" />
                                         </div>
                                     </div>
 
-                                    <div class="col-xs-6">
-                                        <select class="form-control input-lg">
+                                    <div class="col-xs-3">
+                                        <select class="form-control">
                                             <option value="gallon">Gallon</option>
                                             <option value="pot">Pot</option>
                                         </select>
@@ -352,14 +440,14 @@
                                 <div class="row">
 
                                     <div class="col-xs-6">
-                                        <div class="input-group input-group-lg">
+                                        <div class="input-group">
                                             <span class="input-group-addon">Donuts</span>
                                             <input class="form-control input-lg" placeholder="0" name="team-food-donuts-amount" id="team-food-donuts-amount" type="number" />
                                         </div>
                                     </div>
 
                                     <div class="col-xs-6">
-                                        <select class="form-control input-lg">
+                                        <select class="form-control">
                                             <option value="gallon">Each</option>
                                             <option value="pot">Dozen</option>
                                         </select>
@@ -370,14 +458,14 @@
                                 <div class="row">
 
                                     <div class="col-xs-6">
-                                        <div class="input-group input-group-lg">
+                                        <div class="input-group">
                                             <span class="input-group-addon">Cookies</span>
                                             <input class="form-control input-lg" placeholder="0" name="team-food-cookies-amount" id="team-food-cookies-amount" type="number" />
                                         </div>
                                     </div>
 
                                     <div class="col-xs-6">
-                                        <select class="form-control input-lg">
+                                        <select class="form-control">
                                             <option value="gallon">Each</option>
                                             <option value="pot">Dozen</option>
                                         </select>
@@ -388,14 +476,14 @@
                                 <div class="row">
 
                                     <div class="col-xs-6">
-                                        <div class="input-group input-group-lg">
+                                        <div class="input-group">
                                             <span class="input-group-addon">Sandwiches</span>
                                             <input class="form-control input-lg" placeholder="0" name="team-food-sandwiches-amount" id="team-food-sandwiches-amount" type="number" />
                                         </div>
                                     </div>
 
                                     <div class="col-xs-6">
-                                        <select class="form-control input-lg">
+                                        <select class="form-control">
                                             <option value="gallon">Each</option>
                                             <option value="pot">Dozen</option>
                                         </select>
@@ -406,14 +494,14 @@
                                 <div class="row">
 
                                     <div class="col-xs-6">
-                                        <div class="input-group input-group-lg">
+                                        <div class="input-group">
                                             <span class="input-group-addon">Hot Dogs</span>
                                             <input class="form-control input-lg" placeholder="0" name="team-food-hot-dogs-amount" id="team-food-hot-dogs-amount" type="number" />
                                         </div>
                                     </div>
 
                                     <div class="col-xs-6">
-                                        <select class="form-control input-lg">
+                                        <select class="form-control">
                                             <option value="gallon">Each</option>
                                             <option value="pot">Dozen</option>
                                         </select>
@@ -424,14 +512,14 @@
                                 <div class="row">
 
                                     <div class="col-xs-6">
-                                        <div class="input-group input-group-lg">
+                                        <div class="input-group">
                                             <span class="input-group-addon">Snack Items</span>
                                             <input class="form-control input-lg" placeholder="0" name="team-snacks-amount" id="team-snacks-amount" type="number" />
                                         </div>
                                     </div>
 
                                     <div class="col-xs-6">
-                                        <select class="form-control input-lg">
+                                        <select class="form-control">
                                             <option value="gallon">Each</option>
                                             <option value="pot">Dozen</option>
                                         </select>
@@ -453,7 +541,7 @@
                                 <div class="row">
 
                                     <div class="col-xs-6">
-                                        <div class="input-group input-group-lg">
+                                        <div class="input-group">
                                             <span class="input-group-addon">Gloves</span>
                                             <input class="form-control input-lg" placeholder="0" name="team-clothing-gloves-amount" id="team-clothing-gloves-amount" type="number" />
                                         </div>
@@ -464,7 +552,7 @@
                                 <div class="row">
 
                                     <div class="col-xs-6">
-                                        <div class="input-group input-group-lg">
+                                        <div class="input-group">
                                             <span class="input-group-addon">Blankets</span>
                                             <input class="form-control input-lg" placeholder="0" name="team-clothing-blankets-amount" id="team-clothing-blankets-amount" type="number" />
                                         </div>
@@ -475,7 +563,7 @@
                                 <div class="row">
 
                                     <div class="col-xs-6">
-                                        <div class="input-group input-group-lg">
+                                        <div class="input-group">
                                             <span class="input-group-addon">Clothing</span>
                                             <input class="form-control input-lg" placeholder="0" name="team-clothing-amount" id="team-clothing-amount" type="number" />
                                         </div>
@@ -486,8 +574,9 @@
                                 <div class="row">
 
                                     <div class="col-xs-6">
-                                        <div class="input-group input-group-lg">
+                                        <div class="input-group">
                                             <span class="input-group-addon">Hand Warmers</span>
+
                                             <input class="form-control input-lg" placeholder="0" name="team-clothing-hand-warmers--amount" id="team-clothing-hand-warmers--amount" type="number" />
                                         </div>
                                     </div>
@@ -510,7 +599,7 @@
 
                 <fieldset>
 
-                    <legend>Counseling/Player</legend>
+                    <!-- <legend>Counseling/Player</legend> -->
 
                     <div class="form-group">
 
@@ -576,11 +665,11 @@
             <!--
                 END
               -->
-            <section id="end" class="well">
+            <section id="end" class="canteen-well">
 
                 <fieldset>
 
-                    <legend>End</legend>
+                    <!-- <legend>End</legend> -->
 
                     <div class="form-group">
 
@@ -624,6 +713,7 @@
                 <button type="button" class="btn btn-default">
                     Submit
                 </button>
+
             </section>
                 <br />
                 <br />
