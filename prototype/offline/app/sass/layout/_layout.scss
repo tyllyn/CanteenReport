@@ -1,9 +1,15 @@
+body {
+	padding: 1em;
+}
+
 form {
 	display: block;
 	width: 400px;
+	padding: 1em;
 }
 
-input {
+input,
+select {
 	display: block;
 	width: 100%;
 	padding: 1em;
