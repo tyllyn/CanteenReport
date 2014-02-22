@@ -9,9 +9,10 @@ body {
   max-width: 1200px;
   min-width: 768px;
   margin: 0 auto;
+  background: #fff;
 }
 
-/* line 10, ../sass/_start.scss */
+/* line 11, ../sass/_start.scss */
 .container.framed {
   padding-left: 100px;
   padding-top: 70px;
@@ -20,21 +21,22 @@ body {
 /* 
 	added a start class just to center things
 */
-/* line 17, ../sass/_start.scss */
+/* line 18, ../sass/_start.scss */
 .container.start {
   text-align: center;
   padding-top: 50px;
   background: #ECEBE7;
   max-width: 100%;
   margin-bottom: 100px;
+  padding-bottom: 50px;
 }
-/* line 24, ../sass/_start.scss */
+/* line 26, ../sass/_start.scss */
 .container.start h1 {
   text-transform: uppercase;
   margin-bottom: 1.5em;
   font-family: 'Average';
 }
-/* line 29, ../sass/_start.scss */
+/* line 31, ../sass/_start.scss */
 .container.start a.btn-primary {
   display: inline-block;
   margin: 0 auto;
@@ -43,12 +45,12 @@ body {
   font-size: 1.2em;
   text-transform: uppercase;
 }
-/* line 37, ../sass/_start.scss */
+/* line 39, ../sass/_start.scss */
 .container.start a.btn-primary:hover {
   text-decoration: none;
 }
 
-/* line 42, ../sass/_start.scss */
+/* line 44, ../sass/_start.scss */
 .glyphicon-remove-sign:before {
   font-size: 1.3em;
   position: relative;
@@ -56,7 +58,7 @@ body {
   color: #B2AEA5;
 }
 
-/* line 49, ../sass/_start.scss */
+/* line 51, ../sass/_start.scss */
 .btn-primary {
   padding: 10px 25px;
   border-radius: 3px;
@@ -67,7 +69,7 @@ body {
   vertical-align: top;
   -webkit-transition: all 0.4s;
 }
-/* line 59, ../sass/_start.scss */
+/* line 61, ../sass/_start.scss */
 .btn-primary:hover {
   text-decoration: none;
   background: #EBEAE8;
@@ -209,4 +211,18 @@ header .sync-btn:hover {
 /* line 3, ../sass/_form.scss */
 .team-member-1 .js-remove-member-container {
   display: none;
+}
+
+/* line 1, ../sass/_openreport.scss */
+.open-report {
+  margin: 0 auto;
+  max-width: 500px;
+  text-align: left;
+  clear: both;
+  font-family: 'Lato';
+}
+/* line 8, ../sass/_openreport.scss */
+.open-report h2 {
+  margin: 0;
+  padding: 0;
 }
