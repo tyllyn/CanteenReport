@@ -10,7 +10,7 @@
 
 
 	<div>
-		<label>Unit:</label> {$report['Unit']}
+		<label>Unit:</label> <?php echo $report['Unit'] ?>
 	
 
 
