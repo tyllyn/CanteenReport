@@ -44,7 +44,13 @@ class Item extends CI_Model {
 			$end = $start;
 			//sdate_add($end, date_interval_create_from_date_string(
 			
-			$data[$start->format('F') . ' ' . $y] = $this->get_entries_items($itemId, $start->format("Y-m-d"), $end->format("Y-m-d"))[0];
+			$res = $this->get_entries_items($itemId, $start->format("Y-m-d"), $end->format("Y-m-d"));
+			if ($res == null) {
+				$res = 0;
+			} else {
+				$res = $res;
+			}
+			$data[$start->format('F') . ' ' . $y] = $res;
 			$m = $m - 1;
 			if ($m == 0) {
 				$m = 12;
