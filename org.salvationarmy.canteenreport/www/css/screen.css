@@ -1,0 +1,35 @@
+/* line 2, ../sass/_start.scss */
+.container {
+  width: 100%;
+  max-width: 1200px;
+  min-width: 768px;
+  margin: 0 auto;
+}
+
+/* 
+	added a start class just to center things
+*/
+/* line 11, ../sass/_start.scss */
+.container.start {
+  text-align: center;
+}
+/* line 14, ../sass/_start.scss */
+.container.start h1 {
+  text-transform: uppercase;
+  margin-bottom: 2em;
+}
+
+/* line 19, ../sass/_start.scss */
+a.btn-primary {
+  display: block;
+  width: 60%;
+  margin: 0 auto;
+  padding: 15px;
+  text-align: center;
+  font-size: 1.2em;
+  text-transform: uppercase;
+}
+/* line 28, ../sass/_start.scss */
+a.btn-primary:hover {
+  text-decoration: none;
+}
