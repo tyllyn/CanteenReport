@@ -2,6 +2,14 @@ form {
 	margin-bottom: 50em;
 }
 
+.container {
+	padding-right: 0;
+}
+
+a:link, a:hover, a:focus {
+	color: #e3323a;
+}
+
 .team-member {
 	margin-bottom: 0.25em;
 }
@@ -15,12 +23,16 @@ form {
 	padding: 2em;
 	border-bottom: 2px solid #ecebe8;
 }
+.canteen-well:last-child {
+	padding-top: 4em;
+	border-bottom: none;
+}
 
 .amounts .row {
-
-	/*margin-top: 1em;
-	margin-bottom: 1em;*/
 	padding: 0.75em 0 0.5em 0;
+}
+.amounts .row .input-group .glyphicon {
+	top: 1px;
 }
 
 .amounts .row:nth-child(even) {
