@@ -24,7 +24,7 @@ header{
 	}
 	.closebtn{
 		margin-top: 9px;
-		padding: 10px 25px;
+		padding: 13px 25px 15px;
 		border-radius: 3px;
 		position: absolute;
 		right: 15px;
@@ -45,7 +45,7 @@ header{
 			}
 		}
 	}
-	.sync-btn{
+	.sync-btn {
 		margin-top: 9px;
 		padding: 10px 25px;
 		border-radius: 3px;
@@ -56,6 +56,7 @@ header{
 		background: #EBEAE8;
 		color: #000;
 		border: solid 1px #ccc;
+
 		&.isLoading:after{
 			display: inline-block;
 			position: relative;
@@ -71,6 +72,13 @@ header{
 			background: #E3323A;
 			border-color: #c42d32;
 			color: #fff;
+		}
+
+		&.disabled,
+		&.btn-primary.disabled:hover {
+			background-color: #EBEAE8;
+			border-color: transparent;
+			color: #bfbbb5;
 		}
 	}
 }
