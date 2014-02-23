@@ -130,7 +130,8 @@ class Report extends CI_Model {
 		//linkreportitem ReportID
 		//reportmembers ReportID
 
-		die($params);
+		print_r($params);
+		
 		
 		if(isset($params['month']) && $params['month'] != ''){
 			$this->db->where('MONTH(r.incident_start)', $params['month']);
