@@ -45,19 +45,34 @@ body {
   width: 100%;
 }
 
-/* line 1, ../sass/_start.scss */
-body {
-  background: #B3AEA8;
+/* line 1, ../sass/_app.scss */
+#app {
+  display: none;
+  position: absolute;
+  top: 0;
 }
 
-/* line 4, ../sass/_start.scss */
+/* line 1, ../sass/_start.scss */
+body {
+  background: #ECEBE7;
+}
+
+/* line 5, ../sass/_start.scss */
+#start {
+  padding-top: 25%;
+  height: 100%;
+  position: absolute;
+  z-index: 5000;
+}
+
+/* line 12, ../sass/_start.scss */
 .container {
   width: 100%;
   margin: 0 auto;
   background: #fff;
 }
 
-/* line 10, ../sass/_start.scss */
+/* line 18, ../sass/_start.scss */
 .container.framed {
   padding-left: 100px;
   padding-top: 70px;
@@ -66,7 +81,7 @@ body {
 /*
 	added a start class just to center things
 */
-/* line 17, ../sass/_start.scss */
+/* line 25, ../sass/_start.scss */
 .container.start {
   text-align: center;
   padding-top: 50px;
@@ -75,13 +90,13 @@ body {
   margin-bottom: 100px;
   padding-bottom: 50px;
 }
-/* line 25, ../sass/_start.scss */
+/* line 33, ../sass/_start.scss */
 .container.start h1 {
   text-transform: uppercase;
   margin-bottom: 1.5em;
   font-family: 'Average';
 }
-/* line 30, ../sass/_start.scss */
+/* line 38, ../sass/_start.scss */
 .container.start a.btn-primary {
   display: inline-block;
   margin: 0 auto;
@@ -90,12 +105,12 @@ body {
   font-size: 1.2em;
   text-transform: uppercase;
 }
-/* line 38, ../sass/_start.scss */
+/* line 46, ../sass/_start.scss */
 .container.start a.btn-primary:hover {
   text-decoration: none;
 }
 
-/* line 43, ../sass/_start.scss */
+/* line 51, ../sass/_start.scss */
 .glyphicon-remove-circle:before {
   font-size: 1.3em;
   position: relative;
@@ -103,7 +118,7 @@ body {
   color: #B2AEA5;
 }
 
-/* line 50, ../sass/_start.scss */
+/* line 58, ../sass/_start.scss */
 .btn-primary {
   padding: 10px 25px;
   border-radius: 3px;
@@ -114,7 +129,7 @@ body {
   vertical-align: top;
   -webkit-transition: all 0.4s;
 }
-/* line 60, ../sass/_start.scss */
+/* line 68, ../sass/_start.scss */
 .btn-primary:hover {
   text-decoration: none;
   background: #EBEAE8;

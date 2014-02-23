@@ -4,7 +4,7 @@ var form = {
 	},
 	events: function () {
 		var f = this;
-		$('.members-group').on('ontouchevent', '.js-add-member', function () {
+		$('.members-group').on('touchstart', '.js-add-member', function () {
 			var next;
 
 			next = $('.team-member').length + 1;
@@ -12,7 +12,7 @@ var form = {
 			f.addNewMember(next, '');
 
 		})
-		.on('ontouchevent', '.js-remove-member', function () {
+		.on('touchstart', '.js-remove-member', function () {
 			var $this = $(this);
 
 			if ($('.team-member').length > 1) {
