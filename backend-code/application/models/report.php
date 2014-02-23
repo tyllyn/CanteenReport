@@ -136,8 +136,8 @@ class Report extends CI_Model {
 		if(isset($params['year']) && $params['year'] != ''){
 			$this->db->where('YEAR(r.incident_start)', $params['year']);
 		}
-		if(isset($param['unit_id']) && $params["unit_id"] != '') {
-			$this->db->where('incident_unit_number',$params['unit_id']);
+		if(isset($param['id']) && $params["id"] != '') {
+			$this->db->where('incident_unit_number',$params['id']);
 		}
 
 		$q = $this->db->get();
