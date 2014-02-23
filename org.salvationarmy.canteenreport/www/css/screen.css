@@ -126,7 +126,7 @@ body {
 header {
   width: 100%;
   position: fixed;
-  padding: 20px 15px;
+  padding: 40px 15px 20px;
   background: #DAD7D2;
   z-index: 1000;
 }
@@ -150,6 +150,7 @@ header:after {
 }
 /* line 25, ../sass/_frame.scss */
 header .closebtn {
+  margin-top: 9px;
   padding: 10px 25px;
   border-radius: 3px;
   position: absolute;
@@ -161,19 +162,20 @@ header .closebtn {
   border: solid 1px #ccc;
   vertical-align: top;
 }
-/* line 37, ../sass/_frame.scss */
+/* line 38, ../sass/_frame.scss */
 header .closebtn:hover {
   text-decoration: none;
   background: #E3323A;
   border-color: #c42d32;
   color: #fff;
 }
-/* line 42, ../sass/_frame.scss */
+/* line 43, ../sass/_frame.scss */
 header .closebtn:hover:before {
   color: #fff;
 }
-/* line 47, ../sass/_frame.scss */
+/* line 48, ../sass/_frame.scss */
 header .sync-btn {
+  margin-top: 9px;
   padding: 10px 25px;
   border-radius: 3px;
   position: absolute;
@@ -184,7 +186,7 @@ header .sync-btn {
   color: #000;
   border: solid 1px #ccc;
 }
-/* line 57, ../sass/_frame.scss */
+/* line 59, ../sass/_frame.scss */
 header .sync-btn.isLoading:after {
   display: inline-block;
   position: relative;
@@ -195,7 +197,7 @@ header .sync-btn.isLoading:after {
   top: 3px;
   margin-left: 10px;
 }
-/* line 67, ../sass/_frame.scss */
+/* line 69, ../sass/_frame.scss */
 header .sync-btn:hover {
   text-decoration: none;
   background: #E3323A;
@@ -203,7 +205,7 @@ header .sync-btn:hover {
   color: #fff;
 }
 
-/* line 75, ../sass/_frame.scss */
+/* line 77, ../sass/_frame.scss */
 .left-menu {
   border-right: solid 1px #DAD7D2;
   width: 100%;
@@ -214,41 +216,41 @@ header .sync-btn:hover {
   background: #ECEBE7;
   margin-top: 20px;
 }
-/* line 84, ../sass/_frame.scss */
+/* line 86, ../sass/_frame.scss */
 .left-menu ul {
   list-style: none;
   padding: 0;
   margin: 0;
 }
-/* line 88, ../sass/_frame.scss */
+/* line 90, ../sass/_frame.scss */
 .left-menu ul li {
   text-align: center;
 }
-/* line 91, ../sass/_frame.scss */
+/* line 93, ../sass/_frame.scss */
 .left-menu ul li.isActive a {
   color: #e3323a;
 }
-/* line 94, ../sass/_frame.scss */
+/* line 96, ../sass/_frame.scss */
 .left-menu ul li a {
   width: 100%;
   color: #9C9992;
   padding: 25px 0;
 }
-/* line 99, ../sass/_frame.scss */
+/* line 101, ../sass/_frame.scss */
 .left-menu ul li a:hover {
   color: #E3323A;
 }
-/* line 103, ../sass/_frame.scss */
+/* line 105, ../sass/_frame.scss */
 .left-menu ul li a:before {
   display: block;
   font-size: 1.6em;
   margin-bottom: 4px;
 }
-/* line 108, ../sass/_frame.scss */
+/* line 110, ../sass/_frame.scss */
 .left-menu ul li a:hover {
   text-decoration: none;
 }
-/* line 114, ../sass/_frame.scss */
+/* line 116, ../sass/_frame.scss */
 .left-menu:after {
   display: block;
   content: '';
@@ -350,12 +352,14 @@ a:link, a:hover, a:focus {
   padding: 0.75em 0 0.5em 0;
 }
 
-/* line 45, ../sass/_canteenReportForms.scss */
+/* line 47, ../sass/_canteenReportForms.scss */
 .btn-is-active,
 .btn-is-active:focus,
+.btn-is-active:active,
 .btn-red,
 .btn-red:focus,
-.btn-red:hover {
+.btn-red:hover,
+.btn-red:active {
   text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.2);
   background: #E3323A;
   text-decoration: none;
@@ -365,91 +369,91 @@ a:link, a:hover, a:focus {
   vertical-align: top;
 }
 
-/* line 54, ../sass/_canteenReportForms.scss */
+/* line 56, ../sass/_canteenReportForms.scss */
 .btn-red:focus {
   -webkit-box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
   box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
 }
 
-/* line 60, ../sass/_canteenReportForms.scss */
+/* line 62, ../sass/_canteenReportForms.scss */
 .amounts .row .input-group .glyphicon {
   top: 1px;
 }
 
-/* line 64, ../sass/_canteenReportForms.scss */
+/* line 66, ../sass/_canteenReportForms.scss */
 .amounts .row:nth-child(even) {
   background-color: #ecebe8;
   border-top: 1px solid #dad7d2;
   border-bottom: 1px solid #dad7d2;
 }
 
-/* line 70, ../sass/_canteenReportForms.scss */
+/* line 72, ../sass/_canteenReportForms.scss */
 .amounts .row:nth-child(even) .form-control-label {
   background: transparent;
 }
 
 /** bootstrap overrides */
-/* line 74, ../sass/_canteenReportForms.scss */
+/* line 76, ../sass/_canteenReportForms.scss */
 .control-group {
   margin-bottom: 1em;
 }
 
-/* line 78, ../sass/_canteenReportForms.scss */
+/* line 80, ../sass/_canteenReportForms.scss */
 .input-group {
   width: 100%;
 }
 
-/* line 81, ../sass/_canteenReportForms.scss */
+/* line 83, ../sass/_canteenReportForms.scss */
 .input-group .glyphicon {
   top: 0;
 }
 
-/* line 85, ../sass/_canteenReportForms.scss */
+/* line 87, ../sass/_canteenReportForms.scss */
 .type-container .row {
   margin-bottom: 1em;
 }
 
-/* line 89, ../sass/_canteenReportForms.scss */
+/* line 91, ../sass/_canteenReportForms.scss */
 .row-label {
   display: table;
 }
 
-/* line 92, ../sass/_canteenReportForms.scss */
+/* line 94, ../sass/_canteenReportForms.scss */
 .row-label label {
   display: table-cell;
 }
 
-/* line 97, ../sass/_canteenReportForms.scss */
+/* line 99, ../sass/_canteenReportForms.scss */
 label, h2 {
   font-size: 16px;
   font-weight: bold;
   color: #332e27;
 }
 
-/* line 102, ../sass/_canteenReportForms.scss */
+/* line 104, ../sass/_canteenReportForms.scss */
 label.control-label {
   margin-top: 0.5em;
   margin-bottom: 0.5em;
 }
 
-/* line 106, ../sass/_canteenReportForms.scss */
+/* line 108, ../sass/_canteenReportForms.scss */
 label.form-control {
   font-weight: normal;
 }
 
-/* line 109, ../sass/_canteenReportForms.scss */
+/* line 111, ../sass/_canteenReportForms.scss */
 label.form-control-label {
   border: none;
   -webkit-box-shadow: none;
   box-shadow: none;
 }
 
-/* line 115, ../sass/_canteenReportForms.scss */
+/* line 117, ../sass/_canteenReportForms.scss */
 .form-control {
   border: 1px solid #c8c4bb;
 }
 
-/* line 119, ../sass/_canteenReportForms.scss */
+/* line 121, ../sass/_canteenReportForms.scss */
 .required abbr {
   border-bottom: none;
   color: #e3323a;

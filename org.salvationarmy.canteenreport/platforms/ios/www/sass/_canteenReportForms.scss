@@ -40,9 +40,11 @@ a:link, a:hover, a:focus {
 
 .btn-is-active,
 .btn-is-active:focus,
+.btn-is-active:active,
 .btn-red,
 .btn-red:focus,
-.btn-red:hover {
+.btn-red:hover,
+.btn-red:active  {
 	text-shadow: 0 -1px 0 rgba(0,0,0,.2);
 	background: #E3323A;
 	text-decoration: none;

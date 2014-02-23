@@ -49,7 +49,7 @@ echo substr($output, 0, strlen($output)-1);
 }
 			
 var ctx = document.getElementById("myChart").getContext("2d");
-var myNewChart = new Chart(ctx).Line(data, {scaleOverride: true, scaleStepWidth: 1, scaleSteps: 10});
+var myNewChart = new Chart(ctx).Line(data, {scaleStepWidth: 1, scaleSteps: 10});
 
 			});
 		</script>
