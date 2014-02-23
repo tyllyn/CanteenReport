@@ -16,8 +16,9 @@ var storage = {
 
 		$('#form').on('submit', function (e) {
 			e.preventDefault();
-			console.log(JSON.stringify($('#form').serializeArray()));
 		});
+
+		s.saveForm();
 
 		$('#form').on('blur keydown', 'input, textarea, select', function () {
 			s.saveForm();
@@ -26,15 +27,12 @@ var storage = {
 	syncForm: function () {
 		var unique = $('#form').attr('data-unique');
 
-		console.log(amplify.store(unique));
-
 		if (amplify.store(unique) !== null) {
 
 			this.data.report[unique] = amplify.store(unique);
 
 			for (var key in this.data.report[unique]) {
 				if (this.data.report[unique].hasOwnProperty(key)) {
-					console.log(this.data.report[unique][key], this.data.report[unique][key].name, this.data.report[unique][key].value);
 
 					this.field(this.data.report[unique][key].name, this.data.report[unique][key].value);
 				}
@@ -43,24 +41,116 @@ var storage = {
 		}
 	},
 	saveForm: function () {
-		var unique = $('#form').attr('data-unique'),
+		var unique = 0,
 			formdata = this.getFormJSON();
+
+		if ($('#form').attr('data-unique') != null) {
+			unique = $('#form').attr('data-unique');
+
+			if ($('#id').length == 0 || $('#id').val() != unique) {
+				$('#id').remove();
+				$('<input />')
+					.attr('type', 'hidden')
+					.attr('id', 'id')
+					.attr('name', 'id')
+					.val(unique)
+					.appendTo($('#form'));
+			}
+
+			// Save
+			this.save(formdata, false);
+
+		} else {
+
+			// Save and Initilize
+			this.save(formdata, true);
+
+		}
 
 		// amplify.store(unique, null);
 
-		amplify.store(unique, formdata);
+	},
+	save: function (data, init) {
+
+		console.log('saving...');
+
+		console.log('data', data);
+
+		var id,
+			msg;
+
+		if (this.isOnline()) {
+
+			$.ajax({
+				url: 'http://23.239.8.146/backend-code/index.php/canteen/add',
+				type: 'POST',
+				data: data,
+				dataType: 'text',
+				success: function (res, status, xhr) {
+
+					console.log("I am here");
+
+					var result = res.split(':');
+
+					msg = result[0];
+					id = result[1];
+
+					console.log(result, msg, id);
+
+					if ("success" == msg) {
+
+						console.log('successful');
+
+						if (init) {
+
+							console.log('making input');
+
+							$('<input />')
+								.attr('type', 'hidden')
+								.attr('id', 'id')
+								.attr('name', 'id')
+								.val(id)
+								.appendTo($('#form'));
+
+							var date = new Date();
+
+							$('<input />')
+								.attr('type', 'hidden')
+								.attr('id', 'date')
+								.attr('name', 'date')
+								.val(date.getTime())
+								.appendTo($('#form'));
+
+							$('#form').attr('data-unique', id);
+						}
+
+					}
+				},
+				error: function (a, b, c) {
+					console.log(a, b, c);
+				}
+			});
+
+		}
+
+		data = this.getFormJSON();
+
+		console.log(data);
+
+		amplify.store(id, data);
+
 	},
 	field: function (id, value) {
 		var $field = $('#' + id);
 
-		console.log('trying', $field, $field.is('input[type=text]'));
+		// console.log('trying', $field, $field.is('input[type=text]'));
 
 		// Text field
 		if ($field.is('input[type=text]')) {
 
-			console.log('inside');
+			// console.log('inside');
 
-			console.log($field.val(), value);
+			// console.log($field.val(), value);
 			if ($field.val() !== value) {
 				$field.val(value);
 			}
@@ -70,13 +160,13 @@ var storage = {
 		// Text field
 		if ($field.is('textarea')) {
 
-			console.log('inside');
+			// console.log('inside');
 
 			if ($field.attr('id').indexOf('team-member') != -1) {
 				if ($field.attr('id') != 'team-member-1') {
 					var id = $field.attr('id').split('-');
 
-					console.log('ATTEMPTING TO ADD MEMBER', id[2], value);
+					// console.log('ATTEMPTING TO ADD MEMBER', id[2], value);
 
 					form.addMember(id[2], value);
 				} else {
@@ -86,7 +176,7 @@ var storage = {
 				}
 			} else {
 
-				console.log($field.val(), value);
+				// console.log($field.val(), value);
 				if ($field.val() !== value) {
 					$field.val(value);
 				}
@@ -98,9 +188,9 @@ var storage = {
 		// Number field
 		if ($field.is('input[type=number]')) {
 
-			console.log('inside');
+			// console.log('inside');
 
-			console.log($field.val(), value);
+			// console.log($field.val(), value);
 			if ($field.val() !== value) {
 				$field.val(value);
 			}
@@ -112,7 +202,7 @@ var storage = {
 
 			// console.log('inside');
 
-			console.log($field, $field.val(), value);
+			// console.log($field, $field.val(), value);
 			if ($field.attr('checked') !== 'checked') {
 				$field.attr('checked', 'checked');
 			}
@@ -134,9 +224,9 @@ var storage = {
 		// DateTime
 		if ($field.is('input[type=datetime-local]')) {
 
-			console.log('inside');
+			// console.log('inside');
 
-			console.log($field.val(), value);
+			// console.log($field.val(), value);
 			if ($field.val() !== value) {
 				$field.val(value);
 			}
@@ -145,6 +235,9 @@ var storage = {
 	},
 	getFormJSON: function () {
 		return JSON.parse(JSON.stringify($('#form').serializeArray()));
+	},
+	getFormJSONString: function () {
+		return JSON.stringify($('#form').serializeArray());
 	},
 	goOffline: function () {
 
