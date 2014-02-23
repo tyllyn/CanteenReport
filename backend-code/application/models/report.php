@@ -121,25 +121,6 @@ class Report extends CI_Model {
 
 		return $q->result();
 	}
-	function item_search($params){
-		$this->db->select('*');
-		$this->db->from("Reports r");
-		$this->db->join("ReportMembers rm","rm.ReportID=r.ID","left outer");
-		$this->db->join("LinkReportItem l","l.ReportID=r.ID","left outer");
-		//linkreportitem ReportID
-		//reportmembers ReportID
-
-		if(isset($params['month'])){
-			$this->db->where('MONTH(r.incident_start)', $params['month']);
-		}
-		if(isset($params['year'])){
-			$this->db->where('YEAR(r.incident_start)', $params['year']);
-		}
-
-		$q = $this->db->get();
-		
-		return $q->result();
-	}
 	function add($data) {
 		$this->db->trans_start();
 		$this->db->insert('Reports',$data);
@@ -154,23 +135,3 @@ class Report extends CI_Model {
 	}
 	
 }
-
-/*
-
-		}elseif($params['id'] == null && $params['month'] != null || $params['year'] != null || $params['day']){
-
-			if(isset($params['month'])){
-				$this->db->where('MONTH(incident_start)', $params['month']);
-			}
-			if(isset($params['year'])){
-				$this->db->where('YEAR(incident_start)', $params['year']);
-			}
-			if(isset($params['day'])){
-				$this->db->where('DAY(incident_start)', $params['day']);
-			}
-
-			$q = $this->db->get('Reports');
-		}else{
-			$q = $this->db->get('LinkReportItem');
-		}
-*/
