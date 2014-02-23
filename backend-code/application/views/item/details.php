@@ -9,7 +9,7 @@
 	<div>
 		<label>Category: </label><?php print "Category"; ?>
 	</div>
-	<?php print_r($result); ?>
+	
 	<h2>Usage Over Past 2 Years</div>
 	<div>
 	
@@ -48,7 +48,7 @@ echo substr($output, 0, strlen($output)-1);
 		}
 	]
 }
-	va		
+			
 var ctx = document.getElementById("myChart").getContext("2d");
 var myNewChart = new Chart(ctx).Line(data,options);
 
