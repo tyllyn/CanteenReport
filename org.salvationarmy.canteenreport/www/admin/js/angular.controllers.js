@@ -27,7 +27,6 @@ app.controller('home', function($scope, $http){
 				 		}
 			 		})
 			 		$scope.noResults = false;
-			 		console.log(data)
 			 	}
 			 	$scope.reports = data;
 			 })
