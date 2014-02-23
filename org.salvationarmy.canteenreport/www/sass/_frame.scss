@@ -1,7 +1,7 @@
 header{
 	width: 100%;
 	position: fixed;
-	padding: 20px 15px;
+	padding: 40px 15px 20px;
 	background: #DAD7D2;
 	z-index: 1000;
 
@@ -23,6 +23,7 @@ header{
 		clear: both;
 	}
 	.closebtn{
+		margin-top: 9px;
 		padding: 10px 25px;
 		border-radius: 3px;
 		position: absolute;
@@ -45,6 +46,7 @@ header{
 		}
 	}
 	.sync-btn{
+		margin-top: 9px;
 		padding: 10px 25px;
 		border-radius: 3px;
 		position: absolute;

@@ -56,10 +56,23 @@ var app = {
              .end().filter("[href=#"+id+"]").parent().addClass("isActive");
         });
 
+        $('#new-report-button').on('touchstart', function(event)
+        {
+          $('#start').hide();
+          $('#app').show();
+        });
+
+        $('#close-button').on('touchstart', function(event)
+        {
+          $('#start').show();
+          $('#app').hide();
+        });
+
+
         /**
          * adds increment functionality to the + buttons
          */
-        $('.increment').on('click', function(event)
+        $('.increment').on('touchstart', function(event)
         {
             var incrementNumberField = $(event.currentTarget).parent().next();
             var incrementNumberFieldVal = Number(incrementNumberField.val());
@@ -68,7 +81,7 @@ var app = {
             event.preventDefault();
         });
 
-        $('.increment-minus').on('click', function(event)
+        $('.increment-minus').on('touchstart', function(event)
         {
             var incrementNumberField = $(event.currentTarget).parent().prev();
             var incrementNumberFieldVal = Number(incrementNumberField.val());
@@ -85,7 +98,7 @@ var app = {
         /**
          * fuel level
          */
-        $('.fuel-level-button').on('click', function(event)
+        $('.fuel-level-button').on('touchstart', function(event)
         {
             if(app.$activeFuelLevel != undefined){
                 app.$activeFuelLevel.removeClass('btn-is-active');
@@ -100,7 +113,7 @@ var app = {
         /**
          * water level
          */
-        $('.water-level-button').on('click', function(event)
+        $('.water-level-button').on('touchstart', function(event)
         {
             if(app.$activeWaterLevel != undefined){
                 app.$activeWaterLevel.removeClass('btn-is-active');
@@ -116,7 +129,7 @@ var app = {
          */
         $('.left-menu').find('a').on(
         {
-            click: function(e){
+            touchstart: function(e){
                 var id = $(this).attr('href');
 
                 if($(id).length){

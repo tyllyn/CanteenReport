@@ -1,9 +1,17 @@
 body{
-	background: #B3AEA8;
+	background: #ECEBE7;
 }
+
+#start {
+	padding-top: 25%;
+	height: 100%;
+	position: absolute;
+	z-index: 5000;
+}
+
 .container{
 	width: 100%;
-	min-width: 768px;
+	//min-width: 768px;
 	margin: 0 auto;
 	background: #fff;
 }

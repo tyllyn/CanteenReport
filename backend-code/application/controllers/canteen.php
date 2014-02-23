@@ -7,42 +7,6 @@ class Canteen extends CI_Controller {
 	}
 	
 	public function add() {
-	var_dump($_POST);
-		$json = $_POST;
-	
-		// if (!array_key_exists ("data", $_POST)) {
-			// die("NO DATA PASSED");
-		// }
-	
-		// $json=$_POST["data"];
-	// $json='[{
-    // "name": "incident-start",
-    // "value": "2014-02-22 15:35:00"
-// }, {
-    // "name": "incident-location",
-    // "value": "South Side"
-// }, {
-    // "name": "incident-route",
-    // "value": ""
-// }, {
-    // "name": "team-driver",
-    // "value": "Joshua Petry"
-// }, {
-    // "name": "team-member-1",
-    // "value": "Prince"
-// }, {
-    // "name": "team-member-2",
-    // "value": "Wyatt"
-// }, {
-    // "name": "team-member-3",
-    // "value": ""
-// }, {
-    // "name": "team-refferal-name",
-    // "value": ""
-// }, {
-    // "name": "team-refferal-title",
-    // "value": ""
-// }]"';
 		$res = $_POST; //json_decode($json);
 		
 		//$data = new array();
@@ -157,7 +121,7 @@ class Canteen extends CI_Controller {
 	
 	public function viewitems() {
 		$this->load->model('Item');
-		$data = $this->Item->get_entries();
+		$data["query"] = $this->Item->get_entries();
 		$this->load->view("header");
 		$this->load->view('database_output', $data);
 		$this->load->view("footer");

@@ -1,6 +1,6 @@
-<html>
+<?php $this->load->view('header'); ?>
 
-<body>
+	<h1>Test Links</h1>
 
 	<ul>
 		<li><a href="/backend-code/index.php/canteen/viewreports">View Reports</a></li>
@@ -11,6 +11,4 @@
 		<li><a href="/backend-code/index.php/canteen/viewitem/1">Example Item Overview</a></li>
 	</ul>
 	
-	
-	
-</body>
+<?php $this->load->view('footer'); ?>

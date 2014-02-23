@@ -4,7 +4,7 @@ var form = {
 	},
 	events: function () {
 		var f = this;
-		$('.members-group').on('click', '.js-add-member', function () {
+		$('.members-group').on('touchstart', '.js-add-member', function () {
 			var next;
 
 			next = $('.team-member').length + 1;
@@ -12,7 +12,7 @@ var form = {
 			f.addNewMember(next, '');
 
 		})
-		.on('click', '.js-remove-member', function () {
+		.on('touchstart', '.js-remove-member', function () {
 			var $this = $(this);
 
 			if ($('.team-member').length > 1) {
@@ -40,6 +40,7 @@ var form = {
 		});
 	},
 	addNewMember: function (id, val) {
+
 		var $newmember;
 
 		// Clone first member, strip all data, and append
@@ -47,6 +48,9 @@ var form = {
 			.clone()
 			.removeClass('team-member-1')
 			.addClass('team-member-' + id)
+			.find('.js-add-member-container')
+			.remove()
+			.end()
 			.find('input')
 				.val(val)
 				.attr('id', 'team-member-' + id)
