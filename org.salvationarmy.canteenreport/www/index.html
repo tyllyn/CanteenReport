@@ -66,7 +66,7 @@
         <div class="container framed">
 
         <!-- WE NEED TO DYNAMICALLY CREATE THE UNIQUE ID FOR THE FORM ON "NEW REPORT" -->
-        <form id="form" data-unique="1">
+        <form class="form-horizontal" id="form">
 
             <!--
                 INCIDENT
@@ -243,16 +243,15 @@
 
                         <div class="input-group input-group-lg team-member team-member-1">
                             <input class="form-control" placeholder="Staff/Volunteer" name="team-member" id="team-member-1" type="text" />
-                            <span class="input-group-btn">
+                            <span class="input-group-btn js-remove-member-container">
                                 <button class="btn btn-default btn-red glyphicon glyphicon-minus js-remove-member" type="button"></button>
                             </span>
-                            <span class="input-group-btn">
+                            <span class="input-group-btn js-add-member-container">
                                 <button class="btn btn-default btn-red glyphicon glyphicon-plus js-add-member" type="button"></button>
                             </span>
                         </div>
 
                     </div>
-
 
                     <h2>Red Cross Referral</h2>
 
@@ -921,7 +920,7 @@
 
             <section id="submit" class="canteen-well">
 
-                <p><strong>Ready to submit?</strong> Please check all fields before submitting.</strong></p>
+                <p><strong>Ready to submit? Please check all fields before submitting.</strong></p>
 
                 <br />
 

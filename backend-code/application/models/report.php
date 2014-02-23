@@ -70,7 +70,7 @@ class Report extends CI_Model {
 		$query = $this->db->get('Reports');
 		return $query->result();
 	}
-	
+	//2014-02-22 00:00:00
 	function get_entries_items($start, $end) {
 		$this->db->select("i.ID,i.name,sum(l.quantity)");
 		$this->db->from("LinkReportItem l");
@@ -94,16 +94,29 @@ class Report extends CI_Model {
 	}
 	
 	function get_entry_items($id) {
+		//incident_unit_number
 		$this->db->where('ReportID',$id);
 		$q = $this->db->get('LinkReportItem');
 		return $q->result();
 	}
-	
+	function get_by_unit($id = null){
+		if(isset($id)){
+			$this->db->where('incident_unit_number', $id);
+			$query = $this->db->get('Reports');
+		}else{
+			$query = $this->db->get('Reports');
+		}
+
+		return $q->result();
+	}
+	function get_item_by_date($start, $end){
+		$this->db->where('incident_start', $start);
+		$q = $this->db->get('Reports');
+
+		return $q->result();
+	}
 	function add($data) {
 		$this->db->trans_start();
-		if ($data == null) {
-			$data = array();
-		}
 		$this->db->insert('Reports',$data);
 		$insert_id = $this->db->insert_id();
 		$this->db->trans_complete();
@@ -117,4 +130,22 @@ class Report extends CI_Model {
 	
 }
 
-?>
+/*
+
+		}elseif($params['id'] == null && $params['month'] != null || $params['year'] != null || $params['day']){
+
+			if(isset($params['month'])){
+				$this->db->where('MONTH(incident_start)', $params['month']);
+			}
+			if(isset($params['year'])){
+				$this->db->where('YEAR(incident_start)', $params['year']);
+			}
+			if(isset($params['day'])){
+				$this->db->where('DAY(incident_start)', $params['day']);
+			}
+
+			$q = $this->db->get('Reports');
+		}else{
+			$q = $this->db->get('LinkReportItem');
+		}
+*/
