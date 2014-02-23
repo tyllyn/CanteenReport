@@ -43,14 +43,13 @@ foreach ($result as $key => $value) {
 echo substr($output, 0, strlen($output)-1);
 
 			
-			?>],
-			scaleSteps: 10
+			?>]
 		}
 	]
 }
 			
 var ctx = document.getElementById("myChart").getContext("2d");
-var myNewChart = new Chart(ctx).Line(data);
+var myNewChart = new Chart(ctx).Line(data, {scaleOverride: true, scaleStepWidth: 1, scaleSteps: 10});
 
 			});
 		</script>
