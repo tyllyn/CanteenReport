@@ -13,11 +13,11 @@ body {
 
 /* line 10, ../sass/_start.scss */
 .container.framed {
-  padding-left: 120px;
+  padding-left: 100px;
   padding-top: 70px;
 }
 
-/* 
+/*
 	added a start class just to center things
 */
 /* line 17, ../sass/_start.scss */
