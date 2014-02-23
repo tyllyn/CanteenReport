@@ -41,12 +41,11 @@
 
             <h1>Canteen Report</h1>
 
-
             <button id="new-report-button" class="btn-primary" alt="New Report" title="New Report">New Report</button>
 
             <div class="open-report">
                 <h2>Open Report</h2>
-                <a href="#" class="date glyphicon glyphicon-chevron-right">Month, DD, YYYY 0:00 PM</a>
+                <a href="javascript:;" class="date glyphicon glyphicon-chevron-right" data-report="289">02/23/2014 01:24:00 PM</a>
             </div>
 
         </section>
@@ -54,9 +53,9 @@
         <section id="app">
 
             <header>
-                <a href="#" class="btn-primary sync-btn">Sync</a> <!-- add class isLoading, to add the fancy ajax loader. -->
+                <button class="btn-primary sync-btn">Sync</button> <!-- add class isLoading, to add the fancy ajax loader. -->
                 <h1>Canteen Report</h1>
-                <a href="#" id="close-button" class="glyphicon closebtn">Close</a>
+                <button id="close-button" class="btn-primary glyphicon closebtn">Close</button>
             </header>
 
             <div class="left-menu">
@@ -337,7 +336,7 @@
                                         </div>
 
                                         <div class="col-xs-3">
-                                            <select class="form-control">
+                                            <select class="form-control" id="team-drink-coffee-unit" name="team-drink-coffee-unit">
                                                 <option value="gallon">Gallon</option>
                                                 <option value="pot">Pot</option>
                                             </select>
@@ -368,7 +367,7 @@
                                         </div>
 
                                         <div class="col-xs-3">
-                                            <select class="form-control">
+                                            <select class="form-control" id="team-drink-cocoa-unit" id="team-drink-cocoa-unit">
                                                 <option value="gallon">Gallon</option>
                                                 <option value="pot">Pot</option>
                                             </select>
@@ -399,7 +398,7 @@
                                         </div>
 
                                         <div class="col-xs-3">
-                                            <select class="form-control">
+                                            <select class="form-control" id="team-drink-tea-unit" name="team-drink-tea-unit">
                                                 <option value="gallon">Gallon</option>
                                                 <option value="pot">Pot</option>
                                             </select>
@@ -430,7 +429,7 @@
                                         </div>
 
                                         <div class="col-xs-3">
-                                            <select class="form-control">
+                                            <select class="form-control" id="team-drink-cold-drinks-unit" name="team-drink-cold-drinks-unit">
                                                 <option value="gallon">Gallon</option>
                                                 <option value="pot">Pot</option>
                                             </select>
@@ -461,7 +460,7 @@
                                         </div>
 
                                         <div class="col-xs-3">
-                                            <select class="form-control">
+                                            <select class="form-control" id="team-drink-water-unit" id="team-drink-water-unit">
                                                 <option value="gallon">Gallon</option>
                                                 <option value="pot">Pot</option>
                                             </select>
@@ -487,7 +486,7 @@
                                     <div class="row">
 
                                         <div class="col-xs-3">
-                                            <label class="form-control form-control-label">Water</label>
+                                            <label class="form-control form-control-label">Donuts</label>
                                         </div>
 
                                         <div class="col-xs-3">
@@ -507,7 +506,7 @@
                                         </div>
 
                                         <div class="col-xs-3">
-                                            <select class="form-control">
+                                            <select class="form-control" id="team-food-donuts-unit" name="team-food-donuts-unit">
                                                 <option value="gallon">Each</option>
                                                 <option value="pot">Dozen</option>
                                             </select>
@@ -518,7 +517,7 @@
                                     <div class="row">
 
                                         <div class="col-xs-3">
-                                            <label class="form-control form-control-label">Water</label>
+                                            <label class="form-control form-control-label">Cookies</label>
                                         </div>
 
                                         <div class="col-xs-3">
@@ -538,7 +537,7 @@
                                         </div>
 
                                         <div class="col-xs-3">
-                                            <select class="form-control">
+                                            <select class="form-control" id="team-food-cookies-unit" name="team-food-cookies-unit">
                                                 <option value="gallon">Each</option>
                                                 <option value="pot">Dozen</option>
                                             </select>
@@ -549,7 +548,7 @@
                                     <div class="row">
 
                                         <div class="col-xs-3">
-                                            <label class="form-control form-control-label">Water</label>
+                                            <label class="form-control form-control-label">Sanwiches</label>
                                         </div>
 
                                         <div class="col-xs-3">
@@ -569,7 +568,7 @@
                                         </div>
 
                                         <div class="col-xs-3">
-                                            <select class="form-control">
+                                            <select class="form-control" id="team-food-sandwiches-unit" name="team-food-sandwiches-unit">
                                                 <option value="gallon">Each</option>
                                                 <option value="pot">Dozen</option>
                                             </select>
@@ -580,7 +579,7 @@
                                     <div class="row">
 
                                         <div class="col-xs-3">
-                                            <label class="form-control form-control-label">Water</label>
+                                            <label class="form-control form-control-label">Hot Dogs</label>
                                         </div>
 
                                         <div class="col-xs-3">
@@ -600,7 +599,7 @@
                                         </div>
 
                                         <div class="col-xs-3">
-                                            <select class="form-control">
+                                            <select class="form-control" id="team-food-hot-dogs-unit" name="team-food-hot-dogs-unit">
                                                 <option value="gallon">Each</option>
                                                 <option value="pot">Dozen</option>
                                             </select>
@@ -611,7 +610,7 @@
                                     <div class="row">
 
                                         <div class="col-xs-3">
-                                            <label class="form-control form-control-label">Water</label>
+                                            <label class="form-control form-control-label">Snacks</label>
                                         </div>
 
                                         <div class="col-xs-3">
@@ -631,7 +630,7 @@
                                         </div>
 
                                         <div class="col-xs-3">
-                                            <select class="form-control">
+                                            <select class="form-control" id="team-food-snacks-unit" id="team-food-snacks-unit">
                                                 <option value="gallon">Each</option>
                                                 <option value="pot">Dozen</option>
                                             </select>

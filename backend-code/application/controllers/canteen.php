@@ -11,6 +11,7 @@ class Canteen extends CI_Controller {
 		
 		//$data = new array();
 		$items = null;
+		$itemSizes = null;
 		$members = null;
 		$data = null;
 		$id = "";
@@ -21,34 +22,64 @@ class Canteen extends CI_Controller {
 				case "team-drink-coffee-amount":
 					$items[1] = $val;
 					break;
+				case "team-drink-coffee-unit":
+					$itemSizes[1] = $val;
+					break;
 				case "team-drink-cocoa-amount":
 					$items[2] = $val;
+					break;
+				case "team-drink-cocoa-unit":
+					$itemSizes[2] = $val;
 					break;
 				case "team-drink-tea-amount":
 					$items[3] = $val;
 					break;
+				case "team-drink-tea-unit":
+					$itemSizes[3] = $val;
+					break;
 				case "team-cold-drinks-amount":
 					$items[4] = $val;
 					break;
+				case "team-drink-cold-drinks-unit":
+					$itemSizes[4] = $val;
+					break;
 				case "team-water-amount":
 					$items[5] = $val;
+					break;
+				case "team-drink-water-unit":
+					$itemSizes[5] = $val;
 					break;
 					
 					
 				case "team-food-donuts-amount":
 					$items[6] = $val;
 					break;
+				case "team-food-donuts-unit":
+					$itemSizes[6] = $val;
+					break;
 				case "team-food-cookies-amount":
 					$items[7] = $val;
+					break;
+				case "team-food-cookies-unit":
+					$itemSizes[7] = $val;
 					break;
 				case "team-food-sandwiches-amount":
 					$items[8] = $val;
 					break;
+				case "team-food-sandwiches-unit":
+					$itemSizes[8] = $val;
+					break;
 				case "team-food-hot-dogs-amount":
 					$items[9] = $val;
 					break;
+				case "team-food-hot-dogs-unit":
+					$itemSizes[9] = $val;
+					break;
 				case "team-snacks-amount":
 					$items[12] = $val;
+					break;
+				case "team-food-snacks-unit":
+					$itemSizes[12] = $val;
 					break;
 					
 					
@@ -96,7 +127,11 @@ class Canteen extends CI_Controller {
 		if ($items != null) {
 			foreach ($items as $key => $value) {
 				if (is_numeric($value) && $value > 0) {
-					$this->Item->link_to_report($reportId, $key, $value);
+					$size = null;
+					if (isset($itemSizes[$key])) {
+						$size = $itemSizes[$key];
+					}
+					$this->Item->link_to_report($key, $reportId, $value, $size);
 				}
 			}
 		}

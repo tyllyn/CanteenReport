@@ -28,7 +28,8 @@ var app = {
 
         // Cache selectors
         var topMenu = $("header"),
-            topMenuHeight = topMenu.outerHeight()+15,
+            //topMenuHeight = topMenu.outerHeight()+15,
+            topMenuHeight = 84,
             // All list items
             menuItems = $('.left-menu').find("a"),
             // Anchors corresponding to menu items
@@ -39,8 +40,9 @@ var app = {
 
         // Bind to scroll
         $(window).scroll(function(){
+
            // Get container scroll position
-           var fromTop = $(this).scrollTop()+topMenuHeight;
+           var fromTop = $(this).scrollTop() + topMenuHeight;
 
            // Get id of current scroll item
            var cur = scrollItems.map(function(){
@@ -54,20 +56,29 @@ var app = {
            menuItems
              .parent().removeClass("isActive")
              .end().filter("[href=#"+id+"]").parent().addClass("isActive");
+
         });
 
         $('#new-report-button').on('touchstart', function(event)
         {
           $('#start').hide();
           $('#app').show();
+
+          amplify.store('active', '0');
+          $('#form').attr('unique', 0);
+
         });
 
         $('#close-button').on('touchstart', function(event)
         {
+          menuItems
+             .parent().removeClass("isActive")
+             .end().filter("[href=#incident]").parent().addClass("isActive");
           $('#start').show();
           $('#app').hide();
         });
 
+        // this.showReports();
 
         /**
          * adds increment functionality to the + buttons
@@ -142,6 +153,42 @@ var app = {
             }
         });
 
+        $('.open-report').on('click', 'a', function (e) {
+          e.preventDefault();
+
+          if ($(this).attr('data-report') != null) {
+            amplify.store('active', $(this).attr('data-report'));
+            $('#form').attr('data-unique', $(this).attr('data-report'));
+
+            $('#start').hide();
+            $('#app').show();
+          }
+        });
+
+        $('#submit').on('touchstart', 'button', function () {
+
+          console.log('submit');
+
+          $('<input />')
+            .attr('type', 'hidden')
+            .attr('name', 'finished')
+            .attr('id', 'finished')
+            .val(1)
+            .appendTo($('#form'));
+
+          storage.saveForm();
+
+          var id = $('#form').attr('data-unique');
+
+          amplify.store('active', 0);
+          amplify.store(id, null);
+
+          $('#form').attr('data-unique', '0');
+
+          $('#start').show();
+            $('#app').hide();
+        })
+
     },
 
     // Bind Event Listeners
@@ -172,5 +219,81 @@ var app = {
         receivedElement.setAttribute('style', 'display:block;');
 
         console.log('Received Event: ' + id);
+    },
+
+    // Show open reports
+    showReports: function() {
+
+      var storaged = amplify.store(),
+          dates = [];
+
+      for (var key in storaged) {
+
+        if (storaged.hasOwnProperty(key)) {
+
+          if (key != 'active' && key != 'canteen.changed') {
+
+            var d = storaged[key];
+
+            dates[key] = {};
+
+            for (var kkey in d) {
+
+              if (d.hasOwnProperty(kkey)) {
+
+                if (d[kkey].name == "date") {
+
+                  dates[key].fdate = d[kkey].value;
+
+                }
+
+                if (d[kkey].name == "id") {
+
+                  dates[key].fid = d[kkey].value;
+
+                }
+
+              }
+
+            }
+
+          }
+
+        }
+
+      }
+
+      if (dates.length > 0) {
+
+        $('.open-report')
+          .find('a')
+            .remove();
+
+        for (var jkey in dates) {
+
+          if (dates.hasOwnProperty(jkey)) {
+
+            console.log(dates[jkey]);
+
+            var format = new Date();
+
+            format.setTime(dates[jkey].fdate);
+
+            console.log(format);
+
+            $("<a />")
+              .attr('href', 'javascript:;')
+              .addClass('date glyphicon glyphicon-chevron-right')
+              .attr('data-report', dates[jkey].fid)
+              .html(
+                parseInt(format.getMonth(), 10) - 1 + '/' + format.getDate() + '/' + format.getFullYear() + ' ' + format.getHours() + ':' + format.getMinutes() + ':' + format.getSeconds()
+              )
+              .appendTo($('.open-report'));
+          }
+
+        }
+
+      }
+
     }
 };

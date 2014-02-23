@@ -122,26 +122,41 @@ class Report extends CI_Model {
 		return $q->result();
 	}
 	function item_search($params){
-		$this->db->select('r.*, i.Name, i.Category, l.quantity');
+		$this->db->select('r.*'); //, i.Name, i.Category, l.quantity
 		$this->db->from("Reports r");
-		$this->db->join("ReportMembers rm","rm.ReportID=r.ID","left outer");
-		$this->db->join("LinkReportItem l","l.ReportID=r.ID","left outer");
-		$this->db->join('Items i', 'l.ItemID=i.ID', 'left outer');
+		//$this->db->join("ReportMembers rm","rm.ReportID=r.ID","left outer");
+		//$this->db->join("LinkReportItem l","l.ReportID=r.ID","left outer");
+		//$this->db->join('Items i', 'l.ItemID=i.ID', 'left outer');
 		//linkreportitem ReportID
 		//reportmembers ReportID
 
+		//print_r($params);
+		
 		if(isset($params['month']) && $params['month'] != ''){
 			$this->db->where('MONTH(r.incident_start)', $params['month']);
 		}
 		if(isset($params['year']) && $params['year'] != ''){
 			$this->db->where('YEAR(r.incident_start)', $params['year']);
 		}
+		if(isset($params['id']) && $params["id"] != '') {
+			$this->db->where('incident_unit_number',$params['id']);
+		}
 
 		$q = $this->db->get();
 		
-		return $q->result();
+		$this->load->model('Item');
+		$results = $q->result();
+		foreach ($results as $key => $value) {
+			$results[$key]->items = $this->get_entry_items($value->ID);
+			foreach ($results[$key]->items as $itemKey => $itemValue) {
+				$results[$key]->items[$itemKey]->Details = $this->Item->get_entry($itemValue->ItemID);
+			}
+			$results[$key]->members = $this->get_entry_members($value->ID);
+		}
+		return $results;
+		
 	}
-
+	
 	function add($data) {
 		$this->db->trans_start();
 		$this->db->insert('Reports',$data);

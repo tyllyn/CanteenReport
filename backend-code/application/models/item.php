@@ -11,7 +11,12 @@ class Item extends CI_Model {
         parent::__construct();
     }
     
-    
+    function get_entry($id) {
+	$this->db->where("ID",$id);
+		$query = $this->db->get('Items');
+		
+		return $query->result();
+	}
 
 	function get_entries() {
 		$query = $this->db->get('Items');
@@ -19,13 +24,16 @@ class Item extends CI_Model {
 		return $query->result();
 	}
 	
-	function link_to_report($itemId, $reportId, $quantity) {
+	function link_to_report($itemId, $reportId, $quantity, $servingSize) {
 		$this->db->trans_start();
 		$data = array(
 			'ItemID' => $itemId,
 			'ReportID' => $reportId,
 			'Quantity' => $quantity
 		);
+		if ($servingSize != null) {
+			$data["ServingSize"] = $servingSize;
+		}
 		$this->db->insert('LinkReportItem',$data);
 		$insert_id = $this->db->insert_id();
 		$this->db->trans_complete();
