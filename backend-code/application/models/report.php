@@ -78,10 +78,10 @@ class Report extends CI_Model {
 		$this->db->join("Reports r","r.id=l.ReportID","inner");
 		$this->db->group_by("i.ID");
 		if ($start != null) {
-			$this->db->where('r.start >= ', $start);
+			$this->db->where('r.incident_start >= ', $start);
 		}
 		if ($end != null) {
-			$this->db->where('r.start < ', $end);
+			$this->db->where('r.incident_start < ', $end);
 		}
 		return $this->db->get()->result();
 		
