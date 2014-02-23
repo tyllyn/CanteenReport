@@ -107,6 +107,11 @@ class Report extends CI_Model {
 		return $insert_id;
 	}
 	
+	function update($id, $data) {
+		$this->db->where('ID', $id);
+		$this->db->update('Reports', $data); 
+	}
+	
 }
 
 ?>
