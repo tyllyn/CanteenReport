@@ -19,7 +19,12 @@ class Admin extends REST_Controller{
 		);
 
 
-		$data = $this->Report->get_entry_items($params);
-		$this->response($data);
+		$data = $this->Report->item_search($params);
+
+		if(count($data) > 0){
+			$this->response($data);
+		}else{
+			$this->response(array('status'=>'No Results.'));
+		}
 	}
 }
