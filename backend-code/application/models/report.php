@@ -99,6 +99,12 @@ class Report extends CI_Model {
 		$q = $this->db->get('LinkReportItem');
 		return $q->result();
 	}
+	function get_entry_members($id) {
+		//incident_unit_number
+		$this->db->where('ReportID',$id);
+		$q = $this->db->get('ReportMembers');
+		return $q->result();
+	}
 	function get_by_unit($id = null){
 		if(isset($id)){
 			$this->db->where('incident_unit_number', $id);
