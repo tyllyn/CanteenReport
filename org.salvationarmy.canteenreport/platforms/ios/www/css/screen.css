@@ -166,7 +166,7 @@ header:after {
 /* line 25, ../sass/_frame.scss */
 header .closebtn {
   margin-top: 9px;
-  padding: 10px 25px;
+  padding: 13px 25px 15px;
   border-radius: 3px;
   position: absolute;
   right: 15px;
@@ -201,7 +201,7 @@ header .sync-btn {
   color: #000;
   border: solid 1px #ccc;
 }
-/* line 59, ../sass/_frame.scss */
+/* line 60, ../sass/_frame.scss */
 header .sync-btn.isLoading:after {
   display: inline-block;
   position: relative;
@@ -212,15 +212,21 @@ header .sync-btn.isLoading:after {
   top: 3px;
   margin-left: 10px;
 }
-/* line 69, ../sass/_frame.scss */
+/* line 70, ../sass/_frame.scss */
 header .sync-btn:hover {
   text-decoration: none;
   background: #E3323A;
   border-color: #c42d32;
   color: #fff;
 }
+/* line 78, ../sass/_frame.scss */
+header .sync-btn.disabled, header .sync-btn.btn-primary.disabled:hover {
+  background-color: #EBEAE8;
+  border-color: transparent;
+  color: #bfbbb5;
+}
 
-/* line 77, ../sass/_frame.scss */
+/* line 85, ../sass/_frame.scss */
 .left-menu {
   border-right: solid 1px #DAD7D2;
   width: 100%;
@@ -231,41 +237,41 @@ header .sync-btn:hover {
   background: #ECEBE7;
   margin-top: 20px;
 }
-/* line 86, ../sass/_frame.scss */
+/* line 94, ../sass/_frame.scss */
 .left-menu ul {
   list-style: none;
   padding: 0;
   margin: 0;
 }
-/* line 90, ../sass/_frame.scss */
+/* line 98, ../sass/_frame.scss */
 .left-menu ul li {
   text-align: center;
 }
-/* line 93, ../sass/_frame.scss */
+/* line 101, ../sass/_frame.scss */
 .left-menu ul li.isActive a {
   color: #e3323a;
 }
-/* line 96, ../sass/_frame.scss */
+/* line 104, ../sass/_frame.scss */
 .left-menu ul li a {
   width: 100%;
   color: #9C9992;
   padding: 25px 0;
 }
-/* line 101, ../sass/_frame.scss */
+/* line 109, ../sass/_frame.scss */
 .left-menu ul li a:hover {
   color: #E3323A;
 }
-/* line 105, ../sass/_frame.scss */
+/* line 113, ../sass/_frame.scss */
 .left-menu ul li a:before {
   display: block;
   font-size: 1.6em;
   margin-bottom: 4px;
 }
-/* line 110, ../sass/_frame.scss */
+/* line 118, ../sass/_frame.scss */
 .left-menu ul li a:hover {
   text-decoration: none;
 }
-/* line 116, ../sass/_frame.scss */
+/* line 124, ../sass/_frame.scss */
 .left-menu:after {
   display: block;
   content: '';

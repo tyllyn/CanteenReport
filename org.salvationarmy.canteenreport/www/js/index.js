@@ -28,7 +28,8 @@ var app = {
 
         // Cache selectors
         var topMenu = $("header"),
-            topMenuHeight = topMenu.outerHeight()+15,
+            //topMenuHeight = topMenu.outerHeight()+15,
+            topMenuHeight = 84,
             // All list items
             menuItems = $('.left-menu').find("a"),
             // Anchors corresponding to menu items
@@ -39,8 +40,9 @@ var app = {
 
         // Bind to scroll
         $(window).scroll(function(){
+
            // Get container scroll position
-           var fromTop = $(this).scrollTop()+topMenuHeight;
+           var fromTop = $(this).scrollTop() + topMenuHeight;
 
            // Get id of current scroll item
            var cur = scrollItems.map(function(){
@@ -54,6 +56,7 @@ var app = {
            menuItems
              .parent().removeClass("isActive")
              .end().filter("[href=#"+id+"]").parent().addClass("isActive");
+
         });
 
         $('#new-report-button').on('touchstart', function(event)
