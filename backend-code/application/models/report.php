@@ -102,7 +102,7 @@ class Report extends CI_Model {
 	function add($data) {
 		$this->db->trans_start();
 		$now = new DateTime();
-		$data["LastUpdate"] = $now->format('Y-m-d H:i:s')
+		$data["LastUpdate"] = $now->format('Y-m-d H:i:s');
 		$this->db->insert('Reports',$data);
 		$insert_id = $this->db->insert_id();
 		$this->db->trans_complete();
@@ -112,7 +112,7 @@ class Report extends CI_Model {
 	function update($id, $data) {
 		$this->db->where('ID', $id);
 		$now = new DateTime();
-		$data["LastUpdate"] = $now->format('Y-m-d H:i:s')
+		$data["LastUpdate"] = $now->format('Y-m-d H:i:s');
 		$this->db->update('Reports', $data); 
 	}
 	
