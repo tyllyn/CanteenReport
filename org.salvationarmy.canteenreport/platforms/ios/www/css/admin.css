@@ -1,0 +1,11 @@
+/* line 1, ../sass/admin.scss */
+.container {
+  padding: 20px;
+}
+
+/* line 4, ../sass/admin.scss */
+.search-reports {
+  width: 100%;
+  padding: 10px 15px;
+  border-bottom: solid 1px #000;
+}
