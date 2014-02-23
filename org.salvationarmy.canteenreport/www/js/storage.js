@@ -3,6 +3,10 @@ var storage = {
 		this.events();
 		this.syncForm();
 
+		if (amplify.store('active') != null) {
+			$('#form').attr('data-unique', amplify.store('active'));
+		}
+
 	},
 	events: function () {
 		var s = this;
@@ -18,11 +22,30 @@ var storage = {
 			e.preventDefault();
 		});
 
-		s.saveForm();
+		s.resetChanged();
+		s.doSave();
 
 		$('#form').on('blur keydown', 'input, textarea, select', function () {
-			s.saveForm();
+			s.showChanged();
 		});
+	},
+	showChanged: function () {
+		$('.sync-btn').removeClass('disabled');
+
+		amplify.store('canteen.changed', 1);
+	},
+	resetChanged: function () {
+		$('.sync-btn').addClass('disabled');
+
+		amplify.store('canteen.changed', 0);
+	},
+	doSave: function () {
+		var s = this;
+		s.intv = setInterval(function () {
+			if (amplify.store('canteen.changed') == 1) {
+				s.saveForm();
+			}
+		}, 5000);
 	},
 	syncForm: function () {
 		var unique = $('#form').attr('data-unique');
@@ -72,14 +95,15 @@ var storage = {
 	},
 	save: function (data, init) {
 
-		console.log('saving...');
+		// console.log('saving...');
 
-		console.log('data', data);
+		// console.log('data', data);
 
 		var id,
-			msg;
+			msg
+			s = this;
 
-		if (this.isOnline()) {
+		if (s.isOnline()) {
 
 			$.ajax({
 				url: 'http://23.239.8.146/backend-code/index.php/canteen/add',
@@ -88,41 +112,31 @@ var storage = {
 				dataType: 'text',
 				success: function (res, status, xhr) {
 
-					console.log("I am here");
+					// console.log("I am here");
 
 					var result = res.split(':');
 
 					msg = result[0];
 					id = result[1];
 
-					console.log(result, msg, id);
+					// console.log(result, msg, id);
 
 					if ("success" == msg) {
 
-						console.log('successful');
+						// console.log('successful');
 
 						if (init) {
 
-							console.log('making input');
+							// console.log('making input');
 
-							$('<input />')
-								.attr('type', 'hidden')
-								.attr('id', 'id')
-								.attr('name', 'id')
-								.val(id)
-								.appendTo($('#form'));
-
-							var date = new Date();
-
-							$('<input />')
-								.attr('type', 'hidden')
-								.attr('id', 'date')
-								.attr('name', 'date')
-								.val(date.getTime())
-								.appendTo($('#form'));
+							s.setupIDandDate(id);
 
 							$('#form').attr('data-unique', id);
+
+							amplify.store('active', id);
 						}
+
+						s.resetChanged();
 
 					}
 				},
@@ -133,11 +147,30 @@ var storage = {
 
 		}
 
-		data = this.getFormJSON();
+		data = s.getFormJSON();
 
-		console.log(data);
+		console.log("amplify", id, data);
 
 		amplify.store(id, data);
+
+	},
+	setupIDandDate: function (id) {
+
+		$('<input />')
+			.attr('type', 'hidden')
+			.attr('id', 'id')
+			.attr('name', 'id')
+			.val(id)
+			.appendTo($('#form'));
+
+		var date = new Date();
+
+		$('<input />')
+			.attr('type', 'hidden')
+			.attr('id', 'date')
+			.attr('name', 'date')
+			.val(date.getTime())
+			.appendTo($('#form'));
 
 	},
 	field: function (id, value) {
