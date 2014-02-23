@@ -253,3 +253,136 @@ header .sync-btn:hover {
   position: absolute;
   right: 10px;
 }
+
+/* line 1, ../sass/_canteenReportForms.scss */
+#submit {
+  background-color: #332e28;
+  padding-bottom: 50em;
+}
+
+/* line 5, ../sass/_canteenReportForms.scss */
+#submit p {
+  font-size: 1.25em;
+  font-weight: normal;
+  color: #fff;
+}
+
+/* line 11, ../sass/_canteenReportForms.scss */
+.container {
+  padding-right: 0;
+}
+
+/* line 15, ../sass/_canteenReportForms.scss */
+a:link, a:hover, a:focus {
+  color: #e3323a;
+}
+
+/* line 19, ../sass/_canteenReportForms.scss */
+.team-member {
+  margin-bottom: 0.25em;
+}
+
+/* line 23, ../sass/_canteenReportForms.scss */
+.tab-content {
+  margin-bottom: 2em;
+}
+
+/* line 28, ../sass/_canteenReportForms.scss */
+.canteen-well {
+  padding: 2em;
+  border-bottom: 2px solid #ecebe8;
+}
+
+/* line 32, ../sass/_canteenReportForms.scss */
+.canteen-well:last-child {
+  padding-top: 2em;
+  border-bottom: none;
+}
+
+/* line 37, ../sass/_canteenReportForms.scss */
+.amounts .row {
+  padding: 0.75em 0 0.5em 0;
+}
+
+/* line 40, ../sass/_canteenReportForms.scss */
+.amounts .row .input-group .glyphicon {
+  top: 1px;
+}
+
+/* line 44, ../sass/_canteenReportForms.scss */
+.amounts .row:nth-child(even) {
+  background-color: #ecebe8;
+  border-top: 1px solid #dad7d2;
+  border-bottom: 1px solid #dad7d2;
+}
+
+/* line 50, ../sass/_canteenReportForms.scss */
+.amounts .row:nth-child(even) .form-control-label {
+  background: transparent;
+}
+
+/** bootstrap overrides */
+/* line 54, ../sass/_canteenReportForms.scss */
+.control-group {
+  margin-bottom: 1em;
+}
+
+/* line 58, ../sass/_canteenReportForms.scss */
+.input-group {
+  width: 100%;
+}
+
+/* line 61, ../sass/_canteenReportForms.scss */
+.input-group .glyphicon {
+  top: 0;
+}
+
+/* line 65, ../sass/_canteenReportForms.scss */
+.type-container .row {
+  margin-bottom: 1em;
+}
+
+/* line 69, ../sass/_canteenReportForms.scss */
+.row-label {
+  display: table;
+}
+
+/* line 72, ../sass/_canteenReportForms.scss */
+.row-label label {
+  display: table-cell;
+}
+
+/* line 77, ../sass/_canteenReportForms.scss */
+label, h2 {
+  font-size: 16px;
+  color: #332e27;
+}
+
+/* line 81, ../sass/_canteenReportForms.scss */
+label.control-label {
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+}
+
+/* line 85, ../sass/_canteenReportForms.scss */
+label.form-control {
+  font-weight: normal;
+}
+
+/* line 88, ../sass/_canteenReportForms.scss */
+label.form-control-label {
+  border: none;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+
+/* line 94, ../sass/_canteenReportForms.scss */
+.form-control {
+  border: 1px solid #c8c4bb;
+}
+
+/* line 98, ../sass/_canteenReportForms.scss */
+.required abbr {
+  border-bottom: none;
+  color: #e3323a;
+}
