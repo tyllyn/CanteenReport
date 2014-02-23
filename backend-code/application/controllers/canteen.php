@@ -82,7 +82,7 @@ class Canteen extends CI_Controller {
 				case "team-food-hot-dogs-amount":
 					$items[9] = $val;
 					break;
-				case "team-food-snacks-amount":
+				case "team-snacks-amount":
 					$items[12] = $val;
 					break;
 					
