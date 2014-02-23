@@ -72,7 +72,7 @@ class Report extends CI_Model {
 	}
 	//2014-02-22 00:00:00
 	function get_entries_items($start, $end) {
-		$this->db->select("i.ID,i.name,sum(l.quantity)");
+		$this->db->select("i.ID,i.Name,sum(l.quantity) Quantity");
 		$this->db->from("LinkReportItem l");
 		$this->db->join("Items i","i.id=l.ItemID","inner");
 		$this->db->join("Reports r","r.id=l.ReportID","inner");
