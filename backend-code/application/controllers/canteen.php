@@ -131,7 +131,7 @@ class Canteen extends CI_Controller {
 					if (isset($itemSizes[$key])) {
 						$size = $itemSizes[$key];
 					}
-					$this->Item->link_to_report($reportId, $key, $value, $size);
+					$this->Item->link_to_report($key, $reportId, $value, $size);
 				}
 			}
 		}
