@@ -7,7 +7,6 @@ class Canteen extends CI_Controller {
 	}
 	
 	public function add() {
-<<<<<<< HEAD
 	var_dump($_POST);
 		$json = $_POST;
 	
@@ -44,13 +43,8 @@ class Canteen extends CI_Controller {
     // "name": "team-refferal-title",
     // "value": ""
 // }]"';
->>>>>>> 8c0f29626bc04d790201cb7f9949897ca273c997
-		$res = json_decode($json);
-=======
 		$res = $_POST; //json_decode($json);
 		
-		
->>>>>>> 5487b56a46501e1bafd3d563598eb7eddf1ac420
 		//$data = new array();
 		$items = null;
 		$members = null;
