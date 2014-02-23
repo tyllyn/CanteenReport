@@ -157,7 +157,7 @@ class Canteen extends CI_Controller {
 	
 	public function viewitems() {
 		$this->load->model('Item');
-		$data = $this->Item->get_entries();
+		$data["query"] = $this->Item->get_entries();
 		$this->load->view("header");
 		$this->load->view('database_output', $data);
 		$this->load->view("footer");
@@ -173,6 +173,7 @@ class Canteen extends CI_Controller {
 		$this->load->model('Report');
 		$data['report'] = $this->Report->get_entry($id);
 		$data['reportitems'] = $this->Report->get_entry_items($id);
+		$data['reportmembers'] = $this->Report->get_entry_members($id);
 		$this->load->view('canteen/report',$data);
 	}
 	

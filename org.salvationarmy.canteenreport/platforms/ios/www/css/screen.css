@@ -1,27 +1,72 @@
+/*
+ * Licensed to the Apache Software Foundation (ASF) under one
+ * or more contributor license agreements.  See the NOTICE file
+ * distributed with this work for additional information
+ * regarding copyright ownership.  The ASF licenses this file
+ * to you under the Apache License, Version 2.0 (the
+ * "License"); you may not use this file except in compliance
+ * with the License.  You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an
+ * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ * KIND, either express or implied.  See the License for the
+ * specific language governing permissions and limitations
+ * under the License.
+ */
+/* line 19, ../sass/_cordovaIndex.scss */
+* {
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  /* make transparent link selection, adjust last value opacity 0 to 1.0 */
+}
+
+/* apply a natural box layout model to all elements */
+/* line 23, ../sass/_cordovaIndex.scss */
+*, *:before, *:after {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+/* line 26, ../sass/_cordovaIndex.scss */
+body {
+  -webkit-touch-callout: none;
+  /* prevent callout to copy image, etc when tap to hold */
+  -webkit-text-size-adjust: none;
+  /* prevent webkit from resizing text to fit */
+  -webkit-user-select: none;
+  /* prevent copy paste, to allow, change 'none' to 'text' */
+  background-attachment: fixed;
+  height: 100%;
+  margin: 0px;
+  padding: 0px;
+  width: 100%;
+}
+
 /* line 1, ../sass/_start.scss */
 body {
   background: #B3AEA8;
-  margin-top: 20px;
 }
 
-/* line 5, ../sass/_start.scss */
+/* line 4, ../sass/_start.scss */
 .container {
   width: 100%;
-  min-width: 768px;
   margin: 0 auto;
   background: #fff;
 }
 
-/* line 11, ../sass/_start.scss */
+/* line 10, ../sass/_start.scss */
 .container.framed {
-  padding-left: 120px;
+  padding-left: 100px;
   padding-top: 70px;
 }
 
-/* 
+/*
 	added a start class just to center things
 */
-/* line 18, ../sass/_start.scss */
+/* line 17, ../sass/_start.scss */
 .container.start {
   text-align: center;
   padding-top: 50px;
@@ -30,13 +75,13 @@ body {
   margin-bottom: 100px;
   padding-bottom: 50px;
 }
-/* line 26, ../sass/_start.scss */
+/* line 25, ../sass/_start.scss */
 .container.start h1 {
   text-transform: uppercase;
   margin-bottom: 1.5em;
   font-family: 'Average';
 }
-/* line 31, ../sass/_start.scss */
+/* line 30, ../sass/_start.scss */
 .container.start a.btn-primary {
   display: inline-block;
   margin: 0 auto;
@@ -45,12 +90,12 @@ body {
   font-size: 1.2em;
   text-transform: uppercase;
 }
-/* line 39, ../sass/_start.scss */
+/* line 38, ../sass/_start.scss */
 .container.start a.btn-primary:hover {
   text-decoration: none;
 }
 
-/* line 44, ../sass/_start.scss */
+/* line 43, ../sass/_start.scss */
 .glyphicon-remove-circle:before {
   font-size: 1.3em;
   position: relative;
@@ -58,7 +103,7 @@ body {
   color: #B2AEA5;
 }
 
-/* line 51, ../sass/_start.scss */
+/* line 50, ../sass/_start.scss */
 .btn-primary {
   padding: 10px 25px;
   border-radius: 3px;
@@ -69,7 +114,7 @@ body {
   vertical-align: top;
   -webkit-transition: all 0.4s;
 }
-/* line 61, ../sass/_start.scss */
+/* line 60, ../sass/_start.scss */
 .btn-primary:hover {
   text-decoration: none;
   background: #EBEAE8;
@@ -253,4 +298,159 @@ header .sync-btn:hover {
   content: "\e080";
   position: absolute;
   right: 10px;
+}
+
+/* line 1, ../sass/_canteenReportForms.scss */
+#submit {
+  background-color: #332e28;
+  padding-bottom: 50em;
+}
+
+/* line 5, ../sass/_canteenReportForms.scss */
+#submit p {
+  font-size: 1.25em;
+  font-weight: normal;
+  color: #fff;
+}
+
+/* line 11, ../sass/_canteenReportForms.scss */
+.container {
+  padding-right: 0;
+}
+
+/* line 15, ../sass/_canteenReportForms.scss */
+a:link, a:hover, a:focus {
+  color: #e3323a;
+}
+
+/* line 19, ../sass/_canteenReportForms.scss */
+.team-member {
+  margin-bottom: 0.25em;
+}
+
+/* line 23, ../sass/_canteenReportForms.scss */
+.tab-content {
+  margin-bottom: 2em;
+}
+
+/* line 28, ../sass/_canteenReportForms.scss */
+.canteen-well {
+  padding: 2em;
+  border-bottom: 2px solid #ecebe8;
+}
+
+/* line 32, ../sass/_canteenReportForms.scss */
+.canteen-well:last-child {
+  padding-top: 2em;
+  border-bottom: none;
+}
+
+/* line 37, ../sass/_canteenReportForms.scss */
+.amounts .row {
+  padding: 0.75em 0 0.5em 0;
+}
+
+/* line 45, ../sass/_canteenReportForms.scss */
+.btn-is-active,
+.btn-is-active:focus,
+.btn-red,
+.btn-red:focus,
+.btn-red:hover {
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.2);
+  background: #E3323A;
+  text-decoration: none;
+  border-color: #ccc;
+  color: #fff;
+  border: solid 1px #c42d32;
+  vertical-align: top;
+}
+
+/* line 54, ../sass/_canteenReportForms.scss */
+.btn-red:focus {
+  -webkit-box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+  box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+}
+
+/* line 60, ../sass/_canteenReportForms.scss */
+.amounts .row .input-group .glyphicon {
+  top: 1px;
+}
+
+/* line 64, ../sass/_canteenReportForms.scss */
+.amounts .row:nth-child(even) {
+  background-color: #ecebe8;
+  border-top: 1px solid #dad7d2;
+  border-bottom: 1px solid #dad7d2;
+}
+
+/* line 70, ../sass/_canteenReportForms.scss */
+.amounts .row:nth-child(even) .form-control-label {
+  background: transparent;
+}
+
+/** bootstrap overrides */
+/* line 74, ../sass/_canteenReportForms.scss */
+.control-group {
+  margin-bottom: 1em;
+}
+
+/* line 78, ../sass/_canteenReportForms.scss */
+.input-group {
+  width: 100%;
+}
+
+/* line 81, ../sass/_canteenReportForms.scss */
+.input-group .glyphicon {
+  top: 0;
+}
+
+/* line 85, ../sass/_canteenReportForms.scss */
+.type-container .row {
+  margin-bottom: 1em;
+}
+
+/* line 89, ../sass/_canteenReportForms.scss */
+.row-label {
+  display: table;
+}
+
+/* line 92, ../sass/_canteenReportForms.scss */
+.row-label label {
+  display: table-cell;
+}
+
+/* line 97, ../sass/_canteenReportForms.scss */
+label, h2 {
+  font-size: 16px;
+  font-weight: bold;
+  color: #332e27;
+}
+
+/* line 102, ../sass/_canteenReportForms.scss */
+label.control-label {
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+}
+
+/* line 106, ../sass/_canteenReportForms.scss */
+label.form-control {
+  font-weight: normal;
+}
+
+/* line 109, ../sass/_canteenReportForms.scss */
+label.form-control-label {
+  border: none;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+
+/* line 115, ../sass/_canteenReportForms.scss */
+.form-control {
+  border: 1px solid #c8c4bb;
+}
+
+/* line 119, ../sass/_canteenReportForms.scss */
+.required abbr {
+  border-bottom: none;
+  color: #e3323a;
 }

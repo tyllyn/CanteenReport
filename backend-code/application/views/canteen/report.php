@@ -30,5 +30,15 @@
 		?>
 		
 	</div>
+	<div>
+		<h2>Members</h2>
+		
+		<?php
+		$data["query"] = $reportmembers;
+		$this->load->view("database_output", $data);
+
+		?>
+		
+	</div>
 
 <?php $this->load->view("footer"); ?>

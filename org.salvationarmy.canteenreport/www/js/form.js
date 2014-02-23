@@ -40,6 +40,7 @@ var form = {
 		});
 	},
 	addNewMember: function (id, val) {
+
 		var $newmember;
 
 		// Clone first member, strip all data, and append
@@ -47,6 +48,9 @@ var form = {
 			.clone()
 			.removeClass('team-member-1')
 			.addClass('team-member-' + id)
+			.find('.js-add-member-container')
+			.remove()
+			.end()
 			.find('input')
 				.val(val)
 				.attr('id', 'team-member-' + id)

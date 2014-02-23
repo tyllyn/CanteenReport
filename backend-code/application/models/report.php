@@ -72,16 +72,16 @@ class Report extends CI_Model {
 	}
 	//2014-02-22 00:00:00
 	function get_entries_items($start, $end) {
-		$this->db->select("i.ID,i.name,sum(l.quantity)");
+		$this->db->select("i.ID,i.Name,sum(l.quantity) Quantity");
 		$this->db->from("LinkReportItem l");
 		$this->db->join("Items i","i.id=l.ItemID","inner");
 		$this->db->join("Reports r","r.id=l.ReportID","inner");
 		$this->db->group_by("i.ID");
 		if ($start != null) {
-			$this->db->where('r.start >= ', $start);
+			$this->db->where('r.incident_start >= ', $start);
 		}
 		if ($end != null) {
-			$this->db->where('r.start < ', $end);
+			$this->db->where('r.incident_start < ', $end);
 		}
 		return $this->db->get()->result();
 		
@@ -97,6 +97,12 @@ class Report extends CI_Model {
 		//incident_unit_number
 		$this->db->where('ReportID',$id);
 		$q = $this->db->get('LinkReportItem');
+		return $q->result();
+	}
+	function get_entry_members($id) {
+		//incident_unit_number
+		$this->db->where('ReportID',$id);
+		$q = $this->db->get('ReportMembers');
 		return $q->result();
 	}
 	function get_by_unit($id = null){

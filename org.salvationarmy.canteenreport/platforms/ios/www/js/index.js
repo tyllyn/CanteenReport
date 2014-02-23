@@ -18,6 +18,9 @@
  */
 var app = {
 
+    $activeFuelLevel: undefined,
+    $activeWaterLevel: undefined,
+
     // Application Constructor
     initialize: function() {
 
@@ -53,21 +56,66 @@ var app = {
              .end().filter("[href=#"+id+"]").parent().addClass("isActive");
         });
 
+        /**
+         * adds increment functionality to the + buttons
+         */
         $('.increment').on('click', function(event)
         {
-
-            console.log('click');
-
             var incrementNumberField = $(event.currentTarget).parent().next();
             var incrementNumberFieldVal = Number(incrementNumberField.val());
-
             incrementNumberField.val(incrementNumberFieldVal + 1);
 
-            console.log(incrementNumberField.val())
-
+            event.preventDefault();
         });
 
-        $('.left-menu').find('a').on({
+        $('.increment-minus').on('click', function(event)
+        {
+            var incrementNumberField = $(event.currentTarget).parent().prev();
+            var incrementNumberFieldVal = Number(incrementNumberField.val());
+
+            var newVal = incrementNumberFieldVal - 1;
+            if(newVal < 0)
+                newVal = 0;
+
+            incrementNumberField.val(newVal);
+
+            event.preventDefault();
+        });
+
+        /**
+         * fuel level
+         */
+        $('.fuel-level-button').on('click', function(event)
+        {
+            if(app.$activeFuelLevel != undefined){
+                app.$activeFuelLevel.removeClass('btn-is-active');
+            }
+            app.$activeFuelLevel = $(event.currentTarget).addClass('btn-is-active');
+
+            $('#end-fuel-level').val(app.$activeFuelLevel.data().level);
+
+            event.preventDefault();
+        });
+
+        /**
+         * water level
+         */
+        $('.water-level-button').on('click', function(event)
+        {
+            if(app.$activeWaterLevel != undefined){
+                app.$activeWaterLevel.removeClass('btn-is-active');
+            }
+            app.$activeWaterLevel = $(event.currentTarget).addClass('btn-is-active');
+
+            $('#end-water-level').val(app.$activeWaterLevel.data().level);
+
+            event.preventDefault();
+        });
+
+        /**
+         */
+        $('.left-menu').find('a').on(
+        {
             click: function(e){
                 var id = $(this).attr('href');
 
@@ -80,7 +128,9 @@ var app = {
                 e.preventDefault();
             }
         });
+
     },
+
     // Bind Event Listeners
     //
     // Bind any events that are required on startup. Common events are:
