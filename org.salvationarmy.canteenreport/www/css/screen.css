@@ -97,7 +97,7 @@ body {
   font-family: 'Average';
 }
 /* line 38, ../sass/_start.scss */
-.container.start a.btn-primary {
+.container.start .btn-primary {
   display: inline-block;
   margin: 0 auto;
   padding: 10px 60px;
@@ -106,7 +106,7 @@ body {
   text-transform: uppercase;
 }
 /* line 46, ../sass/_start.scss */
-.container.start a.btn-primary:hover {
+.container.start .btn-primary:hover {
   text-decoration: none;
 }
 
