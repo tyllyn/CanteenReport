@@ -126,13 +126,14 @@ class Report extends CI_Model {
 		$this->db->from("Reports r");
 		$this->db->join("ReportMembers rm","rm.ReportID=r.ID","left outer");
 		$this->db->join("LinkReportItem l","l.ReportID=r.ID","left outer");
+		$this->db->join('Items i', 'l.ItemID=i.ID', 'left outer');
 		//linkreportitem ReportID
 		//reportmembers ReportID
 
-		if(isset($params['month'])){
+		if(isset($params['month']) && $params['month'] != ''){
 			$this->db->where('MONTH(r.incident_start)', $params['month']);
 		}
-		if(isset($params['year'])){
+		if(isset($params['year']) && $params['year'] != ''){
 			$this->db->where('YEAR(r.incident_start)', $params['year']);
 		}
 
