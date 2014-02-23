@@ -8,11 +8,13 @@ class Canteen extends CI_Controller {
 	
 	public function add() {
 	
-		if (!array_key_exists ("data", $_POST)) {
-			die("NO DATA PASSED");
-		}
+		$json = $HTTP_RAW_POST_DATA;
 	
-		$json=$_POST["data"];
+		// if (!array_key_exists ("data", $_POST)) {
+			// die("NO DATA PASSED");
+		// }
+	
+		// $json=$_POST["data"];
 	// $json='[{
     // "name": "incident-start",
     // "value": "2014-02-22 15:35:00"
