@@ -8,6 +8,7 @@ class Canteen extends CI_Controller {
 	
 	public function add() {
 	
+<<<<<<< HEAD
 	//$json=$_POST["data"];
 	$json='[{
     "name": "incident-start",
@@ -37,9 +38,46 @@ class Canteen extends CI_Controller {
     "name": "team-refferal-title",
     "value": ""
 }]"';
+=======
+		if (!array_key_exists ("data", $_POST)) {
+			die("NO DATA PASSED");
+		}
+	
+		$json=$_POST["data"];
+	// $json='[{
+    // "name": "incident-start",
+    // "value": "2014-02-22 15:35:00"
+// }, {
+    // "name": "incident-location",
+    // "value": "South Side"
+// }, {
+    // "name": "incident-route",
+    // "value": ""
+// }, {
+    // "name": "team-driver",
+    // "value": "Joshua Petry"
+// }, {
+    // "name": "team-member-1",
+    // "value": "Prince"
+// }, {
+    // "name": "team-member-2",
+    // "value": "Wyatt"
+// }, {
+    // "name": "team-member-3",
+    // "value": ""
+// }, {
+    // "name": "team-refferal-name",
+    // "value": ""
+// }, {
+    // "name": "team-refferal-title",
+    // "value": ""
+// }]"';
+>>>>>>> 8c0f29626bc04d790201cb7f9949897ca273c997
 		$res = json_decode($json);
 		//$data = new array();
 		$items = null;
+		$members = null;
+		$id = "";
 		foreach ($res as $value) {
 		
 			// hard coding IDs because #yolo
@@ -91,21 +129,42 @@ class Canteen extends CI_Controller {
 					$items[14] = $value->value;
 					break;
 					
+				case "id":
+					$id = $value->value;
+					break;
 					
 				default:
-					$data[str_replace ("-","_", $value->name)] = $value->value;
+					if (strpos($value->name,"team-member-") === 0) {
+						array_push($members, $value->value);
+					} else {
+						$data[str_replace ("-","_", $value->name)] = $value->value;
+					}
 			}
 		}
 		
 		$this->load->model('Report');
-		$reportId = $this->Report->add($data);
+		$this->load->model('Item');
+		$this->load->model('Member');
+		if ($id == 0 || !is_numeric($id)) {
+			$reportId = $this->Report->add($data);
+		} else {
+			$this->Report->update($id, $data);
+			$reportId = $id;
+			$this->Item->delete_report_links($reportId);
+			$this->Member->delete_report_links($reportId);
+		}
 		
 		if ($items != null) {
-			$this->load->model('Item');
-			foreach ($item as $key => $value) {
+			foreach ($items as $key => $value) {
 				if (is_numeric($value) && $value > 0) {
 					$this->Item->link_to_report($reportId, $key, $value);
 				}
+			}
+		}
+		
+		if ($members != null) {
+			foreach ($members as $key => $value) {
+				$this->Member->link_to_report($value, $reportId);
 			}
 		}
 		
