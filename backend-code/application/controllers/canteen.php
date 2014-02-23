@@ -47,6 +47,7 @@ class Canteen extends CI_Controller {
 		//$data = new array();
 		$items = null;
 		$members = null;
+		$data = null;
 		$id = "";
 		foreach ($res as $key => $val) {
 		
