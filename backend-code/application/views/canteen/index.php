@@ -1,5 +1,7 @@
 <?php $this->load->view('header'); ?>
 
+	<h1>Test Links</h1>
+
 	<ul>
 		<li><a href="/backend-code/index.php/canteen/viewreports">View Reports</a></li>
 		<li><a href="/backend-code/index.php/canteen/viewreport/1">View A Report</a></li>
