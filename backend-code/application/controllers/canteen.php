@@ -8,7 +8,7 @@ class Canteen extends CI_Controller {
 	
 	public function add() {
 	
-		$json = $HTTP_RAW_POST_DATA;
+		$json = $_POST;
 	
 		// if (!array_key_exists ("data", $_POST)) {
 			// die("NO DATA PASSED");
