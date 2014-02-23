@@ -66,8 +66,11 @@ var app = {
         {
           $('#start').show();
           $('#app').hide();
+
+          amplify.store('active', '0');
         });
 
+        this.showReports();
 
         /**
          * adds increment functionality to the + buttons
@@ -172,5 +175,81 @@ var app = {
         receivedElement.setAttribute('style', 'display:block;');
 
         console.log('Received Event: ' + id);
+    },
+
+    // Show open reports
+    showReports: function() {
+
+      var storaged = amplify.store(),
+          dates = [];
+
+      for (var key in storaged) {
+
+        if (storaged.hasOwnProperty(key)) {
+
+          if (key != 'active' && key != 'canteen.changed') {
+
+            var d = storaged[key];
+
+            dates[key] = {};
+
+            for (var kkey in d) {
+
+              if (d.hasOwnProperty(kkey)) {
+
+                if (d[kkey].name == "date") {
+
+                  dates[key].fdate = d[kkey].value;
+
+                }
+
+                if (d[kkey].name == "id") {
+
+                  dates[key].fid = d[kkey].value;
+
+                }
+
+              }
+
+            }
+
+          }
+
+        }
+
+      }
+
+      if (dates.length > 0) {
+
+        $('.open-report')
+          .find('a')
+            .remove();
+
+        for (var jkey in dates) {
+
+          if (dates.hasOwnProperty(jkey)) {
+
+            var format = new Date();
+
+            format.setTime(dates[jkey].fdate);
+
+
+
+            console.log(format);
+
+            $("<a />")
+              .attr('href', 'javascript:;')
+              .addClass('date glyphicon glyphicon-chevron-right')
+              .attr('data-report', dates[jkey].fid)
+              .html(
+                parseInt(format.getMonth(), 10) - 1 + '/' + format.getDate() + '/' + format.getFullYear() + ' ' + format.getHours() + ':' + format.getMinutes() + ':' + format.getSeconds()
+              )
+              .appendTo($('.open-report'));
+          }
+
+        }
+
+      }
+
     }
 };
