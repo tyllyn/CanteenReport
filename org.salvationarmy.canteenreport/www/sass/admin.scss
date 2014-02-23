@@ -4,5 +4,108 @@
 .search-reports{
 	width: 100%;
 	padding: 10px 15px;
-	border-bottom: solid 1px #000;
+}
+header{
+	position: relative;
+	background: #ecebe8;
+	text-align: left;
+	padding: 0;
+	max-height: 120px;
+}
+header h1{
+	display: block;
+	margin: 0;
+	padding: 0;
+	font-family: 'Average';
+	font-size: 1.4em;
+	left: 0;
+	-webkit-transform: none;
+	vertical-align: top;
+	padding-top: 50px;
+	padding-left: 20px;
+
+	&:before{
+		display: inline-block;
+		content: '';
+		background: url(../img/logo.png);
+		position: relative;
+		width: 100px;
+		height: 100px;
+		background-size: 100%;
+		top: -42px;
+		margin-right: 20px;
+	}
+}
+.adminPanel{
+	width: 100%;
+	border: solid 1px #c8c4bb;
+	min-height: 100px;
+
+	h2{
+		display: block;
+		background: #ecebe8;
+		margin: 0;
+		padding: 10px 15px;
+		border-bottom: solid 1px #c8c4bb;
+	}
+
+	input, select{
+		width: 100%;
+		height: 100%;
+		padding: 10px;
+		-webkit-transform: none;
+	}
+	select{
+		background: transparent;
+   		-webkit-appearance: none;
+   		border: solid 1px #c8c4bb;
+   		position: relative;
+   		z-index: 1000;
+	}
+	.fancySelect{
+		width: 100%;
+		height: 41px;
+	}
+	.fancySelect:before{
+		content: none !important;
+	}
+	.fancySelect:after{
+		content: "\e080";
+		position: absolute;
+		right: 10px;
+		top: 50%;
+		-webkit-transform: translateY(-50%) rotate(90deg);
+		z-index: 1;
+	}
+
+	input{
+		border: solid 1px #c8c4bb;
+	}
+}
+.adminSearch{
+	padding: 15px;
+}
+.reports{
+	padding: 0;
+	border: solid 1px #c8c4bb;
+	margin-top: 10px;
+}
+.reports li{
+	list-style: none;
+	padding: 10px;
+	background: #ecebe8;
+	border-bottom: solid 1px #c8c4bb;
+
+	&:last-child{
+		border: none;
+	}
+	&:nth-child(2n+1){
+		background: #fff;
+	}
+
+	&:after{
+		display: block;
+		content: '';
+		clear: both;
+	}
 }
