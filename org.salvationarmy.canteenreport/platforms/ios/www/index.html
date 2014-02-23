@@ -40,6 +40,46 @@
             <img src="img/logo.png" width="200" />
 
             <h1>Canteen Report</h1>
+<<<<<<< HEAD
+            <a href="#" class="glyphicon glyphicon-remove-circle closebtn">Close</a>
+        </header>
+
+        <div class="left-menu">
+            <ul>
+                <li class="isActive">
+                    <a href="#incident" class="fa fa-flag">Incident</a>
+                </li>
+                <li>
+                    <a href="#team" class="fa fa-users">Team</a>
+                </li>
+                <li>
+                    <a href="#services" class="fa fa-clipboard">Services</a>
+                </li>
+                <li>
+                    <a href="#end" class="fa fa-check">Finish</a>
+                </li>
+            </ul>
+        </div>
+        <div class="container framed">
+
+        <!-- WE NEED TO DYNAMICALLY CREATE THE UNIQUE ID FOR THE FORM ON "NEW REPORT" -->
+        <form class="form-horizontal" id="form" data-unique="0">
+
+            <!--
+                INCIDENT
+              -->
+
+            <section id="incident" class="canteen-well">
+
+                <fieldset>
+
+                    <div class="form-group">
+
+                        <label class="required control-label" for="incident-start">
+                            Unit Number <abbr title="required">*</abbr>
+                        </label>
+=======
+>>>>>>> f33eb591734c61ff91f300cadfdefb42a25c20bd
 
             <button id="new-report-button" class="btn-primary" alt="New Report" title="New Report">New Report</button>
 
@@ -216,7 +256,8 @@
                                             <span class="input-group-addon">
                                                 <input type="checkbox" id="incident-type-other" name="incident-type-other"  />
                                             </span>
-                                            <input type="text" class="form-control" placeholder="other" />
+                                            <input type="text" class="form-control" placeholder="other" name="incident-other" id="incident-other" />
+
                                         </div>
 
                                     </div>
