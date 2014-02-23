@@ -122,7 +122,7 @@ class Report extends CI_Model {
 		return $q->result();
 	}
 	function item_search($params){
-		$this->db->select('*');
+		$this->db->select('r.*, i.Name, i.Category, l.quantity');
 		$this->db->from("Reports r");
 		$this->db->join("ReportMembers rm","rm.ReportID=r.ID","left outer");
 		$this->db->join("LinkReportItem l","l.ReportID=r.ID","left outer");
