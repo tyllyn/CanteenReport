@@ -157,7 +157,7 @@ class Canteen extends CI_Controller {
 	
 	public function viewitems() {
 		$this->load->model('Item');
-		$data = $this->Item->get_entries();
+		$data["query"] = $this->Item->get_entries();
 		$this->load->view("header");
 		$this->load->view('database_output', $data);
 		$this->load->view("footer");
