@@ -3,7 +3,6 @@ body{
 }
 .container{
 	width: 100%;
-	max-width: 1200px;
 	min-width: 768px;
 	margin: 0 auto;
 	background: #fff;
@@ -12,7 +11,7 @@ body{
 	padding-left: 100px;
 	padding-top: 70px;
 }
-/* 
+/*
 	added a start class just to center things
 */
 .container.start{
@@ -41,10 +40,10 @@ body{
 		}
 	}
 }
-.glyphicon-remove-sign:before {
+.glyphicon-remove-circle:before {
 	font-size: 1.3em;
 	position: relative;
-	margin-right: 10px;
+	margin-right: 5px;
 	color: #B2AEA5;
 }
 

@@ -1,13 +1,44 @@
+#submit {
+	background-color: #332e28;
+	padding-bottom: 50em;
+}
+#submit p {
+	font-size: 1.25em;
+	font-weight: normal;
+	color: #fff;
+}
+
+.container {
+	padding-right: 0;
+}
+
+a:link, a:hover, a:focus {
+	color: #e3323a;
+}
+
+.team-member {
+	margin-bottom: 0.25em;
+}
+
+.tab-content {
+	margin-bottom: 2em;
+}
+
+
 .canteen-well {
 	padding: 2em;
 	border-bottom: 2px solid #ecebe8;
 }
+.canteen-well:last-child {
+	padding-top: 2em;
+	border-bottom: none;
+}
 
 .amounts .row {
-
-	/*margin-top: 1em;
-	margin-bottom: 1em;*/
 	padding: 0.75em 0 0.5em 0;
+}
+.amounts .row .input-group .glyphicon {
+	top: 1px;
 }
 
 .amounts .row:nth-child(even) {
@@ -45,6 +76,7 @@
 
 label, h2 {
 	font-size: 16px;
+	font-weight: bold;
 	color: #332e27;
 }
 label.control-label {

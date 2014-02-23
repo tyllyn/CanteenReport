@@ -33,9 +33,8 @@
         <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" />
         <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css" />
 
-        <link rel="stylesheet" href="css/canteenReportForms.css" />
         <link rel="stylesheet" href="css/screen.css" />
-        <link href="css/font-awesome.css" rel="stylesheet">
+        <link rel="stylesheet" href="css/font-awesome.css" />
 
         <title>Emergency Disaster Services - Canteen Report</title>
     </head>
@@ -45,8 +44,9 @@
         <header>
             <a href="#" class="btn-primary sync-btn">Sync</a> <!-- add class isLoading, to add the fancy ajax loader. -->
             <h1>Canteen Report</h1>
-            <a href="#" class="glyphicon glyphicon-remove-sign closebtn">Close</a>
+            <a href="#" class="glyphicon glyphicon-remove-circle closebtn">Close</a>
         </header>
+
         <div class="left-menu">
             <ul>
                 <li class="isActive">
@@ -64,15 +64,6 @@
             </ul>
         </div>
         <div class="container framed">
-        <!--
-        <div class="app">
-            <h1>Apache Cordova</h1>
-            <div id="deviceready" class="blink">
-                <p class="event listening">Connecting to Device</p>
-                <p class="event received">Device is Ready</p>
-            </div>
-        </div>
-        -->
 
         <!-- WE NEED TO DYNAMICALLY CREATE THE UNIQUE ID FOR THE FORM ON "NEW REPORT" -->
         <form class="form-horizontal" id="form">
@@ -87,6 +78,10 @@
 
                     <div class="form-group">
 
+                        <label class="required control-label" for="incident-start">
+                            Unit Number <abbr title="required">*</abbr>
+                        </label>
+
                         <div class="input-group input-group-lg">
                             <input class="form-control" placeholder="Unit Number" name="incident-unit-number" id="incident-unit-number" type="text" />
                         </div>
@@ -100,7 +95,7 @@
                         </label>
 
                         <div class="input-group input-group-lg">
-                            <input class="form-control" placeholder="Start Time" name="incident-start" id="incident-start" type="datetime" />
+                            <input class="form-control" placeholder="Start Time" name="incident-start" id="incident-start" type="datetime-local" />
                             <span class="input-group-addon glyphicon glyphicon-calendar"></span>
                         </div>
 
@@ -259,7 +254,7 @@
                     </div>
 
 
-                    <h2>Red Cross Refferal</h2>
+                    <h2>Red Cross Referral</h2>
 
                     <div class="form-group">
 
@@ -316,7 +311,9 @@
                                     <div class="col-xs-3">
                                         <div class="input-group">
                                             <span class="input-group-btn">
-                                                <button class="btn btn-default glyphicon glyphicon-plus" type="button"></button>
+                                                <button class="btn btn-default increment" type="button">
+                                                    <span class="glyphicon glyphicon-plus"></span>
+                                                </button>
                                             </span>
                                             <input class="form-control" placeholder="0" name="team-drink-coffee-amount" id="team-drink-coffee-amount" type="number" />
                                         </div>
@@ -340,7 +337,9 @@
                                     <div class="col-xs-3">
                                         <div class="input-group">
                                             <span class="input-group-btn">
-                                                <button class="btn btn-default glyphicon glyphicon-plus" type="button"></button>
+                                                <button class="btn btn-default increment" type="button">
+                                                    <span class="glyphicon glyphicon-plus"></span>
+                                                </button>
                                             </span>
                                             <input class="form-control" placeholder="0" name="team-drink-cocoa-amount" id="team-drink-cocoa-amount" type="number" />
                                         </div>
@@ -364,7 +363,9 @@
                                     <div class="col-xs-3">
                                         <div class="input-group">
                                             <span class="input-group-btn">
-                                                <button class="btn btn-default glyphicon glyphicon-plus" type="button"></button>
+                                                <button class="btn btn-default increment" type="button">
+                                                    <span class="glyphicon glyphicon-plus"></span>
+                                                </button>
                                             </span>
                                             <input class="form-control" placeholder="0" name="team-drink-tea-amount" id="team-drink-tea-amount" type="number" />
                                         </div>
@@ -388,7 +389,9 @@
                                     <div class="col-xs-3">
                                         <div class="input-group">
                                             <span class="input-group-btn">
-                                                <button class="btn btn-default glyphicon glyphicon-plus" type="button"></button>
+                                                <button class="btn btn-default increment" type="button">
+                                                    <span class="glyphicon glyphicon-plus"></span>
+                                                </button>
                                             </span>
                                             <input class="form-control" placeholder="0" name="team-cold-drinks-amount" id="team-cold-drinks-amount" type="number" />
                                         </div>
@@ -412,7 +415,9 @@
                                     <div class="col-xs-3">
                                         <div class="input-group">
                                             <span class="input-group-btn">
-                                                <button class="btn btn-default glyphicon glyphicon-plus" type="button"></button>
+                                                <button class="btn btn-default increment" type="button">
+                                                    <span class="glyphicon glyphicon-plus"></span>
+                                                </button>
                                             </span>
                                             <input class="form-control" placeholder="0" name="team-water-amount" id="team-water-amount" type="number" />
                                         </div>
@@ -440,14 +445,22 @@
 
                                 <div class="row">
 
-                                    <div class="col-xs-6">
+                                    <div class="col-xs-3">
+                                        <label class="form-control form-control-label">Water</label>
+                                    </div>
+
+                                    <div class="col-xs-3">
                                         <div class="input-group">
-                                            <span class="input-group-addon">Donuts</span>
-                                            <input class="form-control input-lg" placeholder="0" name="team-food-donuts-amount" id="team-food-donuts-amount" type="number" />
+                                            <span class="input-group-btn">
+                                                <button class="btn btn-default increment" type="button">
+                                                    <span class="glyphicon glyphicon-plus"></span>
+                                                </button>
+                                            </span>
+                                            <input class="form-control" placeholder="0" name="team-food-donuts-amount" id="team-food-donuts-amount" type="number" />
                                         </div>
                                     </div>
 
-                                    <div class="col-xs-6">
+                                    <div class="col-xs-3">
                                         <select class="form-control">
                                             <option value="gallon">Each</option>
                                             <option value="pot">Dozen</option>
@@ -458,14 +471,22 @@
 
                                 <div class="row">
 
-                                    <div class="col-xs-6">
+                                    <div class="col-xs-3">
+                                        <label class="form-control form-control-label">Water</label>
+                                    </div>
+
+                                    <div class="col-xs-3">
                                         <div class="input-group">
-                                            <span class="input-group-addon">Cookies</span>
-                                            <input class="form-control input-lg" placeholder="0" name="team-food-cookies-amount" id="team-food-cookies-amount" type="number" />
+                                            <span class="input-group-btn">
+                                                <button class="btn btn-default increment" type="button">
+                                                    <span class="glyphicon glyphicon-plus"></span>
+                                                </button>
+                                            </span>
+                                            <input class="form-control" placeholder="0" name="team-food-cookies-amount" id="team-food-cookies-amount" type="text" />
                                         </div>
                                     </div>
 
-                                    <div class="col-xs-6">
+                                    <div class="col-xs-3">
                                         <select class="form-control">
                                             <option value="gallon">Each</option>
                                             <option value="pot">Dozen</option>
@@ -476,14 +497,22 @@
 
                                 <div class="row">
 
-                                    <div class="col-xs-6">
+                                    <div class="col-xs-3">
+                                        <label class="form-control form-control-label">Water</label>
+                                    </div>
+
+                                    <div class="col-xs-3">
                                         <div class="input-group">
-                                            <span class="input-group-addon">Sandwiches</span>
-                                            <input class="form-control input-lg" placeholder="0" name="team-food-sandwiches-amount" id="team-food-sandwiches-amount" type="number" />
+                                            <span class="input-group-btn">
+                                                <button class="btn btn-default increment" type="button">
+                                                    <span class="glyphicon glyphicon-plus"></span>
+                                                </button>
+                                            </span>
+                                            <input class="form-control" placeholder="0" name="team-food-sandwiches-amount" id="team-food-sandwiches-amount" type="number" />
                                         </div>
                                     </div>
 
-                                    <div class="col-xs-6">
+                                    <div class="col-xs-3">
                                         <select class="form-control">
                                             <option value="gallon">Each</option>
                                             <option value="pot">Dozen</option>
@@ -494,14 +523,22 @@
 
                                 <div class="row">
 
-                                    <div class="col-xs-6">
+                                    <div class="col-xs-3">
+                                        <label class="form-control form-control-label">Water</label>
+                                    </div>
+
+                                    <div class="col-xs-3">
                                         <div class="input-group">
-                                            <span class="input-group-addon">Hot Dogs</span>
-                                            <input class="form-control input-lg" placeholder="0" name="team-food-hot-dogs-amount" id="team-food-hot-dogs-amount" type="number" />
+                                            <span class="input-group-btn">
+                                                <button class="btn btn-default increment" type="button">
+                                                    <span class="glyphicon glyphicon-plus"></span>
+                                                </button>
+                                            </span>
+                                            <input class="form-control" placeholder="0" name="team-food-hot-dogs-amount" id="team-food-hot-dogs-amount" type="number" />
                                         </div>
                                     </div>
 
-                                    <div class="col-xs-6">
+                                    <div class="col-xs-3">
                                         <select class="form-control">
                                             <option value="gallon">Each</option>
                                             <option value="pot">Dozen</option>
@@ -512,14 +549,22 @@
 
                                 <div class="row">
 
-                                    <div class="col-xs-6">
+                                    <div class="col-xs-3">
+                                        <label class="form-control form-control-label">Water</label>
+                                    </div>
+
+                                    <div class="col-xs-3">
                                         <div class="input-group">
-                                            <span class="input-group-addon">Snack Items</span>
-                                            <input class="form-control input-lg" placeholder="0" name="team-snacks-amount" id="team-snacks-amount" type="number" />
+                                            <span class="input-group-btn">
+                                                <button class="btn btn-default increment" type="button">
+                                                    <span class="glyphicon glyphicon-plus"></span>
+                                                </button>
+                                            </span>
+                                            <input class="form-control" placeholder="0" name="team-snacks-amount" id="team-snacks-amount" type="number" />
                                         </div>
                                     </div>
 
-                                    <div class="col-xs-6">
+                                    <div class="col-xs-3">
                                         <select class="form-control">
                                             <option value="gallon">Each</option>
                                             <option value="pot">Dozen</option>
@@ -541,10 +586,18 @@
 
                                 <div class="row">
 
-                                    <div class="col-xs-6">
+                                    <div class="col-xs-3">
+                                        <label class="form-control form-control-label">Gloves</label>
+                                    </div>
+
+                                    <div class="col-xs-3">
                                         <div class="input-group">
-                                            <span class="input-group-addon">Gloves</span>
-                                            <input class="form-control input-lg" placeholder="0" name="team-clothing-gloves-amount" id="team-clothing-gloves-amount" type="number" />
+                                            <span class="input-group-btn">
+                                                <button class="btn btn-default increment" type="button">
+                                                    <span class="glyphicon glyphicon-plus"></span>
+                                                </button>
+                                            </span>
+                                            <input class="form-control" placeholder="0" name="team-clothing-gloves-amount" id="team-clothing-gloves-amount" type="number" />
                                         </div>
                                     </div>
 
@@ -552,10 +605,18 @@
 
                                 <div class="row">
 
-                                    <div class="col-xs-6">
+                                    <div class="col-xs-3">
+                                        <label class="form-control form-control-label">Blankets</label>
+                                    </div>
+
+                                    <div class="col-xs-3">
                                         <div class="input-group">
-                                            <span class="input-group-addon">Blankets</span>
-                                            <input class="form-control input-lg" placeholder="0" name="team-clothing-blankets-amount" id="team-clothing-blankets-amount" type="number" />
+                                            <span class="input-group-btn">
+                                                <button class="btn btn-default increment" type="button">
+                                                    <span class="glyphicon glyphicon-plus"></span>
+                                                </button>
+                                            </span>
+                                            <input class="form-control" placeholder="0" name="team-clothing-blankets-amount" id="team-clothing-blankets-amount" type="number" />
                                         </div>
                                     </div>
 
@@ -563,10 +624,18 @@
 
                                 <div class="row">
 
-                                    <div class="col-xs-6">
+                                    <div class="col-xs-3">
+                                        <label class="form-control form-control-label">Clothing</label>
+                                    </div>
+
+                                    <div class="col-xs-3">
                                         <div class="input-group">
-                                            <span class="input-group-addon">Clothing</span>
-                                            <input class="form-control input-lg" placeholder="0" name="team-clothing-amount" id="team-clothing-amount" type="number" />
+                                            <span class="input-group-btn">
+                                                <button class="btn btn-default increment" type="button">
+                                                    <span class="glyphicon glyphicon-plus"></span>
+                                                </button>
+                                            </span>
+                                            <input class="form-control" placeholder="0" name="team-clothing-amount" id="team-clothing-amount" type="number" />
                                         </div>
                                     </div>
 
@@ -574,11 +643,18 @@
 
                                 <div class="row">
 
-                                    <div class="col-xs-6">
-                                        <div class="input-group">
-                                            <span class="input-group-addon">Hand Warmers</span>
+                                    <div class="col-xs-3">
+                                        <label class="form-control form-control-label">Hand Warmers</label>
+                                    </div>
 
-                                            <input class="form-control input-lg" placeholder="0" name="team-clothing-hand-warmers--amount" id="team-clothing-hand-warmers--amount" type="number" />
+                                    <div class="col-xs-3">
+                                        <div class="input-group">
+                                            <span class="input-group-btn">
+                                                <button class="btn btn-default increment" type="button">
+                                                    <span class="glyphicon glyphicon-plus"></span>
+                                                </button>
+                                            </span>
+                                            <input class="form-control" placeholder="0" name="team-clothing-hand-warmers--amount" id="team-clothing-hand-warmers--amount" type="number" />
                                         </div>
                                     </div>
 
@@ -600,13 +676,13 @@
 
                 <fieldset>
 
-                    <!-- <legend>Counseling/Player</legend> -->
+                    <h2>Counseling/Prayer</h2>
 
                     <div class="form-group">
 
-                        <label class="required control-label" for="services-administer">
+                        <!-- <label class="required control-label" for="services-administer">
                             Administer
-                        </label>
+                        </label> -->
 
                         <div class="input-group input-group-lg">
                             <input class="input-xlarge form-control" placeholder="Administer" name="services-counseling-administer" id="services-counseling-administer" type="text" />
@@ -616,9 +692,9 @@
 
                     <div class="form-group">
 
-                        <label class="required control-label" for="services-administer">
+                        <!-- <label class="required control-label" for="services-administer">
                             Individual
-                        </label>
+                        </label> -->
 
                         <div class="input-group input-group-lg">
                             <input class="input-xlarge form-control" placeholder="Individual" name="services-counseling-individual" id="services-counseling-individual" type="text" />
@@ -628,9 +704,9 @@
 
                     <div class="form-group">
 
-                        <label class="required control-label" for="services-administer">
+                        <!-- <label class="required control-label" for="services-administer">
                             Reason
-                        </label>
+                        </label> -->
 
                         <div class="input-group input-group-lg">
                             <input class="input-xlarge form-control" placeholder="Reason" name="services-counseling-reason" id="services-counseling-reason" type="text" />
@@ -640,9 +716,9 @@
 
                     <div class="form-group">
 
-                        <label class="required control-label" for="services-administer">
+                        <!-- <label class="required control-label" for="services-administer">
                             Phone Number
-                        </label>
+                        </label> -->
 
                         <div class="input-group input-group-lg">
                             <input class="input-xlarge form-control" placeholder="Phone Number" name="services-counseling-phone-number" id="services-counseling-phone-number" type="text" />
@@ -711,59 +787,44 @@
 
                 </fieldset>
 
-                <button type="button" class="btn btn-default">
+            </section>
+
+            <section id="submit" class="canteen-well">
+
+                <p><strong>Ready to submit? Please check all fields before submitting.</strong></p>
+
+                <br />
+
+                <button class="btn btn-primary">
                     Submit
                 </button>
 
             </section>
-                <br />
-                <br />
-                <br />
-                <br />
-                <br />
-                <br />
-                <br />
-                <br />
-                <br />
-                <br />
-                <br />
-                <br />
-                <br />
-                <br />
-                <br />
-                <br />
-                <br />
-                <br />
-                <br />
-                <br />
-                <br />
-                <br />
-                <br />
 
         </form>
 
     </div>
 
-        <script type="text/javascript" src="cordova.js"></script>
-        <script type="text/javascript" src="js/jquery.min.js"></script>
-        <script type="text/javascript" src="js/amplify.js"></script>
-        <script type="text/javascript" src="js/index.js"></script>
-        <script type="text/javascript" src="js/form.js"></script>
-        <script type="text/javascript" src="js/storage.js"></script>
-        <script type="text/javascript">
-            app.initialize();
-        </script>
+    <script type="text/javascript" src="cordova.js"></script>
 
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
 
-        <script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/amplify.js"></script>
+    <script type="text/javascript" src="js/index.js"></script>
+    <script type="text/javascript" src="js/form.js"></script>
+    <script type="text/javascript" src="js/storage.js"></script>
 
-        <script type="text/javascript">
-            $(function () {
-                form.initialize();
-                storage.initialize();
-            });
-        </script>
+    <script type="text/javascript">
+        app.initialize();
+    </script>
 
+    <script type="text/javascript">
+        $(function () {
+            form.initialize();
+            storage.initialize();
+        });
+    </script>
 
     </body>
 </html>

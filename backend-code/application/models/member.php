@@ -1,6 +1,6 @@
 <?php
 
-class Item extends CI_Model {
+class Member extends CI_Model {
 
 	var $name;
 	
@@ -13,20 +13,19 @@ class Item extends CI_Model {
     
     
 
-	function get_entries() {
+	/*function get_entries() {
 		$query = $this->db->get('Items');
 		
 		return $query->result();
-	}
+	}*/
 	
-	function link_to_report($itemId, $reportId, $quantity) {
+	function link_to_report($name, $reportId) {
 		$this->db->trans_start();
 		$data = array(
-			'ItemID' => $itemId,
 			'ReportID' => $reportId,
-			'Quantity' => $quantity
+			'Name' => $name
 		);
-		$this->db->insert('LinkReportItem',$data);
+		$this->db->insert('ReportMembers',$data);
 		$insert_id = $this->db->insert_id();
 		$this->db->trans_complete();
 		return $insert_id;
@@ -34,10 +33,10 @@ class Item extends CI_Model {
 	
 	function delete_report_links($reportId) {
 		$this->db->where("ReportID", $reportId);
-		$this->db->delete("LinkReportItem");
+		$this->db->delete("ReportMembers");
 	}
 	
-	function report_last_2y($itemId) {
+	/*function report_last_2y($itemId) {
 		date_default_timezone_set('America/New_York'); 
 		$date = new DateTime();
 		$m = $date->format("m");
@@ -78,7 +77,7 @@ class Item extends CI_Model {
 		$this->db->where('i.ID', $itemId);
 		return $this->db->get()->result();
 		
-	}
+	}*/
 	
 }
 
