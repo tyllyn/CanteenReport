@@ -53,7 +53,6 @@ body {
 /* line 4, ../sass/_start.scss */
 .container {
   width: 100%;
-  min-width: 768px;
   margin: 0 auto;
   background: #fff;
 }
