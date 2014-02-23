@@ -126,7 +126,7 @@ body {
 header {
   width: 100%;
   position: fixed;
-  padding: 20px 15px;
+  padding: 40px 15px 20px;
   background: #DAD7D2;
   z-index: 1000;
 }
@@ -150,6 +150,7 @@ header:after {
 }
 /* line 25, ../sass/_frame.scss */
 header .closebtn {
+  margin-top: 9px;
   padding: 10px 25px;
   border-radius: 3px;
   position: absolute;
@@ -161,19 +162,20 @@ header .closebtn {
   border: solid 1px #ccc;
   vertical-align: top;
 }
-/* line 37, ../sass/_frame.scss */
+/* line 38, ../sass/_frame.scss */
 header .closebtn:hover {
   text-decoration: none;
   background: #E3323A;
   border-color: #c42d32;
   color: #fff;
 }
-/* line 42, ../sass/_frame.scss */
+/* line 43, ../sass/_frame.scss */
 header .closebtn:hover:before {
   color: #fff;
 }
-/* line 47, ../sass/_frame.scss */
+/* line 48, ../sass/_frame.scss */
 header .sync-btn {
+  margin-top: 9px;
   padding: 10px 25px;
   border-radius: 3px;
   position: absolute;
@@ -184,7 +186,7 @@ header .sync-btn {
   color: #000;
   border: solid 1px #ccc;
 }
-/* line 57, ../sass/_frame.scss */
+/* line 59, ../sass/_frame.scss */
 header .sync-btn.isLoading:after {
   display: inline-block;
   position: relative;
@@ -195,7 +197,7 @@ header .sync-btn.isLoading:after {
   top: 3px;
   margin-left: 10px;
 }
-/* line 67, ../sass/_frame.scss */
+/* line 69, ../sass/_frame.scss */
 header .sync-btn:hover {
   text-decoration: none;
   background: #E3323A;
@@ -203,7 +205,7 @@ header .sync-btn:hover {
   color: #fff;
 }
 
-/* line 75, ../sass/_frame.scss */
+/* line 77, ../sass/_frame.scss */
 .left-menu {
   border-right: solid 1px #DAD7D2;
   width: 100%;
@@ -214,41 +216,41 @@ header .sync-btn:hover {
   background: #ECEBE7;
   margin-top: 20px;
 }
-/* line 84, ../sass/_frame.scss */
+/* line 86, ../sass/_frame.scss */
 .left-menu ul {
   list-style: none;
   padding: 0;
   margin: 0;
 }
-/* line 88, ../sass/_frame.scss */
+/* line 90, ../sass/_frame.scss */
 .left-menu ul li {
   text-align: center;
 }
-/* line 91, ../sass/_frame.scss */
+/* line 93, ../sass/_frame.scss */
 .left-menu ul li.isActive a {
   color: #e3323a;
 }
-/* line 94, ../sass/_frame.scss */
+/* line 96, ../sass/_frame.scss */
 .left-menu ul li a {
   width: 100%;
   color: #9C9992;
   padding: 25px 0;
 }
-/* line 99, ../sass/_frame.scss */
+/* line 101, ../sass/_frame.scss */
 .left-menu ul li a:hover {
   color: #E3323A;
 }
-/* line 103, ../sass/_frame.scss */
+/* line 105, ../sass/_frame.scss */
 .left-menu ul li a:before {
   display: block;
   font-size: 1.6em;
   margin-bottom: 4px;
 }
-/* line 108, ../sass/_frame.scss */
+/* line 110, ../sass/_frame.scss */
 .left-menu ul li a:hover {
   text-decoration: none;
 }
-/* line 114, ../sass/_frame.scss */
+/* line 116, ../sass/_frame.scss */
 .left-menu:after {
   display: block;
   content: '';
