@@ -144,8 +144,8 @@ class Report extends CI_Model {
 		
 		$results = $q->result();
 		foreach ($results as $key => $value) {
-			$results[$key]["items"] = $this->get_entry_items($value["id"]);
-			$results[$key]["members"] = $this->get_entry_members($value["id"]);
+			$results[$key]->items = $this->get_entry_items($value->id);
+			$results[$key]->members = $this->get_entry_members($value->id);
 		}
 		return $results;
 		
