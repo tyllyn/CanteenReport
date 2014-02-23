@@ -71,6 +71,32 @@ INSERT INTO `LinkReportItem` VALUES (1,1,1,100),(2,1,2,100),(3,3,2,42);
 UNLOCK TABLES;
 
 --
+-- Table structure for table `ReportMembers`
+--
+
+DROP TABLE IF EXISTS `ReportMembers`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `ReportMembers` (
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `ReportID` int(11) DEFAULT NULL,
+  `Name` varchar(1000) DEFAULT NULL,
+  PRIMARY KEY (`ID`),
+  KEY `ReportID` (`ReportID`),
+  CONSTRAINT `ReportMembers_ibfk_1` FOREIGN KEY (`ReportID`) REFERENCES `Reports` (`ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `ReportMembers`
+--
+
+LOCK TABLES `ReportMembers` WRITE;
+/*!40000 ALTER TABLE `ReportMembers` DISABLE KEYS */;
+/*!40000 ALTER TABLE `ReportMembers` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `Reports`
 --
 
@@ -79,20 +105,21 @@ DROP TABLE IF EXISTS `Reports`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `Reports` (
   `ID` int(11) NOT NULL AUTO_INCREMENT,
-  `Unit` varchar(100) DEFAULT NULL,
-  `Start` datetime DEFAULT NULL,
-  `Location` varchar(1000) DEFAULT NULL,
   `incident_start` datetime DEFAULT NULL,
   `incident_location` varchar(500) DEFAULT NULL,
   `incident_route` varchar(500) DEFAULT NULL,
   `team_driver` varchar(500) DEFAULT NULL,
-  `team_member_1` varchar(500) DEFAULT NULL,
-  `team_member_2` varchar(500) DEFAULT NULL,
-  `team_member_3` varchar(500) DEFAULT NULL,
   `team_refferal_name` varchar(500) DEFAULT NULL,
   `team_refferal_title` varchar(500) DEFAULT NULL,
+  `services_counseling_administer` varchar(1000) DEFAULT NULL,
+  `services_counseling_reason` varchar(1000) DEFAULT NULL,
+  `services_counseling_individual` varchar(1000) DEFAULT NULL,
+  `services_counseling_phone_number` varchar(1000) DEFAULT NULL,
+  `end_time` varchar(1000) DEFAULT NULL,
+  `end_total_mileage` varchar(1000) DEFAULT NULL,
+  `end_route_time` varchar(1000) DEFAULT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=45 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -101,7 +128,7 @@ CREATE TABLE `Reports` (
 
 LOCK TABLES `Reports` WRITE;
 /*!40000 ALTER TABLE `Reports` DISABLE KEYS */;
-INSERT INTO `Reports` VALUES (1,'001','0000-00-00 00:00:00','AE Office','2014-02-23 00:00:00',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(2,'EAM','0000-00-00 00:00:00','Anybar, Pittsburgh, PA','2014-01-10 00:00:00',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(3,'JJP','2014-02-23 01:00:00','Unova','2014-01-10 00:00:00',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(4,NULL,NULL,NULL,'2014-01-10 00:00:00','South Side','','Joshua Petry','Prince','Wyatt','','',''),(5,NULL,NULL,NULL,'2014-02-22 15:35:00','South Side','','Joshua Petry','Prince','Wyatt','','',''),(6,NULL,NULL,NULL,'2014-02-22 15:35:00','South Side','','Joshua Petry','Prince','Wyatt','','',''),(7,NULL,NULL,NULL,'2014-02-22 15:35:00','South Side','','Joshua Petry','Prince','Wyatt','','',''),(8,NULL,NULL,NULL,'2014-02-22 15:35:00','South Side','','Joshua Petry','Prince','Wyatt','','',''),(9,NULL,NULL,NULL,'2014-02-22 15:35:00','South Side','','Joshua Petry','Prince','Wyatt','','',''),(10,NULL,NULL,NULL,'2014-02-22 15:35:00','South Side','','Joshua Petry','Prince','Wyatt','','',''),(11,NULL,NULL,NULL,'2014-02-22 15:35:00','South Side','','Joshua Petry','Prince','Wyatt','','',''),(12,NULL,NULL,NULL,'2014-02-22 15:35:00','South Side','','Joshua Petry','Prince','Wyatt','','',''),(13,NULL,NULL,NULL,'2014-02-22 15:35:00','South Side','','Joshua Petry','Prince','Wyatt','','','');
+INSERT INTO `Reports` VALUES (1,'2014-02-23 00:00:00',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(2,'2014-01-10 00:00:00',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(3,'2014-01-10 00:00:00',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(4,'2014-01-10 00:00:00','South Side','','Joshua Petry','','',NULL,NULL,NULL,NULL,NULL,NULL,NULL),(5,'2014-02-22 15:35:00','South Side','','Joshua Petry','','',NULL,NULL,NULL,NULL,NULL,NULL,NULL),(6,'2014-02-22 15:35:00','South Side','','Joshua Petry','','',NULL,NULL,NULL,NULL,NULL,NULL,NULL),(7,'2014-02-22 15:35:00','South Side','','Joshua Petry','','',NULL,NULL,NULL,NULL,NULL,NULL,NULL),(8,'2014-02-22 15:35:00','South Side','','Joshua Petry','','',NULL,NULL,NULL,NULL,NULL,NULL,NULL),(9,'2014-02-22 15:35:00','South Side','','Joshua Petry','','',NULL,NULL,NULL,NULL,NULL,NULL,NULL),(10,'2014-02-22 15:35:00','South Side','','Joshua Petry','','',NULL,NULL,NULL,NULL,NULL,NULL,NULL),(11,'2014-02-22 15:35:00','South Side','','Joshua Petry','','',NULL,NULL,NULL,NULL,NULL,NULL,NULL),(12,'2014-02-22 15:35:00','South Side','','Joshua Petry','','',NULL,NULL,NULL,NULL,NULL,NULL,NULL),(13,'2014-02-22 15:35:00','South Side','','Joshua Petry','','',NULL,NULL,NULL,NULL,NULL,NULL,NULL),(14,'2014-02-22 15:35:00','South Side','','Joshua Petry','','',NULL,NULL,NULL,NULL,NULL,NULL,NULL),(15,'2014-02-22 15:35:00','South Side','','Joshua Petry','','',NULL,NULL,NULL,NULL,NULL,NULL,NULL),(16,'2014-02-22 15:35:00','South Side','','Joshua Petry','','',NULL,NULL,NULL,NULL,NULL,NULL,NULL),(17,'2014-02-22 15:35:00','South Side','','Joshua Petry','','',NULL,NULL,NULL,NULL,NULL,NULL,NULL),(18,'2014-02-22 15:35:00','South Side','','Joshua Petry','','',NULL,NULL,NULL,NULL,NULL,NULL,NULL),(19,'2014-02-22 15:35:00','South Side','','Joshua Petry','','',NULL,NULL,NULL,NULL,NULL,NULL,NULL),(20,'2014-02-22 15:35:00','South Side','','Joshua Petry','','',NULL,NULL,NULL,NULL,NULL,NULL,NULL),(21,'2014-02-22 15:35:00','South Side','','Joshua Petry','','',NULL,NULL,NULL,NULL,NULL,NULL,NULL),(22,'2014-02-22 15:35:00','South Side','','Joshua Petry','','',NULL,NULL,NULL,NULL,NULL,NULL,NULL),(23,'2014-02-22 15:35:00','South Side','','Joshua Petry','','',NULL,NULL,NULL,NULL,NULL,NULL,NULL),(24,'2014-02-22 15:35:00','South Side','','Joshua Petry','','',NULL,NULL,NULL,NULL,NULL,NULL,NULL),(25,'2014-02-22 15:35:00','South Side','','Joshua Petry','','',NULL,NULL,NULL,NULL,NULL,NULL,NULL),(26,'2014-02-22 15:35:00','South Side','','Joshua Petry','','',NULL,NULL,NULL,NULL,NULL,NULL,NULL),(27,'2014-02-22 15:35:00','South Side','','Joshua Petry','','',NULL,NULL,NULL,NULL,NULL,NULL,NULL),(28,'2014-02-22 15:35:00','South Side','','Joshua Petry','','',NULL,NULL,NULL,NULL,NULL,NULL,NULL),(29,'2014-02-22 15:35:00','South Side','','Joshua Petry','','',NULL,NULL,NULL,NULL,NULL,NULL,NULL),(30,'2014-02-22 15:35:00','South Side','','Joshua Petry','','',NULL,NULL,NULL,NULL,NULL,NULL,NULL),(31,'2014-02-22 15:35:00','South Side','','Joshua Petry','','',NULL,NULL,NULL,NULL,NULL,NULL,NULL),(32,'2014-02-22 15:35:00','South Side','','Joshua Petry','','',NULL,NULL,NULL,NULL,NULL,NULL,NULL),(33,'2014-02-22 15:35:00','South Side','','Joshua Petry','','',NULL,NULL,NULL,NULL,NULL,NULL,NULL),(34,'2014-02-22 15:35:00','South Side','','Joshua Petry','','',NULL,NULL,NULL,NULL,NULL,NULL,NULL),(35,'2014-02-22 15:35:00','South Side','','Joshua Petry','','',NULL,NULL,NULL,NULL,NULL,NULL,NULL),(36,'2014-02-22 15:35:00','South Side','','Joshua Petry','','',NULL,NULL,NULL,NULL,NULL,NULL,NULL),(37,'2014-02-22 15:35:00','South Side','','Joshua Petry','','',NULL,NULL,NULL,NULL,NULL,NULL,NULL),(38,'2014-02-22 15:35:00','South Side','','Joshua Petry','','',NULL,NULL,NULL,NULL,NULL,NULL,NULL),(39,'2014-02-22 15:35:00','South Side','','Joshua Petry','','',NULL,NULL,NULL,NULL,NULL,NULL,NULL),(40,'2014-02-22 15:35:00','South Side','','Joshua Petry','','',NULL,NULL,NULL,NULL,NULL,NULL,NULL),(41,'2014-02-22 15:35:00','South Side','','Joshua Petry','','',NULL,NULL,NULL,NULL,NULL,NULL,NULL),(42,'2014-02-22 15:35:00','South Side','','Joshua Petry','','',NULL,NULL,NULL,NULL,NULL,NULL,NULL),(43,'2014-02-22 15:35:00','South Side','','Joshua Petry','','',NULL,NULL,NULL,NULL,NULL,NULL,NULL),(44,'2014-02-22 15:35:00','South Side','','Joshua Petry','','',NULL,NULL,NULL,NULL,NULL,NULL,NULL);
 /*!40000 ALTER TABLE `Reports` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -114,4 +141,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2014-02-22 23:09:19
+-- Dump completed on 2014-02-23  0:29:53
