@@ -101,9 +101,7 @@ class Report extends CI_Model {
 	
 	function add($data) {
 		$this->db->trans_start();
-		if ($data == null) {
-			$data = array();
-		}
+		$data["LastUpdate"] = (new DateTime())->format('Y-m-d H:i:s')
 		$this->db->insert('Reports',$data);
 		$insert_id = $this->db->insert_id();
 		$this->db->trans_complete();
@@ -112,6 +110,7 @@ class Report extends CI_Model {
 	
 	function update($id, $data) {
 		$this->db->where('ID', $id);
+		$data["LastUpdate"] = (new DateTime())->format('Y-m-d H:i:s')
 		$this->db->update('Reports', $data); 
 	}
 	
