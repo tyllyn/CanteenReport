@@ -70,7 +70,7 @@ var app = {
           amplify.store('active', '0');
         });
 
-        this.showReports();
+        // this.showReports();
 
         /**
          * adds increment functionality to the + buttons
@@ -143,6 +143,18 @@ var app = {
 
                 e.preventDefault();
             }
+        });
+
+        $('.open-report').on('click', 'a', function (e) {
+          e.preventDefault();
+
+          if ($(this).attr('data-report') != null) {
+            amplify.store('active', $(this).attr('data-report'));
+            $('#form').attr('data-unique', $(this).attr('data-report'));
+
+            $('#start').hide();
+            $('#app').show();
+          }
         });
 
     },
@@ -229,11 +241,11 @@ var app = {
 
           if (dates.hasOwnProperty(jkey)) {
 
+            console.log(dates[jkey]);
+
             var format = new Date();
 
             format.setTime(dates[jkey].fdate);
-
-
 
             console.log(format);
 

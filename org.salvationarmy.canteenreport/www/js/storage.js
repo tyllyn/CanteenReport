@@ -200,56 +200,33 @@ var storage = {
 
 	},
 	field: function (id, value) {
-		var $field = $('#' + id);
 
-		// console.log('trying', $field, $field.is('input[type=text]'));
+		if (id != null) {
 
-		if ($field.length == 0) {
+			var $field = $('#' + id);
 
-			if (id.indexOf('team-member') != -1) {
-				if (id != 'team-member-1') {
-					var d = id.split('-');
+			// console.log('trying', $field, $field.is('input[type=text]'));
 
-					// console.log('ATTEMPTING TO ADD MEMBER', d[2], value);
+			if ($field.length == 0) {
 
-					form.addNewMember(d[2], value);
-				}
-			}
 
-		}
 
-		// Text field
-		if ($field.is('textarea')) {
+				if (id.indexOf('team-member') != -1) {
+					if (id != 'team-member-1') {
+						var d = id.split('-');
 
-			// console.log('inside');
+						// console.log('ATTEMPTING TO ADD MEMBER', d[2], value);
 
-			// console.log($field.val(), value);
-			if ($field.val() !== value) {
-				$field.val(value);
-			}
-
-		}
-
-		// Text field
-		if ($field.is('input[type=text]')) {
-
-			// console.log('inside');
-
-			// console.log($field.attr('id'), $field.attr('id').indexOf('team-member'));
-
-			if ($field.attr('id').indexOf('team-member') != -1) {
-				if ($field.attr('id') != 'team-member-1') {
-					var id = $field.attr('id').split('-');
-
-					// console.log('ATTEMPTING TO ADD MEMBER', id[2], value);
-
-					form.addMember(id[2], value);
-				} else {
-					if ($field.val() !== value) {
-						$field.val(value);
+						form.addNewMember(d[2], value);
 					}
 				}
-			} else {
+
+			}
+
+			// Text field
+			if ($field.is('textarea')) {
+
+				// console.log('inside');
 
 				// console.log($field.val(), value);
 				if ($field.val() !== value) {
@@ -258,52 +235,82 @@ var storage = {
 
 			}
 
-		}
+			// Text field
+			if ($field.is('input[type=text]')) {
 
-		// Number field
-		if ($field.is('input[type=number]')) {
+				// console.log('inside');
 
-			// console.log('inside');
+				// console.log($field.attr('id'), $field.attr('id').indexOf('team-member'));
 
-			// console.log($field.val(), value);
-			if ($field.val() !== value) {
-				$field.val(value);
+				if ($field.attr('id').indexOf('team-member') != -1) {
+					if ($field.attr('id') != 'team-member-1') {
+						var id = $field.attr('id').split('-');
+
+						// console.log('ATTEMPTING TO ADD MEMBER', id[2], value);
+
+						form.addMember(id[2], value);
+					} else {
+						if ($field.val() !== value) {
+							$field.val(value);
+						}
+					}
+				} else {
+
+					// console.log($field.val(), value);
+					if ($field.val() !== value) {
+						$field.val(value);
+					}
+
+				}
+
 			}
 
-		}
+			// Number field
+			if ($field.is('input[type=number]')) {
 
-		// Checkbox
-		if ($field.is('input[type=checkbox]')) {
+				// console.log('inside');
 
-			// console.log('inside');
+				// console.log($field.val(), value);
+				if ($field.val() !== value) {
+					$field.val(value);
+				}
 
-			// console.log($field, $field.val(), value);
-			if ($field.attr('checked') !== 'checked') {
-				$field.attr('checked', 'checked');
 			}
 
-		}
+			// Checkbox
+			if ($field.is('input[type=checkbox]')) {
 
-		// Select
-		if ($field.is('select')) {
+				// console.log('inside');
 
-			// console.log('inside');
+				// console.log($field, $field.val(), value);
+				if ($field.attr('checked') !== 'checked') {
+					$field.attr('checked', 'checked');
+				}
 
-			// console.log($field.find('option[value=' + value + ']'), value);
-			if ($field.val() !== value) {
-				$field.val(value);
 			}
 
-		}
+			// Select
+			if ($field.is('select')) {
 
-		// DateTime
-		if ($field.is('input[type=datetime-local]')) {
+				// console.log('inside');
 
-			// console.log('inside');
+				// console.log($field.find('option[value=' + value + ']'), value);
+				if ($field.val() !== value) {
+					$field.val(value);
+				}
 
-			// console.log($field.val(), value);
-			if ($field.val() !== value) {
-				$field.val(value);
+			}
+
+			// DateTime
+			if ($field.is('input[type=datetime-local]')) {
+
+				// console.log('inside');
+
+				// console.log($field.val(), value);
+				if ($field.val() !== value) {
+					$field.val(value);
+				}
+
 			}
 
 		}
