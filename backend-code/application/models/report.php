@@ -132,16 +132,15 @@ class Report extends CI_Model {
 
 		//print_r($params);
 		
-		
+		die($param["id"]);
 		if(isset($params['month']) && $params['month'] != ''){
 			$this->db->where('MONTH(r.incident_start)', $params['month']);
 		}
 		if(isset($params['year']) && $params['year'] != ''){
 			$this->db->where('YEAR(r.incident_start)', $params['year']);
 		}
-		if(isset($param['id']) && $params["id"] != '') {
+		if(isset($params['id']) && $params["id"] != '') {
 			$this->db->where('incident_unit_number',$params['id']);
-			die('hi mom');
 		}
 
 		$q = $this->db->get();
