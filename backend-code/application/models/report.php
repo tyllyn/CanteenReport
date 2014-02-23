@@ -94,25 +94,9 @@ class Report extends CI_Model {
 	}
 	
 	function get_entry_items($params) {
-		if(isset($params['id'])){
-			$this->db->where('ReportID',$params['id']);
-			$q = $this->db->get('LinkReportItem');
-		}elseif($params['id'] == null && $params['month'] != null || $params['year'] != null || $params['day']){
-
-			if(isset($params['month'])){
-				$this->db->where('MONTH(incident_start)', $params['month']);
-			}
-			if(isset($params['year'])){
-				$this->db->where('YEAR(incident_start)', $params['year']);
-			}
-			if(isset($params['day'])){
-				$this->db->where('DAY(incident_start)', $params['day']);
-			}
-
-			$q = $this->db->get('Reports');
-		}else{
-			$q = $this->db->get('LinkReportItem');
-		}
+		//incident_unit_number
+		$this->db->where('ReportID',$params['id']);
+		$q = $this->db->get('LinkReportItem');
 		return $q->result();
 	}
 	function get_by_unit($id = null){
@@ -133,8 +117,6 @@ class Report extends CI_Model {
 	}
 	function add($data) {
 		$this->db->trans_start();
-		$now = new DateTime();
-		$data["LastUpdate"] = $now->format('Y-m-d H:i:s');
 		$this->db->insert('Reports',$data);
 		$insert_id = $this->db->insert_id();
 		$this->db->trans_complete();
@@ -142,12 +124,28 @@ class Report extends CI_Model {
 	}
 	
 	function update($id, $data) {
-		$this->db->where('id', $id);
-		//$now = new DateTime();
-		//$data["LastUpdate"] = $now->format('Y-m-d H:i:s');
+		$this->db->where('ID', $id);
 		$this->db->update('Reports', $data); 
 	}
 	
 }
 
-?>
+/*
+
+		}elseif($params['id'] == null && $params['month'] != null || $params['year'] != null || $params['day']){
+
+			if(isset($params['month'])){
+				$this->db->where('MONTH(incident_start)', $params['month']);
+			}
+			if(isset($params['year'])){
+				$this->db->where('YEAR(incident_start)', $params['year']);
+			}
+			if(isset($params['day'])){
+				$this->db->where('DAY(incident_start)', $params['day']);
+			}
+
+			$q = $this->db->get('Reports');
+		}else{
+			$q = $this->db->get('LinkReportItem');
+		}
+*/
