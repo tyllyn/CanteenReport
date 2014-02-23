@@ -56,6 +56,19 @@ var app = {
              .end().filter("[href=#"+id+"]").parent().addClass("isActive");
         });
 
+        $('#new-report-button').on('touchstart', function(event)
+        {
+          $('#start').hide();
+          $('#app').show();
+        });
+
+        $('#close-button').on('touchstart', function(event)
+        {
+          $('#start').show();
+          $('#app').hide();
+        });
+
+
         /**
          * adds increment functionality to the + buttons
          */
