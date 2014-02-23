@@ -11,7 +11,12 @@ class Item extends CI_Model {
         parent::__construct();
     }
     
-    
+    function get_entry($id) {
+	$this->db->where("ID",$id);
+		$query = $this->db->get('Items');
+		
+		return $query->result();
+	}
 
 	function get_entries() {
 		$query = $this->db->get('Items');
