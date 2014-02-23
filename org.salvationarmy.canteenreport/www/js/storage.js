@@ -5,6 +5,8 @@ var storage = {
 
 		if (amplify.store('active') != null) {
 			$('#form').attr('data-unique', amplify.store('active'));
+
+			this.syncForm();
 		}
 
 	},
@@ -22,19 +24,21 @@ var storage = {
 			e.preventDefault();
 		});
 
-		s.resetChanged();
 		s.doSave();
+		s.resetChanged();
 
 		$('#form').on('blur keydown', 'input, textarea, select', function () {
 			s.showChanged();
 		});
 	},
 	showChanged: function () {
+		// console.log('changed!');
 		$('.sync-btn').removeClass('disabled');
 
 		amplify.store('canteen.changed', 1);
 	},
 	resetChanged: function () {
+		// console.log('acknowledged');
 		$('.sync-btn').addClass('disabled');
 
 		amplify.store('canteen.changed', 0);
@@ -42,7 +46,7 @@ var storage = {
 	doSave: function () {
 		var s = this;
 		s.intv = setInterval(function () {
-			if (amplify.store('canteen.changed') == 1) {
+			if (amplify.store('canteen.changed') == 1 && s.isOnline()) {
 				s.saveForm();
 			}
 		}, 5000);
@@ -80,8 +84,13 @@ var storage = {
 					.appendTo($('#form'));
 			}
 
-			// Save
-			this.save(formdata, false);
+			if (unique == 0) {
+				// Save
+				this.save(formdata, true);
+			} else {
+				// Save
+				this.save(formdata, false);
+			}
 
 		} else {
 
@@ -120,6 +129,7 @@ var storage = {
 					id = result[1];
 
 					// console.log(result, msg, id);
+					// console.log('ajaxed');
 
 					if ("success" == msg) {
 
@@ -134,8 +144,10 @@ var storage = {
 							$('#form').attr('data-unique', id);
 
 							amplify.store('active', id);
+							amplify.store(0, null);
 						}
 
+						// console.log('resetting?');
 						s.resetChanged();
 
 					}
@@ -143,15 +155,29 @@ var storage = {
 				error: function (a, b, c) {
 					console.log(a, b, c);
 				}
+			}).done(function () {
+
+				data = s.getFormJSON();
+
+				// console.log("amplify", id, data);
+
+				amplify.store(id, data);
+
 			});
+
+		} else {
+
+			id = $('#form').attr('data-unique');
+
+			data = s.getFormJSON();
+
+			// console.log("amplify", id, data);
+
+			amplify.store(id, data);
 
 		}
 
-		data = s.getFormJSON();
 
-		console.log("amplify", id, data);
-
-		amplify.store(id, data);
 
 	},
 	setupIDandDate: function (id) {
@@ -178,8 +204,22 @@ var storage = {
 
 		// console.log('trying', $field, $field.is('input[type=text]'));
 
+		if ($field.length == 0) {
+
+			if (id.indexOf('team-member') != -1) {
+				if (id != 'team-member-1') {
+					var d = id.split('-');
+
+					// console.log('ATTEMPTING TO ADD MEMBER', d[2], value);
+
+					form.addNewMember(d[2], value);
+				}
+			}
+
+		}
+
 		// Text field
-		if ($field.is('input[type=text]')) {
+		if ($field.is('textarea')) {
 
 			// console.log('inside');
 
@@ -191,9 +231,11 @@ var storage = {
 		}
 
 		// Text field
-		if ($field.is('textarea')) {
+		if ($field.is('input[type=text]')) {
 
 			// console.log('inside');
+
+			// console.log($field.attr('id'), $field.attr('id').indexOf('team-member'));
 
 			if ($field.attr('id').indexOf('team-member') != -1) {
 				if ($field.attr('id') != 'team-member-1') {
