@@ -71,6 +71,9 @@ var app = {
 
         $('#close-button').on('touchstart', function(event)
         {
+          menuItems
+             .parent().removeClass("isActive")
+             .end().filter("[href=#incident]").parent().addClass("isActive");
           $('#start').show();
           $('#app').hide();
         });
