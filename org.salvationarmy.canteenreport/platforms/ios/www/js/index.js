@@ -63,6 +63,10 @@ var app = {
         {
           $('#start').hide();
           $('#app').show();
+
+          amplify.store('active', '0');
+          $('#form').attr('unique', 0);
+
         });
 
         $('#close-button').on('touchstart', function(event)
@@ -72,11 +76,9 @@ var app = {
              .end().filter("[href=#incident]").parent().addClass("isActive");
           $('#start').show();
           $('#app').hide();
-
-          amplify.store('active', '0');
         });
 
-        this.showReports();
+        // this.showReports();
 
         /**
          * adds increment functionality to the + buttons
@@ -150,6 +152,42 @@ var app = {
                 e.preventDefault();
             }
         });
+
+        $('.open-report').on('click', 'a', function (e) {
+          e.preventDefault();
+
+          if ($(this).attr('data-report') != null) {
+            amplify.store('active', $(this).attr('data-report'));
+            $('#form').attr('data-unique', $(this).attr('data-report'));
+
+            $('#start').hide();
+            $('#app').show();
+          }
+        });
+
+        $('#submit').on('touchstart', 'button', function () {
+
+          console.log('submit');
+
+          $('<input />')
+            .attr('type', 'hidden')
+            .attr('name', 'finished')
+            .attr('id', 'finished')
+            .val(1)
+            .appendTo($('#form'));
+
+          storage.saveForm();
+
+          var id = $('#form').attr('data-unique');
+
+          amplify.store('active', 0);
+          amplify.store(id, null);
+
+          $('#form').attr('data-unique', '0');
+
+          $('#start').show();
+            $('#app').hide();
+        })
 
     },
 
@@ -235,11 +273,11 @@ var app = {
 
           if (dates.hasOwnProperty(jkey)) {
 
+            console.log(dates[jkey]);
+
             var format = new Date();
 
             format.setTime(dates[jkey].fdate);
-
-
 
             console.log(format);
 
