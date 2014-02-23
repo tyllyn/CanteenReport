@@ -110,9 +110,9 @@ class Report extends CI_Model {
 	}
 	
 	function update($id, $data) {
-		$this->db->where('ID', $id);
-		$now = new DateTime();
-		$data["LastUpdate"] = $now->format('Y-m-d H:i:s');
+		$this->db->where('id', $id);
+		//$now = new DateTime();
+		//$data["LastUpdate"] = $now->format('Y-m-d H:i:s');
 		$this->db->update('Reports', $data); 
 	}
 	
