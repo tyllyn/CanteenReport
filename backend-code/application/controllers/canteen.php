@@ -104,6 +104,9 @@ class Canteen extends CI_Controller {
 					$id = $val;
 					break;
 					
+				case "date":
+					break;
+					
 				default:
 					if (strpos($key,"team-member-") === 0) {
 						array_push($members, $val);
