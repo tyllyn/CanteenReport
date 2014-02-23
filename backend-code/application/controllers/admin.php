@@ -12,7 +12,7 @@ class Admin extends REST_Controller{
 	function report_get(){
 		$this->load->model('Report');
 		$params = array(
-			'id' => (isset($_GET['entry_id'])) ? $_GET['entry_id'] : null,
+			'id' => (isset($_GET['unit_id'])) ? $_GET['unit_id'] : null,
 			'startdate' => (isset($_GET['date'])) ? $_GET['date'] : null,
 			'month' => (isset($_GET['month'])) ? $_GET['month'] : null,
 			'year' => (isset($_GET['year'])) ? $_GET['year'] : null
