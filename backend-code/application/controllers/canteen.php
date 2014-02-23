@@ -7,6 +7,7 @@ class Canteen extends CI_Controller {
 	}
 	
 	public function add() {
+	
 	//$json=$_POST["data"];
 	$json='[{
     "name": "incident-start",
@@ -122,7 +123,7 @@ class Canteen extends CI_Controller {
 	
 	public function viewitems() {
 		$this->load->model('Item');
-		$data['query'] = $this->Item->get_entries();
+		$data = $this->Item->get_entries();
 		$this->load->view("header");
 		$this->load->view('database_output', $data);
 		$this->load->view("footer");
