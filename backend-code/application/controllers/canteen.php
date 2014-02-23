@@ -7,6 +7,7 @@ class Canteen extends CI_Controller {
 	}
 	
 	public function add() {
+<<<<<<< HEAD
 	var_dump($_POST);
 		$json = $_POST;
 	
@@ -45,70 +46,79 @@ class Canteen extends CI_Controller {
 // }]"';
 >>>>>>> 8c0f29626bc04d790201cb7f9949897ca273c997
 		$res = json_decode($json);
+=======
+		$res = $_POST; //json_decode($json);
+		
+		
+>>>>>>> 5487b56a46501e1bafd3d563598eb7eddf1ac420
 		//$data = new array();
 		$items = null;
 		$members = null;
+		$data = null;
 		$id = "";
-		foreach ($res as $value) {
+		foreach ($res as $key => $val) {
 		
 			// hard coding IDs because #yolo
-			switch ($value->name) {
+			switch ($key) {
 				case "team-drink-coffee-amount":
-					$items[1] = $value->value;
+					$items[1] = $val;
 					break;
 				case "team-drink-cocoa-amount":
-					$items[2] = $value->value;
+					$items[2] = $val;
 					break;
 				case "team-drink-tea-amount":
-					$items[3] = $value->value;
+					$items[3] = $val;
 					break;
 				case "team-cold-drinks-amount":
-					$items[4] = $value->value;
+					$items[4] = $val;
 					break;
 				case "team-water-amount":
-					$items[5] = $value->value;
+					$items[5] = $val;
 					break;
 					
 					
 				case "team-food-donuts-amount":
-					$items[6] = $value->value;
+					$items[6] = $val;
 					break;
 				case "team-food-cookies-amount":
-					$items[7] = $value->value;
+					$items[7] = $val;
 					break;
 				case "team-food-sandwiches-amount":
-					$items[8] = $value->value;
+					$items[8] = $val;
 					break;
 				case "team-food-hot-dogs-amount":
-					$items[9] = $value->value;
+					$items[9] = $val;
 					break;
-				case "team-food-snacks-amount":
-					$items[12] = $value->value;
+				case "team-snacks-amount":
+					$items[12] = $val;
 					break;
 					
 					
 				case "team-clothing-gloves-amount":
-					$items[10] = $value->value;
+					$items[10] = $val;
 					break;
 				case "team-clothing-blankets-amount":
-					$items[11] = $value->value;
+					$items[11] = $val;
 					break;
 				case "team-clothing-amount":
-					$items[13] = $value->value;
+					$items[13] = $val;
 					break;
 				case "team-clothing-hand-warmers--amount":
-					$items[14] = $value->value;
+					$items[14] = $val;
 					break;
 					
 				case "id":
-					$id = $value->value;
+					$id = $val;
+					break;
+					
+				case "date":
 					break;
 					
 				default:
-					if (strpos($value->name,"team-member-") === 0) {
-						array_push($members, $value->value);
+					if (strpos($key,"team-member-") === 0) {
+						$members[] = $val;
 					} else {
-						$data[str_replace ("-","_", $value->name)] = $value->value;
+						$data[str_replace ("-","_", $key)] = $val;
 					}
 			}
 		}
