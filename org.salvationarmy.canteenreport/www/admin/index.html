@@ -99,8 +99,8 @@
                         <li ng-repeat="r in reports" ng-class="{hidden: noResults}">
                             <span class="id col-md-3"><strong>{{r.incident_unit_number}}</strong></span>
                             <span class="date col-md-3"><strong>{{r.incident_start}}</strong></span>
-                            <span class="type col-md-3"><strong>Fire</strong></span>
-                            <span class="number-served col-md-3"><strong>{{r.items.quantity}}</strong></span>
+                            <span class="type col-md-3"><strong>{{r.incident_type}}</strong></span>
+                            <span class="number-served col-md-3"><strong>{{r.total_quantity}}</strong></span>
                         </li>    
                     </ul>
                 </div>
