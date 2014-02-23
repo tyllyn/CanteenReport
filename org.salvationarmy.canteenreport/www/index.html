@@ -677,13 +677,13 @@
 
                 <fieldset>
 
-                    <!-- <legend>Counseling/Player</legend> -->
+                    <h2>Counseling/Player</h2>
 
                     <div class="form-group">
 
-                        <label class="required control-label" for="services-administer">
+                        <!-- <label class="required control-label" for="services-administer">
                             Administer
-                        </label>
+                        </label> -->
 
                         <div class="input-group input-group-lg">
                             <input class="input-xlarge form-control" placeholder="Administer" name="services-counseling-administer" id="services-counseling-administer" type="text" />
@@ -693,9 +693,9 @@
 
                     <div class="form-group">
 
-                        <label class="required control-label" for="services-administer">
+                        <!-- <label class="required control-label" for="services-administer">
                             Individual
-                        </label>
+                        </label> -->
 
                         <div class="input-group input-group-lg">
                             <input class="input-xlarge form-control" placeholder="Individual" name="services-counseling-individual" id="services-counseling-individual" type="text" />
@@ -705,9 +705,9 @@
 
                     <div class="form-group">
 
-                        <label class="required control-label" for="services-administer">
+                        <!-- <label class="required control-label" for="services-administer">
                             Reason
-                        </label>
+                        </label> -->
 
                         <div class="input-group input-group-lg">
                             <input class="input-xlarge form-control" placeholder="Reason" name="services-counseling-reason" id="services-counseling-reason" type="text" />
@@ -717,9 +717,9 @@
 
                     <div class="form-group">
 
-                        <label class="required control-label" for="services-administer">
+                        <!-- <label class="required control-label" for="services-administer">
                             Phone Number
-                        </label>
+                        </label> -->
 
                         <div class="input-group input-group-lg">
                             <input class="input-xlarge form-control" placeholder="Phone Number" name="services-counseling-phone-number" id="services-counseling-phone-number" type="text" />
@@ -790,9 +790,13 @@
 
             </section>
 
-            <section class="canteen-well">
+            <section id="submit" class="canteen-well">
 
-                <button type="button" class="btn btn-primary">
+                <p><strong>Ready to submit?</strong> Please check all fields before submitting.</strong></p>
+
+                <br />
+
+                <button class="btn btn-primary">
                     Submit
                 </button>
 
@@ -803,7 +807,10 @@
     </div>
 
     <script type="text/javascript" src="cordova.js"></script>
+
     <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+
     <script type="text/javascript" src="js/amplify.js"></script>
     <script type="text/javascript" src="js/index.js"></script>
     <script type="text/javascript" src="js/form.js"></script>
@@ -812,9 +819,6 @@
     <script type="text/javascript">
         app.initialize();
     </script>
-
-
-    <script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
 
     <script type="text/javascript">
         $(function () {
