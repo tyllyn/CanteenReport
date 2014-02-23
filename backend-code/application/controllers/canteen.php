@@ -75,7 +75,7 @@ class Canteen extends CI_Controller {
 					
 				default:
 					if (strpos($key,"team-member-") === 0) {
-						array_push($members, $val);
+						$members[] = $val;
 					} else {
 						$data[str_replace ("-","_", $key)] = $val;
 					}
