@@ -3,6 +3,12 @@ var storage = {
 		this.events();
 		this.syncForm();
 
+		if (amplify.store('active') != null) {
+			$('#form').attr('data-unique', amplify.store('active'));
+
+			this.syncForm();
+		}
+
 	},
 	events: function () {
 		var s = this;
@@ -18,11 +24,32 @@ var storage = {
 			e.preventDefault();
 		});
 
-		s.saveForm();
+		s.doSave();
+		s.resetChanged();
 
 		$('#form').on('blur keydown', 'input, textarea, select', function () {
-			s.saveForm();
+			s.showChanged();
 		});
+	},
+	showChanged: function () {
+		// console.log('changed!');
+		$('.sync-btn').removeClass('disabled');
+
+		amplify.store('canteen.changed', 1);
+	},
+	resetChanged: function () {
+		// console.log('acknowledged');
+		$('.sync-btn').addClass('disabled');
+
+		amplify.store('canteen.changed', 0);
+	},
+	doSave: function () {
+		var s = this;
+		s.intv = setInterval(function () {
+			if (amplify.store('canteen.changed') == 1 && s.isOnline()) {
+				s.saveForm();
+			}
+		}, 5000);
 	},
 	syncForm: function () {
 		var unique = $('#form').attr('data-unique');
@@ -57,8 +84,13 @@ var storage = {
 					.appendTo($('#form'));
 			}
 
-			// Save
-			this.save(formdata, false);
+			if (unique == 0) {
+				// Save
+				this.save(formdata, true);
+			} else {
+				// Save
+				this.save(formdata, false);
+			}
 
 		} else {
 
@@ -72,14 +104,15 @@ var storage = {
 	},
 	save: function (data, init) {
 
-		console.log('saving...');
+		// console.log('saving...');
 
-		console.log('data', data);
+		// console.log('data', data);
 
 		var id,
-			msg;
+			msg
+			s = this;
 
-		if (this.isOnline()) {
+		if (s.isOnline()) {
 
 			$.ajax({
 				url: 'http://23.239.8.146/backend-code/index.php/canteen/add',
@@ -88,56 +121,82 @@ var storage = {
 				dataType: 'text',
 				success: function (res, status, xhr) {
 
-					console.log("I am here");
+					// console.log("I am here");
 
 					var result = res.split(':');
 
 					msg = result[0];
 					id = result[1];
 
-					console.log(result, msg, id);
+					// console.log(result, msg, id);
+					// console.log('ajaxed');
 
 					if ("success" == msg) {
 
-						console.log('successful');
+						// console.log('successful');
 
 						if (init) {
 
-							console.log('making input');
+							// console.log('making input');
 
-							$('<input />')
-								.attr('type', 'hidden')
-								.attr('id', 'id')
-								.attr('name', 'id')
-								.val(id)
-								.appendTo($('#form'));
-
-							var date = new Date();
-
-							$('<input />')
-								.attr('type', 'hidden')
-								.attr('id', 'date')
-								.attr('name', 'date')
-								.val(date.getTime())
-								.appendTo($('#form'));
+							s.setupIDandDate(id);
 
 							$('#form').attr('data-unique', id);
+
+							amplify.store('active', id);
+							amplify.store(0, null);
 						}
+
+						// console.log('resetting?');
+						s.resetChanged();
 
 					}
 				},
 				error: function (a, b, c) {
 					console.log(a, b, c);
 				}
+			}).done(function () {
+
+				data = s.getFormJSON();
+
+				// console.log("amplify", id, data);
+
+				amplify.store(id, data);
+
 			});
+
+		} else {
+
+			id = $('#form').attr('data-unique');
+
+			data = s.getFormJSON();
+
+			// console.log("amplify", id, data);
+
+			amplify.store(id, data);
 
 		}
 
-		data = this.getFormJSON();
 
-		console.log(data);
 
-		amplify.store(id, data);
+	},
+	setupIDandDate: function (id) {
+
+		$('<input />')
+			.attr('type', 'hidden')
+			.attr('id', 'id')
+			.attr('name', 'id')
+			.val(id)
+			.appendTo($('#form'));
+
+		var date = new Date();
+
+		$('<input />')
+			.attr('type', 'hidden')
+			.attr('id', 'date')
+			.attr('name', 'date')
+			.val(date.getTime())
+			.appendTo($('#form'));
 
 	},
 	field: function (id, value) {
@@ -145,8 +204,22 @@ var storage = {
 
 		// console.log('trying', $field, $field.is('input[type=text]'));
 
+		if ($field.length == 0) {
+
+			if (id.indexOf('team-member') != -1) {
+				if (id != 'team-member-1') {
+					var d = id.split('-');
+
+					// console.log('ATTEMPTING TO ADD MEMBER', d[2], value);
+
+					form.addNewMember(d[2], value);
+				}
+			}
+
+		}
+
 		// Text field
-		if ($field.is('input[type=text]')) {
+		if ($field.is('textarea')) {
 
 			// console.log('inside');
 
@@ -158,9 +231,11 @@ var storage = {
 		}
 
 		// Text field
-		if ($field.is('textarea')) {
+		if ($field.is('input[type=text]')) {
 
 			// console.log('inside');
+
+			// console.log($field.attr('id'), $field.attr('id').indexOf('team-member'));
 
 			if ($field.attr('id').indexOf('team-member') != -1) {
 				if ($field.attr('id') != 'team-member-1') {

@@ -35,13 +35,13 @@ body{
 		margin-bottom: 1.5em;
 		font-family: 'Average';
 	}
-	a.btn-primary{
+	.btn-primary{
 		display: inline-block;
 		margin: 0 auto;
 		padding: 10px 60px;
 		text-align: center;
 		font-size: 1.2em;
-		//text-transform: uppercase;
+		text-transform: uppercase;
 
 		&:hover{
 			text-decoration: none;
