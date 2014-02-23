@@ -93,9 +93,9 @@ class Report extends CI_Model {
 		return $q->result_array()[0];
 	}
 	
-	function get_entry_items($params) {
+	function get_entry_items($id) {
 		//incident_unit_number
-		$this->db->where('ReportID',$params['id']);
+		$this->db->where('ReportID',$id);
 		$q = $this->db->get('LinkReportItem');
 		return $q->result();
 	}
