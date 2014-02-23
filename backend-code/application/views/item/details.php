@@ -50,7 +50,7 @@ echo substr($output, 0, strlen($output)-1);
 }
 			
 var ctx = document.getElementById("myChart").getContext("2d");
-var myNewChart = new Chart(ctx).Line(data,options);
+var myNewChart = new Chart(ctx).Line(data);
 
 			});
 		</script>
