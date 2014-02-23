@@ -63,14 +63,16 @@ var app = {
         {
           $('#start').hide();
           $('#app').show();
+
+          amplify.store('active', '0');
+          $('#form').attr('unique', 0);
+
         });
 
         $('#close-button').on('touchstart', function(event)
         {
           $('#start').show();
           $('#app').hide();
-
-          amplify.store('active', '0');
         });
 
         // this.showReports();
@@ -159,6 +161,30 @@ var app = {
             $('#app').show();
           }
         });
+
+        $('#submit').on('touchstart', 'button', function () {
+
+          console.log('submit');
+
+          $('<input />')
+            .attr('type', 'hidden')
+            .attr('name', 'finished')
+            .attr('id', 'finished')
+            .val(1)
+            .appendTo($('#form'));
+
+          storage.saveForm();
+
+          var id = $('#form').attr('data-unique');
+
+          amplify.store('active', 0);
+          amplify.store(id, null);
+
+          $('#form').attr('data-unique', '0');
+
+          $('#start').show();
+            $('#app').hide();
+        })
 
     },
 

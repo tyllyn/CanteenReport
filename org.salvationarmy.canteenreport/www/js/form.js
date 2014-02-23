@@ -38,6 +38,10 @@ var form = {
 			}
 
 		});
+
+		$('.sync-btn').on('click', function () {
+			storage.saveForm();
+		});
 	},
 	addNewMember: function (id, val) {
 

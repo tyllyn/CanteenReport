@@ -177,8 +177,6 @@ var storage = {
 
 		}
 
-
-
 	},
 	setupIDandDate: function (id) {
 
@@ -208,8 +206,6 @@ var storage = {
 			// console.log('trying', $field, $field.is('input[type=text]'));
 
 			if ($field.length == 0) {
-
-
 
 				if (id.indexOf('team-member') != -1) {
 					if (id != 'team-member-1') {
@@ -248,7 +244,7 @@ var storage = {
 
 						// console.log('ATTEMPTING TO ADD MEMBER', id[2], value);
 
-						form.addMember(id[2], value);
+						form.addNewMember(id[2], value);
 					} else {
 						if ($field.val() !== value) {
 							$field.val(value);
