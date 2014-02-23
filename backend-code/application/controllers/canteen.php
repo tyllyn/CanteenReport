@@ -173,6 +173,7 @@ class Canteen extends CI_Controller {
 		$this->load->model('Report');
 		$data['report'] = $this->Report->get_entry($id);
 		$data['reportitems'] = $this->Report->get_entry_items($id);
+		$data['reportmembers'] = $this->Report->get_entry_members($id);
 		$this->load->view('canteen/report',$data);
 	}
 	
