@@ -1,0 +1,43 @@
+.app-header {
+
+	background: #DAD7D2;
+
+	text-align: center;
+
+	padding: 40px 15px 20px;
+	width: 100%;
+	position: fixed;
+	z-index: 1000;
+
+	h1 {
+
+		font-size: 1.6em;
+		text-transform: uppercase;
+		padding: 0.18em 0 0 0;
+		margin: 0;
+		display: none;
+		// position: relative;
+		// left: 50%;
+		//-webkit-transform: translateX(-50%);
+
+		@include bp(medium) {
+			display: inline-block;
+		}
+
+	}
+
+	&:after{
+		display: block;
+		content: '';
+		clear: both;
+	}
+
+	#btn-sync {
+		float: left;
+	}
+
+	#btn-close {
+		float: right;
+	}
+
+}

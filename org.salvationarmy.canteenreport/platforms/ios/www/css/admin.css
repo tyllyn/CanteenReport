@@ -7,5 +7,125 @@
 .search-reports {
   width: 100%;
   padding: 10px 15px;
-  border-bottom: solid 1px #000;
+}
+
+/* line 8, ../sass/admin.scss */
+header {
+  position: relative;
+  background: #ecebe8;
+  text-align: left;
+  padding: 0;
+  max-height: 120px;
+}
+
+/* line 15, ../sass/admin.scss */
+header h1 {
+  display: block;
+  margin: 0;
+  padding: 0;
+  font-family: 'Average';
+  font-size: 1.4em;
+  left: 0;
+  -webkit-transform: none;
+  vertical-align: top;
+  padding-top: 50px;
+  padding-left: 20px;
+}
+/* line 27, ../sass/admin.scss */
+header h1:before {
+  display: inline-block;
+  content: '';
+  background: url(../img/logo.png);
+  position: relative;
+  width: 100px;
+  height: 100px;
+  background-size: 100%;
+  top: -42px;
+  margin-right: 20px;
+}
+
+/* line 39, ../sass/admin.scss */
+.adminPanel {
+  width: 100%;
+  border: solid 1px #c8c4bb;
+  min-height: 100px;
+}
+/* line 44, ../sass/admin.scss */
+.adminPanel h2 {
+  display: block;
+  background: #ecebe8;
+  margin: 0;
+  padding: 10px 15px;
+  border-bottom: solid 1px #c8c4bb;
+}
+/* line 52, ../sass/admin.scss */
+.adminPanel input, .adminPanel select {
+  width: 100%;
+  height: 100%;
+  padding: 10px;
+  -webkit-transform: none;
+}
+/* line 58, ../sass/admin.scss */
+.adminPanel select {
+  background: transparent;
+  -webkit-appearance: none;
+  border: solid 1px #c8c4bb;
+  position: relative;
+  z-index: 1000;
+}
+/* line 65, ../sass/admin.scss */
+.adminPanel .fancySelect {
+  width: 100%;
+  height: 41px;
+}
+/* line 69, ../sass/admin.scss */
+.adminPanel .fancySelect:before {
+  content: none !important;
+}
+/* line 72, ../sass/admin.scss */
+.adminPanel .fancySelect:after {
+  content: "\e080";
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  -webkit-transform: translateY(-50%) rotate(90deg);
+  z-index: 1;
+}
+/* line 81, ../sass/admin.scss */
+.adminPanel input {
+  border: solid 1px #c8c4bb;
+}
+
+/* line 85, ../sass/admin.scss */
+.adminSearch {
+  padding: 15px;
+}
+
+/* line 88, ../sass/admin.scss */
+.reports {
+  padding: 0;
+  border: solid 1px #c8c4bb;
+  margin-top: 10px;
+}
+
+/* line 93, ../sass/admin.scss */
+.reports li {
+  list-style: none;
+  padding: 10px;
+  background: #ecebe8;
+  border-bottom: solid 1px #c8c4bb;
+}
+/* line 99, ../sass/admin.scss */
+.reports li:last-child {
+  border: none;
+}
+/* line 102, ../sass/admin.scss */
+.reports li:nth-child(2n+1) {
+  background: #fff;
+}
+/* line 106, ../sass/admin.scss */
+.reports li:after {
+  display: block;
+  content: '';
+  clear: both;
 }

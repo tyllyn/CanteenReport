@@ -1,0 +1,111 @@
+#submit {
+	background-color: #332e28;
+	padding-bottom: 50em;
+}
+#submit p {
+	font-size: 1.25em;
+	font-weight: normal;
+	color: #fff;
+}
+
+.form-center {
+	text-align: center;
+}
+
+// .container {
+// 	padding-right: 0;
+// }
+
+a:link, a:hover, a:focus {
+	color: #e3323a;
+}
+
+.team-member {
+	margin-bottom: 0.25em;
+}
+
+.tab-content {
+	margin-bottom: 2em;
+}
+
+
+.canteen-well {
+	border-bottom: 2px solid #ecebe8;
+	padding: 1em;
+	@include bp(medium) {
+		padding: 2em;
+	}
+}
+.canteen-well:last-child {
+	padding-top: 2em;
+	border-bottom: none;
+}
+
+.amounts .row {
+	padding: 0.75em 0 0.5em 0;
+}
+
+.amounts .row .input-group .glyphicon {
+	top: 1px;
+}
+
+.amounts .row:nth-child(even) {
+	background-color: #ecebe8;
+	border-top: 1px solid #dad7d2;
+	border-bottom: 1px solid #dad7d2;
+}
+
+.amounts .row:nth-child(even) .form-control-label {
+	background: transparent;
+}
+/** bootstrap overrides */
+.control-group {
+	margin-bottom: 1em;
+}
+
+.input-group {
+	width: 100%;
+}
+.input-group .glyphicon {
+	top: 0;
+}
+
+.type-container .row {
+	margin-bottom: 1em;
+}
+
+.row-label {
+	display: table;
+}
+.row-label label {
+	display: table-cell;
+}
+
+
+label, h2 {
+	font-family: $font-family-sans-serif;
+	font-size: 1em;
+	font-weight: bold;
+	color: #332e27;
+}
+label.control-label {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+label.form-control {
+	font-weight: normal;
+}
+label.form-control-label {
+	border: none;
+	-webkit-box-shadow: none;
+	box-shadow: none;
+}
+
+.form-control {
+	border: 1px solid #c8c4bb;
+}
+
+.required abbr {
+	border-bottom: none;
+	color: #e3323a;
+}

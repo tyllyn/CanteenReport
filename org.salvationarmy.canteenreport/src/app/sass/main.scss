@@ -1,0 +1,22 @@
+@import "./_variables";
+
+// boostrap
+@import "./bootstrap/bootstrap-custom";
+
+// helpers
+@import "./helpers/_mixins";
+
+// layout
+@import "./layout/_app";
+//@import "./layout/_container";
+@import "./layout/_start";
+
+// modules
+@import "./modules/_cordovaIndex";
+@import "./modules/_start-header";
+@import "./modules/_open-report";
+@import "./modules/_app-header";
+@import "./modules/_form";
+@import "./modules/_left-menu";
+
+@import "./modules/_canteenReportForms";

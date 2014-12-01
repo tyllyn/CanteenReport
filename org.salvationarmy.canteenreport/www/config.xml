@@ -2,10 +2,10 @@
 <widget id="CanteenReport" version="0.0.7" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>CanteenReport</name>
     <description>
-        A sample Apache Cordova application that responds to the deviceready event.
+        Canteen Report app for the Salvation Army built by Ryan Sprake, Joshua Petry, and Sarah Swartz
     </description>
-    <author email="dev@cordova.apache.org" href="http://cordova.io">
-        Apache Cordova Team
+    <author email="ryan.sprake@gmail.com" href="http://cordova.io">
+        Team
     </author>
     <content src="index.html" />
     <access origin="*" />

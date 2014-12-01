@@ -10,29 +10,29 @@
 	<string>CanteenReport</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>2A101DD8-40C7-4E74-99C0-39D3AC8A2D06</key>
+		<key>BAB74602229F794503677A63056E853CD9CFF1C3</key>
 		<string>https://github.com/tyllyn/CanteenReport.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>org.salvationarmy.canteenreport/platforms/ios/CanteenReport.xcodeproj/project.xcworkspace</string>
+	<string>org.salvationarmy.canteenreport/platforms/ios/CanteenReport.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>2A101DD8-40C7-4E74-99C0-39D3AC8A2D06</key>
+		<key>BAB74602229F794503677A63056E853CD9CFF1C3</key>
 		<string>../../../../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
 	<string>https://github.com/tyllyn/CanteenReport.git</string>
 	<key>IDESourceControlProjectVersion</key>
-	<integer>110</integer>
+	<integer>111</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>2A101DD8-40C7-4E74-99C0-39D3AC8A2D06</string>
+	<string>BAB74602229F794503677A63056E853CD9CFF1C3</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>2A101DD8-40C7-4E74-99C0-39D3AC8A2D06</string>
+			<string>BAB74602229F794503677A63056E853CD9CFF1C3</string>
 			<key>IDESourceControlWCCName</key>
 			<string>CanteenReport</string>
 		</dict>

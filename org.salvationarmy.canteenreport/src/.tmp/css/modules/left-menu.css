@@ -1,0 +1,68 @@
+/* line 1, ../../sass/modules/left-menu.scss */
+
+.left-menu {
+  border-right: solid 1px #DAD7D2;
+  width: 100%;
+  max-width: 100px;
+  position: fixed;
+  height: 100%;
+  padding-top: 64px;
+  background: #ECEBE7;
+  margin-top: 20px;
+}
+
+/* line 10, ../../sass/modules/left-menu.scss */
+
+.left-menu ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* line 14, ../../sass/modules/left-menu.scss */
+
+.left-menu ul li {
+  text-align: center;
+}
+
+/* line 17, ../../sass/modules/left-menu.scss */
+
+.left-menu ul li.isActive a {
+  color: #e3323a;
+}
+
+/* line 20, ../../sass/modules/left-menu.scss */
+
+.left-menu ul li a {
+  width: 100%;
+  color: #9C9992;
+  padding: 25px 0;
+}
+
+/* line 25, ../../sass/modules/left-menu.scss */
+
+.left-menu ul li a:hover {
+  color: #E3323A;
+}
+
+/* line 29, ../../sass/modules/left-menu.scss */
+
+.left-menu ul li a:before {
+  display: block;
+  font-size: 1.6em;
+  margin-bottom: 4px;
+}
+
+/* line 34, ../../sass/modules/left-menu.scss */
+
+.left-menu ul li a:hover {
+  text-decoration: none;
+}
+
+/* line 40, ../../sass/modules/left-menu.scss */
+
+.left-menu:after {
+  display: block;
+  content: '';
+  clear: both;
+}
