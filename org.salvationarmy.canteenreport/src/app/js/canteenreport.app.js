@@ -2,31 +2,34 @@ var canteenreport = canteenreport || {};
 
 canteenreport.app = {
 
-  debug: true,
+	debug: true,
 
-  $activeFuelLevel: undefined,
-  $activeWaterLevel: undefined,
-  $syncBtn: null,
+	isOnline: false,
+  isSyncing: false,
 
-  initialize: function() {
+	$activeFuelLevel: undefined,
+	$activeWaterLevel: undefined,
+	$syncBtn: null,
+	$closeBtn: null,
+  $body: null,
 
-    this.log('app.initialize');
+	initialize: function() {
 
-    this.bindEvents();
-
-    // Cache selectors
+		// Cache selectors
     var topMenu = $("header"),
-      //topMenuHeight = topMenu.outerHeight()+15,
-      topMenuHeight = 84,
-      // All list items
-      menuItems = $('.left-menu').find("a"),
-      // Anchors corresponding to menu items
-      scrollItems = menuItems.map(function(){
-        var item = $($(this).attr("href"));
-        if (item.length) { return item; }
-      });
+    	topMenuHeight = 84,
+    	menuItems = $('.left-menu').find("a"),
+    	scrollItems = menuItems.map(function () {
+    		var item = $($(this).attr("href"));
+    		if (item.length) { return item; }
+    	});
 
+		this.isOnline = navigator.onLine;
+		this.bindEvents();
+
+    this.$body = $('body');
     this.$syncBtn = $('#btn-sync');
+    this.$closeBtn = $('#btn-close');
 
     // Bind to scroll
     $(window).scroll(function(){
@@ -36,86 +39,104 @@ canteenreport.app = {
 
        // Get id of current scroll item
        var cur = scrollItems.map(function(){
-         if ($(this).offset().top < fromTop)
-           return this;
+       	if ($(this).offset().top < fromTop)
+       		return this;
        });
        cur = cur[cur.length-1];
 
        var id = cur && cur.length ? cur[0].id : "";
        // Set/remove active class
        menuItems
-        .parent().removeClass("isActive")
-        .end().filter("[href=#"+id+"]").parent().addClass("isActive");
+       	.parent().removeClass("isActive")
+       	.end().filter("[href=#"+id+"]").parent().addClass("isActive");
 
     });
+
+    window.addEventListener('offline', this.goOffline);
+		window.addEventListener('online', this.goOnline);
 
     // new report
     // todo: imporove
     $('#new-report-button').on('touchend', function (event) {
 
-      $('#start').hide();
-      $('#app').show();
+    	$('#start').hide();
+    	$('#app').show();
 
-      canteenreport.storage.initialize();
-      canteenreport.form.initialize();
+    	canteenreport.storage.initialize();
+      canteenreport.form.initialize(canteenreport.app.formFocused);
 
-      amplify.store('active', '0');
+      // todo
+      //amplify.store('active', '0');
 
       $('#form').attr('unique', 0);
 
     });
 
     // close the open report
-    $('#btn-close').on('touchend', function (event) {
+    this.$closeBtn.on('touchend', function (event) {
 
-      menuItems.parent().removeClass("isActive").end().filter("[href=#incident]").parent().addClass("isActive");
+    	menuItems.parent().removeClass("isActive").end().filter("[href=#incident]").parent().addClass("isActive");
 
-      $('#start').show();
-      $('#app').hide();
+    	$('#start').show();
+    	$('#app').hide();
 
     });
 
     // sync the report
-    this.$syncBtn.on('click', function () {
-      canteenreport.storage.saveForm();
-    });
+    this.$syncBtn.on('click', $.proxy(this.saveForm, this));
 
     // setup the left menu
     $('.left-menu').find('a').on({
-      touchstart: function(e){
-        var id = $(this).attr('href');
-        if($(id).length){
-          $('html, body').animate({
-            scrollTop: $(id).offset().top - 70
-          });
-        }
-        e.preventDefault();
-      }
+    	touchstart: function(e){
+    		var id = $(this).attr('href');
+    		if($(id).length){
+    			$('html, body').animate({
+    				scrollTop: $(id).offset().top - 70
+    			});
+    		}
+    		e.preventDefault();
+    	}
     });
 
-    // open unfinisehd report button
-    // todo: finish, make real
-    // $('.open-report').on('click', 'a', function (e) {
+    amplify.subscribe('canteenreport-saved', $.proxy(this.savedForm, this));
 
-    //   canteenreport.form.initialize(); // start up the form
+	},
 
-    //   if ($(this).attr('data-report') != null) {
+  /***
+    * Callback for the form focus listener. Assigned in initialize.
+    */
+  formFocused: function () {
+    canteenreport.app.saveForm();
+  },
 
-    //     amplify.store('active', $(this).attr('data-report'));
+  savedForm: function () {
 
-    //     $('#form').attr('data-unique', $(this).attr('data-report'));
-    //     $('#start').hide();
-    //     $('#app').show();
+    canteenreport.app.log('canteenreport.app.savedForm');
 
-    //   }
+    this.isSyncing = false;
 
-    //   e.preventDefault();
+    var scope = this;
 
-    // });
+    setTimeout(function(){
+      if (!scope.isSyncing) {
+        scope.$body.removeClass('is-syncing');
+      }
+    }, 3000);
 
   },
 
-  /**
+  /***
+   * Save function for the app.
+   */
+  saveForm: function () {
+    canteenreport.app.log('canteenreport.app.saveForm');
+
+    this.isSyncing = true;
+    this.$body.addClass('is-syncing');
+    canteenreport.storage.syncForm();
+  },
+
+  /***
    * Bind Event Listeners
    *
    * Bind any events that are required on startup. Common events are:
@@ -123,18 +144,14 @@ canteenreport.app = {
    */
   bindEvents: function() {
 
-    this.log('app.bindEvents');
+   	this.log('app.bindEvents');
 
-    document.addEventListener('deviceready', this.onDeviceReady, false);
+   	document.addEventListener('deviceready', this.onDeviceReady, false);
 
   },
 
+
   /***
-    *
-    */
-
-
-  /**
    * deviceready Event Handler
    *
    * The scope of 'this' is the event. In order to call the 'receivedEvent'
@@ -142,104 +159,45 @@ canteenreport.app = {
    */
   onDeviceReady: function() {
 
-    console.log('app.onDeviceReady')
+   	console.log('app.onDeviceReady')
 
-    app.receivedEvent('deviceready');
+   	app.receivedEvent('deviceready');
 
   },
 
   /** Update DOM on a Received Event */
   receivedEvent: function(id) {
 
-    var parentElement = document.getElementById(id);
-    var listeningElement = parentElement.querySelector('.listening');
-    var receivedElement = parentElement.querySelector('.received');
+  	canteenreport.log('receivedEvent');
 
-    listeningElement.setAttribute('style', 'display:none;');
-    receivedElement.setAttribute('style', 'display:block;');
+   	var parentElement = document.getElementById(id);
+   	var listeningElement = parentElement.querySelector('.listening');
+   	var receivedElement = parentElement.querySelector('.received');
+
+   	listeningElement.setAttribute('style', 'display:none;');
+   	receivedElement.setAttribute('style', 'display:block;');
 
   },
 
-  /** Show open reports */
-  // showReports: function() {
+  goOffline: function () {
+		canteenreport.app.log('goOffline');
+		this.isOnline = false;
+	},
 
-  //   this.log('showReports');
-
-  //   var storaged = amplify.store(),
-  //   dates = [];
-
-  //   for (var key in storaged) {
-
-  //     if (storaged.hasOwnProperty(key)) {
-
-  //       if (key != 'active' && key != 'canteen.changed') {
-
-  //         var d = storaged[key];
-
-  //         dates[key] = {};
-
-  //         for (var kkey in d) {
-
-  //           if (d.hasOwnProperty(kkey)) {
-
-  //             if (d[kkey].name == "date") {
-
-  //               dates[key].fdate = d[kkey].value;
-
-  //             }
-
-  //             if (d[kkey].name == "id") {
-
-  //               dates[key].fid = d[kkey].value;
-
-  //             }
-
-  //           }
-
-  //         }
-
-  //       }
-
-  //     }
-
-  //   }
-
-  //   if (dates.length > 0) {
-
-  //     $('.open-report').find('a').remove();
-
-  //     for (var jkey in dates) {
-
-  //       if (dates.hasOwnProperty(jkey)) {
-
-  //         var format = new Date();
-  //         format.setTime(dates[jkey].fdate);
-
-  //         $("<a />")
-  //         .attr('href', 'javascript:;')
-  //         .addClass('date glyphicon glyphicon-chevron-right')
-  //         .attr('data-report', dates[jkey].fid)
-  //         .html(
-  //           parseInt(format.getMonth(), 10) - 1 + '/' + format.getDate() + '/' + format.getFullYear() + ' ' + format.getHours() + ':' + format.getMinutes() + ':' + format.getSeconds()
-  //           )
-  //         .appendTo($('.open-report'));
-  //       }
-
-  //     }
-
-  //   }
-
-  // },
+	goOnline: function () {
+		canteenreport.app.log('goOnline');
+		this.isOnline = true;
+	},
 
   /**
    * Log a message if debug is true
    */
   log: function (message) {
 
-    if (this.debug) {
-      console.log(message);
-    }
+   	if (this.debug) {
+   		console.log(message);
+   	}
 
   }
 
-};
+ };

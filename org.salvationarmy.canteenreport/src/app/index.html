@@ -8,7 +8,7 @@
 	<title>Emergency Disaster Services - Canteen Report</title>
 
 	<!-- build:css(.tmp) css/main.css -->
-	<link rel="stylesheet" href="./css/main.css" />
+	<link rel="stylesheet" href="css/main.css" />
 	<!-- endbuild -->
 </head>
 <body>
@@ -37,7 +37,10 @@
 
     	<header class="app-header">
     		<h1>Canteen Report</h1>
-    		<button id="btn-sync" class="btn btn-default">Save</button>
+    		<button id="btn-sync" class="btn btn-default">
+                <div id="sync-spinner"><img src="img/spinner.png" width="20" height="20" /></div>
+                <div id="btn-sync-label">Sync</div>
+            </button>
     		<button id="btn-close" class="btn btn-default">Close</button>
     	</header>
 
@@ -62,6 +65,9 @@
 
     		<!-- WE NEED TO DYNAMICALLY CREATE THE UNIQUE ID FOR THE FORM ON "NEW REPORT" -->
     		<form id="form">
+
+                <!-- added in canteenreport.storage -->
+                <input name="incident-id" id="incident-id" type="hidden" />
 
                 <!--
                     INCIDENT
@@ -934,12 +940,12 @@
 	<!-- <script type="text/javascript" src="cordova.js"></script> -->
 
 	<!-- build:js js/main.js -->
-	<script src="./bower_components/jquery/dist/jquery.js"></script>
-	<script src="./bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/tab.js"></script>
-	<script src="./bower_components/amplify/lib/amplify.js"></script>
-	<script src="./js/canteenreport.app.js"></script>
-	<script src="./js/canteenreport.form.js"></script>
-	<script src="./js/canteenreport.storage.js"></script>
+	<script src="bower_components/jquery/dist/jquery.js"></script>
+	<script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/tab.js"></script>
+	<script src="bower_components/amplify/lib/amplify.js"></script>
+	<script src="js/canteenreport.app.js"></script>
+	<script src="js/canteenreport.form.js"></script>
+	<script src="js/canteenreport.storage.js"></script>
 	<!-- endbuild -->
 
 	<script>

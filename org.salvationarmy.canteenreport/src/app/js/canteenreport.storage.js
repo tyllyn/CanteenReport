@@ -2,67 +2,63 @@ var canteenreport = canteenreport || {};
 
 canteenreport.storage = {
 
+	apiUrl: 'http://23.239.8.146/backend-code/index.php/canteen/add',
+	store: null,
+
 	initialize: function () {
 
 		canteenreport.app.log('storage.initialize');
 
-		this.events();
-		this.syncForm();
-
-		if (amplify.store('active') != null) {
-
-			$('#form').attr('data-unique', amplify.store('active'));
-
-			this.syncForm();
+		var timestamp = function getUniqueTime() {
+		  	var time = new Date().getTime();
+		  	while (time == new Date().getTime());
+		  	return new Date().getTime();
 		}
 
-		amplify.subscribe('active', function () {
+		var $idField = $('#incident-id');
 
-			console.log('canteen.changed');
+		var isNewReport = false;
+		var id = $idField.val();
 
-		});
+		// if there is no id
+		if (id == '') {
+			isNewReport = true;
+			$idField.val(timestamp);
+		}
 
-	},
+		// grab or create a new store
+		canteenreport.storage.store = amplify.store('canteenreport') || [];
 
-	events: function () {
+		canteenreport.app.log(canteenreport.storage.store);
 
-		var s = this;
+		// todo: add edit functionality
+		// if this is a new and unique report, push a new report into the store,
+		// if not, get the store
 
-		window.addEventListener('offline', function (e) {
-			s.goOffline();
-		});
+		if (isNewReport) {
+			var formdata = canteenreport.storage.getFormJSON();
+			canteenreport.storage.store.push(formdata);
+			amplify.store('canteenreport', formdata);
+		}
 
-		window.addEventListener('online', function (e) {
-			s.goOnline();
-		});
-
-		$('#form').on('submit', function (e) {
-			e.preventDefault();
-		});
-
-		s.doSave();
-		s.resetChanged();
-
-		$('#form').on('blur keydown', 'input, textarea, select', function () {
-			s.showChanged();
-		});
-
-	},
-
-	showChanged: function () {
-
-		$('.sync-btn').removeClass('disabled');
-
-		amplify.store('canteen.changed', 1);
 	},
 
 	resetChanged: function () {
-
-		$('.sync-btn').addClass('disabled');
-
+		canteenreport.app.log('storage.resetChanged');
 		amplify.store('canteen.changed', 0);
 	},
 
+	findReport: function () {
+
+		var store = canteenreport.storage.store;
+
+		$.each(store, function (index, item) {
+			console.log(item)
+		});
+
+	},
+
+	/*
 	doSave: function () {
 
 		var s = this;
@@ -73,11 +69,30 @@ canteenreport.storage = {
 		}, 5000);
 
 	},
+	*/
 
 	syncForm: function () {
 
 		canteenreport.app.log('storage.syncForm');
 
+		var unique = 0;
+		var formdata = canteenreport.storage.getFormJSON();
+
+		// save to the local store
+		//canteenreport.storage.store.push(formdata);
+
+		// save to the a
+		amplify.store('canteenreport', canteenreport.storage.store);
+
+		amplify.publish('canteenreport-saved');
+
+		// amplify.request('pushData', { employees: amplify.store('employees') }, function (data) {
+		// 	amplify.publish('employee-data-pushed', data);
+		// });
+
+		// amplify.publish('employee-created', employee);
+
+		/*
 		var unique = $('#form').attr('data-unique');
 
 		if (amplify.store(unique) !== null) {
@@ -91,9 +106,11 @@ canteenreport.storage = {
 			}
 
 		}
+		*/
 
 	},
 
+	/*
 	saveForm: function () {
 
 		canteenreport.app.log('storage.saveForm');
@@ -101,7 +118,10 @@ canteenreport.storage = {
 		var unique = 0,
 			formdata = this.getFormJSON();
 
+		console.log(formdata)
+
 		if ($('#form').attr('data-unique') != null) {
+
 			unique = $('#form').attr('data-unique');
 
 			if ($('#id').length == 0 || $('#id').val() != unique) {
@@ -114,13 +134,13 @@ canteenreport.storage = {
 					.appendTo($('#form'));
 			}
 
-			if (unique == 0) {
-				// Save
-				this.save(formdata, true);
-			} else {
-				// Save
-				this.save(formdata, false);
-			}
+			// if (unique == 0) {
+			// 	// Save
+			// 	this.save(formdata, true);
+			// } else {
+			// 	// Save
+			// 	this.save(formdata, false);
+			// }
 
 		} else {
 
@@ -132,83 +152,86 @@ canteenreport.storage = {
 		// amplify.store(unique, null);
 
 	},
+	*/
 
-	save: function (data, init) {
+	// save: function (data, init) {
 
-		canteenreport.app.log('storage.save');
+	// 	canteenreport.app.log('storage.save');
 
-		var id,
-			msg
-			s = this;
+	// 	var id,
+	// 		msg
+	// 		s = this;
 
-		if (s.isOnline()) {
+	// 	if (s.isOnline()) {
 
-			$.ajax({
-				url: 'http://23.239.8.146/backend-code/index.php/canteen/add',
-				type: 'POST',
-				data: data,
-				dataType: 'text',
-				success: function (res, status, xhr) {
+	// 		$.ajax({
+	// 			url: 'http://23.239.8.146/backend-code/index.php/canteen/add',
+	// 			type: 'POST',
+	// 			data: data,
+	// 			dataType: 'text',
+	// 			success: function (res, status, xhr) {
 
-					// console.log("I am here");
+	// 				// console.log("I am here");
 
-					var result = res.split(':');
+	// 				var result = res.split(':');
 
-					msg = result[0];
-					id = result[1];
+	// 				msg = result[0];
+	// 				id = result[1];
 
-					// console.log(result, msg, id);
-					// console.log('ajaxed');
+	// 				// console.log(result, msg, id);
+	// 				// console.log('ajaxed');
 
-					if ("success" == msg) {
+	// 				if ("success" == msg) {
 
-						// console.log('successful');
+	// 					// console.log('successful');
 
-						if (init) {
+	// 					if (init) {
 
-							// console.log('making input');
+	// 						// console.log('making input');
 
-							s.setupIDandDate(id);
+	// 						s.setupIDandDate(id);
 
-							$('#form').attr('data-unique', id);
+	// 						$('#form').attr('data-unique', id);
 
-							amplify.store('active', id);
-							amplify.store(0, null);
-						}
+	// 						amplify.store('active', id);
+	// 						amplify.store(0, null);
+	// 					}
 
-						// console.log('resetting?');
-						s.resetChanged();
+	// 					// console.log('resetting?');
+	// 					s.resetChanged();
 
-					}
-				},
-				error: function (a, b, c) {
-					console.log(a, b, c);
-				}
-			}).done(function () {
+	// 				}
+	// 			},
+	// 			error: function (a, b, c) {
+	// 				console.log(a, b, c);
+	// 			}
+	// 		}).done(function () {
 
-				data = s.getFormJSON();
+	// 			data = s.getFormJSON();
 
-				// console.log("amplify", id, data);
+	// 			// console.log("amplify", id, data);
 
-				amplify.store(id, data);
+	// 			amplify.store(id, data);
 
-			});
+	// 		});
 
-		} else {
+	// 	} else {
 
-			id = $('#form').attr('data-unique');
+	// 		id = $('#form').attr('data-unique');
 
-			data = s.getFormJSON();
+	// 		data = s.getFormJSON();
 
-			// console.log("amplify", id, data);
+	// 		// console.log("amplify", id, data);
 
-			amplify.store(id, data);
+	// 		amplify.store(id, data);
 
-		}
+	// 	}
 
-	},
+	// },
 
 	setupIDandDate: function (id) {
+
+		canteenreport.app.log('storage.setupIDandDate');
 
 		$('<input />')
 			.attr('type', 'hidden')
@@ -234,16 +257,11 @@ canteenreport.storage = {
 
 			var $field = $('#' + id);
 
-			// console.log('trying', $field, $field.is('input[type=text]'));
-
 			if ($field.length == 0) {
 
 				if (id.indexOf('team-member') != -1) {
 					if (id != 'team-member-1') {
 						var d = id.split('-');
-
-						// console.log('ATTEMPTING TO ADD MEMBER', d[2], value);
-
 						canteenreport.form.addNewMember(d[2], value);
 					}
 				}
@@ -253,9 +271,6 @@ canteenreport.storage = {
 			// Text field
 			if ($field.is('textarea')) {
 
-				// console.log('inside');
-
-				// console.log($field.val(), value);
 				if ($field.val() !== value) {
 					$field.val(value);
 				}
@@ -264,10 +279,6 @@ canteenreport.storage = {
 
 			// Text field
 			if ($field.is('input[type=text]')) {
-
-				// console.log('inside');
-
-				// console.log($field.attr('id'), $field.attr('id').indexOf('team-member'));
 
 				if ($field.attr('id').indexOf('team-member') != -1) {
 					if ($field.attr('id') != 'team-member-1') {
@@ -295,9 +306,6 @@ canteenreport.storage = {
 			// Number field
 			if ($field.is('input[type=number]')) {
 
-				// console.log('inside');
-
-				// console.log($field.val(), value);
 				if ($field.val() !== value) {
 					$field.val(value);
 				}
@@ -307,9 +315,6 @@ canteenreport.storage = {
 			// Checkbox
 			if ($field.is('input[type=checkbox]')) {
 
-				// console.log('inside');
-
-				// console.log($field, $field.val(), value);
 				if ($field.attr('checked') !== 'checked') {
 					$field.attr('checked', 'checked');
 				}
@@ -319,9 +324,6 @@ canteenreport.storage = {
 			// Select
 			if ($field.is('select')) {
 
-				// console.log('inside');
-
-				// console.log($field.find('option[value=' + value + ']'), value);
 				if ($field.val() !== value) {
 					$field.val(value);
 				}
@@ -331,9 +333,6 @@ canteenreport.storage = {
 			// DateTime
 			if ($field.is('input[type=datetime-local]')) {
 
-				// console.log('inside');
-
-				// console.log($field.val(), value);
 				if ($field.val() !== value) {
 					$field.val(value);
 				}
@@ -347,17 +346,9 @@ canteenreport.storage = {
 		return JSON.parse(JSON.stringify($('#form').serializeArray()));
 	},
 
-	getFormJSONString: function () {
-		return JSON.stringify($('#form').serializeArray());
-	},
-
-	goOffline: function () {
-		canteenreport.app.log('goOffline');
-	},
-
-	goOnline: function () {
-		canteenreport.app.log('goOnline');
-	},
+	// getFormJSONString: function () {
+	// 	return JSON.stringify($('#form').serializeArray());
+	// },
 
 	isOnline: function () {
 		return navigator.onLine;

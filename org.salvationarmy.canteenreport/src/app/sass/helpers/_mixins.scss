@@ -1,3 +1,5 @@
+
+
 @mixin bp($point) {
 
 	@if $point == xlarge {
@@ -26,6 +28,10 @@
 
 }
 
+@function em-calc ($px) {
+	@return #{$px / $default}em
+}
+
 @mixin em_width($px, $default: $fontsize) { width: #{$px / $default}em; }
 @mixin em_height($px, $default: $fontsize) { height: #{$px / $default}em; }
 @mixin em_maxwidth($px, $default: $fontsize) { max-width: #{$px / $default}em; }
@@ -49,13 +55,13 @@
 
 // }
 
-@mixin opacity($i) {
-	$forie: $i * 100;
+// @mixin opacity($i) {
+// 	$forie: $i * 100;
 
-	-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity="+$forie+")";
-	filter: alpha(opacity=$forie);
-	opacity: $i;
-}
+// 	-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity="+$forie+")";
+// 	filter: alpha(opacity=$forie);
+// 	opacity: $i;
+// }
 
 // @mixin transition($sel: all,$time: 1s,$ease: linear) {
 // 	-webkit-transition: $sel $time $time;
