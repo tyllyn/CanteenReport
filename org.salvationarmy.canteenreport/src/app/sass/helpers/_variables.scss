@@ -1,11 +1,16 @@
 $default: 16;
 $default-font-size: em-calc(16);
+$default-sans-serif-font: Helvetica, sans-serif;
+$default-serif-font: Georgia, "Times New Roman", Times, serif;
+
+$heading-font: $default-sans-serif-font;
 
 $birch: #332e27;
 $cararra: #ecbe77;
 $cararraTan: #edebe9;
 $silverRust: #c8c4bb;
 $deepCarminePink: #e3323a;
+$alabaster: #f9f9f9;
 
 $background: $cararraTan;
 $primaryRed: $deepCarminePink;

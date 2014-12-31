@@ -10,6 +10,8 @@
 
 .form-center {
 	text-align: center;
+	padding-left: 0;
+	padding-right: 0;
 }
 
 // .container {
@@ -50,9 +52,9 @@ a:link, a:hover, a:focus {
 }
 
 .amounts .row:nth-child(even) {
-	background-color: #ecebe8;
-	border-top: 1px solid #dad7d2;
-	border-bottom: 1px solid #dad7d2;
+	background-color: $alabaster;
+	border-top: 1px solid darken($alabaster, 20%);
+	border-bottom: 1px solid darken($alabaster, 20%);
 }
 
 .amounts .row:nth-child(even) .form-control-label {
@@ -81,28 +83,14 @@ a:link, a:hover, a:focus {
 	display: table-cell;
 }
 
-
-label, h2 {
-	font-family: $font-family-sans-serif;
-	font-size: 1em;
-	font-weight: bold;
-	color: #332e27;
-}
-label.control-label {
-	margin-top: 0.5em;
-	margin-bottom: 0.5em;
-}
-label.form-control {
-	font-weight: normal;
-}
-label.form-control-label {
-	border: none;
-	-webkit-box-shadow: none;
-	box-shadow: none;
-}
-
 .form-control {
 	border: 1px solid #c8c4bb;
+}
+
+label {
+	&.form-control {
+		font-weight: normal !important;
+	}
 }
 
 .required abbr {

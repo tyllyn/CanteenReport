@@ -12,11 +12,11 @@ $bootstrap-sass-asset-helper: (twbs-font-path("") != unquote('twbs-font-path("")
 //
 //## Gray and brand colors for use across Bootstrap.
 
-$gray-darker:            lighten(#000, 13.5%) !default; // #222
-$gray-dark:              lighten(#000, 20%) !default;   // #333
-$gray:                   lighten(#000, 33.5%) !default; // #555
-$gray-light:             lighten(#000, 46.7%) !default; // #777
-$gray-lighter:           lighten(#000, 93.5%) !default; // #eee
+$gray-darker:            lighten($birch, 0) !default;
+$gray-dark:              lighten($birch, 0) !default;
+$gray:                   lighten($birch, 10%) !default;
+$gray-light:             lighten($birch, 46.7%) !default;
+$gray-lighter:           lighten($birch, 75.0%) !default;
 
 //$brand-primary:         #428bca !default;
 $brand-primary:         $primaryRed !default;
@@ -70,7 +70,7 @@ $line-height-computed:    floor(($font-size-base * $line-height-base)) !default;
 
 //** By default, this inherits from the `<body>`.
 //$headings-font-family:    inherit !default;
-$headings-font-family:    $font-family-serif !default;
+$headings-font-family:    $font-family-sans-serif !default;
 $headings-font-weight:    500 !default;
 $headings-line-height:    1.1 !default;
 $headings-color:          inherit !default;
@@ -153,7 +153,7 @@ $table-border-color:            #ddd !default;
 $btn-font-weight:                normal !default;
 
 $btn-default-color:              $birch !default;
-$btn-default-bg:                 $cararraTan !default;
+$btn-default-bg:                 #fff !default;
 $btn-default-border:             #ccc !default;
 
 $btn-primary-color:              #fff !default;
