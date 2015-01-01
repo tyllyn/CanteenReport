@@ -24,12 +24,12 @@
 			<button id="new-report-button" class="btn btn-primary" alt="New Report">New Report</button>
 		</div>
 
-        <!-- <div class="row open-report">
+        <div class="row open-report">
             <h2>Unsubmitted Reports</h2>
             <a href="javascript:;" class="date glyphicon glyphicon-chevron-right" data-report="289">
                 02/23/2014 01:24:00 PM
             </a>
-        </div> -->
+        </div>
 
     </section>
 
@@ -37,11 +37,11 @@
 
     	<header class="app-header">
     		<h1>Canteen Report</h1>
-    		<button id="btn-sync" class="btn btn-default">
+    		<button id="btn-sync" class="btn btn-default btn-secondary">
                 <div id="sync-spinner"><img src="img/spinner.png" width="20" height="20" /></div>
                 <div id="btn-sync-label">Sync</div>
             </button>
-    		<button id="btn-close" class="btn btn-default">Close</button>
+    		<button id="btn-close" class="btn btn-default btn-secondary">Close</button>
     	</header>
 
     	<div class="left-menu">
@@ -103,8 +103,8 @@
                     			</label>
 
                     			<div class="input-group input-group-lg">
-                    				<input class="form-control" name="incident-start" id="incident-start" type="text" />
-                    				<span class="input-group-addon glyphicon glyphicon-calendar"></span>
+                    				<input class="form-control form-control-date" name="incident-start" id="incident-start" type="datetime-local" />
+                    				<label class="input-group-addon glyphicon glyphicon-calendar" for="incident-start"></label>
                     			</div>
 
                             </div>
@@ -120,8 +120,8 @@
                                 </label>
 
                                 <div class="input-group input-group-lg">
-                                    <input class="form-control" name="incident-start" id="incident-start" type="text" />
-                                    <span class="input-group-addon glyphicon glyphicon-calendar"></span>
+                                    <input class="form-control form-control-date" name="incident-inroute" id="incident-inroute" type="datetime-local" />
+                                    <label class="input-group-addon glyphicon glyphicon-calendar" for="incident-inroute"></label>
                                 </div>
 
                             </div>
@@ -133,8 +133,8 @@
                                 </label>
 
                                 <div class="input-group input-group-lg">
-                                    <input class="form-control" name="incident-start" id="incident-start" type="text" />
-                                    <span class="input-group-addon glyphicon glyphicon-calendar"></span>
+                                    <input class="form-control form-control-date" name="incident-onscene" id="incident-onscene" type="datetime-local" />
+                                    <label class="input-group-addon glyphicon glyphicon-calendar" for="incident-onscene"></label>
                                 </div>
 
                             </div>
@@ -405,7 +405,7 @@
                 		</div>
                         -->
 
-                        <div class="row">
+                        <div class="row canteen-row">
 
                             <div class="col-sm-12">
 
@@ -458,6 +458,7 @@
                 	</fieldset>
 
                 </section>
+
 
                 <!--
                     SERVICES
@@ -937,22 +938,27 @@
 
                     </fieldset>
 
+                </section>
+
+
+                <section id="counseling" class="canteen-well">
+
                     <fieldset>
 
                         <div class="row">
 
                             <div class="col-sm-6">
 
-                            	<h2>Counseling/Prayer</h2>
+                                <h2>Counseling/Prayer</h2>
 
-                            	<div class="form-group">
+                                <div class="form-group">
 
                                     <label class="required control-label minor" for="services-administer">
                                         Administer
                                     </label>
 
                                     <div class="input-group input-group-lg">
-                                    	<input class="input-xlarge form-control" name="services-counseling-administer" id="services-counseling-administer" type="text" />
+                                        <input class="input-xlarge form-control" name="services-counseling-administer" id="services-counseling-administer" type="text" />
                                     </div>
 
                                 </div>
@@ -964,7 +970,7 @@
                                     </label>
 
                                     <div class="input-group input-group-lg">
-                                    	<input class="input-xlarge form-control" name="services-counseling-individual" id="services-counseling-individual" type="text" />
+                                        <input class="input-xlarge form-control" name="services-counseling-individual" id="services-counseling-individual" type="text" />
                                     </div>
 
                                 </div>
@@ -976,7 +982,7 @@
                                     </label>
 
                                     <div class="input-group input-group-lg">
-                                    	<input class="input-xlarge form-control" name="services-counseling-reason" id="services-counseling-reason" type="text" />
+                                        <input class="input-xlarge form-control" name="services-counseling-reason" id="services-counseling-reason" type="text" />
                                     </div>
 
                                 </div>
@@ -988,7 +994,7 @@
                                     </label>
 
                                     <div class="input-group input-group-lg">
-                                    	<input class="input-xlarge form-control" name="services-counseling-phone-number" id="services-counseling-phone-number" type="text" />
+                                        <input class="input-xlarge form-control" name="services-counseling-phone-number" id="services-counseling-phone-number" type="text" />
                                     </div>
 
                                 </div>
@@ -1009,15 +1015,15 @@
 
                     <fieldset>
 
-                        <div class="row">
+                        <div class="row canteen-row">
 
                             <div class="col-sm-12">
 
-                            	<label class="required control-label" for="services-administer">
-                            		Notes
-                            	</label>
+                                <label class="required control-label" for="services-administer">
+                                    Notes
+                                </label>
 
-                            	<textarea class="form-control" rows="3" id="notes" name="notes"></textarea>
+                                <textarea class="form-control" rows="8" id="notes" name="notes"></textarea>
 
                             </div>
 
@@ -1036,7 +1042,7 @@
 
                         <div class="row">
 
-                            <div class="col-sm-8">
+                            <div class="col-sm-6">
 
                         		<div class="form-group">
 
@@ -1045,7 +1051,7 @@
                         			</label>
 
                         			<div class="input-group input-group-lg">
-                        				<input class="form-control" name="end-time" id="end-time" type="text" />
+                        				<input class="form-control form-control-date" name="end-time" id="end-time" type="datetime-local" />
                         				<span class="input-group-addon glyphicon glyphicon-calendar"></span>
                         			</div>
 

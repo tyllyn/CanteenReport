@@ -31,18 +31,6 @@ a:link, a:hover, a:focus {
 }
 
 
-.canteen-well {
-	border-bottom: 2px solid #ecebe8;
-	padding: 1em;
-	@include bp(medium) {
-		padding: 2em;
-	}
-}
-.canteen-well:last-child {
-	padding-top: 2em;
-	border-bottom: none;
-}
-
 .amounts .row {
 	padding: 0.75em 0 0.5em 0;
 }

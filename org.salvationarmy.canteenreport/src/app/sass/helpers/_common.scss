@@ -6,27 +6,60 @@
 	}
 }
 
-h2 {
-	margin-bottom: 0 !important;
+.btn-secondary {
+	background-color: $cararraTan;
 }
 
-label, h2 {
-	font-family: $heading-font !important;
-	font-size: 1.15em !important;
-	font-weight: bold !important;
+h1 {
+	font-family: $default-serif-font;
+}
+
+h2 {
+	margin-bottom: 0;
+}
+
+h2,
+label {
+	font-family: $default-sans-serif-font;
+	font-size: 1.15em;
+	font-weight: bold;
 	&.minor {
-		font-weight: normal !important;
+		font-weight: normal;
 	}
 }
-label.control-label {
+.control-label {
 	margin-top: 0.5em;
-	margin-bottom: 0.5em;
+	margin-bottom: 0.25em;
 }
-label.form-control {
+.form-control {
 	font-weight: normal;
+	&.form-control-label {
+		border: none;
+		-webkit-box-shadow: none;
+		box-shadow: none;
+	}
+	&.form-control-date {
+		width: 240px;
+	}
 }
-label.form-control-label {
-	border: none;
-	-webkit-box-shadow: none;
-	box-shadow: none;
+
+.canteen-well {
+
+	border-bottom: 2px solid #ecebe8;
+	padding: 1em;
+
+	&:last-child {
+		padding-top: 2em;
+		border-bottom: none;
+	}
+
+	@include bp(medium) {
+		padding: 2em;
+	}
+
 }
+
+.canteen-row {
+	margin-top: 2em;
+}
+

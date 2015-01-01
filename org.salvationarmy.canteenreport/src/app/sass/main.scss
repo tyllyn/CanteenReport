@@ -3,11 +3,12 @@
 
 // helpers
 @import "helpers/_variables";
-@import "helpers/_mixins";
-@import "helpers/_common";
 
 // boostrap
 @import "bootstrap/_bootstrap-custom";
+
+@import "helpers/_mixins";
+@import "helpers/_common";
 
 // layout
 @import "layout/_app";
