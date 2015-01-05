@@ -35,7 +35,7 @@
 
     <section id="app">
 
-    	<header class="app-header">
+    	<header id="header" class="app-header">
     		<h1>Canteen Report</h1>
     		<button id="btn-sync" class="btn btn-default btn-secondary">
                 <div id="sync-spinner"><img src="img/spinner.png" width="20" height="20" /></div>
@@ -44,7 +44,7 @@
     		<button id="btn-close" class="btn btn-default btn-secondary">Close</button>
     	</header>
 
-    	<div class="left-menu">
+    	<div id="left-menu" class="left-menu">
     		<ul>
     			<li class="isActive">
     				<a href="#incident" class="glyphicon glyphicon-flag">Incident</a>
@@ -65,7 +65,6 @@
 
     		<!-- WE NEED TO DYNAMICALLY CREATE THE UNIQUE ID FOR THE FORM ON "NEW REPORT" -->
     		<form id="form">
-
 
                 <!-- added in canteenreport.storage -->
                 <input name="incident-id" id="incident-id" type="hidden" />
@@ -1187,15 +1186,6 @@
 	<script src="js/canteenreport.form.js"></script>
 	<script src="js/canteenreport.storage.js"></script>
 	<!-- endbuild -->
-
-	<script>
-		canteenreport.app.initialize();
-	</script>
-
-	<script>
-        // canteenreport.form.initialize();
-        // canteenreport.storage.initialize();
-	</script>
 
 </body>
 </html>

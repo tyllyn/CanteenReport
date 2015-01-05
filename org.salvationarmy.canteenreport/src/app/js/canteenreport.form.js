@@ -6,6 +6,7 @@ canteenreport.form = {
 	focusCallback: null,	// callback for when the form is focused.
 
 	$form: null,
+	$incidentId: null,
 
 	initialize: function (focusCallback) {
 
@@ -28,12 +29,29 @@ canteenreport.form = {
 	},
 
 	/***
+		*
+		*/
+	createNewReport: function (id) {
+
+		if (this.$incidentId === null) {
+			this.$incidentId = $('#incident-id');
+		}
+
+		this.$incidentId.value = id;
+
+		this.reset();
+
+	},
+
+	/***
 	 	* Called when the form focuses. Listener added in initialize.
 	 	*/
 	onfocus: function() {
+
 		if (this.focusCallback != null) {
 			this.focusCallback.call();
 		}
+
 	},
 
 	events: function () {
@@ -155,7 +173,6 @@ canteenreport.form = {
 		*/
 	reset: function () {
 
-		canteenreport.app.log('form.reset');
 		this.$form[0].reset();
 
 	},

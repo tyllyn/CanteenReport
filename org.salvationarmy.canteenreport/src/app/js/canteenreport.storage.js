@@ -4,56 +4,67 @@ canteenreport.storage = {
 
 	apiUrl: 'http://23.239.8.146/backend-code/index.php/canteen/add',
 	store: null,
+	id: '23',
 
 	initialize: function () {
 
 		canteenreport.app.log('storage.initialize');
 
-		var timestamp = function getUniqueTime() {
-		  	var time = new Date().getTime();
-		  	while (time == new Date().getTime());
-		  	return new Date().getTime();
-		}
+		// var timestamp = function getUniqueTime() {
+		//   	var time = new Date().getTime();
+		//   	while (time == new Date().getTime());
+		//   	return new Date().getTime();
+		// }
 
-		var $idField = $('#incident-id');
+		//this.id = $('#incident-id').value();
 
-		var isNewReport = false;
-		var id = $idField.val();
+		console.log('this.id ' + this.id);
+
+		//var isNewReport = false;
+		//var id = $idField.val();
 
 		// if there is no id
-		if (id == '') {
-			isNewReport = true;
-			$idField.val(timestamp);
-		}
+		// if (id == '') {
+		// 	isNewReport = true;
+		// 	$idField.val(timestamp);
+		// }
 
 		// grab or create a new store
-		canteenreport.storage.store = amplify.store('canteenreport') || [];
+		//this.store = amplify.store('canteenreport') || [];
+		this.store = amplify.store(this.id);
+		//this.store.push(this.getFormJSON());
+		//amplify.store(this.id, this.getFormJSON());
 
-		canteenreport.app.log(canteenreport.storage.store);
+		console.log(this.store);
+
 
 		// todo: add edit functionality
 		// if this is a new and unique report, push a new report into the store,
 		// if not, get the store
 
-		if (isNewReport) {
-			var formdata = canteenreport.storage.getFormJSON();
-			canteenreport.storage.store.push(formdata);
-			amplify.store('canteenreport', formdata);
-		}
+		// if (isNewReport) {
+		// 	var formdata = canteenreport.storage.getFormJSON();
+		// 	canteenreport.storage.store.push(formdata);
+		// 	amplify.store('canteenreport', formdata);
+		// }
 
 	},
 
 	resetChanged: function () {
+
 		canteenreport.app.log('storage.resetChanged');
-		amplify.store('canteen.changed', 0);
+		//amplify.store('canteen.changed', 0);
+
 	},
 
 	findReport: function () {
 
+		canteenreport.app.log('storage.findReport');
+
 		var store = canteenreport.storage.store;
 
 		$.each(store, function (index, item) {
-			console.log(item)
+			console.log(item);
 		});
 
 	},
@@ -77,6 +88,8 @@ canteenreport.storage = {
 
 		var unique = 0;
 		var formdata = canteenreport.storage.getFormJSON();
+
+		console.log(formdata);
 
 		// save to the local store
 		//canteenreport.storage.store.push(formdata);
