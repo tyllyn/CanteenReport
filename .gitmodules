@@ -1,0 +1,3 @@
+[submodule "CanteenReportAdmin"]
+	path = CanteenReportAdmin
+	url = https://github.com/eightdotthree/CanteenReportAdmin.git
