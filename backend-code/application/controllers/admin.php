@@ -4,6 +4,10 @@ require(APPPATH.'libraries/REST_Controller.php');
 
 class Admin extends REST_Controller{
 
+	public function index() {
+		$this->view('index');
+	}
+
 	public function view($page = 'index') {
 
 		if (!file_exists(APPPATH . '/views/admin/'.$page.'.php')) {
