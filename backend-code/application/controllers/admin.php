@@ -6,11 +6,27 @@ class Admin extends CI_Controller {
 
 	public function index() { $this->view('index'); }
 	public function login() { $this->view('login'); }
-	public function report() { $this->view('report'); }
+	public function report() {
+
+		$id = $_GET['id'];
+		if (!is_numeric($id)) {
+			$this->view('login');
+			return;
+		}
+
+		$this->load->model('Report');
+		$data['report'] = $this->Report->get_entry($id);
+		$data['reportitems'] = $this->Report->get_entry_items($id);
+		$data['reportmembers'] = $this->Report->get_entry_members($id);
+		$this->load->view('canteen/report',$data);
+
+		$this->view('report', $data);
+
+	}
 	public function reportsearch() { $this->view('reportsearch'); }
 	public function summary() { $this->view('summary'); }
 
-	public function view($page = 'index') {
+	public function view($page = 'index', $data = array()) {
 		
 		if (!file_exists(APPPATH . '/views/admin/'.$page.'.php')) {
 			show_404();
