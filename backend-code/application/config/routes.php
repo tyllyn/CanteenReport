@@ -39,7 +39,8 @@
 */
 
 $route['default_controller'] = "admin";
-$route['404_override'] = '';
+$route['(:any)'] = 'index.php/$1';
+//$route['404_override'] = '';
 
 
 /* End of file routes.php */
