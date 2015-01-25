@@ -1,8 +1,8 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-require(APPPATH.'libraries/REST_Controller.php');
+//require(APPPATH.'libraries/REST_Controller.php');
 
-class Admin extends REST_Controller{
+class Admin extends CI_Controller {
 
 	public function index() {
 		$this->view('index');
