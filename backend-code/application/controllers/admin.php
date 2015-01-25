@@ -7,6 +7,9 @@ class Admin extends CI_Controller {
 	public function index() {
 		$this->view('index');
 	}
+	public function login() {
+		$this->view('login');
+	}
 
 	public function view($page = 'index') {
 

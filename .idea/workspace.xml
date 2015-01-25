@@ -2,9 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c2b1683f-20b3-4984-a5f3-8bc4c1fc0610" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backend-code/img/logo-emergency-disaster-services.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backend-code/css/main.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backend-code/js/main.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/backend-code/application/controllers/admin.php" afterPath="$PROJECT_DIR$/backend-code/application/controllers/admin.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/backend-code/application/views/templates/footer.php" afterPath="$PROJECT_DIR$/backend-code/application/views/templates/footer.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/backend-code/application/views/templates/header.php" afterPath="$PROJECT_DIR$/backend-code/application/views/templates/header.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/backend-code/application/views/admin/index.php" afterPath="$PROJECT_DIR$/backend-code/application/views/admin/index.php" />
@@ -33,21 +31,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="report.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/CanteenReportAdmin/web/site/_files/report.html">
+      <file leaf-file-name="login.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/CanteenReportAdmin/web/site/_files/login.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1972">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="index.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/backend-code/application/views/canteen/index.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-0.0" vertical-offset="0" max-vertical-offset="323">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="37" />
+            <state vertical-scroll-proportion="-28.423077" vertical-offset="434" max-vertical-offset="1275">
+              <caret line="69" column="7" selection-start-line="69" selection-start-column="7" selection-end-line="69" selection-end-column="7" />
               <folding />
             </state>
           </provider>
@@ -76,8 +64,8 @@
       <file leaf-file-name="footer.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/backend-code/application/views/templates/footer.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-0.0" vertical-offset="0" max-vertical-offset="187">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+            <state vertical-scroll-proportion="-1.3076923" vertical-offset="0" max-vertical-offset="187">
+              <caret line="2" column="14" selection-start-line="2" selection-start-column="14" selection-end-line="2" selection-end-column="14" />
               <folding />
             </state>
           </provider>
@@ -98,8 +86,18 @@
       <file leaf-file-name="admin.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/backend-code/application/controllers/admin.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="1.3076923" vertical-offset="51" max-vertical-offset="935">
-              <caret line="1" column="0" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
+            <state vertical-scroll-proportion="-4.576923" vertical-offset="51" max-vertical-offset="986">
+              <caret line="10" column="29" selection-start-line="10" selection-start-column="29" selection-end-line="10" selection-end-column="29" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="login.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/backend-code/application/views/admin/login.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="841">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -115,10 +113,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="index.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="index.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/backend-code/application/views/admin/index.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.09953161" vertical-offset="0" max-vertical-offset="854">
+            <state vertical-scroll-proportion="-3.2692308" vertical-offset="0" max-vertical-offset="187">
               <caret line="5" column="6" selection-start-line="5" selection-start-column="6" selection-end-line="5" selection-end-column="6" />
               <folding>
                 <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
@@ -130,8 +128,8 @@
       <file leaf-file-name="routes.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/backend-code/application/config/routes.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-25.153847" vertical-offset="26" max-vertical-offset="867">
-              <caret line="40" column="37" selection-start-line="40" selection-start-column="37" selection-end-line="40" selection-end-column="37" />
+            <state vertical-scroll-proportion="-25.153847" vertical-offset="60" max-vertical-offset="884">
+              <caret line="42" column="30" selection-start-line="42" selection-start-column="30" selection-end-line="42" selection-end-column="30" />
               <folding />
             </state>
           </provider>
@@ -147,10 +145,11 @@
       <list>
         <option value="$PROJECT_DIR$/backend-code/application/views/canteen/index.php" />
         <option value="$PROJECT_DIR$/backend-code/application/config/routes.php" />
-        <option value="$PROJECT_DIR$/backend-code/application/controllers/admin.php" />
+        <option value="$PROJECT_DIR$/backend-code/application/views/admin/login.php" />
         <option value="$PROJECT_DIR$/backend-code/application/views/templates/header.php" />
         <option value="$PROJECT_DIR$/backend-code/application/views/templates/footer.php" />
         <option value="$PROJECT_DIR$/backend-code/application/views/admin/index.php" />
+        <option value="$PROJECT_DIR$/backend-code/application/controllers/admin.php" />
       </list>
     </option>
   </component>
@@ -350,6 +349,28 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="CanteenReport" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="CanteenReport" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="backend-code" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="application" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="controllers" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
       <pane id="Scope" />
@@ -487,14 +508,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/CanteenReportAdmin/web/site/_files/login.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="408" max-vertical-offset="1275">
-          <caret line="24" column="10" selection-start-line="24" selection-start-column="10" selection-end-line="24" selection-end-column="10" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/CanteenReportAdmin/web/site/_files/report.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1972">
@@ -513,8 +526,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/backend-code/application/config/routes.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-25.153847" vertical-offset="26" max-vertical-offset="867">
-          <caret line="40" column="37" selection-start-line="40" selection-start-column="37" selection-end-line="40" selection-end-column="37" />
+        <state vertical-scroll-proportion="-25.153847" vertical-offset="60" max-vertical-offset="884">
+          <caret line="42" column="30" selection-start-line="42" selection-start-column="30" selection-end-line="42" selection-end-column="30" />
           <folding />
         </state>
       </provider>
@@ -526,14 +539,6 @@
           <folding>
             <element signature="n#add#0;n#Canteen#0;n#!!top" expanded="false" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/backend-code/application/controllers/admin.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="1.3076923" vertical-offset="51" max-vertical-offset="935">
-          <caret line="1" column="0" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -553,6 +558,14 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/CanteenReportAdmin/web/site/_files/login.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-28.423077" vertical-offset="434" max-vertical-offset="1275">
+          <caret line="69" column="7" selection-start-line="69" selection-start-column="7" selection-end-line="69" selection-end-column="7" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/backend-code/application/views/templates/header.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-22.23077" vertical-offset="0" max-vertical-offset="680">
@@ -563,19 +576,35 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/backend-code/application/views/templates/footer.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="880">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        <state vertical-scroll-proportion="-1.3076923" vertical-offset="0" max-vertical-offset="187">
+          <caret line="2" column="14" selection-start-line="2" selection-start-column="14" selection-end-line="2" selection-end-column="14" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/backend-code/application/views/admin/index.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.09953161" vertical-offset="0" max-vertical-offset="854">
+        <state vertical-scroll-proportion="-3.2692308" vertical-offset="0" max-vertical-offset="187">
           <caret line="5" column="6" selection-start-line="5" selection-start-column="6" selection-end-line="5" selection-end-column="6" />
           <folding>
             <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/backend-code/application/controllers/admin.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-4.576923" vertical-offset="51" max-vertical-offset="986">
+          <caret line="10" column="29" selection-start-line="10" selection-start-column="29" selection-end-line="10" selection-end-column="29" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/backend-code/application/views/admin/login.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="867">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>

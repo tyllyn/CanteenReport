@@ -10,7 +10,7 @@
 
 	<title>Emergency Disaster Services - Canteen Report</title>
 
-	<link rel="stylesheet" href="css/main.css">
+	<link rel="stylesheet" href="/css/main.css">
 </head>
 
 <body>
