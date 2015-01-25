@@ -90,7 +90,7 @@ class Report extends CI_Model {
 	function get_entry($id) {
 		$this->db->where('id',$id);
 		$q = $this->db->get('Reports');
-		return $q->result_array()[0];
+		return $q->result_array(); //[0];
 	}
 	
 	function get_entry_items($id) {

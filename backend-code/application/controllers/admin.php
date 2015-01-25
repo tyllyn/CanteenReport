@@ -18,7 +18,7 @@ class Admin extends CI_Controller {
 		$data['report'] = $this->Report->get_entry($id);
 		$data['reportitems'] = $this->Report->get_entry_items($id);
 		$data['reportmembers'] = $this->Report->get_entry_members($id);
-		$this->load->view('canteen/report',$data);
+		//die(var_export($data));
 
 		$this->view('report', $data);
 

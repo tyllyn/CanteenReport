@@ -1,3 +1,12 @@
+<?php 
+	$r = $report;
+	$rm = $reportmembers;
+	function p($report, $key) {
+		echo $report[0][$key];
+	}
+?>
+
+
 <section>
 
     <div class="container-fluid">
@@ -24,8 +33,8 @@
 
                     <ul class="list-group">
                         <li class="list-group-item"><strong>Report Status:</strong> <span class="label label-danger">Active</span></li>
-                        <li class="list-group-item"><strong>Report ID Number:</strong> 001</li>
-                        <li class="list-group-item"><strong>Unit Number:</strong> 001</li>
+                        <li class="list-group-item"><strong>Report ID Number:</strong> <?php p($r,'ID') ?></li>
+                        <li class="list-group-item"><strong>Unit Number:</strong> <?php p($r, 'incident_unit_number') ?></li>
                         <li class="list-group-item"><strong>Dispatch:</strong> 01/01/2015, 9:00am</li>
                         <li class="list-group-item"><strong>In Route:</strong> 01/01/2015, 9:00am</li>
                         <li class="list-group-item"><strong>On the Scene:</strong> 01/01/2015, 9:00am</li>
@@ -41,11 +50,19 @@
                         <h3 class="panel-title">Team</h3>
                     </div>
 
-                    <ul class="list-group">
-                        <li class="list-group-item"><strong>Salvation Army - Driver:</strong> Tom Jones</li>
-                        <li class="list-group-item"><strong>Salvation Army - Team member:</strong> Tina Jones</li>
-                        <li class="list-group-item"><strong>Red Cross Refferal</strong> Tina Jones, 412-431-0000</li>
-                    </ul>
+					<ul class="list-group">
+					<?php 
+					foreach ($rm as $member) {
+						//var_export($member);
+						print <<<EOD
+                        <li class="list-group-item"><strong>Member:</strong> {$member->Name}</li>
+EOD;
+						
+					}
+					?>
+					</ul>
+					
+                    
 
                 </div>
 
