@@ -4,12 +4,11 @@
 
 class Admin extends CI_Controller {
 
-	public function index() {
-		$this->view('index');
-	}
-	public function login() {
-		$this->view('login');
-	}
+	public function index() { $this->view('index'); }
+	public function login() { $this->view('login'); }
+	public function report() { $this->view('report'); }
+	public function reportsearch() { $this->view('reportsearch'); }
+	public function summary() { $this->view('summary'); }
 
 	public function view($page = 'index') {
 		
