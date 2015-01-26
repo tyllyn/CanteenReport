@@ -108,14 +108,14 @@ module.exports = function (grunt) {
         },
         jshint: {
             options: {
-                jshintrc: '.jshintrc'
+                jshintrc: '.jshintrc',
+                node: true
             },
             all: [
                 'Gruntfile.js',
                 '<%= yeoman.app %>/js/{,*/}*.js',
                 '!<%= yeoman.app %>/js/plugins.js',
-                '!<%= yeoman.app %>/js/vendor/*',
-                'test/spec/{,*/}*.js'
+                '!<%= yeoman.app %>/js/vendor/*'
             ]
         },
         mocha: {
@@ -341,8 +341,8 @@ module.exports = function (grunt) {
     ]);
 
     grunt.registerTask('default', [
-        'jshint',
-        'test',
+        //'jshint',
+        //'test',
         'build'
     ]);
 
