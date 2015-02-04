@@ -50,10 +50,10 @@ $active_record = TRUE;
 
 $account_info = include('account_info.php');
 
-$db['default']['hostname'] = $account_info['hostname'];
-$db['default']['username'] = $account_info['username'];
-$db['default']['password'] = $account_info['password'];
-$db['default']['database'] = $account_info['database'];
+$db['default']['hostname'] = $account_info['database']['hostname'];
+$db['default']['username'] = $account_info['database']['username'];
+$db['default']['password'] = $account_info['database']['password'];
+$db['default']['database'] = $account_info['database']['database'];
 $db['default']['dbdriver'] = 'mysql';
 $db['default']['dbprefix'] = '';
 $db['default']['pconnect'] = TRUE;

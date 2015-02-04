@@ -10,11 +10,20 @@ class Canteen extends CI_Controller {
 		$res = $_POST; //json_decode($json);
 		
 		//$data = new array();
-		$items = null;
-		$itemSizes = null;
-		$members = null;
-		$data = null;
+		$items = array();
+		$itemSizes = array();
+		$members = array();
+		$data = array();
 		$id = "";
+		
+		/*
+		
+			$data: Gets inserted into the Reports table
+			$items: Quantity of items handed out (Item ID = key)
+			$itemSizes: Size (cups, gallons...) used for an item entry (Item ID = key)
+			
+		*/
+		
 		foreach ($res as $key => $val) {
 		
 			// hard coding IDs because #yolo
@@ -112,16 +121,28 @@ class Canteen extends CI_Controller {
 			}
 		}
 		
+		// make sure something exists in the array
+		if (!array_key_exists('notes',$data)) {
+			$data['notes'] = '';
+		}
+		
 		$this->load->model('Report');
 		$this->load->model('Item');
 		$this->load->model('Member');
-		if ($id == 0 || !is_numeric($id)) {
+		
+		if ($id == null || $id == 0 || !is_numeric($id)) {
+			
+			// add a new report
 			$reportId = $this->Report->add($data);
+			
 		} else {
+			
+			// update an existing report
 			$this->Report->update($id, $data);
 			$reportId = $id;
 			$this->Item->delete_report_links($reportId);
 			$this->Member->delete_report_links($reportId);
+			
 		}
 		
 		if ($items != null) {
