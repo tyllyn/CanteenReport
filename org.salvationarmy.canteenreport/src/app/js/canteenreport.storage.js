@@ -5,7 +5,7 @@
 	var initialized = false;
 
 	var store;
-	var apiUrl = 'http://23.239.8.146/backend-code/index.php/canteen/add';
+	var apiUrl = 'http://72.22.29.60/Canteen/add';
 	var id = '23';
 
 	var storage = canteenreport.storage = function () {
@@ -14,7 +14,7 @@
 
 	storage.newReport = function () {
 
-		console.log(canteenreport.BACKUP_STORE_NAME)
+		console.log(canteenreport.BACKUP_STORE_NAME);
 
 		amplify.store(canteenreport.ACTIVE_REPORT_STORE_NAME, {});
 

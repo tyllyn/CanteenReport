@@ -9,7 +9,7 @@
 
 	<link rel="stylesheet" href="css/main.css">
 </head>
-<body>
+<body style="position: relative">
 
 	<section id="start" class="container start">
 
@@ -24,9 +24,8 @@
 
         <div class="row open-report">
             <h2>Unsubmitted Reports</h2>
-            <a href="javascript:;" class="date glyphicon glyphicon-chevron-right" data-report="289">
-                02/23/2014 01:24:00 PM
-            </a>
+            <div id="js-saved-reports" class="saved-reports">
+            </div>
         </div>
 
     </section>
@@ -43,8 +42,8 @@
     	</header>
 
     	<div id="left-menu" class="left-menu">
-    		<ul>
-    			<li class="isActive">
+    		<ul class="nav">
+    			<li class="active">
     				<a href="#incident" class="glyphicon glyphicon-flag">Incident</a>
     			</li>
     			<li>
@@ -362,45 +361,44 @@
 
                         <div class="row">
 
-                            <div class="col-sm-8">
+                            <div id="js-team" class="col-sm-8">
 
-                                <h2>Salvation Army Team</h2>
+                                <label>Salvation Army Team</label>
 
-                        		<div class="form-group">
+                        		<!-- <div class="form-group">
 
                                     <label class="required control-label minor" for="incident-driver">
                                         Driver<abbr title="required">*</abbr>
                                     </label>
 
                         			<div class="input-group input-group-lg">
-                        				<input class="form-control" name="team-driver" id="team-driver" type="text">
+                        				<input class="form-control" name="team-member" id="team-member" type="text" />
                         			</div>
 
-                        		</div>
+                        		</div> -->
 
-                                <button class="btn btn-primary">
+                                <div id="js-team-members" class="form-group members-group">
+
+                                    <div class="input-group input-group-lg team-member team-member-1">
+                                        <input class="form-control" placeholder="Staff/Volunteer (Optional)" name="team-member" id="team-member-1" type="text">
+                                        <span class="input-group-btn js-remove-member-container">
+                                            <button class="btn btn-primary glyphicon glyphicon-minus js-remove-member" type="button"></button>
+                                        </span>
+                                        <span class="input-group-btn js-add-member-container">
+                                            <button class="btn btn-primary glyphicon glyphicon-plus js-add-member" type="button"></button>
+                                        </span>
+                                    </div>
+
+                                </div>
+
+                                <!-- <button id="js-add-member-btn" class="btn btn-primary">
                                     Add Team Member
-                                </button>
+                                </button> -->
 
                             </div>
 
                         </div>
 
-                        <!--
-                		<div class="form-group members-group">
-
-                			<div class="input-group input-group-lg team-member team-member-1">
-                				<input class="form-control" placeholder="Staff/Volunteer (Optional)" name="team-member" id="team-member-1" type="text" />
-                				<span class="input-group-btn js-remove-member-container">
-                					<button class="btn btn-primary glyphicon glyphicon-minus js-remove-member" type="button"></button>
-                				</span>
-                				<span class="input-group-btn js-add-member-container">
-                					<button class="btn btn-primary glyphicon glyphicon-plus js-add-member" type="button"></button>
-                				</span>
-                			</div>
-
-                		</div>
-                        -->
 
                         <div class="row canteen-row">
 
