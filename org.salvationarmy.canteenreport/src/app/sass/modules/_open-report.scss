@@ -1,13 +1,11 @@
 .open-report {
 
 	background: #fff;
-
 	text-align: left;
-
 	border: solid 1px $silverRust;
-
 	margin: 4em auto 1em;
 	max-width: 300px;
+	//display: none;
 
 	h2 {
 		border-bottom: solid 1px $silverRust;
@@ -18,11 +16,9 @@
 	}
 
 	a {
+		background: transparent;
+		padding: 15px 15px;
 		display: block;
-		padding: 15px 10px;
-		&:hover {
-			text-decoration: none;
-		}
 		&:before {
 			content: none;
 		}
@@ -31,6 +27,11 @@
 			position: absolute;
 			right: 10px;
 		}
+	}
+
+	.saved-reports {
+		height: 200px;
+		overflow-y: scroll;
 	}
 
 }
