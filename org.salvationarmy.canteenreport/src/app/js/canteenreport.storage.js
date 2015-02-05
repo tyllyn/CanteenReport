@@ -1,224 +1,289 @@
-var canteenreport = canteenreport || {};
+(function( canteenreport, undefined) {
 
-canteenreport.storage = {
+	'use strict';
 
-	apiUrl: 'http://23.239.8.146/backend-code/index.php/canteen/add',
-	store: null,
-	id: '23',
+	var initialized = false;
 
-	initialize: function () {
+	var store;
+	var apiUrl = 'http://23.239.8.146/backend-code/index.php/canteen/add';
+	var id = '23';
 
-		canteenreport.app.log('storage.initialize');
+	var storage = canteenreport.storage = function () {
+		return;
+	}
 
-		// var timestamp = function getUniqueTime() {
-		//   	var time = new Date().getTime();
-		//   	while (time == new Date().getTime());
-		//   	return new Date().getTime();
-		// }
+	storage.newReport = function () {
 
-		//this.id = $('#incident-id').value();
+		console.log(canteenreport.BACKUP_STORE_NAME)
 
-		console.log('this.id ' + this.id);
+		amplify.store(canteenreport.ACTIVE_REPORT_STORE_NAME, {});
 
-		//var isNewReport = false;
-		//var id = $idField.val();
+	}
 
-		// if there is no id
-		// if (id == '') {
-		// 	isNewReport = true;
-		// 	$idField.val(timestamp);
-		// }
+	/**
+	 * Syncs the form on demand or when the form is focused or blurred
+	 */
+	storage.syncReport = function () {
 
-		// grab or create a new store
-		//this.store = amplify.store('canteenreport') || [];
-		this.store = amplify.store(this.id);
-		//this.store.push(this.getFormJSON());
-		//amplify.store(this.id, this.getFormJSON());
+		var formValues = $('#form').serializeArray();
+        var formValuesJSON = JSON.parse(JSON.stringify(formValues));
 
-		console.log(this.store);
+		console.group('storage.syncReport');
+        console.log(formValuesJSON);
+        console.groupEnd();
 
+        amplify.store(canteenreport.ACTIVE_REPORT_STORE_NAME, formValuesJSON);
+        amplify.publish('report-saved');
 
-		// todo: add edit functionality
-		// if this is a new and unique report, push a new report into the store,
-		// if not, get the store
+	}
 
-		// if (isNewReport) {
-		// 	var formdata = canteenreport.storage.getFormJSON();
-		// 	canteenreport.storage.store.push(formdata);
-		// 	amplify.store('canteenreport', formdata);
-		// }
+	/**
+	 * Saves the report.
+	 */
+	storage.saveReport = function () {
 
-	},
+		console.group('saveReport');
+		backupReport();
+		console.groupEnd();
 
-	resetChanged: function () {
+	}
 
-		canteenreport.app.log('storage.resetChanged');
-		//amplify.store('canteen.changed', 0);
+	/**
+	 * Called when the report is closed before submitting.
+     */
+    function backupReport () {
 
-	},
+    	console.group('backupReport');
 
-	findReport: function () {
+        var formStore = amplify.store(canteenreport.ACTIVE_REPORT_STORE_NAME);
+        var formBackupStore = amplify.store(canteenreport.BACKUP_STORE_NAME);
+        var formBackupArray = [];
+        var formBackupJSON;
 
-		canteenreport.app.log('storage.findReport');
+        var formId = $('#incident-id').val();
+        var isBackedUp = typeof storage.findBackupFormById(formId) !== 'undefined' ? true : false;
 
-		var store = canteenreport.storage.store;
+        console.info('incident-id: ' + formId);
 
-		$.each(store, function (index, item) {
-			console.log(item);
-		});
+        if (typeof formBackupStore !== 'undefined') {
+            formBackupArray = formBackupStore;
+        }
 
-	},
+        if (isBackedUp == true) {
 
-	/*
-	doSave: function () {
+            console.info('this report already exists. replace its backup.');
 
-		var s = this;
-		s.intv = setInterval(function () {
-			if (amplify.store('canteen.changed') == 1 && s.isOnline()) {
-				s.saveForm();
-			}
-		}, 5000);
+            var index = storage.findBackupFormIndexById(formId);
+            formBackupArray[index] = formStore;
 
-	},
-	*/
+        } else {
 
-	syncForm: function () {
+            console.info('this report has not been backed up yet.');
+            formBackupArray.push(formStore);
 
-		canteenreport.app.log('storage.syncForm');
+        }
 
-		var unique = 0;
-		var formdata = canteenreport.storage.getFormJSON();
+        console.log(formBackupArray);
 
-		console.log(formdata);
+        amplify.store(canteenreport.BACKUP_STORE_NAME, formBackupArray);
 
-		// save to the local store
-		//canteenreport.storage.store.push(formdata);
+        console.groupEnd();
 
-		// save to the a
-		amplify.store('canteenreport', canteenreport.storage.store);
+    }
 
-		amplify.publish('canteenreport-saved');
+	/**
+     * Will find a backed up form by its ID
+     */
+    storage.findBackupFormById = function (id) {
 
-		// amplify.request('pushData', { employees: amplify.store('employees') }, function (data) {
-		// 	amplify.publish('employee-data-pushed', data);
-		// });
+    	console.group('storage.findBackupFormById: ' + id);
 
-		// amplify.publish('employee-created', employee);
+        var formBackupStore = amplify.store(canteenreport.BACKUP_STORE_NAME);
+        var formBackup;
 
-		/*
-		var unique = $('#form').attr('data-unique');
+        console.log(formBackupStore);
 
-		if (amplify.store(unique) !== null) {
+        if (formBackupStore != null) {
+	        $.each(formBackupStore, function (index, value) {
+	            var backedUpFormId = value[0].value;
+	            if (backedUpFormId == id) {
+	                formBackup = value;
+	                return;
+	            }
+	        });
+	    }
 
-			this.data.report[unique] = amplify.store(unique);
+	    console.groupEnd();
 
-			for (var key in this.data.report[unique]) {
-				if (this.data.report[unique].hasOwnProperty(key)) {
-					this.field(this.data.report[unique][key].name, this.data.report[unique][key].value);
-				}
-			}
+        return formBackup;
 
-		}
-		*/
+    }
 
-	},
+    storage.findBackupFormIndexById = function (id) {
 
-	/*
-	saveForm: function () {
+        var formBackupStore = amplify.store(canteenreport.BACKUP_STORE_NAME);
+        var backupIndex;
 
-		canteenreport.app.log('storage.saveForm');
+        $.each(formBackupStore, function (index, value) {
+            var backedUpFormId = value[0].value;
+            if (backedUpFormId == id) {
+                backupIndex = index;
+                return;
+            }
+        });
 
-		var unique = 0,
-			formdata = this.getFormJSON();
+        return backupIndex;
 
-		console.log(formdata)
+    }
 
-		if ($('#form').attr('data-unique') != null) {
+	// canteenreport.storage = {
 
-			unique = $('#form').attr('data-unique');
+	// 	initialize: function () {
 
-			if ($('#id').length == 0 || $('#id').val() != unique) {
-				$('#id').remove();
-				$('<input />')
-					.attr('type', 'hidden')
-					.attr('id', 'id')
-					.attr('name', 'id')
-					.val(unique)
-					.appendTo($('#form'));
-			}
+	// 		canteenreport.log('storage.initialize');
 
-			// if (unique == 0) {
-			// 	// Save
-			// 	this.save(formdata, true);
-			// } else {
-			// 	// Save
-			// 	this.save(formdata, false);
-			// }
+	// 		// var timestamp = function getUniqueTime() {
+	// 		//   	var time = new Date().getTime();
+	// 		//   	while (time == new Date().getTime());
+	// 		//   	return new Date().getTime();
+	// 		// }
 
-		} else {
+	// 		//this.id = $('#incident-id').value();
 
-			// Save and Initilize
-			this.save(formdata, true);
+	// 		console.log('this.id ' + this.id);
 
-		}
+	// 		//var isNewReport = false;
+	// 		//var id = $idField.val();
 
-		// amplify.store(unique, null);
+	// 		// if there is no id
+	// 		// if (id == '') {
+	// 		// 	isNewReport = true;
+	// 		// 	$idField.val(timestamp);
+	// 		// }
 
-	},
-	*/
+	// 		// grab or create a new store
+	// 		//this.store = amplify.store('canteenreport') || [];
+	// 		this.store = amplify.store(this.id);
+	// 		//this.store.push(this.getFormJSON());
+	// 		//amplify.store(this.id, this.getFormJSON());
 
-	// save: function (data, init) {
+	// 		console.log(this.store);
 
-	// 	canteenreport.app.log('storage.save');
 
-	// 	var id,
-	// 		msg
-	// 		s = this;
+	// 		// todo: add edit functionality
+	// 		// if this is a new and unique report, push a new report into the store,
+	// 		// if not, get the store
 
-	// 	if (s.isOnline()) {
+	// 		// if (isNewReport) {
+	// 		// 	var formdata = canteenreport.storage.getFormJSON();
+	// 		// 	canteenreport.storage.store.push(formdata);
+	// 		// 	amplify.store('canteenreport', formdata);
+	// 		// }
 
-	// 		$.ajax({
-	// 			url: 'http://23.239.8.146/backend-code/index.php/canteen/add',
-	// 			type: 'POST',
-	// 			data: data,
-	// 			dataType: 'text',
-	// 			success: function (res, status, xhr) {
+	// 	},
 
-	// 				// console.log("I am here");
+	// 	resetChanged: function () {
 
-	// 				var result = res.split(':');
+	// 		canteenreport.log('storage.resetChanged');
+	// 		//amplify.store('canteen.changed', 0);
 
-	// 				msg = result[0];
-	// 				id = result[1];
+	// 	},
 
-	// 				// console.log(result, msg, id);
-	// 				// console.log('ajaxed');
+	// 	findReport: function () {
 
-	// 				if ("success" == msg) {
+	// 		canteenreport.log('storage.findReport');
 
-	// 					// console.log('successful');
+	// 		var store = canteenreport.storage.store;
 
-	// 					if (init) {
+	// 		$.each(store, function (index, item) {
+	// 			console.log(item);
+	// 		});
 
-	// 						// console.log('making input');
+	// 	},
 
-	// 						s.setupIDandDate(id);
+	// 	syncForm: function () {
 
-	// 						$('#form').attr('data-unique', id);
+	// 		canteenreport.log('storage.syncForm');
 
-	// 						amplify.store('active', id);
-	// 						amplify.store(0, null);
+	// 		var unique = 0;
+	// 		var formdata = canteenreport.storage.getFormJSON();
+
+	// 		console.log(formdata);
+
+	// 		// save to the local store
+	// 		//canteenreport.storage.store.push(formdata);
+
+	// 		// save to the a
+	// 		amplify.store('canteenreport', canteenreport.storage.store);
+
+	// 		amplify.publish('canteenreport-saved');
+
+	// 	},
+
+	// 	save: function (data, init) {
+
+	// 		canteenreport.log('storage.save');
+
+	// 		var id,
+	// 			msg
+	// 			s = this;
+
+	// 		if (s.isOnline()) {
+
+	// 			$.ajax({
+	// 				url: 'http://23.239.8.146/backend-code/index.php/canteen/add',
+	// 				type: 'POST',
+	// 				data: data,
+	// 				dataType: 'text',
+	// 				success: function (res, status, xhr) {
+
+	// 					// console.log("I am here");
+
+	// 					var result = res.split(':');
+
+	// 					msg = result[0];
+	// 					id = result[1];
+
+	// 					// console.log(result, msg, id);
+	// 					// console.log('ajaxed');
+
+	// 					if ("success" == msg) {
+
+	// 						// console.log('successful');
+
+	// 						if (init) {
+
+	// 							// console.log('making input');
+
+	// 							s.setupIDandDate(id);
+
+	// 							$('#form').attr('data-unique', id);
+
+	// 							amplify.store('active', id);
+	// 							amplify.store(0, null);
+	// 						}
+
+	// 						// console.log('resetting?');
+	// 						s.resetChanged();
+
 	// 					}
-
-	// 					// console.log('resetting?');
-	// 					s.resetChanged();
-
+	// 				},
+	// 				error: function (a, b, c) {
+	// 					console.log(a, b, c);
 	// 				}
-	// 			},
-	// 			error: function (a, b, c) {
-	// 				console.log(a, b, c);
-	// 			}
-	// 		}).done(function () {
+	// 			}).done(function () {
+
+	// 				data = s.getFormJSON();
+
+	// 				// console.log("amplify", id, data);
+
+	// 				amplify.store(id, data);
+
+	// 			});
+
+	// 		} else {
+
+	// 			id = $('#form').attr('data-unique');
 
 	// 			data = s.getFormJSON();
 
@@ -226,149 +291,139 @@ canteenreport.storage = {
 
 	// 			amplify.store(id, data);
 
-	// 		});
+	// 		}
 
-	// 	} else {
+	// 	},
 
-	// 		id = $('#form').attr('data-unique');
+	// 	setupIDandDate: function (id) {
 
-	// 		data = s.getFormJSON();
+	// 		canteenreport.log('storage.setupIDandDate');
 
-	// 		// console.log("amplify", id, data);
+	// 		$('<input />')
+	// 			.attr('type', 'hidden')
+	// 			.attr('id', 'id')
+	// 			.attr('name', 'id')
+	// 			.val(id)
+	// 			.appendTo($('#form'));
 
-	// 		amplify.store(id, data);
+	// 		var date = new Date();
 
+	// 		$('<input />')
+	// 			.attr('type', 'hidden')
+	// 			.attr('id', 'date')
+	// 			.attr('name', 'date')
+	// 			.val(date.getTime())
+	// 			.appendTo($('#form'));
+
+	// 	},
+
+	// 	field: function (id, value) {
+
+	// 		if (id != null) {
+
+	// 			var $field = $('#' + id);
+
+	// 			if ($field.length == 0) {
+
+	// 				if (id.indexOf('team-member') != -1) {
+	// 					if (id != 'team-member-1') {
+	// 						var d = id.split('-');
+	// 						canteenreport.form.addNewMember(d[2], value);
+	// 					}
+	// 				}
+
+	// 			}
+
+	// 			// Text field
+	// 			if ($field.is('textarea')) {
+
+	// 				if ($field.val() !== value) {
+	// 					$field.val(value);
+	// 				}
+
+	// 			}
+
+	// 			// Text field
+	// 			if ($field.is('input[type=text]')) {
+
+	// 				if ($field.attr('id').indexOf('team-member') != -1) {
+	// 					if ($field.attr('id') != 'team-member-1') {
+	// 						var id = $field.attr('id').split('-');
+
+	// 						// console.log('ATTEMPTING TO ADD MEMBER', id[2], value);
+
+	// 						canteenreport.form.addNewMember(id[2], value);
+	// 					} else {
+	// 						if ($field.val() !== value) {
+	// 							$field.val(value);
+	// 						}
+	// 					}
+	// 				} else {
+
+	// 					// console.log($field.val(), value);
+	// 					if ($field.val() !== value) {
+	// 						$field.val(value);
+	// 					}
+
+	// 				}
+
+	// 			}
+
+	// 			// Number field
+	// 			if ($field.is('input[type=number]')) {
+
+	// 				if ($field.val() !== value) {
+	// 					$field.val(value);
+	// 				}
+
+	// 			}
+
+	// 			// Checkbox
+	// 			if ($field.is('input[type=checkbox]')) {
+
+	// 				if ($field.attr('checked') !== 'checked') {
+	// 					$field.attr('checked', 'checked');
+	// 				}
+
+	// 			}
+
+	// 			// Select
+	// 			if ($field.is('select')) {
+
+	// 				if ($field.val() !== value) {
+	// 					$field.val(value);
+	// 				}
+
+	// 			}
+
+	// 			// DateTime
+	// 			if ($field.is('input[type=datetime-local]')) {
+
+	// 				if ($field.val() !== value) {
+	// 					$field.val(value);
+	// 				}
+
+	// 			}
+
+	// 		}
+	// 	},
+
+	// 	getFormJSON: function () {
+	// 		return JSON.parse(JSON.stringify($('#form').serializeArray()));
+	// 	},
+
+	// 	// getFormJSONString: function () {
+	// 	// 	return JSON.stringify($('#form').serializeArray());
+	// 	// },
+
+	// 	isOnline: function () {
+	// 		return navigator.onLine;
+	// 	},
+
+	// 	data: {
+	// 		report: []
 	// 	}
 
-	// },
+	// }
 
-	setupIDandDate: function (id) {
-
-		canteenreport.app.log('storage.setupIDandDate');
-
-		$('<input />')
-			.attr('type', 'hidden')
-			.attr('id', 'id')
-			.attr('name', 'id')
-			.val(id)
-			.appendTo($('#form'));
-
-		var date = new Date();
-
-		$('<input />')
-			.attr('type', 'hidden')
-			.attr('id', 'date')
-			.attr('name', 'date')
-			.val(date.getTime())
-			.appendTo($('#form'));
-
-	},
-
-	field: function (id, value) {
-
-		if (id != null) {
-
-			var $field = $('#' + id);
-
-			if ($field.length == 0) {
-
-				if (id.indexOf('team-member') != -1) {
-					if (id != 'team-member-1') {
-						var d = id.split('-');
-						canteenreport.form.addNewMember(d[2], value);
-					}
-				}
-
-			}
-
-			// Text field
-			if ($field.is('textarea')) {
-
-				if ($field.val() !== value) {
-					$field.val(value);
-				}
-
-			}
-
-			// Text field
-			if ($field.is('input[type=text]')) {
-
-				if ($field.attr('id').indexOf('team-member') != -1) {
-					if ($field.attr('id') != 'team-member-1') {
-						var id = $field.attr('id').split('-');
-
-						// console.log('ATTEMPTING TO ADD MEMBER', id[2], value);
-
-						canteenreport.form.addNewMember(id[2], value);
-					} else {
-						if ($field.val() !== value) {
-							$field.val(value);
-						}
-					}
-				} else {
-
-					// console.log($field.val(), value);
-					if ($field.val() !== value) {
-						$field.val(value);
-					}
-
-				}
-
-			}
-
-			// Number field
-			if ($field.is('input[type=number]')) {
-
-				if ($field.val() !== value) {
-					$field.val(value);
-				}
-
-			}
-
-			// Checkbox
-			if ($field.is('input[type=checkbox]')) {
-
-				if ($field.attr('checked') !== 'checked') {
-					$field.attr('checked', 'checked');
-				}
-
-			}
-
-			// Select
-			if ($field.is('select')) {
-
-				if ($field.val() !== value) {
-					$field.val(value);
-				}
-
-			}
-
-			// DateTime
-			if ($field.is('input[type=datetime-local]')) {
-
-				if ($field.val() !== value) {
-					$field.val(value);
-				}
-
-			}
-
-		}
-	},
-
-	getFormJSON: function () {
-		return JSON.parse(JSON.stringify($('#form').serializeArray()));
-	},
-
-	// getFormJSONString: function () {
-	// 	return JSON.stringify($('#form').serializeArray());
-	// },
-
-	isOnline: function () {
-		return navigator.onLine;
-	},
-
-	data: {
-		report: []
-	}
-
-}
+}( canteenreport, jQuery ));

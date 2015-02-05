@@ -1,241 +1,379 @@
-var canteenreport = canteenreport || {};
+(function( global, undefined ) {
 
-canteenreport.app = {
+  var slice = [].slice,
+    subscriptions = {};
 
-	debug: true,
+  var canteenreport = global.canteenreport = {
 
-	isOnline: false,
-  isSyncing: false,
-  formInitialized: false,
+  	debug: true,
 
-  form: null,
+    // save some constants
+    BACKUP_STORE_NAME: 'canteenReportBackupStore',
+    ACTIVE_REPORT_STORE_NAME: 'canteenReportActiveStore',
+    HOME_SCREEN: 'home',
+    INPUT_SCREEN: 'form',
 
-  $body: null,
-	$syncBtn: null,
-	$closeBtn: null,
-  $newReportButton: null,
-  $leftMenu: null,
-  $leftMenuItems: null,
-  $scrollItems: null,
+  	isOnline: false,
+    isSyncing: false,
 
-	initialize: function() {
+    //form: null,
 
-		// Cache selectors
-    var topMenu = $("header"),
-    	topMenuHeight = 84;
+    // cached selectors
+    $body: null,
+    $newReportButton: null,
+    $syncBtn: null,
+    $closeBtn: null,
+    $leftMenu: null,
+    $leftMenuItems: null,
 
+  	initialize: function() {
 
-		this.isOnline = navigator.onLine;
+      this.$body = $('body');
 
-    this.$body = $('body');
+      // setup bootstrap's scrollSpy
+      this.$body.scrollspy(
+        {
+          target: '#left-menu',
+          offset: 170
+        }
+      );
 
-    //this.$menuItems = $('.left-menu').find("a"),
-    // this.$scrollItems = menuItems.map(function () {
-    //     var item = $($(this).attr("href"));
-    //     if (item.length) { return item; }
-    //   });
+      // listens for Cordova's onDeviceReady event
+      document.addEventListener('deviceready', this.onDeviceReady, false);
 
-    // Bind to scroll
-    // $(window).scroll(function(){
-
-    //    // Get container scroll position
-    //    var fromTop = $(this).scrollTop() + topMenuHeight;
-
-    //    // Get id of current scroll item
-    //    var cur = scrollItems.map(function(){
-    //    	if ($(this).offset().top < fromTop)
-    //    		return this;
-    //    });
-    //    cur = cur[cur.length-1];
-
-    //    var id = cur && cur.length ? cur[0].id : "";
-    //    // Set/remove active class
-    //    menuItems
-    //    	.parent().removeClass("isActive")
-    //    	.end().filter("[href=#"+id+"]").parent().addClass("isActive");
-
-    // });
-
-    document.addEventListener('deviceready', this.onDeviceReady, false);
-    window.addEventListener('offline', this.goOffline);
-		window.addEventListener('online', this.goOnline);
-
-    // creates a new report
-    this.$newReportButton = $('#new-report-button').on('touchend', $.proxy(this.newReport, this));
-
-    // close the open report
-    this.$closeBtn = $('#btn-close').on('touchend', $.proxy(this.closeReport, this));
-
-    // sync the report
-    this.$syncBtn = $('#btn-sync').on('touchend', $.proxy(this.saveReport, this));
-
-    amplify.subscribe('canteenreport-saved', $.proxy(this.reportSaved, this));
-
-	},
-
-
-  /***
-    * Creates a new Canteen Report
-    */
-  newReport: function () {
-
-    canteenreport.app.log('newReport');
-
-    $('#start').hide();
-    $('#app').show();
-
-    var newReportId = new Date().getTime();
-
-    if (!canteenreport.form.initialized) {
-
-      // cache the leftMenu
-      this.$leftMenu = $('#left-menu');
+      // watch for on and offline notifications
+      window.addEventListener('offline', this.goOffline);
+  		window.addEventListener('online', this.goOnline);
 
       // setup the left menu
+      this.$leftMenu = $('#left-menu');
       this.$leftMenuItems = this.$leftMenu.find('a').on('touchend', $.proxy(this.scrollToSection, this));
 
-      // initialize the form
-      canteenreport.form.initialize(canteenreport.app.formFocused);
+      // on touchend this creates a new report
+      this.$newReportButton = $('#new-report-button').on('touchend', $.proxy(this.newReport, this));
 
-    }
+      // closes an open report
+      this.$closeBtn = $('#btn-close').on('touchend', $.proxy(this.closeReport, this));
 
-    canteenreport.form.createNewReport(newReportId);
-    canteenreport.storage.initialize();
+      // syncs the report
+      this.$syncBtn = $('#btn-sync').on('touchend', $.proxy(this.saveReport, this));
 
-    // todo
-    //amplify.store('active', '0');
+      // subscribe to amplify events
+      amplify.subscribe('report-saved', $.proxy(this.reportSaved, this));
 
-    $('#form').attr('unique', 0);
+      // canteen report event subscriptions
+      canteenreport.subscribe('form-focused', $.proxy(this.formFocused, this));
 
-  },
+      this.listUnsubmittedReports();
 
+  	},
 
-  scrollToSection: function (event) {
+    /**
+     * lists the forms that ahve been saved to local storage
+     */
+    listUnsubmittedReports: function () {
 
-    var id = $(event.currentTarget).attr('href');
+      console.group('listUnsubmittedReports');
 
-    if (id.length) {
-      $('html, body').animate({
-        scrollTop: $(id).offset().top - 70
-      });
-    }
+      var formBackupStore = amplify.store(canteenreport.BACKUP_STORE_NAME);
+      var $savedFormsList = $('#js-saved-reports').empty();
 
-    event.preventDefault();
+      console.log(formBackupStore);
 
-  },
+      if (formBackupStore != undefined) {
 
+        $.each(formBackupStore, function (index, value) {
+          var id = value[0].value;
+          $savedFormsList.append('<a class="js-open-saved-form-btn date glyphicon glyphicon-chevron-right" data-id="' + id + '">' + id + '</a>');
+        });
 
-  openReport: function () {
-
-  },
-
-
-  /***
-    * Closes the current form.
-    */
-  closeReport: function () {
-
-    this.$leftMenuItems.parent().removeClass("isActive").end().filter("[href=#incident]").parent().addClass("isActive");
-
-    $('#start').show();
-    $('#app').hide();
-
-  },
-
-
-  /***
-    * Callback for the form focus listener. Assigned in initialize.
-    */
-  formFocused: function () {
-
-    canteenreport.app.saveReport();
-
-  },
-
-  /***
-    * Callback from Amplify
-    */
-  reportSaved: function () {
-
-    canteenreport.app.log('canteenreport.app.savedForm');
-
-    this.isSyncing = false;
-
-    var scope = this;
-
-    // this allows the sync animation to run its course before stopping
-    setTimeout(function(){
-      if (!scope.isSyncing) {
-        scope.$body.removeClass('is-syncing');
       }
-    }, 3000);
 
-  },
+      $('.js-open-saved-form-btn').on('click', $.proxy(this.openReport, this));
+
+      console.groupEnd();
+
+    },
+
+    /**
+     * Creates a new Canteen Report
+     */
+    newReport: function () {
+
+      var newReportId = new Date().getTime();
+
+      this.changeScreen(this.INPUT_SCREEN);
+
+      canteenreport.storage.newReport();
+      canteenreport.form.newReport(newReportId);
+
+    },
 
 
-  /***
-   * Save function for the app. Called from formFocused and from $syncBtn.
-   */
-  saveReport: function () {
+    openReport: function (event) {
 
-    canteenreport.app.log('canteenreport.app.saveForm');
+      var id = $(event.currentTarget).data().id;
 
-    this.isSyncing = true;
-    this.$body.addClass('is-syncing');
-    canteenreport.storage.syncForm();
+      console.group('openReport');
+      console.log('id: ' + id);
 
-  },
+      var report = canteenreport.storage.findBackupFormById(id);
+      canteenreport.form.openReport(report);
+
+      this.changeScreen(this.INPUT_SCREEN);
+
+      console.groupEnd();
+
+      return false;
+
+    },
+
+    /***
+     * Closes the current form.
+     */
+    closeReport: function () {
+
+      console.group('closeReport');
+
+      var confirmation = window.confirm('This report will be saved for you to edit later.');
+
+      if (confirmation === true) {
+        canteenreport.storage.saveReport();
+      }
+
+      this.$leftMenuItems.parent().removeClass("isActive").end().filter("[href=#incident]").parent().addClass("isActive");
+
+      this.listUnsubmittedReports();
+      this.changeScreen(this.HOME_SCREEN);
+
+      console.groupEnd();
+
+    },
 
 
-  /***
-   * deviceready Event Handler
-   *
-   * The scope of 'this' is the event. In order to call the 'receivedEvent'
-   * function, we must explicity call 'app.receivedEvent(...);'
-   */
-  onDeviceReady: function() {
+    /**
+     * Callback for the form focus listener. Assigned in initialize.
+     */
+    formFocused: function () {
 
-   	app.receivedEvent('deviceready');
+      canteenreport.saveReport();
 
-  },
+    },
 
-  /** Update DOM on a Received Event */
-  receivedEvent: function(id) {
 
-  	canteenreport.log('receivedEvent');
+    /**
+     * Save function for the app. Called from formFocused and from $syncBtn.
+     */
+    saveReport: function () {
 
-   	var parentElement = document.getElementById(id);
-   	var listeningElement = parentElement.querySelector('.listening');
-   	var receivedElement = parentElement.querySelector('.received');
+      this.isSyncing = true;
+      this.$body.addClass('is-syncing');
 
-   	listeningElement.setAttribute('style', 'display:none;');
-   	receivedElement.setAttribute('style', 'display:block;');
+      canteenreport.storage.syncReport();
 
-  },
+    },
 
-  goOffline: function () {
-		canteenreport.app.log('goOffline');
-		this.isOnline = false;
-	},
+    /**
+     * Callback from Amplify
+     */
+    reportSaved: function () {
 
-	goOnline: function () {
-		canteenreport.app.log('goOnline');
-		this.isOnline = true;
-	},
+      console.info('reportSaved');
 
-  /**
-   * Log a message if debug is true
-   */
-  log: function (message) {
+      this.isSyncing = false;
 
-   	if (this.debug) {
-   		console.log(message);
-   	}
+      var scope = canteenreport;
 
-  }
+      // this allows the sync animation to run its course before stopping
+      setTimeout(function(){
+        if (!canteenreport.isSyncing) {
+          canteenreport.$body.removeClass('is-syncing');
+          canteenreport.publish('report-saved');
+        }
+      }, 3000);
 
- };
+    },
+
+    /**
+     */
+    changeScreen: function (screen) {
+
+      switch (screen) {
+
+        case this.INPUT_SCREEN : {
+
+          $('#start').hide();
+          $('#app').show();
+
+          break;
+        }
+
+        default : {
+          $('#start').show();
+          $('#app').hide();
+        }
+
+      }
+
+    },
+
+    /**
+     * deviceready Event Handler
+     *
+     * The scope of 'this' is the event. In order to call the 'receivedEvent'
+     * function, we must explicity call 'app.receivedEvent(...);'
+     */
+    onDeviceReady: function() {
+
+     	app.receivedEvent('deviceready');
+
+    },
+
+    goOffline: function () {
+
+  		canteenreport.publish('app-offline');
+
+  	},
+
+  	goOnline: function () {
+
+  		canteenreport.publish('app-online');
+
+  	},
+
+    /**
+     * publish, subscribe, and unsubscribe borowed from amplify.core
+     */
+    publish: function( topic ) {
+      if ( typeof topic !== "string" ) {
+        throw new Error( "You must provide a valid topic to publish." );
+      }
+      var args = slice.call( arguments, 1 ),
+        topicSubscriptions,
+        subscription,
+        length,
+        i = 0,
+        ret;
+      if ( !subscriptions[ topic ] ) {
+        return true;
+      }
+      topicSubscriptions = subscriptions[ topic ].slice();
+      for ( length = topicSubscriptions.length; i < length; i++ ) {
+        subscription = topicSubscriptions[ i ];
+        ret = subscription.callback.apply( subscription.context, args );
+        if ( ret === false ) {
+          break;
+        }
+      }
+      return ret !== false;
+    },
+    subscribe: function( topic, context, callback, priority ) {
+      if ( typeof topic !== "string" ) {
+        throw new Error( "You must provide a valid topic to create a subscription." );
+      }
+      if ( arguments.length === 3 && typeof callback === "number" ) {
+        priority = callback;
+        callback = context;
+        context = null;
+      }
+      if ( arguments.length === 2 ) {
+        callback = context;
+        context = null;
+      }
+      priority = priority || 10;
+
+      var topicIndex = 0,
+        topics = topic.split( /\s/ ),
+        topicLength = topics.length,
+        added;
+      for ( ; topicIndex < topicLength; topicIndex++ ) {
+        topic = topics[ topicIndex ];
+        added = false;
+        if ( !subscriptions[ topic ] ) {
+          subscriptions[ topic ] = [];
+        }
+
+        var i = subscriptions[ topic ].length - 1,
+          subscriptionInfo = {
+            callback: callback,
+            context: context,
+            priority: priority
+          };
+
+        for ( ; i >= 0; i-- ) {
+          if ( subscriptions[ topic ][ i ].priority <= priority ) {
+            subscriptions[ topic ].splice( i + 1, 0, subscriptionInfo );
+            added = true;
+            break;
+          }
+        }
+
+        if ( !added ) {
+          subscriptions[ topic ].unshift( subscriptionInfo );
+        }
+      }
+
+      return callback;
+    },
+    unsubscribe: function( topic, context, callback ) {
+      if ( typeof topic !== "string" ) {
+        throw new Error( "You must provide a valid topic to remove a subscription." );
+      }
+
+      if ( arguments.length === 2 ) {
+        callback = context;
+        context = null;
+      }
+
+      if ( !subscriptions[ topic ] ) {
+        return;
+      }
+
+      var length = subscriptions[ topic ].length,
+        i = 0;
+
+      for ( ; i < length; i++ ) {
+        if ( subscriptions[ topic ][ i ].callback === callback ) {
+          if ( !context || subscriptions[ topic ][ i ].context === context ) {
+            subscriptions[ topic ].splice( i, 1 );
+
+            // Adjust counter and length for removed item
+            i--;
+            length--;
+          }
+        }
+      }
+    },
+
+    scrollToSection: function (event) {
+
+      var id = $(event.currentTarget).attr('href');
+
+      if (id.length) {
+        $('html, body').animate({
+          scrollTop: $(id).offset().top - 70
+        });
+      }
+
+      event.preventDefault();
+
+    },
+
+    /**
+     * Log a message if debug is true
+     */
+    log: function (message) {
+
+     	if (this.debug) {
+     		console.log(message);
+     	}
+
+    }
+
+  };
+
+}( this ) );
 
 $(function() {
-  canteenreport.app.initialize();
-})
+  canteenreport.initialize();
+});
