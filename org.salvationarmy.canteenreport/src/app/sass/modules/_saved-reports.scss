@@ -1,0 +1,28 @@
+.saved-reports {
+
+	height: 200px;
+	overflow-y: scroll;
+
+	p,
+	a {
+		padding: 15px 15px;
+	}
+
+	a {
+
+		background: transparent;
+		display: block;
+
+		&:before {
+			content: none;
+		}
+
+		&:after {
+			content: "\e080";
+			position: absolute;
+			right: 10px;
+		}
+
+	}
+
+}

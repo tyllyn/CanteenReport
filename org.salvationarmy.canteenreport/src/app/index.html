@@ -27,6 +27,7 @@
         <div class="row open-report">
             <h2>Unsubmitted Reports</h2>
             <div id="js-saved-reports" class="saved-reports">
+                <p>No saved reports.</p>
             </div>
         </div>
 
@@ -67,6 +68,7 @@
 
                 <!-- added in canteenreport.storage -->
                 <input name="incident-id" id="incident-id" type="hidden" />
+                <input name="final" id="final" type="hidden" value="false" />
 
                 <!--
                     INCIDENT
@@ -85,7 +87,7 @@
                     			</label>
 
                     			<div class="input-group input-group-lg">
-                    				<input class="form-control" name="incident-unit-number" id="incident-unit-number" type="text" />
+                    				<input class="form-control" name="incident-unit-number" id="incident-unit-number" type="text" required />
                     			</div>
 
                             </div>
@@ -1158,11 +1160,11 @@
 
 	            <section id="submit" class="canteen-well">
 
-	            	<p><strong>Ready to submit? Please check all fields before submitting.</strong></p>
+	            	<p id="js-form-message" class="form-message">
+                        Ready to submit? Please check all fields before submitting.
+                    </p>
 
-	            	<br />
-
-	            	<button class="btn btn-primary">
+	            	<button id="js-submit-button" class="btn btn-primary">
 	            		Submit Final Report
 	            	</button>
 
@@ -1180,7 +1182,6 @@
 	<script src="bower_components/jquery/dist/jquery.js"></script>
 	<script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/tab.js"></script>
     <script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap.js"></script>
-    <!--<script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/scrollspy.js"></script>-->
 	<script src="bower_components/amplify/lib/amplify.js"></script>
 	<script src="js/canteenreport.app.js"></script>
 	<script src="js/canteenreport.form.js"></script>

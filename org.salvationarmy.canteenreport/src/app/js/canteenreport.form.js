@@ -9,8 +9,20 @@
 	var $activeWaterLevelBtn;
 
 	var form = canteenreport.form = function () {
-
 		return this;
+	}
+
+	function reportError () {
+
+		$('#js-submit-button').removeClass('disabled');
+		$('#js-form-message').html(canteenreport.FORM_ERROR_MESSAGE);
+
+	}
+
+	function reportSaved () {
+
+		$('#js-submit-button').removeClass('disabled');
+		$('#js-form-message').html(canteenreport.FORM_SUBMITTED_MESSAGE);
 
 	}
 
@@ -21,9 +33,12 @@
 			$form = $('#form');
 			$form.on('focusout', $.proxy(onfocus, this));
 
-			initEvents();
-
 			initialized = true;
+
+			amplify.subscribe('request.success', reportSaved);
+      amplify.subscribe('request.error', reportError);
+
+      initEvents();
 
 		}
 
@@ -95,8 +110,8 @@
 
 		console.log('form.reset')
 
-    $form.find('input:text, input:password, input:file, select, textarea').val('');
-    $form.find('input:radio, input:checkbox').removeAttr('checked').removeAttr('selected');
+    	$form.find('input:text, input:password, input:file, select, textarea').val('');
+    	$form.find('input:radio, input:checkbox').removeAttr('checked').removeAttr('selected');
 
 	};
 
@@ -238,37 +253,18 @@
 	  /**
 	   * form submit
 	   */
-	  $('#submit').on('touchstart', 'button', function (event) {
+	  $('#js-submit-button').on('touchstart', function (event) {
 
-	  	var valid = false;
-
-	  	// need to add error checking
-    	$('<input />')
-    		.attr('type', 'hidden')
-    		.attr('name', 'finished')
-    		.attr('id', 'finished')
-    		.val(1)
-    		.appendTo($('#form'));
+	  	var valid = $form[0].checkValidity();
 
     	if (valid) {
-				canteenreport.publish('report-saved');
+    		$(this).addClass('disabled');
+    		$('#final').val('true'); // sets the report as final
+				canteenreport.publish('submit-report');
     	} else {
+    		$('#js-form-message').html(canteenreport.FORM_FIELDS_ERROR_MESSAGE);
     		canteenreport.publish('report-not-complete');
     	}
-
-    	//canteenreport.storage.saveForm();
-
-    	// todo: this seems like it should all be moved to storage
-    	//var id = $('#form').attr('data-unique');
-
-    	// amplify.store('active', 0);
-    	// amplify.store(id, null);
-
-    	// $('#form').attr('data-unique', '0');
-
-    	// todo: should be moved to app
-    	// $('#start').show();
-    	// $('#app').hide();
 
     	return false;
 

@@ -10,8 +10,14 @@
     // save some constants
     BACKUP_STORE_NAME: 'canteenReportBackupStore',
     ACTIVE_REPORT_STORE_NAME: 'canteenReportActiveStore',
+    REPORT_REQUEST_NAME: 'canteenreportRequest',
     HOME_SCREEN: 'home',
     INPUT_SCREEN: 'form',
+
+    FORM_SUBMIT_MESSAGE: 'Ready to submit? Please check all fields before submitting.',
+    FORM_SUBMITTED_MESSAGE: 'Your report has been submitted.',
+    FORM_ERROR_MESSAGE: 'There was an error submitting your report. Are you connected to the Internet?',
+    FORM_FIELDS_ERROR_MESSAGE: 'You have errors in your form. Please make sure all required fields are filled out.',
 
   	isOnline: false,
     isSyncing: false,
@@ -61,9 +67,38 @@
       // subscribe to amplify events
       amplify.subscribe('report-saved', $.proxy(this.reportSaved, this));
 
+      amplify.subscribe('request.success', function (settings, data, status) {
+        console.group('request.success');
+        console.info(settings);
+        console.info(data);
+        console.info(status);
+        console.groupEnd();
+      } );
+
+      amplify.subscribe('request.error', function (settings, data, status) {
+        console.group('request.error');
+        console.info(settings);
+        console.info(data);
+        console.info(status);
+        console.groupEnd();
+      } );
+
+      //
+      // Canteen report subscriptions
+      //
+
+      // subscribe to the submit report event
+      canteenreport.subscribe('submit-report', $.proxy(this.submitReport, this));
+
+      //
+      canteenreport.subscribe('report-submitted', $.proxy(this.reportSubmitted, this));
+
       // canteen report event subscriptions
       canteenreport.subscribe('form-focused', $.proxy(this.formFocused, this));
 
+      //
+      // go
+      //
       this.listUnsubmittedReports();
 
   	},
@@ -86,6 +121,10 @@
           var id = value[0].value;
           $savedFormsList.append('<a class="js-open-saved-form-btn date glyphicon glyphicon-chevron-right" data-id="' + id + '">' + id + '</a>');
         });
+
+      } else {
+
+        $savedFormsList.append('<p>Your unsubmitted reports will appear here.</p>');
 
       }
 
@@ -128,7 +167,7 @@
 
     },
 
-    /***
+    /**
      * Closes the current form.
      */
     closeReport: function () {
@@ -147,6 +186,24 @@
       this.changeScreen(this.HOME_SCREEN);
 
       console.groupEnd();
+
+    },
+
+    /**
+     * The form was valid and ready to be submitted
+     */
+    submitReport: function () {
+
+      canteenreport.storage.submitReport();
+
+    },
+
+
+    /**
+     */
+    reportSubmitted: function () {
+
+      console.log('reportSubmitted');
 
     },
 
