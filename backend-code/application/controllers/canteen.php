@@ -7,7 +7,8 @@ class Canteen extends CI_Controller {
 	}
 	
 	public function add() {
-		$res = $_POST; //json_decode($json);
+		$res = $_GET; //json_decode($json);
+		
 		
 		//$data = new array();
 		$items = array();
@@ -24,7 +25,13 @@ class Canteen extends CI_Controller {
 			
 		*/
 		
-		foreach ($res as $key => $val) {
+		foreach ($res as $keyInitial => $valueInitial) {
+		
+			if (!is_array($valueInitial)) {
+				continue;
+			}
+			$key = $valueInitial["name"];
+			$val = $valueInitial["value"];
 		
 			// hard coding IDs because #yolo
 			switch ($key) {
