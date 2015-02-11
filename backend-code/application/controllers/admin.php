@@ -2,7 +2,14 @@
 
 //require(APPPATH.'libraries/REST_Controller.php');
 
+function redirect($path) {
+	header("Location: $path");
+	die();
+}
+
 class Admin extends CI_Controller {
+
+	
 
 	public function index() {
 		$this->load->model('User');
@@ -17,7 +24,8 @@ class Admin extends CI_Controller {
 		if ($this->User->isAuthenticated()) {
 			redirect('/Admin/index');
 		}
-		if ($_POST['inputEmail'] != null) {
+		if (array_key_exists('inputEmail',$_POST) && array_key_exists('inputePassword',$_POST)) {
+			die('trying');
 			$res = $this->User->authenticate($_POST['inputEmail'], $_POST['inputPassword']);
 			if ($res) {
 				redirect('/Admin/index');
