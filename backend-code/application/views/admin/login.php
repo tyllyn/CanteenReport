@@ -1,6 +1,6 @@
 <div class="container">
 
-    <form class="form-signin">
+    <form class="form-signin" action="/Admin/login" method="post">
 
         <h2 class="form-signin-heading">Sign in</h2>
 

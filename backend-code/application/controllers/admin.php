@@ -4,8 +4,28 @@
 
 class Admin extends CI_Controller {
 
-	public function index() { $this->view('index'); }
-	public function login() { $this->view('login'); }
+	public function index() {
+		$this->load->model('User');
+		if (!$this->User->isAuthenticated()) {
+			redirect('/Admin/login');
+		}
+		$this->view('index');
+	}
+	public function login() {
+
+		$this->load->model('User');
+		if ($this->User->isAuthenticated()) {
+			redirect('/Admin/index');
+		}
+		if ($_POST['inputEmail'] != null) {
+			$res = $this->User->authenticate($_POST['inputEmail'], $_POST['inputPassword']);
+			if ($res) {
+				redirect('/Admin/index');
+			}
+		}
+		$this->view('login');
+
+	}
 	public function report() {
 
 		$id = $_GET['id'];
