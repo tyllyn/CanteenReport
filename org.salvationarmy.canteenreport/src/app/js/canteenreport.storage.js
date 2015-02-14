@@ -77,7 +77,48 @@
         amplify.store(canteenreport.ACTIVE_REPORT_STORE_NAME, formValuesJSON);
         amplify.publish('report-saved');
 
-	}
+	};
+
+    storage.deleteReport = function (id) {
+
+        console.group('storage.deleteReport: ' + id);
+
+        var formBackupStore = amplify.store(canteenreport.BACKUP_STORE_NAME);
+        var formBackupArray = [];
+        var formBackup;
+
+        console.log(formBackupStore);
+
+        if (typeof formBackupStore !== 'undefined') {
+            formBackupArray = formBackupStore;
+        }
+
+        if (formBackupArray.length > 0) {
+
+            $.each(formBackupArray, function (index, value) {
+                if (value.length > 0) {
+
+                    var backedUpFormId = value[0].value;
+
+                    if (backedUpFormId === id) {
+
+                        console.info('found the report at ' + index);
+
+                        formBackupArray.splice(index, 1);
+                        amplify.store(canteenreport.BACKUP_STORE_NAME, formBackupArray);
+                        canteenreport.publish('report-deleted');
+
+
+                        return;
+                    }
+                }
+            });
+
+        }
+
+        console.groupEnd();
+
+    };
 
 	/**
 	 * Saves the report.
@@ -100,7 +141,7 @@
         var formStore = amplify.store(canteenreport.ACTIVE_REPORT_STORE_NAME);
         var formBackupStore = amplify.store(canteenreport.BACKUP_STORE_NAME);
         var formBackupArray = [];
-        var formBackupJSON;
+        //var formBackupJSON;
 
         var formId = $('#incident-id').val();
         var isBackedUp = typeof storage.findBackupFormById(formId) !== 'undefined' ? true : false;
@@ -147,11 +188,14 @@
 
         if (formBackupStore != null) {
 	        $.each(formBackupStore, function (index, value) {
-	            var backedUpFormId = value[0].value;
-	            if (backedUpFormId == id) {
-	                formBackup = value;
-	                return;
-	            }
+
+                if (value.length > 0) {
+    	            var backedUpFormId = value[0].value;
+    	            if (backedUpFormId == id) {
+    	                formBackup = value;
+    	                return;
+    	            }
+                }
 	        });
 	    }
 
@@ -169,10 +213,13 @@
         var backupIndex;
 
         $.each(formBackupStore, function (index, value) {
-            var backedUpFormId = value[0].value;
-            if (backedUpFormId == id) {
-                backupIndex = index;
-                return;
+
+            if (value.length > 0) {
+                var backedUpFormId = value[0].value;
+                if (backedUpFormId == id) {
+                    backupIndex = index;
+                    return;
+                }
             }
         });
 

@@ -34,6 +34,8 @@
 
   	initialize: function() {
 
+      console.info('app.initialize');
+
       this.$body = $('body');
 
       // setup bootstrap's scrollSpy
@@ -93,6 +95,8 @@
       //
       canteenreport.subscribe('report-submitted', $.proxy(this.reportSubmitted, this));
 
+      canteenreport.subscribe('report-deleted', $.proxy(this.reportDeleted, this));
+
       // canteen report event subscriptions
       canteenreport.subscribe('form-focused', $.proxy(this.formFocused, this));
 
@@ -111,15 +115,25 @@
       console.group('listUnsubmittedReports');
 
       var formBackupStore = amplify.store(canteenreport.BACKUP_STORE_NAME);
-      var $savedFormsList = $('#js-saved-reports').empty();
+      var $savedForms = $('#js-saved-reports');
+      var $savedFormsList = $('#js-saved-reports-list').empty();
 
       console.log(formBackupStore);
 
-      if (formBackupStore != undefined) {
+      if (formBackupStore != undefined && formBackupStore.length > 0) {
+
+        $savedForms.slideDown({
+          duration: 900,
+          easing: 'easeInOutQuint'
+        });
 
         $.each(formBackupStore, function (index, value) {
-          var id = value[0].value;
-          $savedFormsList.append('<a class="js-open-saved-form-btn date glyphicon glyphicon-chevron-right" data-id="' + id + '">' + id + '</a>');
+
+          if (value[0]) {
+            var id = value[0].value;
+            $savedFormsList.append('<a class="js-open-saved-form-btn open-saved-report-btn date glyphicon glyphicon-chevron-right" data-id="' + id + '">' + id + '</a>');
+          }
+
         });
 
       } else {
@@ -157,6 +171,8 @@
       console.log('id: ' + id);
 
       var report = canteenreport.storage.findBackupFormById(id);
+
+      console.log(report);
       canteenreport.form.openReport(report);
 
       this.changeScreen(this.INPUT_SCREEN);
@@ -186,6 +202,15 @@
       this.changeScreen(this.HOME_SCREEN);
 
       console.groupEnd();
+
+    },
+
+    reportDeleted: function () {
+
+      this.$leftMenuItems.parent().removeClass("isActive").end().filter("[href=#incident]").parent().addClass("isActive");
+
+      this.listUnsubmittedReports();
+      this.changeScreen(this.HOME_SCREEN);
 
     },
 

@@ -24,10 +24,10 @@
 			<button id="new-report-button" class="btn btn-primary" alt="New Report">New Report</button>
 		</div>
 
-        <div class="row open-report">
+        <div id="js-saved-reports" class="saved-reports row">
             <h2>Unsubmitted Reports</h2>
-            <div id="js-saved-reports" class="saved-reports">
-                <p>No saved reports.</p>
+            <div id="js-saved-reports-list" class="saved-reports-list">
+                <p>No reports to finish and submit. Keep up the good work!</p>
             </div>
         </div>
 
@@ -1168,6 +1168,10 @@
 	            		Submit Final Report
 	            	</button>
 
+                    <button id="js-delete-button" class="btn btn-link">
+                        Delete
+                    </button>
+
 	            </section>
 
         	</form>
@@ -1176,14 +1180,15 @@
 
 	</section>
 
-	<!-- <script type="text/javascript" src="cordova.js"></script> -->
+	<!--<script type="text/javascript" src="cordova.js"></script>-->
 
 	<!-- build:js js/main.js -->
 	<script src="bower_components/jquery/dist/jquery.js"></script>
+    <script src="bower_components/jquery.easing/js/jquery.easing.min.js"></script>
 	<script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/tab.js"></script>
     <script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap.js"></script>
 	<script src="bower_components/amplify/lib/amplify.js"></script>
-	<script src="js/canteenreport.app.js"></script>
+    <script src="js/canteenreport.app.js"></script>
 	<script src="js/canteenreport.form.js"></script>
 	<script src="js/canteenreport.storage.js"></script>
 	<!-- endbuild -->

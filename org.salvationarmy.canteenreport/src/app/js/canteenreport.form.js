@@ -14,12 +14,16 @@
 
 	function reportError () {
 
+		enable();
+
 		$('#js-submit-button').removeClass('disabled');
 		$('#js-form-message').html(canteenreport.FORM_ERROR_MESSAGE);
 
 	}
 
 	function reportSaved () {
+
+		enable();
 
 		$('#js-submit-button').removeClass('disabled');
 		$('#js-form-message').html(canteenreport.FORM_SUBMITTED_MESSAGE);
@@ -36,9 +40,9 @@
 			initialized = true;
 
 			amplify.subscribe('request.success', reportSaved);
-      amplify.subscribe('request.error', reportError);
+      		amplify.subscribe('request.error', reportError);
 
-      initEvents();
+      		initEvents();
 
 		}
 
@@ -52,6 +56,8 @@
 	 * Creates a new report
 	 */
 	form.newReport = function (id) {
+
+		$('#js-delete-button').hide();
 
 		form.initialize();
 
@@ -75,6 +81,8 @@
 	 * Opens a backed up report
 	 */
 	form.openReport = function (report) {
+
+		$('#js-delete-button').show();
 
 		console.group('form.openReport');
 		console.log(report);
@@ -122,6 +130,23 @@
 
 
 	/**
+	 * Disables the form to prevent user input while the form is submitting
+	 */
+	var disable = function () {
+
+		$('input, button, textarea, select').attr('disabled', 'disabled');
+
+	};
+
+
+	var enable = function () {
+
+		$('input, button, textarea, select').removeAttr('disabled');
+
+	};
+
+
+	/**
  	 * Called when the form focuses. Listener added in initialize.
  	 */
 	var onfocus = function () {
@@ -137,72 +162,72 @@
 		/**
   		* adds increment functionality to the + buttons
   		*/
-    $('.increment').on('touchstart', function (event) {
+	    $('.increment').on('touchstart', function (event) {
 
-     	var incrementNumberField = $(event.currentTarget).parent().next();
-     	var incrementNumberFieldVal = Number(incrementNumberField.val());
-     	incrementNumberField.val(incrementNumberFieldVal + 1);
+	     	var incrementNumberField = $(event.currentTarget).parent().next();
+	     	var incrementNumberFieldVal = Number(incrementNumberField.val());
+	     	incrementNumberField.val(incrementNumberFieldVal + 1);
 
-     	return false;
+	     	return false;
 
-    });
-    $('.increment-minus').on('touchstart', function (event) {
+	    });
+	    $('.increment-minus').on('touchstart', function (event) {
 
-     	var incrementNumberField = $(event.currentTarget).parent().prev();
-     	var incrementNumberFieldVal = Number(incrementNumberField.val());
+	     	var incrementNumberField = $(event.currentTarget).parent().prev();
+	     	var incrementNumberFieldVal = Number(incrementNumberField.val());
 
-     	var newVal = incrementNumberFieldVal - 1;
-     	if (newVal < 0) {
-     		newVal = 0;
-     	}
+	     	var newVal = incrementNumberFieldVal - 1;
+	     	if (newVal < 0) {
+	     		newVal = 0;
+	     	}
 
-     	incrementNumberField.val(newVal);
+	     	incrementNumberField.val(newVal);
 
-     	return false;
+	     	return false;
 
-    });
+	    });
 
-    /**
+    	/**
 	   	* fuel level
 	   	*/
-	  $('.fuel-level-button').on('touchstart', function (event) {
+	  	$('.fuel-level-button').on('touchstart', function (event) {
 
-	   	if (typeof $activeFuelLevelBtn != 'undefined') {
-	   		$activeFuelLevelBtn.removeClass('btn-is-active');
-	   	}
-	   	$activeFuelLevelBtn = $(event.currentTarget).addClass('btn-is-active');
+	   		if (typeof $activeFuelLevelBtn != 'undefined') {
+	   			$activeFuelLevelBtn.removeClass('btn-is-active');
+	   		}
+	   		$activeFuelLevelBtn = $(event.currentTarget).addClass('btn-is-active');
 
-	   	// add the value to the hidden input so it can be hidden
-	   	$('#end-fuel-level').val($activeFuelLevelBtn.data().level);
+	   		// add the value to the hidden input so it can be hidden
+	   		$('#end-fuel-level').val($activeFuelLevelBtn.data().level);
 
-	   	return false;
+	   		return false;
 
-	  });
+	  	});
 
-	  /**
+	  	/**
 	   	* water level
 	   	*/
-	  $('.water-level-button').on('touchstart', function (event) {
+	  	$('.water-level-button').on('touchstart', function (event) {
 
-	   	if (typeof $activeWaterLevelBtn != 'undefined') {
-	   		$activeWaterLevelBtn.removeClass('btn-is-active');
-	   	}
-	   	$activeWaterLevelBtn = $(event.currentTarget).addClass('btn-is-active');
+	   		if (typeof $activeWaterLevelBtn != 'undefined') {
+	   			$activeWaterLevelBtn.removeClass('btn-is-active');
+	   		}
+	   		$activeWaterLevelBtn = $(event.currentTarget).addClass('btn-is-active');
 
-	   	// add the value to the hidden input so it can be hidden
-	   	$('#end-water-level').val($activeWaterLevelBtn.data().level);
+	   		// add the value to the hidden input so it can be hidden
+	   		$('#end-water-level').val($activeWaterLevelBtn.data().level);
 
-	   	return false;
+	   		return false;
 
-	  });
+		});
 
-	  /**
-	   * Add new team member fields
-	   */
-	  $('.js-add-member').on('touchstart', function (event) {
+		/**
+		* Add new team member fields
+		*/
+		$('.js-add-member').on('touchstart', function (event) {
 
-	  	var id = '2'
-	  	var val = '';
+			var id = '2'
+			var val = '';
 
 			// Clone first member, strip all data, and append
 			var $newmember = $('.team-member-1')
@@ -221,15 +246,15 @@
 
 			return false;
 
-	  });
+		});
 
-	  /**
-	   * Remove team member fields
-	   */
-	  $('.js-remove-member').on('touchstart', function (event) {
+		/**
+		* Remove team member fields
+		*/
+		$('.js-remove-member').on('touchstart', function (event) {
 
-	  	var id = '2'
-	  	var val = '';
+			var id = '2'
+			var val = '';
 
 			// Clone first member, strip all data, and append
 			// var $newmember = $('.team-member-1')
@@ -248,27 +273,44 @@
 
 			// return false;
 
-	  });
+		});
 
-	  /**
-	   * form submit
-	   */
-	  $('#js-submit-button').on('touchstart', function (event) {
+		/**
+		 * Deletes the active report
+		 */
+		$('#js-delete-button').on('touchstart', function (event) {
 
-	  	var valid = $form[0].checkValidity();
+			var confirmation = window.confirm('Pressing OK will delete this report and return you to the home screen');
 
-    	if (valid) {
-    		$(this).addClass('disabled');
-    		$('#final').val('true'); // sets the report as final
+      		if (confirmation === true) {
+
+      			var id = $('#incident-id').val();
+        		canteenreport.storage.deleteReport(id);
+      		}
+
+		});
+
+		/**
+		* form submit
+		*/
+		$('#js-submit-button').on('touchstart', function (event) {
+
+			var valid = $form[0].checkValidity();
+
+			disable();
+
+			if (valid) {
+				$(this).addClass('disabled');
+				$('#final').val('true'); // sets the report as final
 				canteenreport.publish('submit-report');
-    	} else {
-    		$('#js-form-message').html(canteenreport.FORM_FIELDS_ERROR_MESSAGE);
-    		canteenreport.publish('report-not-complete');
-    	}
+			} else {
+				$('#js-form-message').html(canteenreport.FORM_FIELDS_ERROR_MESSAGE);
+				canteenreport.publish('report-not-complete');
+			}
 
-    	return false;
+			return false;
 
-    });
+		});
 
 	};
 
