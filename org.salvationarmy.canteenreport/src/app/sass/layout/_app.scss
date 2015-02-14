@@ -1,8 +1,10 @@
 #app {
 
-	display: none;
 	position: absolute;
 	top: 0;
+	left: 768px;
+
+	overflow-y: scroll;
 
 	.left-menu {
 

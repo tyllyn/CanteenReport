@@ -6,6 +6,8 @@
   var canteenreport = global.canteenreport = {
 
   	debug: true,
+    screenWidth: screen.width,
+    screenHeight: screen.height,
 
     // save some constants
     BACKUP_STORE_NAME: 'canteenReportBackupStore',
@@ -35,6 +37,13 @@
   	initialize: function() {
 
       console.info('app.initialize');
+
+      // position the ui
+      screenWidth = screen.width;
+      screenHeight = screen.height;
+      $('#container').css('width', screenWidth * 2).css('height', screenHeight);
+      $('#start').css('left', 0).css('width', screenWidth).css('height', screenHeight);
+      $('#app').css('left', screenWidth).css('width', screenWidth).css('height', screenHeight);
 
       this.$body = $('body');
 
@@ -284,15 +293,17 @@
 
         case this.INPUT_SCREEN : {
 
-          $('#start').hide();
-          $('#app').show();
+          $('body').addClass('app');
+          $('#app').scrollTop(0);
+          $('#container').css('left', -screenWidth + 'px');
 
           break;
         }
 
         default : {
-          $('#start').show();
-          $('#app').hide();
+
+          $('body').removeClass('app');
+          $('#container').css('left', '0');
         }
 
       }
