@@ -18,7 +18,7 @@
 
     FORM_SUBMIT_MESSAGE: 'Ready to submit? Please check all fields before submitting.',
     FORM_SUBMITTED_MESSAGE: 'Your report has been submitted.',
-    FORM_ERROR_MESSAGE: 'There was an error submitting your report. Are you connected to the Internet?',
+    FORM_ERROR_MESSAGE: 'There was an error submitting your report.',
     FORM_FIELDS_ERROR_MESSAGE: 'You have errors in your form. Please make sure all required fields are filled out.',
 
   	isOnline: false,
@@ -41,6 +41,7 @@
       // position the ui
       screenWidth = screen.width;
       screenHeight = screen.height;
+
       $('#container').css('width', screenWidth * 2).css('height', screenHeight);
       $('#start').css('left', 0).css('width', screenWidth).css('height', screenHeight);
       $('#app').css('left', screenWidth).css('width', screenWidth).css('height', screenHeight);
@@ -61,6 +62,8 @@
       // watch for on and offline notifications
       window.addEventListener('offline', this.goOffline);
   		window.addEventListener('online', this.goOnline);
+
+      this.scrollToSectionById('#form');
 
       // setup the left menu
       this.$leftMenu = $('#left-menu');
@@ -139,8 +142,25 @@
         $.each(formBackupStore, function (index, value) {
 
           if (value[0]) {
+
+            console.group();
+
             var id = value[0].value;
-            $savedFormsList.append('<a class="js-open-saved-form-btn open-saved-report-btn date glyphicon glyphicon-chevron-right" data-id="' + id + '">' + id + '</a>');
+            var date = new Date(Number(id));
+            var day = date.getDate();
+            var year = date.getUTCFullYear();
+            var month = date.getMonth();
+            var hours = date.getHours();
+            var minutes = '0' + date.getMinutes();
+
+            var formattedDate = month + '/' + day + '/' + year + ', ' + hours + ':' + minutes.substr(minutes.length - 2);
+
+            console.log(formattedDate);
+
+            $savedFormsList.append('<a class="js-open-saved-form-btn open-saved-report-btn date glyphicon glyphicon-chevron-right" data-id="' + id + '">' + formattedDate + '</a>');
+
+            console.groupEnd();
+
           }
 
         });
@@ -162,12 +182,13 @@
      */
     newReport: function () {
 
-      var newReportId = new Date().getTime();
+      var date = new Date();
+      var newReportId = date.getTime();
 
       this.changeScreen(this.INPUT_SCREEN);
 
       canteenreport.storage.newReport();
-      canteenreport.form.newReport(newReportId);
+      canteenreport.form.newReport(newReportId, date);
 
     },
 
@@ -199,7 +220,7 @@
 
       console.group('closeReport');
 
-      var confirmation = window.confirm('This report will be saved for you to edit later.');
+      var confirmation = window.confirm('Pressing OK will save this report for you to edit and submit later.');
 
       if (confirmation === true) {
         canteenreport.storage.saveReport();
@@ -296,6 +317,7 @@
           $('body').addClass('app');
           $('#app').scrollTop(0);
           $('#container').css('left', -screenWidth + 'px');
+          this.scrollToSectionById('#form');
 
           break;
         }
@@ -304,6 +326,7 @@
 
           $('body').removeClass('app');
           $('#container').css('left', '0');
+          this.scrollToSectionById('#form');
         }
 
       }
@@ -443,12 +466,42 @@
       var id = $(event.currentTarget).attr('href');
 
       if (id.length) {
-        $('html, body').animate({
-          scrollTop: $(id).offset().top - 70
-        });
+        this.scrollToSectionById(id);
       }
 
       event.preventDefault();
+
+    },
+
+    scrollToSectionById: function (id, dur, easing) {
+
+      console.group('scrollToSectionById');
+      console.info('id: ' + id);
+      console.info('dur: ' + dur);
+
+      var duration = 400;
+      var easingFunction = 'easeOutQuad';
+
+      if (dur !== undefined) {
+        duration = dur;
+      }
+
+      if (easing !== undefined) {
+        easingFunction = easing;
+      }
+
+      console.info('duration: ' + duration);
+      console.info('easingFunction: ' + easingFunction);
+
+      $('html, body').animate(
+        {
+          scrollTop: $(id).offset().top - 70
+        },
+        duration,
+        easingFunction
+      );
+
+      console.groupEnd();
 
     },
 

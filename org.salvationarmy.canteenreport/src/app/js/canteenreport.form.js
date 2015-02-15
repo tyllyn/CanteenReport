@@ -55,7 +55,7 @@
 	/**
 	 * Creates a new report
 	 */
-	form.newReport = function (id) {
+	form.newReport = function (id, date) {
 
 		$('#js-delete-button').hide();
 
@@ -66,9 +66,11 @@
 
 		// clear the old form
 		form.reset();
+		setUnit();
 
 		// cache the incident-id input and set its value to the id
 		$('#incident-id').val(String(id));
+		$('#creation-date').val(String(date));
 
 		console.groupEnd();
 
@@ -127,6 +129,42 @@
 	/**
 	 * Private Functions
 	 */
+
+	var setUnit = function () {
+
+		console.group('form.setUnit');
+
+		var cookie = document.cookie;
+		var unitNumber;
+
+		console.info('cookie: ' + cookie);
+
+		// dig through the cookie for what we need
+		var name = 'unitNumber' + "=";
+    	var ca = document.cookie.split(';');
+
+    	for (var i = 0; i < ca.length; i++) {
+
+        	var c = ca[i];
+
+        	while (c.charAt(0)==' ') {
+        		c = c.substring(1);
+        	}
+
+        	if (c.indexOf(name) == 0) {
+        		unitNumber = c.substring(name.length, c.length);
+        		break;
+        	}
+
+    	}
+
+    	console.info('unitNumber: ' + unitNumber);
+
+    	$('#incident-unit-number').val(unitNumber);
+
+		console.groupEnd();
+
+	};
 
 
 	/**
@@ -300,12 +338,24 @@
 			disable();
 
 			if (valid) {
+
+				// sets a cookie for the last used unit number
+				document.cookie = 'unitNumber=' + $('#incident-unit-number').val();
+
+				console.log(document.cookie)
+
 				$(this).addClass('disabled');
 				$('#final').val('true'); // sets the report as final
 				canteenreport.publish('submit-report');
+				canteenreport.scrollToSectionById('#confirm', 4000, 'easeOutQuint');
+
 			} else {
+
+				enable();
+
 				$('#js-form-message').html(canteenreport.FORM_FIELDS_ERROR_MESSAGE);
 				canteenreport.publish('report-not-complete');
+
 			}
 
 			return false;
