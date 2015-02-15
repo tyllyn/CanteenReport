@@ -1,4 +1,9 @@
-(function( canteenreport, undefined ) {
+/*global jQuery:false */
+/*global canteenreport:false */
+/*global amplify:false */
+/*global $:false */
+
+(function (canteenreport, undefined) {
 
 	'use strict';
 
@@ -10,9 +15,9 @@
 
 	var form = canteenreport.form = function () {
 		return this;
-	}
+	};
 
-	function reportError () {
+	function reportError() {
 
 		enable();
 
@@ -21,7 +26,7 @@
 
 	}
 
-	function reportSaved () {
+	function reportSaved() {
 
 		enable();
 
@@ -40,9 +45,9 @@
 			initialized = true;
 
 			amplify.subscribe('request.success', reportSaved);
-      		amplify.subscribe('request.error', reportError);
+			amplify.subscribe('request.error', reportError);
 
-      		initEvents();
+			initEvents();
 
 		}
 
@@ -53,8 +58,8 @@
 	};
 
 	/**
-	 * Creates a new report
-	 */
+	* Creates a new report
+	*/
 	form.newReport = function (id, date) {
 
 		$('#js-delete-button').hide();
@@ -80,8 +85,8 @@
 	};
 
 	/**
-	 * Opens a backed up report
-	 */
+	* Opens a backed up report
+	*/
 	form.openReport = function (report) {
 
 		$('#js-delete-button').show();
@@ -94,19 +99,16 @@
 		var i;
 
 		for (i in report) {
-
 			var name = report[i].name;
 			var value = report[i].value;
 			var $field = $form.find('[name="' + name + '"]');
 			var fieldType = $field[0].type;
-
 			if (fieldType === 'checkbox' || fieldType === 'radio') {
-				console.log('this is a radio button or checkbox')
+				console.log('this is a radio button or checkbox');
 				$field.prop('checked', 'checked');
 			} else {
 				$field.val(value);
 			}
-
 		}
 
 		console.groupEnd();
@@ -120,8 +122,8 @@
 
 		console.log('form.reset')
 
-    	$form.find('input:text, input:password, input:file, select, textarea').val('');
-    	$form.find('input:radio, input:checkbox').removeAttr('checked').removeAttr('selected');
+		$form.find('input:text, input:password, input:file, select, textarea').val('');
+		$form.find('input:radio, input:checkbox').removeAttr('checked').removeAttr('selected');
 
 	};
 
@@ -129,7 +131,6 @@
 	/**
 	 * Private Functions
 	 */
-
 	var setUnit = function () {
 
 		console.group('form.setUnit');
@@ -141,26 +142,22 @@
 
 		// dig through the cookie for what we need
 		var name = 'unitNumber' + "=";
-    	var ca = document.cookie.split(';');
+		var ca = document.cookie.split(';');
 
-    	for (var i = 0; i < ca.length; i++) {
+		for (var i = 0; i < ca.length; i++) {
+			var c = ca[i];
+			while (c.charAt(0) == ' ') {
+				c = c.substring(1);
+			}
+			if (c.indexOf(name) == 0) {
+				unitNumber = c.substring(name.length, c.length);
+				break;
+			}
+		}
 
-        	var c = ca[i];
+		console.info('unitNumber: ' + unitNumber);
 
-        	while (c.charAt(0)==' ') {
-        		c = c.substring(1);
-        	}
-
-        	if (c.indexOf(name) == 0) {
-        		unitNumber = c.substring(name.length, c.length);
-        		break;
-        	}
-
-    	}
-
-    	console.info('unitNumber: ' + unitNumber);
-
-    	$('#incident-unit-number').val(unitNumber);
+		$('#incident-unit-number').val(unitNumber);
 
 		console.groupEnd();
 
@@ -172,7 +169,7 @@
 	 */
 	var disable = function () {
 
-		$('input, button, textarea, select').attr('disabled', 'disabled');
+	 	$('input, button, textarea, select').attr('disabled', 'disabled');
 
 	};
 
@@ -187,100 +184,100 @@
 	/**
  	 * Called when the form focuses. Listener added in initialize.
  	 */
-	var onfocus = function () {
+ 	var onfocus = function () {
 
-		canteenreport.publish('form-focused', $form);
+ 	 	canteenreport.publish('form-focused', $form);
 
-	};
+ 	};
 
 	/**
-	 */
+	*/
 	var initEvents = function () {
 
 		/**
-  		* adds increment functionality to the + buttons
-  		*/
-	    $('.increment').on('touchstart', function (event) {
+		* adds increment functionality to the + buttons
+		*/
+		$('.increment').on('touchstart', function (event) {
 
-	     	var incrementNumberField = $(event.currentTarget).parent().next();
-	     	var incrementNumberFieldVal = Number(incrementNumberField.val());
-	     	incrementNumberField.val(incrementNumberFieldVal + 1);
+			var incrementNumberField = $(event.currentTarget).parent().next();
+			var incrementNumberFieldVal = Number(incrementNumberField.val());
+			incrementNumberField.val(incrementNumberFieldVal + 1);
 
-	     	return false;
-
-	    });
-	    $('.increment-minus').on('touchstart', function (event) {
-
-	     	var incrementNumberField = $(event.currentTarget).parent().prev();
-	     	var incrementNumberFieldVal = Number(incrementNumberField.val());
-
-	     	var newVal = incrementNumberFieldVal - 1;
-	     	if (newVal < 0) {
-	     		newVal = 0;
-	     	}
-
-	     	incrementNumberField.val(newVal);
-
-	     	return false;
-
-	    });
-
-    	/**
-	   	* fuel level
-	   	*/
-	  	$('.fuel-level-button').on('touchstart', function (event) {
-
-	   		if (typeof $activeFuelLevelBtn != 'undefined') {
-	   			$activeFuelLevelBtn.removeClass('btn-is-active');
-	   		}
-	   		$activeFuelLevelBtn = $(event.currentTarget).addClass('btn-is-active');
-
-	   		// add the value to the hidden input so it can be hidden
-	   		$('#end-fuel-level').val($activeFuelLevelBtn.data().level);
-
-	   		return false;
-
-	  	});
-
-	  	/**
-	   	* water level
-	   	*/
-	  	$('.water-level-button').on('touchstart', function (event) {
-
-	   		if (typeof $activeWaterLevelBtn != 'undefined') {
-	   			$activeWaterLevelBtn.removeClass('btn-is-active');
-	   		}
-	   		$activeWaterLevelBtn = $(event.currentTarget).addClass('btn-is-active');
-
-	   		// add the value to the hidden input so it can be hidden
-	   		$('#end-water-level').val($activeWaterLevelBtn.data().level);
-
-	   		return false;
+			return false;
 
 		});
+		$('.increment-minus').on('touchstart', function (event) {
+
+			var incrementNumberField = $(event.currentTarget).parent().prev();
+			var incrementNumberFieldVal = Number(incrementNumberField.val());
+
+			var newVal = incrementNumberFieldVal - 1;
+			if (newVal < 0) {
+				newVal = 0;
+			}
+
+			incrementNumberField.val(newVal);
+
+			return false;
+
+		});
+
+		/**
+		* fuel level
+		*/
+		$('.fuel-level-button').on('touchstart', function (event) {
+
+			if (typeof $activeFuelLevelBtn != 'undefined') {
+				$activeFuelLevelBtn.removeClass('btn-is-active');
+			}
+			$activeFuelLevelBtn = $(event.currentTarget).addClass('btn-is-active');
+
+			// add the value to the hidden input so it can be hidden
+			$('#end-fuel-level').val($activeFuelLevelBtn.data().level);
+
+			return false;
+
+		});
+
+		/**
+		* water level
+		*/
+   	$('.water-level-button').on('touchstart', function (event) {
+
+			if (typeof $activeWaterLevelBtn != 'undefined') {
+				$activeWaterLevelBtn.removeClass('btn-is-active');
+			}
+			$activeWaterLevelBtn = $(event.currentTarget).addClass('btn-is-active');
+
+			// add the value to the hidden input so it can be hidden
+			$('#end-water-level').val($activeWaterLevelBtn.data().level);
+
+			return false;
+
+   	});
 
 		/**
 		* Add new team member fields
 		*/
 		$('.js-add-member').on('touchstart', function (event) {
 
-			var id = '2'
+			var id = '2';
 			var val = '';
 
 			// Clone first member, strip all data, and append
 			var $newmember = $('.team-member-1')
-				.clone()
-				.removeClass('team-member-1')
-				.addClass('team-member-' + id)
-				.find('.js-add-member-container')
-				.remove()
-				.end()
-				.find('input')
-				.val(val)
-				.attr('id', 'team-member-' + id)
-				.attr('name', 'team-member-' + id)
-				.end()
-				.appendTo($('#js-team-members'));
+			.clone()
+			.removeClass('team-member-1')
+			.addClass('team-member-' + id)
+			.find('.js-add-member-container')
+			.remove()
+			.end()
+			.find('input')
+			.val(val)
+			.attr('id', 'team-member-' + id)
+			.attr('name', 'team-member-' + id)
+			.end()
+			.appendTo($('#js-team-members'));
 
 			return false;
 
@@ -314,17 +311,17 @@
 		});
 
 		/**
-		 * Deletes the active report
-		 */
+		* Deletes the active report
+		*/
 		$('#js-delete-button').on('touchstart', function (event) {
 
-			var confirmation = window.confirm('Pressing OK will delete this report and return you to the home screen');
+		 	var confirmation = window.confirm('Pressing OK will delete this report and return you to the home screen');
 
-      		if (confirmation === true) {
+		 	if (confirmation === true) {
 
-      			var id = $('#incident-id').val();
-        		canteenreport.storage.deleteReport(id);
-      		}
+		 		var id = $('#incident-id').val();
+		 		canteenreport.storage.deleteReport(id);
+		 	}
 
 		});
 
@@ -342,7 +339,7 @@
 				// sets a cookie for the last used unit number
 				document.cookie = 'unitNumber=' + $('#incident-unit-number').val();
 
-				console.log(document.cookie)
+				console.log('document.cookie: ' + document.cookie);
 
 				$(this).addClass('disabled');
 				$('#final').val('true'); // sets the report as final

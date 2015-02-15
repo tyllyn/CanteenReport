@@ -1,11 +1,13 @@
-(function( global, undefined ) {
+(function (global, undefined) {
+
+  //'use strict';
 
   var slice = [].slice,
     subscriptions = {};
 
   var canteenreport = global.canteenreport = {
 
-  	debug: true,
+    debug: true,
     screenWidth: screen.width,
     screenHeight: screen.height,
 
@@ -34,17 +36,17 @@
     $leftMenu: null,
     $leftMenuItems: null,
 
-  	initialize: function() {
+  	initialize: function () {
 
       console.info('app.initialize');
 
       // position the ui
-      screenWidth = screen.width;
-      screenHeight = screen.height;
+      this.screenWidth = screen.width;
+      this.screenHeight = screen.height;
 
-      $('#container').css('width', screenWidth * 2).css('height', screenHeight);
-      $('#start').css('left', 0).css('width', screenWidth).css('height', screenHeight);
-      $('#app').css('left', screenWidth).css('width', screenWidth).css('height', screenHeight);
+      $('#container').css('width', this.screenWidth * 2).css('height', this.screenHeight);
+      $('#start').css('left', 0).css('width', this.screenWidth).css('height', this.screenHeight);
+      $('#app').css('left', this.screenWidth).css('width', this.screenWidth).css('height', this.screenHeight);
 
       this.$body = $('body');
 
@@ -129,8 +131,6 @@
       var formBackupStore = amplify.store(canteenreport.BACKUP_STORE_NAME);
       var $savedForms = $('#js-saved-reports');
       var $savedFormsList = $('#js-saved-reports-list').empty();
-
-      console.log(formBackupStore);
 
       if (formBackupStore != undefined && formBackupStore.length > 0) {
 
@@ -316,7 +316,7 @@
 
           $('body').addClass('app');
           $('#app').scrollTop(0);
-          $('#container').css('left', -screenWidth + 'px');
+          $('#container').css('left', -this.screenWidth + 'px');
           this.scrollToSectionById('#form');
 
           break;
@@ -360,7 +360,7 @@
     /**
      * publish, subscribe, and unsubscribe borowed from amplify.core
      */
-    publish: function( topic ) {
+    publish: function (topic) {
       if ( typeof topic !== "string" ) {
         throw new Error( "You must provide a valid topic to publish." );
       }
@@ -383,7 +383,7 @@
       }
       return ret !== false;
     },
-    subscribe: function( topic, context, callback, priority ) {
+    subscribe: function (topic, context, callback, priority) {
       if ( typeof topic !== "string" ) {
         throw new Error( "You must provide a valid topic to create a subscription." );
       }
@@ -518,7 +518,7 @@
 
   };
 
-}( this ) );
+}(this) );
 
 $(function() {
   canteenreport.initialize();

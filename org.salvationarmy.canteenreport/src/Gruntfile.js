@@ -108,14 +108,16 @@ module.exports = function (grunt) {
         },
         jshint: {
             options: {
-                jshintrc: '.jshintrc',
-                node: true
+                jshintrc: '.jshintrc'
             },
             all: [
                 'Gruntfile.js',
                 '<%= yeoman.app %>/js/{,*/}*.js',
                 '!<%= yeoman.app %>/js/plugins.js',
-                '!<%= yeoman.app %>/js/vendor/*'
+                '!<%= yeoman.app %>/js/plugins/*',
+                '!<%= yeoman.app %>/js/vendor/*',
+                '!<%= yeoman.app %>/js/angular/*',
+                'test/spec/{,*/}*.js'
             ]
         },
         mocha: {
@@ -168,17 +170,6 @@ module.exports = function (grunt) {
                 }]
             }
         },
-        // not used since Uglify task does concat,
-        // but still available if needed
-        /*concat: {
-            dist: {}
-        },*/
-        // not enabled since usemin task does concat and uglify
-        // check index.html to edit your build targets
-        // enable this task if you prefer defining your build targets here
-        /*uglify: {
-            dist: {}
-        },*/
         useminPrepare: {
             options: {
                 dest: '<%= yeoman.dist %>'
@@ -212,44 +203,6 @@ module.exports = function (grunt) {
                 }]
             }
         },
-        cssmin: {
-            // This task is pre-configured if you do not wish to use Usemin
-            // blocks for your CSS. By default, the Usemin block from your
-            // `index.html` will take care of minification, e.g.
-            //
-            //     <!-- build:css({.tmp,app}) css/main.css -->
-            //
-            // dist: {
-            //     files: {
-            //         '<%= yeoman.dist %>/css/main.css': [
-            //             '.tmp/css/{,*/}*.css',
-            //             '<%= yeoman.app %>/css/{,*/}*.css'
-            //         ]
-            //     }
-            // }
-        },
-        htmlmin: {
-            dist: {
-                options: {
-                    /*removeCommentsFromCDATA: true,
-                    // https://github.com/yeoman/grunt-usemin/issues/44
-                    //collapseWhitespace: true,
-                    collapseBooleanAttributes: true,
-                    removeAttributeQuotes: true,
-                    removeRedundantAttributes: true,
-                    useShortDoctype: true,
-                    removeEmptyAttributes: true,
-                    removeOptionalTags: true*/
-                },
-                files: [{
-                    expand: true,
-                    cwd: '<%= yeoman.app %>',
-                    src: '*.html',
-                    dest: '<%= yeoman.dist %>'
-                }]
-            }
-        },
-        // Put files not handled in other tasks here
         copy: {
             dist: {
                 files: [{
@@ -260,9 +213,10 @@ module.exports = function (grunt) {
                     src: [
                         '*.{ico,png,txt}',
                         '.htaccess',
+                        'index.html',
                         'img/{,*/}*.{webp,gif}',
                         'css/{,*/}*.{jpg,gif,png,webp}',
-                        'css/fonts/*'
+                        'css/fonts/*/{,*}'
                     ]
                 }]
             },
@@ -295,8 +249,7 @@ module.exports = function (grunt) {
                 'compass:dist',
                 'copy:styles',
                 'imagemin',
-                'svgmin',
-                'htmlmin'
+                'svgmin'
             ]
         }
     });
@@ -315,24 +268,19 @@ module.exports = function (grunt) {
         ]);
     });
 
-    grunt.registerTask('test', [
-        'clean:server',
-        'concurrent:test',
-        'autoprefixer',
-        'connect:test',
-        'mocha'
-    ]);
-
     grunt.registerTask('build', [
         'clean:dist',
         'useminPrepare',
         'concurrent:dist',
         'autoprefixer',
         'concat',
-        'cssmin',
         'uglify',
         'copy:dist',
         'usemin'
+    ]);
+
+    grunt.registerTask('check', [
+        'jshint'
     ]);
 
     grunt.registerTask('deploy', [
@@ -342,7 +290,6 @@ module.exports = function (grunt) {
 
     grunt.registerTask('default', [
         //'jshint',
-        //'test',
         'build'
     ]);
 
