@@ -1,0 +1,1207 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<meta name="format-detection" content="telephone=no" />
+	<meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, target-densitydpi=device-dpi" />
+
+	<title>Emergency Disaster Services - Canteen Report</title>
+
+	<link rel="stylesheet" href="css/main.css">
+
+    <script src="cordova.js"></script>
+    <script>
+
+        function onDeviceReady() {
+            console.log('onDeviceReady');
+        }
+
+        function onLoad() {
+            document.addEventListener("deviceready", onDeviceReady, false);
+        }
+
+    </script>
+
+</head>
+<body style="position: relative;" onload="onLoad()">
+
+    <div id="container">
+
+    	<section id="start" class="container start">
+
+    		<header class="row start-header">
+    			<img src="./img/logo.png" alt="The Salvation Army — Emergency Disaster Services" width="250" height="250" />
+    			<h1>Canteen Report</h1>
+    		</header>
+
+    		<div class="row new-report">
+    			<button id="new-report-button" class="btn btn-primary" alt="New Report">New Report</button>
+    		</div>
+
+            <div id="js-saved-reports" class="saved-reports row">
+                <h2>Unsubmitted Reports</h2>
+                <div id="js-saved-reports-list" class="saved-reports-list">
+                    <p>No reports to finish and submit. Keep up the good work!</p>
+                </div>
+            </div>
+
+        </section>
+
+        <section id="app">
+
+        	<header id="header" class="app-header">
+        		<h1>Canteen Report</h1>
+        		<button id="btn-sync" class="btn btn-default btn-secondary">
+                    <div id="sync-spinner"><img src="img/spinner.png" width="20" height="20" /></div>
+                    <div id="btn-sync-label">Sync</div>
+                </button>
+        		<button id="btn-close" class="btn btn-default btn-secondary">Close</button>
+        	</header>
+
+        	<div id="left-menu" class="left-menu">
+        		<ul class="nav">
+        			<li class="active">
+        				<a href="#incident" class="glyphicon glyphicon-flag">Incident</a>
+        			</li>
+        			<li>
+        				<a href="#team" class="glyphicon glyphicon-user">Team</a>
+        			</li>
+        			<li>
+        				<a href="#services" class="glyphicon glyphicon-list-alt">Services</a>
+        			</li>
+        			<li>
+        				<a href="#end" class="glyphicon glyphicon-check">Finish</a>
+        			</li>
+        		</ul>
+        	</div>
+
+        	<div class="container framed">
+
+        		<!-- WE NEED TO DYNAMICALLY CREATE THE UNIQUE ID FOR THE FORM ON "NEW REPORT" -->
+        		<form id="form">
+
+                    <!-- added in canteenreport.storage -->
+                    <input name="incident-id" id="incident-id" type="hidden" />
+                    <input name="final" id="final" type="hidden" value="false" />
+                    <input name="creation-date" id="creation-date" type="hidden" />
+
+                    <!--
+                        INCIDENT
+                    -->
+
+                    <section id="incident" class="canteen-well">
+
+                    	<fieldset>
+
+                    		<div class="form-group row">
+
+                                <div class="col-sm-4">
+
+                        			<label class="required control-label" for="incident-start">
+                        				Unit Number<abbr title="required">*</abbr>
+                        			</label>
+
+                        			<div class="input-group input-group-lg">
+                        				<input class="form-control" name="incident-unit-number" id="incident-unit-number" type="text" required />
+                        			</div>
+
+                                </div>
+
+                    		</div>
+
+                    		<div class="form-group row">
+
+                                <div class="col-sm-6">
+
+                        			<label class="required control-label">
+                        				Dispatch<abbr title="required">*</abbr>
+                        			</label>
+
+                        			<div class="input-group input-group-lg">
+                        				<input class="form-control form-control-date" name="incident-start" id="incident-start" type="datetime-local" />
+                        				<label class="input-group-addon glyphicon glyphicon-calendar" for="incident-start"></label>
+                        			</div>
+
+                                </div>
+
+                    		</div>
+
+                            <div class="form-group row">
+
+                                <div class="col-sm-6">
+
+                                    <label class="required control-label">
+                                        In Route<abbr title="required">*</abbr>
+                                    </label>
+
+                                    <div class="input-group input-group-lg">
+                                        <input class="form-control form-control-date" name="incident-inroute" id="incident-inroute" type="datetime-local" />
+                                        <label class="input-group-addon glyphicon glyphicon-calendar" for="incident-inroute"></label>
+                                    </div>
+
+                                </div>
+
+                                <div class="col-sm-6">
+
+                                    <label class="required control-label">
+                                        On the Scene<abbr title="required">*</abbr>
+                                    </label>
+
+                                    <div class="input-group input-group-lg">
+                                        <input class="form-control form-control-date" name="incident-onscene" id="incident-onscene" type="datetime-local" />
+                                        <label class="input-group-addon glyphicon glyphicon-calendar" for="incident-onscene"></label>
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                    		<div class="form-group">
+
+                                <div class="row">
+
+                                    <div class="col-sm-8">
+
+                                        <h2>Location of Incident</h2>
+
+                            			<label class="required control-label minor" for="incident-address">
+                            				Address<abbr title="required">*</abbr>
+                            			</label>
+
+                                        <div class="input-group input-group-lg">
+                                            <input class="input-xlarge form-control" name="incident-address" id="incident-address" type="text" />
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                                <div class="row">
+
+                                    <div class="col-sm-5">
+
+                                        <label class="required control-label minor" for="incident-city">
+                                            City<abbr title="required">*</abbr>
+                                        </label>
+
+                                        <div class="input-group input-group-lg">
+                                            <input class="input-xlarge form-control" name="incident-city" id="incident-city" type="text" />
+                                        </div>
+
+                                    </div>
+
+                                    <div class="col-sm-2">
+
+                                        <label class="required control-label minor" for="incident-state">
+                                            State<abbr title="required">*</abbr>
+                                        </label>
+
+                                        <div class="input-group input-group-lg">
+                                            <select class="input-xlarge form-control" name="incident-state" id="incident-state">
+                                                <option value="AL">AL</option>
+                                                <option value="AK">AK</option>
+                                                <option value="AZ">AZ</option>
+                                                <option value="AR">AR</option>
+                                                <option value="CA">CA</option>
+                                                <option value="CO">CO</option>
+                                                <option value="CT">CT</option>
+                                                <option value="DE">DE</option>
+                                                <option value="DC">DC</option>
+                                                <option value="FL">FL</option>
+                                                <option value="GA">GA</option>
+                                                <option value="HI">HI</option>
+                                                <option value="ID">ID</option>
+                                                <option value="IL">IL</option>
+                                                <option value="IN">IN</option>
+                                                <option value="IA">IA</option>
+                                                <option value="KS">KS</option>
+                                                <option value="KY">KY</option>
+                                                <option value="LA">LA</option>
+                                                <option value="ME">ME</option>
+                                                <option value="MD">MD</option>
+                                                <option value="MA">MA</option>
+                                                <option value="MI">MI</option>
+                                                <option value="MN">MN</option>
+                                                <option value="MS">MS</option>
+                                                <option value="MO">MO</option>
+                                                <option value="MT">MT</option>
+                                                <option value="NE">NE</option>
+                                                <option value="NV">NV</option>
+                                                <option value="NH">NH</option>
+                                                <option value="NJ">NJ</option>
+                                                <option value="NM">NM</option>
+                                                <option value="NY">NY</option>
+                                                <option value="NC">NC</option>
+                                                <option value="ND">ND</option>
+                                                <option value="OH">OH</option>
+                                                <option value="OK">OK</option>
+                                                <option value="OR">OR</option>
+                                                <option value="PA">PA</option>
+                                                <option value="RI">RI</option>
+                                                <option value="SC">SC</option>
+                                                <option value="SD">SD</option>
+                                                <option value="TN">TN</option>
+                                                <option value="TX">TX</option>
+                                                <option value="UT">UT</option>
+                                                <option value="VT">VT</option>
+                                                <option value="VA">VA</option>
+                                                <option value="WA">WA"</option>
+                                                <option value="WV">WV</option>
+                                                <option value="WI">WI</option>
+                                                <option value="WI">WI</option>
+                                            </select>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="col-sm-3">
+
+                                        <label class="required control-label minor" for="incident-zipcode">
+                                            Zip
+                                        </label>
+
+                                        <div class="input-group input-group-lg">
+                                            <input class="input-xlarge form-control" name="incident-zipcode" id="incident-zipcode" type="text" />
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                    		</div>
+
+                    		<div class="form-group row">
+
+                                <div class="col-sm-10">
+
+                        			<label class="required control-label">
+                        				Type of Call<abbr title="required">*</abbr>
+                        			</label>
+
+                        			<div class="type-container">
+
+                        				<div class="row">
+
+                        					<div class="col-sm-6">
+
+                        						<div class="input-group">
+                        							<span class="input-group-addon">
+                        								<input type="checkbox" id="incident-type-fire" name="incident-type-fire" />
+                        							</span>
+                        							<label for="incident-type-fire" class="form-control">Fire/Alarm/Companies</label>
+                        						</div>
+
+                        					</div>
+
+                        					<div class="col-sm-6">
+
+                        						<div class="input-group">
+                        							<span class="input-group-addon">
+                        								<input type="checkbox" id="incident-type-flood" name="incident-type-flood" />
+                        							</span>
+                        							<label for="incident-type-flood" class="form-control">Flood</label>
+                        						</div>
+
+                        					</div>
+
+                        				</div>
+
+                        				<div class="row">
+
+                        					<div class="col-sm-6">
+
+                        						<div class="input-group">
+                        							<span class="input-group-addon">
+                        								<input type="checkbox" id="incident-type-hazmat" name="incident-type-hazmat" />
+                        							</span>
+                        							<label for="incident-type-hazmat" class="form-control">Hazmat</label>
+                        						</div>
+
+                        					</div>
+
+                        					<div class="col-sm-6">
+
+                        						<div class="input-group">
+                        							<span class="input-group-addon">
+                        								<input type="checkbox" id="incident-type-special-event" name="incident-type-special-event" />
+                        							</span>
+                        							<label for="incident-type-special-event" class="form-control">Special Event</label>
+                        						</div>
+
+                        					</div>
+
+                        				</div>
+
+                        				<div class="row">
+
+                        					<div class="col-sm-6">
+
+                        						<div class="input-group">
+                        							<span class="input-group-addon">
+                        								<input type="checkbox" id="incident-type-maintenence" name="incident-type-maintenence" />
+                        							</span>
+                        							<label for="incident-type-maintenence" class="form-control">Maintenence</label>
+                        						</div>
+
+                        					</div>
+
+                        					<div class="col-sm-6">
+
+                        						<div class="input-group">
+                        							<span class="input-group-addon">
+                        								<input type="checkbox" id="incident-type-other" name="incident-type-other"  />
+                        							</span>
+                        							<input type="text" class="form-control" placeholder="Other" name="incident-other" id="incident-other" />
+
+                        						</div>
+
+                        					</div>
+
+                        				</div>
+
+                        			</div>
+
+                                </div>
+
+                    		</div>
+
+                    	</fieldset>
+
+                    </section>
+
+
+                    <!--
+                        TEAM
+                    -->
+
+                    <section id="team" class="canteen-well">
+
+                    	<fieldset>
+
+                            <div class="row">
+
+                                <div id="js-team" class="col-sm-8">
+
+                                    <label>Salvation Army Team</label>
+
+                            		<!-- <div class="form-group">
+
+                                        <label class="required control-label minor" for="incident-driver">
+                                            Driver<abbr title="required">*</abbr>
+                                        </label>
+
+                            			<div class="input-group input-group-lg">
+                            				<input class="form-control" name="team-member" id="team-member" type="text" />
+                            			</div>
+
+                            		</div> -->
+
+                                    <div id="js-team-members" class="form-group members-group">
+
+                                        <div class="input-group input-group-lg team-member team-member-1">
+                                            <input class="form-control" placeholder="Staff/Volunteer (Optional)" name="team-member" id="team-member-1" type="text" />
+                                            <span class="input-group-btn js-remove-member-container">
+                                                <button class="btn btn-primary glyphicon glyphicon-minus js-remove-member" type="button"></button>
+                                            </span>
+                                            <span class="input-group-btn js-add-member-container">
+                                                <button class="btn btn-primary glyphicon glyphicon-plus js-add-member" type="button"></button>
+                                            </span>
+                                        </div>
+
+                                    </div>
+
+                                    <!-- <button id="js-add-member-btn" class="btn btn-primary">
+                                        Add Team Member
+                                    </button> -->
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="row canteen-row">
+
+                                <div class="col-sm-12">
+
+                                    <h2>Red Cross Referral</h2>
+
+                                    <div class="row">
+
+                                        <div class="col-sm-8">
+
+                                    		<div class="form-group">
+
+                                                <label class="required control-label minor" for="team-refferal-name">
+                                                    Name
+                                                </label>
+
+                                    			<div class="input-group input-group-lg">
+                                    				<input class="form-control" name="team-refferal-name" id="team-refferal-name" type="text" />
+                                    			</div>
+
+                                    		</div>
+
+                                        </div>
+
+                                    </div>
+
+                                    <div class="row">
+
+                                        <div class="col-sm-4">
+
+                                    		<div class="form-group">
+
+                                                <label class="required control-label minor" for="team-refferal-phone">
+                                                    Phone Number
+                                                </label>
+
+                                    			<div class="input-group input-group-lg">
+                                    				<input class="form-control" name="team-refferal-phone" id="team-refferal-phone" type="text" />
+                                    			</div>
+
+                                    		</div>
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                    	</fieldset>
+
+                    </section>
+
+
+                    <!--
+                        SERVICES
+                    -->
+
+                    <section id="services" class="canteen-well">
+
+                    	<fieldset>
+
+                            <div class="row">
+
+                                <div class="col-sm-12">
+
+                            		<ul class="nav nav-tabs">
+                            			<li class="active"><a href="#beverage" data-toggle="tab">Beverage</a></li>
+                            			<li><a href="#food" data-toggle="tab">Food</a></li>
+                            			<li><a href="#clothing" data-toggle="tab">Clothing</a></li>
+                            			<li><a href="#other" data-toggle="tab">Other</a></li>
+                            		</ul>
+
+                            		<div class="tab-content">
+
+                                        <!--
+                                            SERVICES
+                                        -->
+                                        <div class="tab-pane active" id="beverage">
+
+                                        	<div class="container-fluid amounts">
+
+                                        		<div class="row">
+
+                                        			<div class="col-sm-3">
+                                        				<label class="form-control form-control-label">Coffee</label>
+                                        			</div>
+
+                                        			<div class="col-sm-3">
+                                        				<div class="input-group">
+                                        					<span class="input-group-btn">
+                                        						<button class="btn btn-primary increment" type="button">
+                                        							<span class="glyphicon glyphicon-plus"></span>
+                                        						</button>
+                                        					</span>
+                                        					<input class="form-control form-center" placeholder="0" name="team-drink-coffee-amount" id="team-drink-coffee-amount" type="number" />
+                                        					<span class="input-group-btn">
+                                        						<button class="btn btn-primary increment-minus" type="button">
+                                        							<span class="glyphicon glyphicon-minus"></span>
+                                        						</button>
+                                        					</span>
+                                        				</div>
+                                        			</div>
+
+                                        			<div class="col-sm-4">
+                                        				<select class="form-control" id="team-drink-coffee-unit" name="team-drink-coffee-unit">
+                                        					<option value="gallon">Gallon</option>
+                                        					<option value="pot">Pot</option>
+                                        				</select>
+                                        			</div>
+
+                                        		</div>
+
+                                        		<div class="row">
+
+                                        			<div class="col-sm-3">
+                                        				<label class="form-control form-control-label">Cocoa</label>
+                                        			</div>
+
+                                        			<div class="col-sm-3">
+                                        				<div class="input-group">
+                                        					<span class="input-group-btn">
+                                        						<button class="btn btn-primary increment" type="button">
+                                        							<span class="glyphicon glyphicon-plus"></span>
+                                        						</button>
+                                        					</span>
+                                        					<input class="form-control form-center" placeholder="0" name="team-drink-cocoa-amount" id="team-drink-cocoa-amount" type="number" />
+                                        					<span class="input-group-btn">
+                                        						<button class="btn btn-primary increment-minus" type="button">
+                                        							<span class="glyphicon glyphicon-minus"></span>
+                                        						</button>
+                                        					</span>
+                                        				</div>
+                                        			</div>
+
+                                        			<div class="col-sm-4">
+                                        				<select class="form-control" id="team-drink-cocoa-unit" id="team-drink-cocoa-unit">
+                                        					<option value="gallon">Gallon</option>
+                                        					<option value="pot">Pot</option>
+                                        				</select>
+                                        			</div>
+
+                                        		</div>
+
+                                        		<div class="row">
+
+                                        			<div class="col-sm-3">
+                                        				<label class="form-control form-control-label">Hot Tea</label>
+                                        			</div>
+
+                                        			<div class="col-sm-3">
+                                        				<div class="input-group">
+                                        					<span class="input-group-btn">
+                                        						<button class="btn btn-primary increment" type="button">
+                                        							<span class="glyphicon glyphicon-plus"></span>
+                                        						</button>
+                                        					</span>
+                                        					<input class="form-control form-center" placeholder="0" name="team-drink-tea-amount" id="team-drink-tea-amount" type="number" />
+                                        					<span class="input-group-btn">
+                                        						<button class="btn btn-primary increment-minus" type="button">
+                                        							<span class="glyphicon glyphicon-minus"></span>
+                                        						</button>
+                                        					</span>
+                                        				</div>
+                                        			</div>
+
+                                        			<div class="col-sm-4">
+                                        				<select class="form-control" id="team-drink-tea-unit" name="team-drink-tea-unit">
+                                        					<option value="gallon">Gallon</option>
+                                        					<option value="pot">Pot</option>
+                                        				</select>
+                                        			</div>
+
+                                        		</div>
+
+                                        		<div class="row">
+
+                                        			<div class="col-sm-3">
+                                        				<label class="form-control form-control-label">Cold Drinks</label>
+                                        			</div>
+
+                                        			<div class="col-sm-3">
+                                        				<div class="input-group">
+                                        					<span class="input-group-btn">
+                                        						<button class="btn btn-primary increment" type="button">
+                                        							<span class="glyphicon glyphicon-plus"></span>
+                                        						</button>
+                                        					</span>
+                                        					<input class="form-control form-center" placeholder="0" name="team-cold-drinks-amount" id="team-cold-drinks-amount" type="number" />
+                                        					<span class="input-group-btn">
+                                        						<button class="btn btn-primary increment-minus" type="button">
+                                        							<span class="glyphicon glyphicon-minus"></span>
+                                        						</button>
+                                        					</span>
+                                        				</div>
+                                        			</div>
+
+                                        			<div class="col-sm-4">
+                                        				<select class="form-control" id="team-drink-cold-drinks-unit" name="team-drink-cold-drinks-unit">
+                                        					<option value="gallon">Gallon</option>
+                                        					<option value="pot">Pot</option>
+                                        				</select>
+                                        			</div>
+
+                                        		</div>
+
+                                        		<div class="row">
+
+                                        			<div class="col-sm-3">
+                                        				<label class="form-control form-control-label">Water</label>
+                                        			</div>
+
+                                        			<div class="col-sm-3">
+                                        				<div class="input-group">
+                                        					<span class="input-group-btn">
+                                        						<button class="btn btn-primary increment" type="button">
+                                        							<span class="glyphicon glyphicon-plus"></span>
+                                        						</button>
+                                        					</span>
+                                        					<input class="form-control form-center" placeholder="0" name="team-water-amount" id="team-water-amount" type="number" />
+                                        					<span class="input-group-btn">
+                                        						<button class="btn btn-primary increment-minus" type="button">
+                                        							<span class="glyphicon glyphicon-minus"></span>
+                                        						</button>
+                                        					</span>
+                                        				</div>
+                                        			</div>
+
+                                        			<div class="col-sm-4">
+                                        				<select class="form-control" id="team-drink-water-unit" id="team-drink-water-unit">
+                                        					<option value="gallon">Gallon</option>
+                                        					<option value="pot">Pot</option>
+                                        				</select>
+                                        			</div>
+
+                                        		</div>
+
+                                        	</div>
+
+                                            <!-- <button class="btn btn-primary">
+                                                New Item
+                                            </button> -->
+
+                                        </div>
+
+                                        <!--
+                                            FOOD
+                                        -->
+                                        <div class="tab-pane" id="food">
+
+                                        	<div class="container-fluid amounts">
+
+                                        		<div class="row">
+
+                                        			<div class="col-sm-3">
+                                        				<label class="form-control form-control-label">Donuts</label>
+                                        			</div>
+
+                                        			<div class="col-sm-3">
+                                        				<div class="input-group">
+                                        					<span class="input-group-btn">
+                                        						<button class="btn btn-primary increment" type="button">
+                                        							<span class="glyphicon glyphicon-plus"></span>
+                                        						</button>
+                                        					</span>
+                                        					<input class="form-control form-center" placeholder="0" name="team-food-donuts-amount" id="team-food-donuts-amount" type="number" />
+                                        					<span class="input-group-btn">
+                                        						<button class="btn btn-primary increment-minus" type="button">
+                                        							<span class="glyphicon glyphicon-minus"></span>
+                                        						</button>
+                                        					</span>
+                                        				</div>
+                                        			</div>
+
+                                        			<div class="col-sm-3">
+                                        				<select class="form-control" id="team-food-donuts-unit" name="team-food-donuts-unit">
+                                        					<option value="gallon">Each</option>
+                                        					<option value="pot">Dozen</option>
+                                        				</select>
+                                        			</div>
+
+                                        		</div>
+
+                                        		<div class="row">
+
+                                        			<div class="col-sm-3">
+                                        				<label class="form-control form-control-label">Cookies</label>
+                                        			</div>
+
+                                        			<div class="col-sm-3">
+                                        				<div class="input-group">
+                                        					<span class="input-group-btn">
+                                        						<button class="btn btn-primary increment" type="button">
+                                        							<span class="glyphicon glyphicon-plus"></span>
+                                        						</button>
+                                        					</span>
+                                        					<input class="form-control form-center" placeholder="0" name="team-food-cookies-amount" id="team-food-cookies-amount" type="text" />
+                                        					<span class="input-group-btn">
+                                        						<button class="btn btn-primary increment-minus" type="button">
+                                        							<span class="glyphicon glyphicon-minus"></span>
+                                        						</button>
+                                        					</span>
+                                        				</div>
+                                        			</div>
+
+                                        			<div class="col-sm-3">
+                                        				<select class="form-control" id="team-food-cookies-unit" name="team-food-cookies-unit">
+                                        					<option value="gallon">Each</option>
+                                        					<option value="pot">Dozen</option>
+                                        				</select>
+                                        			</div>
+
+                                        		</div>
+
+                                        		<div class="row">
+
+                                        			<div class="col-sm-3">
+                                        				<label class="form-control form-control-label">Sanwiches</label>
+                                        			</div>
+
+                                        			<div class="col-sm-3">
+                                        				<div class="input-group">
+                                        					<span class="input-group-btn">
+                                        						<button class="btn btn-primary increment" type="button">
+                                        							<span class="glyphicon glyphicon-plus"></span>
+                                        						</button>
+                                        					</span>
+                                        					<input class="form-control form-center" placeholder="0" name="team-food-sandwiches-amount" id="team-food-sandwiches-amount" type="number" />
+                                        					<span class="input-group-btn">
+                                        						<button class="btn btn-primary increment-minus" type="button">
+                                        							<span class="glyphicon glyphicon-minus"></span>
+                                        						</button>
+                                        					</span>
+                                        				</div>
+                                        			</div>
+
+                                        			<div class="col-sm-3">
+                                        				<select class="form-control" id="team-food-sandwiches-unit" name="team-food-sandwiches-unit">
+                                        					<option value="gallon">Each</option>
+                                        					<option value="pot">Dozen</option>
+                                        				</select>
+                                        			</div>
+
+                                        		</div>
+
+                                        		<div class="row">
+
+                                        			<div class="col-sm-3">
+                                        				<label class="form-control form-control-label">Hot Dogs</label>
+                                        			</div>
+
+                                        			<div class="col-sm-3">
+                                        				<div class="input-group">
+                                        					<span class="input-group-btn">
+                                        						<button class="btn btn-primary increment" type="button">
+                                        							<span class="glyphicon glyphicon-plus"></span>
+                                        						</button>
+                                        					</span>
+                                        					<input class="form-control form-center" placeholder="0" name="team-food-hot-dogs-amount" id="team-food-hot-dogs-amount" type="number" />
+                                        					<span class="input-group-btn">
+                                        						<button class="btn btn-primary increment-minus" type="button">
+                                        							<span class="glyphicon glyphicon-minus"></span>
+                                        						</button>
+                                        					</span>
+                                        				</div>
+                                        			</div>
+
+                                        			<div class="col-sm-3">
+                                        				<select class="form-control" id="team-food-hot-dogs-unit" name="team-food-hot-dogs-unit">
+                                        					<option value="gallon">Each</option>
+                                        					<option value="pot">Dozen</option>
+                                        				</select>
+                                        			</div>
+
+                                        		</div>
+
+                                        		<div class="row">
+
+                                        			<div class="col-sm-3">
+                                        				<label class="form-control form-control-label">Snacks</label>
+                                        			</div>
+
+                                        			<div class="col-sm-3">
+                                        				<div class="input-group">
+                                        					<span class="input-group-btn">
+                                        						<button class="btn btn-primary increment" type="button">
+                                        							<span class="glyphicon glyphicon-plus"></span>
+                                        						</button>
+                                        					</span>
+                                        					<input class="form-control form-center" placeholder="0" name="team-snacks-amount" id="team-snacks-amount" type="number" />
+                                        					<span class="input-group-btn">
+                                        						<button class="btn btn-primary increment-minus" type="button">
+                                        							<span class="glyphicon glyphicon-minus"></span>
+                                        						</button>
+                                        					</span>
+                                        				</div>
+                                        			</div>
+
+                                        			<div class="col-sm-3">
+                                        				<select class="form-control" id="team-food-snacks-unit" id="team-food-snacks-unit">
+                                        					<option value="gallon">Each</option>
+                                        					<option value="pot">Dozen</option>
+                                        				</select>
+                                        			</div>
+
+                                        		</div>
+
+                                        	</div>
+
+                                        </div>
+
+                                        <!--
+                                            CLOTHING
+                                        -->
+                                        <div class="tab-pane" id="clothing">
+
+                                        	<div class="container-fluid amounts">
+
+                                        		<div class="row">
+
+                                        			<div class="col-sm-3">
+                                        				<label class="form-control form-control-label">Gloves</label>
+                                        			</div>
+
+                                        			<div class="col-sm-3">
+                                        				<div class="input-group">
+                                        					<span class="input-group-btn">
+                                        						<button class="btn btn-primary increment" type="button">
+                                        							<span class="glyphicon glyphicon-plus"></span>
+                                        						</button>
+                                        					</span>
+                                        					<input class="form-control form-center" placeholder="0" name="team-clothing-gloves-amount" id="team-clothing-gloves-amount" type="number" />
+                                        					<span class="input-group-btn">
+                                        						<button class="btn btn-primary increment-minus" type="button">
+                                        							<span class="glyphicon glyphicon-minus"></span>
+                                        						</button>
+                                        					</span>
+                                        				</div>
+                                        			</div>
+
+                                        		</div>
+
+                                        		<div class="row">
+
+                                        			<div class="col-sm-3">
+                                        				<label class="form-control form-control-label">Blankets</label>
+                                        			</div>
+
+                                        			<div class="col-sm-3">
+                                        				<div class="input-group">
+                                        					<span class="input-group-btn">
+                                        						<button class="btn btn-primary increment" type="button">
+                                        							<span class="glyphicon glyphicon-plus"></span>
+                                        						</button>
+                                        					</span>
+                                        					<input class="form-control form-center" placeholder="0" name="team-clothing-blankets-amount" id="team-clothing-blankets-amount" type="number" />
+                                        					<span class="input-group-btn">
+                                        						<button class="btn btn-primary increment-minus" type="button">
+                                        							<span class="glyphicon glyphicon-minus"></span>
+                                        						</button>
+                                        					</span>
+                                        				</div>
+                                        			</div>
+
+                                        		</div>
+
+                                        		<div class="row">
+
+                                        			<div class="col-sm-3">
+                                        				<label class="form-control form-control-label">Clothing</label>
+                                        			</div>
+
+                                        			<div class="col-sm-3">
+                                        				<div class="input-group">
+                                        					<span class="input-group-btn">
+                                        						<button class="btn btn-primary increment" type="button">
+                                        							<span class="glyphicon glyphicon-plus"></span>
+                                        						</button>
+                                        					</span>
+                                        					<input class="form-control form-center" placeholder="0" name="team-clothing-amount" id="team-clothing-amount" type="number" />
+                                        					<span class="input-group-btn">
+                                        						<button class="btn btn-primary increment-minus" type="button">
+                                        							<span class="glyphicon glyphicon-minus"></span>
+                                        						</button>
+                                        					</span>
+                                        				</div>
+                                        			</div>
+
+                                        		</div>
+
+                                        		<div class="row">
+
+                                        			<div class="col-sm-3">
+                                        				<label class="form-control form-control-label">Hand Warmers</label>
+                                        			</div>
+
+                                        			<div class="col-sm-3">
+                                        				<div class="input-group">
+                                        					<span class="input-group-btn">
+                                        						<button class="btn btn-primary increment" type="button">
+                                        							<span class="glyphicon glyphicon-plus"></span>
+                                        						</button>
+                                        					</span>
+                                        					<input class="form-control form-center" placeholder="0" name="team-clothing-hand-warmers--amount" id="team-clothing-hand-warmers--amount" type="number" />
+                                        					<span class="input-group-btn">
+                                        						<button class="btn btn-primary increment-minus" type="button">
+                                        							<span class="glyphicon glyphicon-minus"></span>
+                                        						</button>
+                                        					</span>
+                                        				</div>
+                                        			</div>
+
+                                        		</div>
+
+                                        	</div>
+
+                                        </div>
+
+                                        <!--
+                                            OTHER
+                                        -->
+                                        <div class="tab-pane" id="other">
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </fieldset>
+
+                    </section>
+
+
+                    <section id="counseling" class="canteen-well">
+
+                        <fieldset>
+
+                            <div class="row">
+
+                                <div class="col-sm-6">
+
+                                    <h2>Counseling/Prayer</h2>
+
+                                    <div class="form-group">
+
+                                        <label class="required control-label minor" for="services-administer">
+                                            Administer
+                                        </label>
+
+                                        <div class="input-group input-group-lg">
+                                            <input class="input-xlarge form-control" name="services-counseling-administer" id="services-counseling-administer" type="text" />
+                                        </div>
+
+                                    </div>
+
+                                    <div class="form-group">
+
+                                        <label class="required control-label minor" for="services-administer">
+                                            Individual
+                                        </label>
+
+                                        <div class="input-group input-group-lg">
+                                            <input class="input-xlarge form-control" name="services-counseling-individual" id="services-counseling-individual" type="text" />
+                                        </div>
+
+                                    </div>
+
+                                    <div class="form-group">
+
+                                        <label class="required control-label minor" for="services-administer">
+                                            Reason
+                                        </label>
+
+                                        <div class="input-group input-group-lg">
+                                            <input class="input-xlarge form-control" name="services-counseling-reason" id="services-counseling-reason" type="text" />
+                                        </div>
+
+                                    </div>
+
+                                    <div class="form-group">
+
+                                        <label class="required control-label minor" for="services-administer">
+                                            Phone Number
+                                        </label>
+
+                                        <div class="input-group input-group-lg">
+                                            <input class="input-xlarge form-control" name="services-counseling-phone-number" id="services-counseling-phone-number" type="text" />
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <button class="btn btn-primary">
+                                        Add More
+                                    </button>
+                                </div>
+                            </div>
+
+                        </fieldset>
+
+                        <fieldset>
+
+                            <div class="row canteen-row">
+
+                                <div class="col-sm-12">
+
+                                    <label class="required control-label" for="services-administer">
+                                        Notes
+                                    </label>
+
+                                    <textarea class="form-control" rows="8" id="notes" name="notes"></textarea>
+
+                                </div>
+
+                            </div>
+
+                        </fieldset>
+
+                    </section>
+
+                    <!--
+                        END
+                    -->
+                    <section id="end" class="canteen-well">
+
+                    	<fieldset>
+
+                            <div class="row">
+
+                                <div class="col-sm-6">
+
+                            		<div class="form-group">
+
+                            			<label class="required control-label" for="end-time">
+                            				End<abbr title="required">*</abbr>
+                            			</label>
+
+                            			<div class="input-group input-group-lg">
+                            				<input class="form-control form-control-date" name="end-time" id="end-time" type="datetime-local" />
+                            				<span class="input-group-addon glyphicon glyphicon-calendar"></span>
+                            			</div>
+
+                            		</div>
+
+                                </div>
+
+                            </div>
+
+                            <div class="row">
+
+                                <div class="col-sm-4">
+
+                            		<div class="form-group">
+
+                            			<h2>
+                            				Total Mileage
+                            			</h2>
+
+                                        <label class="required control-label minor" for="end-total-mileage">
+                                            Miles<abbr title="required">*</abbr>
+                                        </label>
+
+                            			<div class="input-group input-group-lg">
+                            				<input class="form-control" name="end-total-mileage" id="end-total-mileage" type="text" />
+                            			</div>
+
+                            		</div>
+
+                                </div>
+
+                            </div>
+
+                            <!--
+                            <div class="form-group">
+
+                                <label class="required control-label" for="end-route-time">
+                                    Total Route Time<abbr title="required">*</abbr>
+                                </label>
+
+                                <div class="input-group input-group-lg">
+                                    <input class="form-control" placeholder="Total Route Time" name="end-route-time" id="end-route-time" type="text" />
+                                </div>
+
+                            </div>
+                        	-->
+
+    	                    <div class="form-group">
+
+    	                    	<label class="required control-label" for="end-fuel-level">
+    	                    		Fuel Level<abbr title="required">*</abbr>
+    	                    	</label>
+
+    	                    	<input type="text" id="end-fuel-level" name="end-fuel-level" class="hidden" />
+
+    	                    	<div class="btn-group btn-group-justified">
+    	                    		<div class="btn-group">
+    	                    			<button type="button" class="btn btn-default fuel-level-button" data-level="100">Full</button>
+    	                    		</div>
+    	                    		<div class="btn-group">
+    	                    			<button type="button" class="btn btn-default fuel-level-button" data-level="75">3/4</button>
+    	                    		</div>
+    	                    		<div class="btn-group">
+    	                    			<button type="button" class="btn btn-default fuel-level-button" data-level="50">1/2</button>
+    	                    		</div>
+    	                    		<div class="btn-group">
+    	                    			<button type="button" class="btn btn-default fuel-level-button" data-level="25">1/4</button>
+    	                    		</div>
+    	                    		<div class="btn-group">
+    	                    			<button type="button" class="btn btn-default fuel-level-button" data-level="0">Empty</button>
+    	                    		</div>
+    	                    	</div>
+
+    	                    </div>
+
+    	                    <div class="form-group">
+
+    	                    	<label class="required control-label" for="end-water-level">
+    	                    		Water Tank Level<abbr title="required">*</abbr>
+    	                    	</label>
+
+    	                    	<input type="text" id="end-water-level" name="end-water-level" class="hidden" />
+
+    	                    	<div class="btn-group btn-group-justified">
+    	                    		<div class="btn-group">
+    	                    			<button type="button" class="btn btn-default water-level-button" data-level="100">Full</button>
+    	                    		</div>
+    	                    		<div class="btn-group">
+    	                    			<button type="button" class="btn btn-default water-level-button" data-level="75">3/4</button>
+    	                    		</div>
+    	                    		<div class="btn-group">
+    	                    			<button type="button" class="btn btn-default water-level-button" data-level="50">1/2</button>
+    	                    		</div>
+    	                    		<div class="btn-group">
+    	                    			<button type="button" class="btn btn-default water-level-button" data-level="25">1/4</button>
+    	                    		</div>
+    	                    		<div class="btn-group">
+    	                    			<button type="button" class="btn btn-default water-level-button" data-level="0">Empty</button>
+    	                    		</div>
+    	                    	</div>
+
+    	                    </div>
+
+                    	</fieldset>
+
+                	</section>
+
+    	            <section id="submit" class="canteen-well">
+
+    	            	<p id="js-form-message" class="form-message">
+                            Ready to submit? Please check all fields before submitting.
+                        </p>
+
+    	            	<button id="js-submit-button" class="btn btn-primary">
+    	            		Submit Final Report
+    	            	</button>
+
+                        <button id="js-delete-button" class="btn btn-link">
+                            Delete
+                        </button>
+
+    	            </section>
+
+                    <section id="confirm">
+                    </section>
+
+            	</form>
+
+        	</div>
+
+    	</section>
+
+    </div>
+
+
+	<script src="js/main.js"></script>
+
+</body>
+</html>
