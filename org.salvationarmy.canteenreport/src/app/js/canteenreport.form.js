@@ -66,8 +66,8 @@
 
 		form.initialize();
 
-		console.group('form.createNewReport');
-		console.info('incident-id: ' + id);
+		// console.group('form.createNewReport');
+		// console.info('incident-id: ' + id);
 
 		// clear the old form
 		form.reset();
@@ -77,7 +77,7 @@
 		$('#incident-id').val(String(id));
 		$('#creation-date').val(String(date));
 
-		console.groupEnd();
+		//console.groupEnd();
 
 		// announce that we created a new report
 		canteenreport.publish('new-report');
@@ -91,8 +91,8 @@
 
 		$('#js-delete-button').show();
 
-		console.group('form.openReport');
-		console.log(report);
+		// console.group('form.openReport');
+		// console.log(report);
 
 		form.initialize();
 
@@ -104,14 +104,14 @@
 			var $field = $form.find('[name="' + name + '"]');
 			var fieldType = $field[0].type;
 			if (fieldType === 'checkbox' || fieldType === 'radio') {
-				console.log('this is a radio button or checkbox');
+				//console.log('this is a radio button or checkbox');
 				$field.prop('checked', 'checked');
 			} else {
 				$field.val(value);
 			}
 		}
 
-		console.groupEnd();
+		//console.groupEnd();
 
 	};
 
@@ -120,7 +120,7 @@
 	 */
 	form.reset = function () {
 
-		console.log('form.reset')
+		//console.log('form.reset')
 
 		$form.find('input:text, input:password, input:file, select, textarea').val('');
 		$form.find('input:radio, input:checkbox').removeAttr('checked').removeAttr('selected');
@@ -133,12 +133,12 @@
 	 */
 	var setUnit = function () {
 
-		console.group('form.setUnit');
+		//console.group('form.setUnit');
 
 		var cookie = document.cookie;
 		var unitNumber;
 
-		console.info('cookie: ' + cookie);
+		//console.info('cookie: ' + cookie);
 
 		// dig through the cookie for what we need
 		var name = 'unitNumber' + "=";
@@ -155,11 +155,11 @@
 			}
 		}
 
-		console.info('unitNumber: ' + unitNumber);
+		//console.info('unitNumber: ' + unitNumber);
 
 		$('#incident-unit-number').val(unitNumber);
 
-		console.groupEnd();
+		//console.groupEnd();
 
 	};
 
@@ -339,7 +339,7 @@
 				// sets a cookie for the last used unit number
 				document.cookie = 'unitNumber=' + $('#incident-unit-number').val();
 
-				console.log('document.cookie: ' + document.cookie);
+				//console.log('document.cookie: ' + document.cookie);
 
 				$(this).addClass('disabled');
 				$('#final').val('true'); // sets the report as final

@@ -10,6 +10,18 @@
 	<!-- build:css(.tmp) css/main.css -->
 	<link rel="stylesheet" href="css/main.css" />
 	<!-- endbuild -->
+
+    <script src="cordova.js"></script>
+    <script>
+
+        function onDeviceReady() {
+            console.log('onDeviceReady');
+        }
+
+        document.addEventListener("deviceready", onDeviceReady, false);
+
+    </script>
+
 </head>
 <body style="position: relative;">
 
@@ -1188,7 +1200,6 @@
 
     </div>
 
-	<!--<script type="text/javascript" src="cordova.js"></script>-->
 
 	<!-- build:js js/main.js -->
 	<script src="bower_components/jquery/dist/jquery.js"></script>

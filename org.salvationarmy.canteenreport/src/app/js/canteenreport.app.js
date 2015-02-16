@@ -7,7 +7,7 @@
 
   var canteenreport = global.canteenreport = {
 
-    debug: true,
+    debug: false,
     screenWidth: screen.width,
     screenHeight: screen.height,
 
@@ -38,7 +38,7 @@
 
   	initialize: function () {
 
-      console.info('app.initialize');
+      console.log('app.initialize');
 
       // position the ui
       this.screenWidth = screen.width;
@@ -83,21 +83,21 @@
       // subscribe to amplify events
       amplify.subscribe('report-saved', $.proxy(this.reportSaved, this));
 
-      amplify.subscribe('request.success', function (settings, data, status) {
-        console.group('request.success');
-        console.info(settings);
-        console.info(data);
-        console.info(status);
-        console.groupEnd();
-      } );
+      // amplify.subscribe('request.success', function (settings, data, status) {
+      //   console.group('request.success');
+      //   console.info(settings);
+      //   console.info(data);
+      //   console.info(status);
+      //   console.groupEnd();
+      // } );
 
-      amplify.subscribe('request.error', function (settings, data, status) {
-        console.group('request.error');
-        console.info(settings);
-        console.info(data);
-        console.info(status);
-        console.groupEnd();
-      } );
+      // amplify.subscribe('request.error', function (settings, data, status) {
+      //   console.group('request.error');
+      //   console.info(settings);
+      //   console.info(data);
+      //   console.info(status);
+      //   console.groupEnd();
+      // } );
 
       //
       // Canteen report subscriptions
@@ -126,7 +126,7 @@
      */
     listUnsubmittedReports: function () {
 
-      console.group('listUnsubmittedReports');
+      //console.group('listUnsubmittedReports');
 
       var formBackupStore = amplify.store(canteenreport.BACKUP_STORE_NAME);
       var $savedForms = $('#js-saved-reports');
@@ -143,7 +143,7 @@
 
           if (value[0]) {
 
-            console.group();
+            //console.group();
 
             var id = value[0].value;
             var date = new Date(Number(id));
@@ -155,11 +155,11 @@
 
             var formattedDate = month + '/' + day + '/' + year + ', ' + hours + ':' + minutes.substr(minutes.length - 2);
 
-            console.log(formattedDate);
+            //console.log(formattedDate);
 
             $savedFormsList.append('<a class="js-open-saved-form-btn open-saved-report-btn date glyphicon glyphicon-chevron-right" data-id="' + id + '">' + formattedDate + '</a>');
 
-            console.groupEnd();
+            //console.groupEnd();
 
           }
 
@@ -173,7 +173,7 @@
 
       $('.js-open-saved-form-btn').on('click', $.proxy(this.openReport, this));
 
-      console.groupEnd();
+      //console.groupEnd();
 
     },
 
@@ -197,17 +197,17 @@
 
       var id = $(event.currentTarget).data().id;
 
-      console.group('openReport');
-      console.log('id: ' + id);
+      // console.group('openReport');
+      // console.log('id: ' + id);
 
       var report = canteenreport.storage.findBackupFormById(id);
 
-      console.log(report);
+      //console.log(report);
       canteenreport.form.openReport(report);
 
       this.changeScreen(this.INPUT_SCREEN);
 
-      console.groupEnd();
+      //console.groupEnd();
 
       return false;
 
@@ -218,20 +218,50 @@
      */
     closeReport: function () {
 
-      console.group('closeReport');
+      //console.group('closeReport');
 
-      var confirmation = window.confirm('Pressing OK will save this report for you to edit and submit later.');
+      if (this.debug) {
 
-      if (confirmation === true) {
-        canteenreport.storage.saveReport();
+        var confirmation = window.confirm('Pressing OK will save this report for you to edit and submit later.');
+
+        if (confirmation === true) {
+          canteenreport.storage.saveReport();
+        }
+
+      } else {
+
+        navigator.notification.confirm (
+          'Pressing OK will save this report for you to edit and submit later.',
+          $.proxy(this.onConfirm, this),
+          'Save This Report?',
+          ['Yes','No']
+        );
+
       }
 
-      this.$leftMenuItems.parent().removeClass("isActive").end().filter("[href=#incident]").parent().addClass("isActive");
+      // this.$leftMenuItems.parent().removeClass("isActive").end().filter("[href=#incident]").parent().addClass("isActive");
 
-      this.listUnsubmittedReports();
-      this.changeScreen(this.HOME_SCREEN);
+      // this.listUnsubmittedReports();
+      // this.changeScreen(this.HOME_SCREEN);
 
-      console.groupEnd();
+      //console.groupEnd();
+
+    },
+
+    onConfirm: function (buttonIndex) {
+
+      switch (buttonIndex) {
+
+        case 1 : {
+          canteenreport.storage.saveReport();
+          canteenreport.listUnsubmittedReports();
+          canteenreport.changeScreen(canteenreport.HOME_SCREEN);
+        }
+        default : {
+          canteenreport.changeScreen(canteenreport.HOME_SCREEN);
+        }
+
+      }
 
     },
 
@@ -258,7 +288,7 @@
      */
     reportSubmitted: function () {
 
-      console.log('reportSubmitted');
+      //console.log('reportSubmitted');
 
     },
 
@@ -276,7 +306,9 @@
     /**
      * Save function for the app. Called from formFocused and from $syncBtn.
      */
-    saveReport: function () {
+    saveReport: function (buttonIndex) {
+
+      //console.log('saveReport ' + buttonIndex);
 
       this.isSyncing = true;
       this.$body.addClass('is-syncing');
@@ -290,7 +322,7 @@
      */
     reportSaved: function () {
 
-      console.info('reportSaved');
+      //console.info('reportSaved');
 
       this.isSyncing = false;
 
@@ -475,9 +507,9 @@
 
     scrollToSectionById: function (id, dur, easing) {
 
-      console.group('scrollToSectionById');
-      console.info('id: ' + id);
-      console.info('dur: ' + dur);
+      // console.group('scrollToSectionById');
+      // console.info('id: ' + id);
+      // console.info('dur: ' + dur);
 
       var duration = 400;
       var easingFunction = 'easeOutQuad';
@@ -490,8 +522,8 @@
         easingFunction = easing;
       }
 
-      console.info('duration: ' + duration);
-      console.info('easingFunction: ' + easingFunction);
+      // console.info('duration: ' + duration);
+      // console.info('easingFunction: ' + easingFunction);
 
       $('html, body').animate(
         {
@@ -501,7 +533,7 @@
         easingFunction
       );
 
-      console.groupEnd();
+      //console.groupEnd();
 
     },
 
@@ -511,7 +543,7 @@
     log: function (message) {
 
      	if (this.debug) {
-     		console.log(message);
+     		//console.log(message);
      	}
 
     }
@@ -523,3 +555,4 @@
 $(function() {
   canteenreport.initialize();
 });
+
