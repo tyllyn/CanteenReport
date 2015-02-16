@@ -1,14 +1,31 @@
 <?xml version='1.0' encoding='utf-8'?>
 <widget id="CanteenReport" version="0.0.7" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+
     <name>CanteenReport</name>
+
     <description>
         Canteen Report app for the Salvation Army built by Ryan Sprake, Joshua Petry, and Sarah Swartz
     </description>
+
     <author email="ryan.sprake@gmail.com" href="http://cordova.io">
         Team
     </author>
+
+    <feature name="Console">
+        <param name="ios-package" value="CDVLogger" />
+    </feature>
+
     <content src="index.html" />
+
     <access origin="*" />
+
     <preference name="fullscreen" value="true" />
     <preference name="webviewbounce" value="true" />
+
+    <preference name="AutoHideSplashScreen" value="true" />
+
+    <preference name="StatusBarOverlaysWebView" value="false" />
+    <preference name="StatusBarBackgroundColor" value="#DAD7D2" />
+    <preference name="StatusBarStyle" value="darkcontent" />
+
 </widget>

@@ -1,0 +1,13 @@
+#container {
+
+	// width: 1536px;
+	// height: 768px;
+
+	@include transition-duration(0.5s);
+	@include transition-property(left);
+
+	position: absolute;
+	top: 0;
+	left: 0;
+
+}

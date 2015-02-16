@@ -1,11 +1,15 @@
-(function( global, undefined ) {
+(function (global, undefined) {
+
+  //'use strict';
 
   var slice = [].slice,
     subscriptions = {};
 
   var canteenreport = global.canteenreport = {
 
-  	debug: true,
+    debug: false,
+    screenWidth: screen.width,
+    screenHeight: screen.height,
 
     // save some constants
     BACKUP_STORE_NAME: 'canteenReportBackupStore',
@@ -16,7 +20,7 @@
 
     FORM_SUBMIT_MESSAGE: 'Ready to submit? Please check all fields before submitting.',
     FORM_SUBMITTED_MESSAGE: 'Your report has been submitted.',
-    FORM_ERROR_MESSAGE: 'There was an error submitting your report. Are you connected to the Internet?',
+    FORM_ERROR_MESSAGE: 'There was an error submitting your report.',
     FORM_FIELDS_ERROR_MESSAGE: 'You have errors in your form. Please make sure all required fields are filled out.',
 
   	isOnline: false,
@@ -32,7 +36,17 @@
     $leftMenu: null,
     $leftMenuItems: null,
 
-  	initialize: function() {
+  	initialize: function () {
+
+      console.log('app.initialize');
+
+      // position the ui
+      this.screenWidth = screen.width;
+      this.screenHeight = screen.height;
+
+      $('#container').css('width', this.screenWidth * 2).css('height', this.screenHeight);
+      $('#start').css('left', 0).css('width', this.screenWidth).css('height', this.screenHeight);
+      $('#app').css('left', this.screenWidth).css('width', this.screenWidth).css('height', this.screenHeight);
 
       this.$body = $('body');
 
@@ -51,6 +65,8 @@
       window.addEventListener('offline', this.goOffline);
   		window.addEventListener('online', this.goOnline);
 
+      this.scrollToSectionById('#form');
+
       // setup the left menu
       this.$leftMenu = $('#left-menu');
       this.$leftMenuItems = this.$leftMenu.find('a').on('touchend', $.proxy(this.scrollToSection, this));
@@ -67,21 +83,21 @@
       // subscribe to amplify events
       amplify.subscribe('report-saved', $.proxy(this.reportSaved, this));
 
-      amplify.subscribe('request.success', function (settings, data, status) {
-        console.group('request.success');
-        console.info(settings);
-        console.info(data);
-        console.info(status);
-        console.groupEnd();
-      } );
+      // amplify.subscribe('request.success', function (settings, data, status) {
+      //   console.group('request.success');
+      //   console.info(settings);
+      //   console.info(data);
+      //   console.info(status);
+      //   console.groupEnd();
+      // } );
 
-      amplify.subscribe('request.error', function (settings, data, status) {
-        console.group('request.error');
-        console.info(settings);
-        console.info(data);
-        console.info(status);
-        console.groupEnd();
-      } );
+      // amplify.subscribe('request.error', function (settings, data, status) {
+      //   console.group('request.error');
+      //   console.info(settings);
+      //   console.info(data);
+      //   console.info(status);
+      //   console.groupEnd();
+      // } );
 
       //
       // Canteen report subscriptions
@@ -92,6 +108,8 @@
 
       //
       canteenreport.subscribe('report-submitted', $.proxy(this.reportSubmitted, this));
+
+      canteenreport.subscribe('report-deleted', $.proxy(this.reportDeleted, this));
 
       // canteen report event subscriptions
       canteenreport.subscribe('form-focused', $.proxy(this.formFocused, this));
@@ -108,18 +126,43 @@
      */
     listUnsubmittedReports: function () {
 
-      console.group('listUnsubmittedReports');
+      //console.group('listUnsubmittedReports');
 
       var formBackupStore = amplify.store(canteenreport.BACKUP_STORE_NAME);
-      var $savedFormsList = $('#js-saved-reports').empty();
+      var $savedForms = $('#js-saved-reports');
+      var $savedFormsList = $('#js-saved-reports-list').empty();
 
-      console.log(formBackupStore);
+      if (formBackupStore != undefined && formBackupStore.length > 0) {
 
-      if (formBackupStore != undefined) {
+        $savedForms.slideDown({
+          duration: 900,
+          easing: 'easeInOutQuint'
+        });
 
         $.each(formBackupStore, function (index, value) {
-          var id = value[0].value;
-          $savedFormsList.append('<a class="js-open-saved-form-btn date glyphicon glyphicon-chevron-right" data-id="' + id + '">' + id + '</a>');
+
+          if (value[0]) {
+
+            //console.group();
+
+            var id = value[0].value;
+            var date = new Date(Number(id));
+            var day = date.getDate();
+            var year = date.getUTCFullYear();
+            var month = date.getMonth();
+            var hours = date.getHours();
+            var minutes = '0' + date.getMinutes();
+
+            var formattedDate = month + '/' + day + '/' + year + ', ' + hours + ':' + minutes.substr(minutes.length - 2);
+
+            //console.log(formattedDate);
+
+            $savedFormsList.append('<a class="js-open-saved-form-btn open-saved-report-btn date glyphicon glyphicon-chevron-right" data-id="' + id + '">' + formattedDate + '</a>');
+
+            //console.groupEnd();
+
+          }
+
         });
 
       } else {
@@ -130,7 +173,7 @@
 
       $('.js-open-saved-form-btn').on('click', $.proxy(this.openReport, this));
 
-      console.groupEnd();
+      //console.groupEnd();
 
     },
 
@@ -139,12 +182,15 @@
      */
     newReport: function () {
 
-      var newReportId = new Date().getTime();
+      console.log('newReport');
+
+      var date = new Date();
+      var newReportId = date.getTime();
 
       this.changeScreen(this.INPUT_SCREEN);
 
       canteenreport.storage.newReport();
-      canteenreport.form.newReport(newReportId);
+      canteenreport.form.newReport(newReportId, date);
 
     },
 
@@ -153,15 +199,17 @@
 
       var id = $(event.currentTarget).data().id;
 
-      console.group('openReport');
-      console.log('id: ' + id);
+      // console.group('openReport');
+      // console.log('id: ' + id);
 
       var report = canteenreport.storage.findBackupFormById(id);
+
+      //console.log(report);
       canteenreport.form.openReport(report);
 
       this.changeScreen(this.INPUT_SCREEN);
 
-      console.groupEnd();
+      //console.groupEnd();
 
       return false;
 
@@ -172,20 +220,59 @@
      */
     closeReport: function () {
 
-      console.group('closeReport');
+      //console.group('closeReport');
 
-      var confirmation = window.confirm('This report will be saved for you to edit later.');
+      if (this.debug) {
 
-      if (confirmation === true) {
-        canteenreport.storage.saveReport();
+        var confirmation = window.confirm('Pressing OK will save this report for you to edit and submit later.');
+
+        if (confirmation === true) {
+          canteenreport.storage.saveReport();
+        }
+
+      } else {
+
+        navigator.notification.confirm (
+          'Pressing OK will save this report for you to edit and submit later.',
+          $.proxy(this.onConfirm, this),
+          'Save This Report?',
+          ['Yes','No']
+        );
+
       }
+
+      // this.$leftMenuItems.parent().removeClass("isActive").end().filter("[href=#incident]").parent().addClass("isActive");
+
+      // this.listUnsubmittedReports();
+      // this.changeScreen(this.HOME_SCREEN);
+
+      //console.groupEnd();
+
+    },
+
+    onConfirm: function (buttonIndex) {
+
+      switch (buttonIndex) {
+
+        case 1 : {
+          canteenreport.storage.saveReport();
+          canteenreport.listUnsubmittedReports();
+          canteenreport.changeScreen(canteenreport.HOME_SCREEN);
+        }
+        default : {
+          canteenreport.changeScreen(canteenreport.HOME_SCREEN);
+        }
+
+      }
+
+    },
+
+    reportDeleted: function () {
 
       this.$leftMenuItems.parent().removeClass("isActive").end().filter("[href=#incident]").parent().addClass("isActive");
 
       this.listUnsubmittedReports();
       this.changeScreen(this.HOME_SCREEN);
-
-      console.groupEnd();
 
     },
 
@@ -203,7 +290,7 @@
      */
     reportSubmitted: function () {
 
-      console.log('reportSubmitted');
+      //console.log('reportSubmitted');
 
     },
 
@@ -221,7 +308,9 @@
     /**
      * Save function for the app. Called from formFocused and from $syncBtn.
      */
-    saveReport: function () {
+    saveReport: function (buttonIndex) {
+
+      //console.log('saveReport ' + buttonIndex);
 
       this.isSyncing = true;
       this.$body.addClass('is-syncing');
@@ -235,7 +324,7 @@
      */
     reportSaved: function () {
 
-      console.info('reportSaved');
+      //console.info('reportSaved');
 
       this.isSyncing = false;
 
@@ -259,15 +348,19 @@
 
         case this.INPUT_SCREEN : {
 
-          $('#start').hide();
-          $('#app').show();
+          $('body').addClass('app');
+          $('#app').scrollTop(0);
+          $('#container').css('left', -this.screenWidth + 'px');
+          this.scrollToSectionById('#form');
 
           break;
         }
 
         default : {
-          $('#start').show();
-          $('#app').hide();
+
+          $('body').removeClass('app');
+          $('#container').css('left', '0');
+          this.scrollToSectionById('#form');
         }
 
       }
@@ -301,7 +394,7 @@
     /**
      * publish, subscribe, and unsubscribe borowed from amplify.core
      */
-    publish: function( topic ) {
+    publish: function (topic) {
       if ( typeof topic !== "string" ) {
         throw new Error( "You must provide a valid topic to publish." );
       }
@@ -324,7 +417,7 @@
       }
       return ret !== false;
     },
-    subscribe: function( topic, context, callback, priority ) {
+    subscribe: function (topic, context, callback, priority) {
       if ( typeof topic !== "string" ) {
         throw new Error( "You must provide a valid topic to create a subscription." );
       }
@@ -407,30 +500,61 @@
       var id = $(event.currentTarget).attr('href');
 
       if (id.length) {
-        $('html, body').animate({
-          scrollTop: $(id).offset().top - 70
-        });
+        this.scrollToSectionById(id);
       }
 
       event.preventDefault();
 
     },
 
+    scrollToSectionById: function (id, dur, easing) {
+
+      // console.group('scrollToSectionById');
+      // console.info('id: ' + id);
+      // console.info('dur: ' + dur);
+
+      var duration = 400;
+      var easingFunction = 'easeOutQuad';
+
+      if (dur !== undefined) {
+        duration = dur;
+      }
+
+      if (easing !== undefined) {
+        easingFunction = easing;
+      }
+
+      // console.info('duration: ' + duration);
+      // console.info('easingFunction: ' + easingFunction);
+
+      $('html, body').animate(
+        {
+          scrollTop: $(id).offset().top - 70
+        },
+        duration,
+        easingFunction
+      );
+
+      //console.groupEnd();
+
+    },
+
     /**
      * Log a message if debug is true
      */
-    log: function (message) {
+    // log: function (message) {
 
-     	if (this.debug) {
-     		console.log(message);
-     	}
+    //  	if (this.debug) {
+    //  		//console.log(message);
+    //  	}
 
-    }
+    // }
 
   };
 
-}( this ) );
+}(this) );
 
 $(function() {
   canteenreport.initialize();
 });
+
