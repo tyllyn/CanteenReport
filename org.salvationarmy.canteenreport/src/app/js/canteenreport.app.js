@@ -182,6 +182,8 @@
      */
     newReport: function () {
 
+      console.log('newReport');
+
       var date = new Date();
       var newReportId = date.getTime();
 
@@ -540,13 +542,13 @@
     /**
      * Log a message if debug is true
      */
-    log: function (message) {
+    // log: function (message) {
 
-     	if (this.debug) {
-     		//console.log(message);
-     	}
+    //  	if (this.debug) {
+    //  		//console.log(message);
+    //  	}
 
-    }
+    // }
 
   };
 

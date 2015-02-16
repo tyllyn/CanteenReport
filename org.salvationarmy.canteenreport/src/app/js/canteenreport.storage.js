@@ -77,15 +77,24 @@
 
 		var formValuesJSON = getFormJson();
 
-		//define the request
-        amplify.request.define(canteenreport.REPORT_REQUEST_NAME, 'ajax', {
+        $.ajax({
+            crossDomain: true,
+            type: 'POST',
             url: apiUrl,
-            dataType: 'jsonp',
-            type: 'POST'
+            data: formValuesJSON
+        }).done(function () {
+            console.log('done');
         });
 
+		//define the request
+        // amplify.request.define(canteenreport.REPORT_REQUEST_NAME, 'ajax', {
+        //     url: apiUrl,
+        //     dataType: 'jsonp'
+        //     type: 'POST'
+        // });
+
         // execute the request
-        amplify.request(canteenreport.REPORT_REQUEST_NAME, formValuesJSON);
+        // amplify.request(canteenreport.REPORT_REQUEST_NAME, formValuesJSON);
 
 		//console.groupEnd('submitReport');
 

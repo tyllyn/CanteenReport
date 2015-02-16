@@ -13,17 +13,21 @@
     <script>
 
         function onDeviceReady() {
+
             console.log('onDeviceReady');
+
+            if (window.cordova.logger) {
+                window.cordova.logger.__onDeviceReady();
+            }
+
         }
 
-        function onLoad() {
-            document.addEventListener("deviceready", onDeviceReady, false);
-        }
+        document.addEventListener("deviceready", onDeviceReady, false);
 
     </script>
 
 </head>
-<body style="position: relative;" onload="onLoad()">
+<body style="position: relative;">
 
     <div id="container">
 

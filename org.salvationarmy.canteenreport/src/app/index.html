@@ -15,7 +15,13 @@
     <script>
 
         function onDeviceReady() {
+
             console.log('onDeviceReady');
+
+            if (window.cordova.logger) {
+                window.cordova.logger.__onDeviceReady();
+            }
+
         }
 
         document.addEventListener("deviceready", onDeviceReady, false);

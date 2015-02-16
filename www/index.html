@@ -8,6 +8,24 @@
 	<title>Emergency Disaster Services - Canteen Report</title>
 
 	<link rel="stylesheet" href="css/main.css">
+
+    <script src="cordova.js"></script>
+    <script>
+
+        function onDeviceReady() {
+
+            window.alert('onDeviceReady');
+
+            if (window.cordova.logger) {
+                window.cordova.logger.__onDeviceReady();
+            }
+
+        }
+
+        document.addEventListener("deviceready", onDeviceReady, false);
+
+    </script>
+
 </head>
 <body style="position: relative;">
 
@@ -1186,7 +1204,6 @@
 
     </div>
 
-	<!--<script type="text/javascript" src="cordova.js"></script>-->
 
 	<script src="js/main.js"></script>
 
