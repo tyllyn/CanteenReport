@@ -1,10 +1,25 @@
 <?php 
 	$r = $report;
 	$rm = $reportmembers;
+    $ri = $reportitems;
 	function p($report, $key) {
 		echo $report[0][$key];
 	}
+    function debug($title, $obj) {
+        print "<b>$title:</b><textarea rows=\"5\" cols=\"80\">" . var_export($obj, true) . "</textarea><br/><br/>";
+    }
+
+    if (array_key_exists("debug", $_GET)) {
+
+        debug("Report",$r);
+        debug("Items",$ri);
+        debug("Members",$rm);
+
+    }
+
 ?>
+
+
 
 
 <section>

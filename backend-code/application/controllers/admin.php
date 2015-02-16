@@ -9,13 +9,15 @@ function redirect($path) {
 
 class Admin extends CI_Controller {
 
-	
-
-	public function index() {
+	private function requireLogin() {
 		$this->load->model('User');
 		if (!$this->User->isAuthenticated()) {
 			redirect('/Admin/login');
 		}
+	}
+
+	public function index() {
+		//$this->requireLogin()
 		$this->view('index');
 	}
 	public function login() {
