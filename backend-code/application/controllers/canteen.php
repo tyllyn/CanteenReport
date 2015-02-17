@@ -7,8 +7,16 @@ class Canteen extends CI_Controller {
 	}
 	
 	public function add() {
-		$res = $_GET; //json_decode($json);
+		$res = $_POST; //json_decode($json);
 		
+		/*$postFile = fopen("post.txt", "w") or die("Unable to open file!");
+		$getFile = fopen("get.txt", "w") or die("Unable to open file!");
+		fwrite($postFile, var_export($_POST,true));
+		fwrite($getFile, var_export($_GET,true));
+		fclose($postFile);
+		fclose($getFile);*/
+		
+		//die(var_export($res));
 		
 		//$data = new array();
 		$items = array();
@@ -25,13 +33,13 @@ class Canteen extends CI_Controller {
 			
 		*/
 		
-		foreach ($res as $keyInitial => $valueInitial) {
+		foreach ($res as $key => $val) {
 		
-			if (!is_array($valueInitial)) {
+			/*if (!is_array($valueInitial)) {
 				continue;
 			}
 			$key = $valueInitial["name"];
-			$val = $valueInitial["value"];
+			$val = $valueInitial["value"];*/
 		
 			// hard coding IDs because #yolo
 			switch ($key) {
@@ -120,7 +128,7 @@ class Canteen extends CI_Controller {
 					break;
 					
 				default:
-					if (strpos($key,"team-member-") === 0) {
+					if (strpos($key,"team-member") === 0) {
 						$members[] = $val;
 					} else {
 						$data[str_replace ("-","_", $key)] = $val;

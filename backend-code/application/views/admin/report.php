@@ -81,6 +81,24 @@ EOD;
 
                 </div>
 
+				<div class="panel panel-default">
+				
+					<div class="panel-heading">
+						<h3 class="panel-title">Items</h3>
+					</div>
+					
+					<ul class="list-group">
+					<?php
+					foreach ($ri as $item) {
+						print <<<EOD
+						<li class="list-group-item">Item #{$item->ID} - {$item->Quantity} {$item->ServingSize}</li>
+EOD;
+					}
+					?>
+					</ul>
+				
+				</div>
+				
                 <div class="page-header page-header-canteen clearfix">
                     <button class="btn btn-default btn-print pull-right glyphicon glyphicon-print">Print</button>
                 </div>
