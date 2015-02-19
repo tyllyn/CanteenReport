@@ -7,3 +7,5 @@ backend-code/application/config/account_info.php
 .xcuserstate
 *.xcuserstate
 .DS_Store
+
+*.xcuserstate
