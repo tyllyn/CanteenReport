@@ -138,7 +138,7 @@ module.exports = function (grunt) {
                 importPath: '<%= yeoman.app %>/bower_components',
                 httpImagesPath: '/img',
                 httpGeneratedImagesPath: '/img/generated',
-                httpFontsPath: '/css/fonts',
+                httpFontsPath: '../css/fonts',
                 relativeAssets: false,
                 outputStyle: 'compact',
                 debugInfo: false
@@ -273,9 +273,9 @@ module.exports = function (grunt) {
         'concurrent:dist',
         'autoprefixer',
         'concat',
-        //'uglify',
+        'uglify',
         'copy:dist',
-        //'usemin'
+        'usemin'
     ]);
 
     grunt.registerTask('check', [
