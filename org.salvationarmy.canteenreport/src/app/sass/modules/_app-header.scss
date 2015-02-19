@@ -59,9 +59,9 @@
 	#sync-spinner {
 
 		background-color: $birch;
-		margin-top: -1px;
-		width: 21px;
-		height: 21px;
+		margin-top: 0;
+		width: 20px;
+		height: 20px;
 		float: left;
 
 		@include transition-property(background-color);
@@ -74,10 +74,11 @@
 		// @include animation-iteration-count(0);
 
 		img {
-			width: 100%;
-			height: 100%;
+			width: 20px;
+			height: 20px;
 			padding: 0;
 			margin: 0;
+			display: block;
 		}
 
 		.is-syncing & {

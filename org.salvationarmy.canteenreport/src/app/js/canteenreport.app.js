@@ -22,6 +22,7 @@
     FORM_SUBMITTED_MESSAGE: 'Your report has been submitted.',
     FORM_ERROR_MESSAGE: 'There was an error submitting your report.',
     FORM_FIELDS_ERROR_MESSAGE: 'You have errors in your form. Please make sure all required fields are filled out.',
+    FORM_SAVE_CONFIRM_MESSAGE: 'Save this report to edit later?',
 
   	isOnline: false,
     isSyncing: false,
@@ -37,8 +38,6 @@
     $leftMenuItems: null,
 
   	initialize: function () {
-
-      console.log('app.initialize');
 
       // position the ui
       this.screenWidth = screen.width;
@@ -59,11 +58,11 @@
       );
 
       // listens for Cordova's onDeviceReady event
-      document.addEventListener('deviceready', this.onDeviceReady, false);
+      //document.addEventListener('deviceready', this.onDeviceReady, false); // does not render the iPad app
 
       // watch for on and offline notifications
       window.addEventListener('offline', this.goOffline);
-  		window.addEventListener('online', this.goOnline);
+      window.addEventListener('online', this.goOnline);
 
       this.scrollToSectionById('#form');
 
@@ -220,11 +219,11 @@
      */
     closeReport: function () {
 
-      //console.group('closeReport');
+      console.group('closeReport');
 
       if (this.debug) {
 
-        var confirmation = window.confirm('Pressing OK will save this report for you to edit and submit later.');
+        var confirmation = window.confirm(this.FORM_SAVE_CONFIRM_MESSAGE);
 
         if (confirmation === true) {
           canteenreport.storage.saveReport();
@@ -233,7 +232,7 @@
       } else {
 
         navigator.notification.confirm (
-          'Pressing OK will save this report for you to edit and submit later.',
+          this.FORM_SAVE_CONFIRM_MESSAGE,
           $.proxy(this.onConfirm, this),
           'Save This Report?',
           ['Yes','No']
@@ -246,11 +245,13 @@
       // this.listUnsubmittedReports();
       // this.changeScreen(this.HOME_SCREEN);
 
-      //console.groupEnd();
+      console.groupEnd();
 
     },
 
     onConfirm: function (buttonIndex) {
+
+      console.log('onConfirm ' + buttonIndex);
 
       switch (buttonIndex) {
 
@@ -310,7 +311,7 @@
      */
     saveReport: function (buttonIndex) {
 
-      //console.log('saveReport ' + buttonIndex);
+      console.log('saveReport ' + buttonIndex);
 
       this.isSyncing = true;
       this.$body.addClass('is-syncing');
@@ -324,7 +325,7 @@
      */
     reportSaved: function () {
 
-      //console.info('reportSaved');
+      console.info('reportSaved');
 
       this.isSyncing = false;
 
@@ -554,7 +555,7 @@
 
 }(this) );
 
-$(function() {
-  canteenreport.initialize();
-});
+// $(function() {
+//   canteenreport.initialize();
+// });
 

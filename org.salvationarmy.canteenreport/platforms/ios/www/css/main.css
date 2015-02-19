@@ -1,3 +1,9 @@
+@font-face {
+  font-family: 'Average';
+  src: url("/css/fonts/Average/average-regular-webfont.eot");
+  src: url("/css/fonts/Average/average-regular-webfont.eot?#iefix") format("embedded-opentype"),url("/css/fonts/Average/average-regular-webfont.woff") format("woff"),url("/css/fonts/Average/average-regular-webfont.ttf") format("truetype"),url("/css/fonts/Average/average-regular-webfont.svg#svgFontName") format("svg");
+}
+
 /*! normalize.css v3.0.1 | MIT License | git.io/normalize */
 
 html {
@@ -7670,7 +7676,7 @@ button.close {
 }
 
 h1 {
-  font-family: Georgia,"Times New Roman",Times,serif;
+  font-family: "Average","Times New Roman",Times,serif;
 }
 
 h2 {
@@ -7894,7 +7900,7 @@ body {
 }
 
 .app-header h1 {
-  font-family: Georgia,"Times New Roman",Times,serif;
+  font-family: "Average","Times New Roman",Times,serif;
   font-size: 1.6em;
   text-transform: uppercase;
   padding: 0.18em 0 0 0;
@@ -7940,9 +7946,9 @@ body {
 
 .app-header #sync-spinner {
   background-color: #332e27;
-  margin-top: -1px;
-  width: 21px;
-  height: 21px;
+  margin-top: 0;
+  width: 20px;
+  height: 20px;
   float: left;
   -webkit-transition-property: background-color;
   transition-property: background-color;
@@ -7953,10 +7959,11 @@ body {
 }
 
 .app-header #sync-spinner img {
-  width: 100%;
-  height: 100%;
+  width: 20px;
+  height: 20px;
   padding: 0;
   margin: 0;
+  display: block;
 }
 
 .is-syncing .app-header #sync-spinner {

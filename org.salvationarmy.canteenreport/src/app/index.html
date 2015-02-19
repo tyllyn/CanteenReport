@@ -14,13 +14,19 @@
     <script src="cordova.js"></script>
     <script>
 
-        function onDeviceReady() {
+        if ('addEventListener' in document) {
+            document.addEventListener('DOMContentLoaded', function() {
+                FastClick.attach(document.body);
+            }, false);
+        }
 
-            console.log('onDeviceReady');
+        function onDeviceReady() {
 
             if (window.cordova.logger) {
                 window.cordova.logger.__onDeviceReady();
             }
+
+            canteenreport.initialize();
 
         }
 
@@ -1072,7 +1078,7 @@
 
                             			<div class="input-group input-group-lg">
                             				<input class="form-control form-control-date" name="end-time" id="end-time" type="datetime-local" />
-                            				<span class="input-group-addon glyphicon glyphicon-calendar"></span>
+                            				<label for="end-time" class="input-group-addon glyphicon glyphicon-calendar"></label>
                             			</div>
 
                             		</div>
@@ -1206,13 +1212,13 @@
 
     </div>
 
-
 	<!-- build:js js/main.js -->
 	<script src="bower_components/jquery/dist/jquery.js"></script>
     <script src="bower_components/jquery.easing/js/jquery.easing.min.js"></script>
 	<script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/tab.js"></script>
     <script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap.js"></script>
 	<script src="bower_components/amplify/lib/amplify.js"></script>
+    <script src="bower_components/fastclick/lib/fastclick.js"></script>
     <script src="js/canteenreport.app.js"></script>
 	<script src="js/canteenreport.form.js"></script>
 	<script src="js/canteenreport.storage.js"></script>

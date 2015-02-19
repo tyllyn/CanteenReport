@@ -12,13 +12,19 @@
     <script src="cordova.js"></script>
     <script>
 
-        function onDeviceReady() {
+        if ('addEventListener' in document) {
+            document.addEventListener('DOMContentLoaded', function() {
+                FastClick.attach(document.body);
+            }, false);
+        }
 
-            console.log('onDeviceReady');
+        function onDeviceReady() {
 
             if (window.cordova.logger) {
                 window.cordova.logger.__onDeviceReady();
             }
+
+            canteenreport.initialize();
 
         }
 
@@ -1070,7 +1076,7 @@
 
                             			<div class="input-group input-group-lg">
                             				<input class="form-control form-control-date" name="end-time" id="end-time" type="datetime-local" />
-                            				<span class="input-group-addon glyphicon glyphicon-calendar"></span>
+                            				<label for="end-time" class="input-group-addon glyphicon glyphicon-calendar"></label>
                             			</div>
 
                             		</div>
@@ -1203,7 +1209,6 @@
     	</section>
 
     </div>
-
 
 	<script src="js/main.js"></script>
 

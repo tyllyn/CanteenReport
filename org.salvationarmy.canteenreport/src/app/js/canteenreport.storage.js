@@ -30,16 +30,19 @@
     function backupReport() {
 
 		//console.group('backupReport');
+        console.log('backupReport');
 
         var formStore = amplify.store(canteenreport.ACTIVE_REPORT_STORE_NAME);
         var formBackupStore = amplify.store(canteenreport.BACKUP_STORE_NAME);
         var formBackupArray = [];
-        //var formBackupJSON;
+        var formBackupJSON;
 
         var formId = $('#incident-id').val();
+        //var isBackedUp = typeof storage.findBackupFormById(formId) !== 'undefined' ? true : false;
         var isBackedUp = typeof storage.findBackupFormById(formId) !== 'undefined' ? true : false;
 
-        //console.info('incident-id: ' + formId);
+        console.log('incident-id: ' + formId);
+        console.log('isBackedUp: ' + isBackedUp);
 
         if (typeof formBackupStore !== 'undefined') {
             formBackupArray = formBackupStore;
@@ -47,19 +50,18 @@
 
         if (isBackedUp === true) {
 
-            //console.info('this report already exists. replace its backup.');
-
+            console.log('this report already exists. replace its backup.');
             var index = storage.findBackupFormIndexById(formId);
             formBackupArray[index] = formStore;
 
         } else {
 
-            //console.info('this report has not been backed up yet.');
+            console.log('this report has not been backed up yet.');
             formBackupArray.push(formStore);
 
         }
 
-        //console.log(formBackupArray);
+        console.log(formBackupArray);
 
         amplify.store(canteenreport.BACKUP_STORE_NAME, formBackupArray);
 
@@ -76,6 +78,8 @@
 		//console.group('submitReport');
 
 		var formValuesJSON = getFormJson();
+
+        console.log(formValuesJSON);
 
         $.ajax({
             crossDomain: true,
@@ -125,9 +129,9 @@
 		// var formValuesJSON = JSON.parse(JSON.stringify(formValues));
 		var formValuesJSON = getFormJson();
 
-		// console.group('storage.syncReport');
-  //       console.log(formValuesJSON);
-  //       console.groupEnd();
+		console.group('storage.syncReport');
+        console.log(formValuesJSON);
+        console.groupEnd();
 
         amplify.store(canteenreport.ACTIVE_REPORT_STORE_NAME, formValuesJSON);
         amplify.publish('report-saved');
@@ -181,6 +185,7 @@
 	storage.saveReport = function () {
 
 		//console.group('saveReport');
+        console.log('saveReport');
 		backupReport();
 		//console.groupEnd();
 
@@ -192,26 +197,27 @@
 	storage.findBackupFormById = function (id) {
 
 		//console.group('storage.findBackupFormById: ' + id);
+        console.log('findBackupFormById ' + id);
 
 		var formBackupStore = amplify.store(canteenreport.BACKUP_STORE_NAME);
 		var formBackup;
 
-		//console.log(formBackupStore);
+		if (typeof formBackupStore !== 'undefined') {
 
-		if (formBackupStore !== null) {
+			console.log('!== null');
+
 			$.each(formBackupStore, function (index, value) {
 
 				if (value.length > 0) {
-
 					var backedUpFormId = value[0].value;
-
 					if (backedUpFormId == id) {
 						formBackup = value;
 						return;
 					}
-
 				}
+
 			});
+
 		}
 
 		//console.groupEnd();

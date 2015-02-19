@@ -169,14 +169,14 @@
 	 */
 	var disable = function () {
 
-	 	$('input, button, textarea, select').attr('disabled', 'disabled');
+	 	//$('input, button, textarea, select').attr('disabled', 'disabled');
 
 	};
 
 
 	var enable = function () {
 
-		$('input, button, textarea, select').removeAttr('disabled');
+		//$('input, button, textarea, select').removeAttr('disabled');
 
 	};
 
@@ -242,19 +242,19 @@
 		/**
 		* water level
 		*/
-   	$('.water-level-button').on('touchstart', function (event) {
+	   	$('.water-level-button').on('touchstart', function (event) {
 
-			if (typeof $activeWaterLevelBtn != 'undefined') {
-				$activeWaterLevelBtn.removeClass('btn-is-active');
-			}
-			$activeWaterLevelBtn = $(event.currentTarget).addClass('btn-is-active');
+				if (typeof $activeWaterLevelBtn != 'undefined') {
+					$activeWaterLevelBtn.removeClass('btn-is-active');
+				}
+				$activeWaterLevelBtn = $(event.currentTarget).addClass('btn-is-active');
 
-			// add the value to the hidden input so it can be hidden
-			$('#end-water-level').val($activeWaterLevelBtn.data().level);
+				// add the value to the hidden input so it can be hidden
+				$('#end-water-level').val($activeWaterLevelBtn.data().level);
 
-			return false;
+				return false;
 
-   	});
+	   	});
 
 		/**
 		* Add new team member fields
