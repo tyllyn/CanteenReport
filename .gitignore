@@ -1,18 +1,5 @@
 backend-code/application/config/database.php
 backend-code/application/config/account_info.php
 
-
-.DS_Store
-org.salvationarmy.canteenreport/.DS_Store
-
-.DS_Store
-
+*.DS_Store
 *.xcuserstate
-
-org.salvationarmy.canteenreport/www/.DS_Store
-
-org.salvationarmy.canteenreport/www/.DS_Store
-
-org.salvationarmy.canteenreport/.DS_Store
-
-org.salvationarmy.canteenreport/.DS_Store
