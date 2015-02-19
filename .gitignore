@@ -6,3 +6,9 @@ backend-code/application/config/account_info.php
 org.salvationarmy.canteenreport/.DS_Store
 
 .DS_Store
+
+*.xcuserstate
+
+org.salvationarmy.canteenreport/www/.DS_Store
+
+org.salvationarmy.canteenreport/www/.DS_Store
