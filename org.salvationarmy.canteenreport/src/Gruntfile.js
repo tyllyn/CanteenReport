@@ -16,7 +16,7 @@ module.exports = function (grunt) {
     var yeomanConfig = {
         app: 'app',
         dist: 'dist',
-        deploy: '../../www'
+        deploy: '../www'
     };
 
     grunt.initConfig({
@@ -101,8 +101,7 @@ module.exports = function (grunt) {
             deploy: {
                 options: {
                     force: true
-                },
-                src: ['<%= yeoman.deploy %>']
+                }
             },
             server: '.tmp'
         },
@@ -215,7 +214,8 @@ module.exports = function (grunt) {
                         '.htaccess',
                         'index.html',
                         'img/{,*/}*.{webp,gif}',
-                        'css/{,*/}*.{jpg,gif,png,webp}'
+                        'css/{,*/}*.{jpg,gif,png,webp}',
+                        'css/fonts/{,*/}*.{eot,svg,ttf,woff,}'
                     ]
                 }]
             },
@@ -273,9 +273,9 @@ module.exports = function (grunt) {
         'concurrent:dist',
         'autoprefixer',
         'concat',
-        'uglify',
+        //'uglify',
         'copy:dist',
-        'usemin'
+        //'usemin'
     ]);
 
     grunt.registerTask('check', [
