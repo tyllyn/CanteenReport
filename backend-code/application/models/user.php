@@ -43,6 +43,10 @@ class User extends CI_Model {
 		}
 		return true;
 	}
+	function logout() {
+		$this->startSession();
+		$_SESSION['user'] = null;
+	}
 
 	function getUser() {
 		$this->startSession();

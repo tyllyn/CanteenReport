@@ -64,7 +64,9 @@ class Report extends CI_Model {
 
         $this->db->update('entries', $this, array('id' => $_POST['id']));
     }
-
+	
+	
+	
 	
 	function get_entries() {
 		$query = $this->db->get('Reports');
@@ -105,6 +107,15 @@ class Report extends CI_Model {
 		$q = $this->db->get('ReportMembers');
 		return $q->result();
 	}
+	
+	
+	function getUnitNumbers() {
+		$this->db->select("incident_unit_number");
+		$this->db->distinct();
+		$this->db->order_by("incident_unit_number", "asc");
+		return $this->db->get('Reports')->result();
+	}
+	
 	function get_by_unit($id = null){
 		if(isset($id)){
 			$this->db->where('incident_unit_number', $id);
@@ -138,8 +149,8 @@ class Report extends CI_Model {
 		if(isset($params['year']) && $params['year'] != ''){
 			$this->db->where('YEAR(r.incident_start)', $params['year']);
 		}
-		if(isset($params['id']) && $params["id"] != '') {
-			$this->db->where('incident_unit_number',$params['id']);
+		if(isset($params['incident-unit-number']) && $params["incident-unit-number"] != '') {
+			$this->db->where('incident_unit_number',$params['incident-unit-number']);
 		}
 
 		$q = $this->db->get();

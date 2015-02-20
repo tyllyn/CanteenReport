@@ -20,8 +20,11 @@
             </label>
         </div>
 
-        <!-- this should obviously only display if you coouldn't authenticate the user -->
-        <div class="alert alert-danger" role="alert">Your email address or password was not correct.</div>
+<?php
+	if ($failed) {
+		echo '<div class="alert alert-danger" role="alert">Your email address or password was not correct.</div>';
+	}
+?>
 
         <div class="form-group">
             <button class="btn btn-lg btn-default" type="submit">Sign in</button>

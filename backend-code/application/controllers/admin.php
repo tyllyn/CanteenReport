@@ -26,6 +26,7 @@ class Admin extends CI_Controller {
 	public function login() {
 
 		$this->load->model('User');
+		$data['failed'] = false;
 		if ($this->User->isAuthenticated()) {
 			redirect('/Admin/index');
 		}
@@ -34,10 +35,16 @@ class Admin extends CI_Controller {
 			if ($res) {
 				redirect('/Admin/index');
 			}
+			$data['failed'] = true;
 		}
 		$data['user'] = $this->User;
 		$this->view('login', $data);
 
+	}
+	public function logout() {
+		$this->load->model('User');
+		$this->User->logout();
+		redirect('/Admin/index');
 	}
 	public function report() {
 
@@ -63,7 +70,8 @@ class Admin extends CI_Controller {
 	public function reportsearch() { 
 	
 		$this->load->model('Report');
-		$data['reports'] = $this->Report->get_entries();
+		$data['params'] = $_GET;
+		$data['reports'] = $this->Report->item_search($_GET); //$this->Report->get_entries();
 	
 		$this->view('reportsearch',$data); 
 	}

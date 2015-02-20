@@ -1,6 +1,32 @@
 <?php
 
-//echo var_export($reports,true);
+// $params = query string
+// $reports = report results
+
+$this->load->model('Report');
+
+function getReportTypeString($report) {
+	$types = array();
+	if ($report->incident_type_fire) {
+		$types[] = "Fire/Alarm/Companies";
+	}
+	if ($report->incident_type_hazmat) {
+		$types[] = "Hazmat";
+	}
+	if ($report->incident_type_maintenence) {
+		$types[] = "Maintenence";
+	}
+	if ($report->incident_type_flood) {
+		$types[] = "Flood";
+	}
+	if ($report->incident_type_special_event) {
+		$types[] = "Special Event";
+	};
+	if (!trim($report->incident_other) == "") {
+		$types[] = $report->incident_other;
+	}
+	return implode(", ", $types);
+}
 
 ?>
 
@@ -11,7 +37,7 @@
 
         <div class="page-header page-header-canteen clearfix">
             <h1>Canteen Reports</h1>
-            <p>100 Results</p>
+            <p><?php echo count($reports) . ' Result'; if (count($reports) != 1) { echo 's';}?></p>
         </div>
 
         <div class="row">
@@ -40,11 +66,17 @@
                             <div class="form-group">
                                 <label for="incident-unit-number">Unit #</label>
                                 <select id="incident-unit-number" class="form-control" name="incident-unit-number">
-                                    <option>001</option>
-                                    <option>002</option>
-                                    <option>003</option>
-                                    <option>004</option>
-                                    <option>005</option>
+<?php
+
+	foreach ($this->Report->getUnitNumbers() as $value) {
+		if (array_key_exists('incident-unit-number', $params) && $params['incident-unit-number'] == $value->incident_unit_number) {
+			echo "<option value=\"{$value->incident_unit_number}\" selected=\"selected\">{$value->incident_unit_number}</option>";
+		} else {
+			echo "<option value=\"{$value->incident_unit_number}\">{$value->incident_unit_number}</option>";
+		}
+	}
+	
+?>
                                 </select>
                             </div>
 
@@ -130,9 +162,9 @@ foreach ($reports as $report) {
 	$link = '/Admin/report?id=' . $report->ID;
 	
 	echo '<tr><td data-dateformat="MM-DD-YYYY"><a href="' . $link . '">' . $report->incident_start . '</a></td>
-                            <td><a href="/report.html">001</a></td>
-                            <td><a href="/report.html">Fire/ Alarm/ Companies</a></td>
-                            <td><a href="/report.html">15222</a></td>
+                            <td><a href="' . $link . '">' . $report->incident_unit_number . '</a></td>
+                            <td><a href="' . $link . '">' . getReportTypeString($report) . '</a></td>
+                            <td><a href="' . $link . '">' . $report->incident_zipcode . '</a></td>
                         </tr>';
 }
 ?>
