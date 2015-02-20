@@ -10,13 +10,18 @@ class User extends CI_Model {
         // Call the Model constructor
         parent::__construct();
     }
-    
-    function authentication($name, $password) {
+    function doHash($pass) {
+		return hash('sha512',$pass);
+	}
+	
+    function authenticate($name, $password) {
+		
+		$hashed = $this->doHash($password);
+		
 		$this->startSession();
 		$this->db->select('ID');
 		$this->db->where('Username', $name);
 		$this->db->where('Password', $hashed);
-		die($hashed);
 		$q = $this->db->get('Users');
 		$data = $q->result_array();
 

@@ -17,8 +17,11 @@ class Admin extends CI_Controller {
 	}
 
 	public function index() {
-		//$this->requireLogin()
-		$this->view('index');
+		$this->requireLogin();
+		$this->load->model('User');
+		$data['user'] = $this->User;
+		
+		$this->view('index',$data);
 	}
 	public function login() {
 
@@ -26,18 +29,22 @@ class Admin extends CI_Controller {
 		if ($this->User->isAuthenticated()) {
 			redirect('/Admin/index');
 		}
-		if (array_key_exists('inputEmail',$_POST) && array_key_exists('inputePassword',$_POST)) {
-			die('trying');
+		if (array_key_exists('inputEmail',$_POST) && array_key_exists('inputPassword',$_POST)) {
 			$res = $this->User->authenticate($_POST['inputEmail'], $_POST['inputPassword']);
 			if ($res) {
 				redirect('/Admin/index');
 			}
 		}
-		$this->view('login');
+		$data['user'] = $this->User;
+		$this->view('login', $data);
 
 	}
 	public function report() {
 
+		if (!array_key_exists('id', $_GET)) {
+			redirect('/Admin/reportsearch');
+		}
+	
 		$id = $_GET['id'];
 		if (!is_numeric($id)) {
 			$this->view('login');
@@ -53,7 +60,13 @@ class Admin extends CI_Controller {
 		$this->view('report', $data);
 
 	}
-	public function reportsearch() { $this->view('reportsearch'); }
+	public function reportsearch() { 
+	
+		$this->load->model('Report');
+		$data['reports'] = $this->Report->get_entries();
+	
+		$this->view('reportsearch',$data); 
+	}
 	public function summary() { $this->view('summary'); }
 
 	public function view($page = 'index', $data = array()) {
@@ -66,7 +79,7 @@ class Admin extends CI_Controller {
 
 		$this->load->view('templates/header', $data);
 		$this->load->view('admin/'.$page, $data);
-		$this->load->view('templates/footer', $data);
+		$this->load->view('templates/footerNoJs', $data);
 
 	}
 

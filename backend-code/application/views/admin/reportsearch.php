@@ -1,3 +1,10 @@
+<?php
+
+//echo var_export($reports,true);
+
+?>
+
+
 <section>
 
     <div class="container-fluid">
@@ -15,6 +22,7 @@
 
                     <h2 id="js-sort-button">Filter</h2>
 
+					
                     <div id="js-sort-container" class="sort-form-container">
 
                         <form>
@@ -116,7 +124,19 @@
                         <th>Zip Code <span class="glyphicon glyphicon-chevron" aria-hidden="true"></span></th>
                         </thead>
 
-                        <tr>
+<?php
+
+foreach ($reports as $report) {
+	$link = '/Admin/report?id=' . $report->ID;
+	
+	echo '<tr><td data-dateformat="MM-DD-YYYY"><a href="' . $link . '">' . $report->incident_start . '</a></td>
+                            <td><a href="/report.html">001</a></td>
+                            <td><a href="/report.html">Fire/ Alarm/ Companies</a></td>
+                            <td><a href="/report.html">15222</a></td>
+                        </tr>';
+}
+?>
+                        <!-- <tr>
                             <td data-dateformat="MM-DD-YYYY"><a href="/report.html">01/08/2015</a></td>
                             <td><a href="/report.html">001</a></td>
                             <td><a href="/report.html">Fire/ Alarm/ Companies</a></td>
@@ -163,7 +183,7 @@
                             <td><a href="/report.html">001</a></td>
                             <td><a href="/report.html">Other</a></td>
                             <td><a href="/report.html">15222</a></td>
-                        </tr>
+                        </tr> -->
 
                     </table>
 
