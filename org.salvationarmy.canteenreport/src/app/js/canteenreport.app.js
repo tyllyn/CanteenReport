@@ -7,7 +7,7 @@
 
   var canteenreport = global.canteenreport = {
 
-    debug: false,
+    debug: true,
     screenWidth: screen.width,
     screenHeight: screen.height,
 
@@ -19,10 +19,14 @@
     INPUT_SCREEN: 'form',
 
     FORM_SUBMIT_MESSAGE: 'Ready to submit? Please check all fields before submitting.',
+    FORM_DELETE_TITLE: 'Delete This Report?',
+    FORM_DELETE_MESSAGE: 'Delete this report and return to the home screen?',
     FORM_SUBMITTED_MESSAGE: 'Your report has been submitted.',
     FORM_ERROR_MESSAGE: 'There was an error submitting your report.',
     FORM_FIELDS_ERROR_MESSAGE: 'You have errors in your form. Please make sure all required fields are filled out.',
+    FORM_SAVE_CONFIRM_TITLE: 'Save This Report',
     FORM_SAVE_CONFIRM_MESSAGE: 'Save this report to edit later?',
+    UNSUBMITTED_REPORTS_MESSAGE: 'When you have unsubmitted reports, they will appear here.',
 
   	isOnline: false,
     isSyncing: false,
@@ -58,7 +62,8 @@
       );
 
       // listens for Cordova's onDeviceReady event
-      //document.addEventListener('deviceready', this.onDeviceReady, false); // does not render the iPad app
+      document.addEventListener('deviceready', this.onDeviceReady, false); // does not render the iPad app
+
 
       // watch for on and offline notifications
       window.addEventListener('offline', this.goOffline);
@@ -125,54 +130,43 @@
      */
     listUnsubmittedReports: function () {
 
-      //console.group('listUnsubmittedReports');
-
       var formBackupStore = amplify.store(canteenreport.BACKUP_STORE_NAME);
       var $savedForms = $('#js-saved-reports');
       var $savedFormsList = $('#js-saved-reports-list').empty();
 
-      if (formBackupStore != undefined && formBackupStore.length > 0) {
+      if (formBackupStore != undefined) {
 
-        $savedForms.slideDown({
-          duration: 900,
-          easing: 'easeInOutQuint'
-        });
+        if (formBackupStore.length > 0) {
 
-        $.each(formBackupStore, function (index, value) {
+          $savedForms.slideDown({
+            duration: 900,
+            easing: 'easeInOutQuint'
+          });
 
-          if (value[0]) {
+          $.each(formBackupStore, function (index, value) {
 
-            //console.group();
+            if (value[0]) {
+              var id = value[0].value;
+              var date = new Date(Number(id));
+              var day = date.getDate();
+              var year = date.getUTCFullYear();
+              var month = date.getMonth();
+              var hours = date.getHours();
+              var minutes = '0' + date.getMinutes();
+              var formattedDate = month + '/' + day + '/' + year + ', ' + hours + ':' + minutes.substr(minutes.length - 2);
+              $savedFormsList.append('<a class="js-open-saved-form-btn open-saved-report-btn date glyphicon glyphicon-chevron-right" data-id="' + id + '">' + formattedDate + '</a>');
+            }
 
-            var id = value[0].value;
-            var date = new Date(Number(id));
-            var day = date.getDate();
-            var year = date.getUTCFullYear();
-            var month = date.getMonth();
-            var hours = date.getHours();
-            var minutes = '0' + date.getMinutes();
+          });
 
-            var formattedDate = month + '/' + day + '/' + year + ', ' + hours + ':' + minutes.substr(minutes.length - 2);
+        } else {
 
-            //console.log(formattedDate);
+          $savedFormsList.append('<p>' + this.UNSUBMITTED_REPORTS_MESSAGE + '</p>');
 
-            $savedFormsList.append('<a class="js-open-saved-form-btn open-saved-report-btn date glyphicon glyphicon-chevron-right" data-id="' + id + '">' + formattedDate + '</a>');
-
-            //console.groupEnd();
-
-          }
-
-        });
-
-      } else {
-
-        $savedFormsList.append('<p>Your unsubmitted reports will appear here.</p>');
-
+        }
       }
 
       $('.js-open-saved-form-btn').on('click', $.proxy(this.openReport, this));
-
-      //console.groupEnd();
 
     },
 
@@ -219,39 +213,20 @@
      */
     closeReport: function () {
 
-      console.group('closeReport');
+      console.log('app.closeReport');
 
-      if (this.debug) {
-
-        var confirmation = window.confirm(this.FORM_SAVE_CONFIRM_MESSAGE);
-
-        if (confirmation === true) {
-          canteenreport.storage.saveReport();
-        }
-
-      } else {
-
-        navigator.notification.confirm (
-          this.FORM_SAVE_CONFIRM_MESSAGE,
-          $.proxy(this.onConfirm, this),
-          'Save This Report?',
-          ['Yes','No']
-        );
-
-      }
-
-      // this.$leftMenuItems.parent().removeClass("isActive").end().filter("[href=#incident]").parent().addClass("isActive");
-
-      // this.listUnsubmittedReports();
-      // this.changeScreen(this.HOME_SCREEN);
-
-      console.groupEnd();
+      navigator.notification.confirm (
+        this.FORM_SAVE_CONFIRM_MESSAGE,
+        $.proxy(this.closeReportOnConfirm, this),
+        this.FORM_SAVE_CONFIRM_TITLE,
+        ['Yes','No']
+      );
 
     },
 
-    onConfirm: function (buttonIndex) {
+    closeReportOnConfirm: function (buttonIndex) {
 
-      console.log('onConfirm ' + buttonIndex);
+      console.log('closeReportOnConfirm ' + buttonIndex);
 
       switch (buttonIndex) {
 
@@ -555,7 +530,6 @@
 
 }(this) );
 
-// $(function() {
-//   canteenreport.initialize();
-// });
-
+$(function() {
+  canteenreport.initialize();
+});

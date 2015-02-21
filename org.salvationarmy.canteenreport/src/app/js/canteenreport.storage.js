@@ -75,7 +75,7 @@
 	 */
 	storage.submitReport = function () {
 
-		//console.group('submitReport');
+		console.log('submitReport');
 
 		var formValuesJSON = getFormJson();
 
@@ -88,6 +88,10 @@
             data: formValuesJSON
         }).done(function () {
             console.log('done');
+        }).fail(function (jqXHR, textStatus) {
+            console.log('fail');
+            console.log(jqXHR);
+            console.log(textStatus);
         });
 
 		//define the request
@@ -99,8 +103,6 @@
 
         // execute the request
         // amplify.request(canteenreport.REPORT_REQUEST_NAME, formValuesJSON);
-
-		//console.groupEnd('submitReport');
 
 	};
 
@@ -204,13 +206,12 @@
 
 		if (typeof formBackupStore !== 'undefined') {
 
-			console.log('!== null');
-
 			$.each(formBackupStore, function (index, value) {
 
 				if (value.length > 0) {
 					var backedUpFormId = value[0].value;
 					if (backedUpFormId == id) {
+                        console.log('found the backup!');
 						formBackup = value;
 						return;
 					}

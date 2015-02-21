@@ -248,7 +248,7 @@
                                                 <option value="OH">OH</option>
                                                 <option value="OK">OK</option>
                                                 <option value="OR">OR</option>
-                                                <option value="PA">PA</option>
+                                                <option value="PA" selected>PA</option>
                                                 <option value="RI">RI</option>
                                                 <option value="SC">SC</option>
                                                 <option value="SD">SD</option>
@@ -413,18 +413,18 @@
                                         <div class="input-group input-group-lg team-member team-member-1">
                                             <input class="form-control" placeholder="Staff/Volunteer (Optional)" name="team-member" id="team-member-1" type="text" />
                                             <span class="input-group-btn js-remove-member-container">
-                                                <button class="btn btn-primary glyphicon glyphicon-minus js-remove-member" type="button"></button>
+                                                <button class="btn btn-primary glyphicon glyphicon-minus js-remove-member-btn" type="button"></button>
                                             </span>
-                                            <span class="input-group-btn js-add-member-container">
+                                            <!-- <span class="input-group-btn js-add-member-container">
                                                 <button class="btn btn-primary glyphicon glyphicon-plus js-add-member" type="button"></button>
-                                            </span>
+                                            </span> -->
                                         </div>
 
                                     </div>
 
-                                    <!-- <button id="js-add-member-btn" class="btn btn-primary">
+                                    <button id="js-add-member-btn" class="btn btn-primary">
                                         Add Team Member
-                                    </button> -->
+                                    </button>
 
                                 </div>
 
@@ -498,11 +498,11 @@
 
                                 <div class="col-sm-12">
 
-                            		<ul class="nav nav-tabs">
+                            		<ul id="js-tabs" class="nav nav-tabs">
                             			<li class="active"><a href="#beverage" data-toggle="tab">Beverage</a></li>
                             			<li><a href="#food" data-toggle="tab">Food</a></li>
                             			<li><a href="#clothing" data-toggle="tab">Clothing</a></li>
-                            			<li><a href="#other" data-toggle="tab">Other</a></li>
+                            			<!-- <li><a href="#other" data-toggle="tab">Other</a></li> -->
                             		</ul>
 
                             		<div class="tab-content">
@@ -568,7 +568,7 @@
                                         			</div>
 
                                         			<div class="col-sm-4">
-                                        				<select class="form-control" id="team-drink-cocoa-unit" id="team-drink-cocoa-unit">
+                                        				<select class="form-control" id="team-drink-cocoa-unit" name="team-drink-cocoa-unit">
                                         					<option value="gallon">Gallon</option>
                                         					<option value="pot">Pot</option>
                                         				</select>
@@ -661,7 +661,7 @@
                                         			</div>
 
                                         			<div class="col-sm-4">
-                                        				<select class="form-control" id="team-drink-water-unit" id="team-drink-water-unit">
+                                        				<select class="form-control" id="team-drink-water-unit" name="team-drink-water-unit">
                                         					<option value="gallon">Gallon</option>
                                         					<option value="pot">Pot</option>
                                         				</select>
@@ -831,7 +831,7 @@
                                         			</div>
 
                                         			<div class="col-sm-3">
-                                        				<select class="form-control" id="team-food-snacks-unit" id="team-food-snacks-unit">
+                                        				<select class="form-control" id="team-food-snacks-unit" name="team-food-snacks-unit">
                                         					<option value="gallon">Each</option>
                                         					<option value="pot">Dozen</option>
                                         				</select>
@@ -953,8 +953,10 @@
                                         <!--
                                             OTHER
                                         -->
+                                        <!--
                                         <div class="tab-pane" id="other">
                                         </div>
+                                        -->
 
                                     </div>
 
@@ -1029,13 +1031,13 @@
 
                             </div>
 
-                            <div class="row">
+                            <!-- <div class="row">
                                 <div class="col-sm-6">
                                     <button class="btn btn-primary">
                                         Add More
                                     </button>
                                 </div>
-                            </div>
+                            </div> -->
 
                         </fieldset>
 
