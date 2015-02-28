@@ -14,6 +14,9 @@
     SAVE_CONFIRM_TITLE: 'Save This Report',
     SAVE_CONFIRM_MESSAGE: 'Save this report to edit later?',
 
+    SUBMIT_CONFIRM_TITLE: 'Your Report Was Saved',
+    SUBMIT_CONFIRM_MESSAGE: 'Your report has been submitted. Thank you for your hard work!',
+
     // save some constants
     // BACKUP_STORE_NAME: 'canteenReportBackupStore',
     // ACTIVE_REPORT_STORE_NAME: 'canteenReportActiveStore',
@@ -78,7 +81,7 @@
       this.$syncBtn = $('#btn-sync').on('touchend', $.proxy(this.saveReport, this));
 
       // subscribe to amplify events
-      amplify.subscribe('report-saved', $.proxy(this.reportSaved, this));
+      //amplify.subscribe('report-saved', $.proxy(this.reportSaved, this));
 
       //
       // Canteen report subscriptions
@@ -275,7 +278,40 @@
      */
     reportSubmitted: function () {
 
-      //console.log('reportSubmitted');
+      console.log('reportSubmitted');
+
+      if (!this.debug) {
+
+        // cordova api call to an os specific confirmation dialog
+        navigator.notification.confirm (
+          this.SUBMIT_CONFIRM_MESSAGE,
+          $.proxy(this.reportSubmittedOnConfirm, this),
+          this.SUBMIT_CONFIRM_TITLE,
+          ['Ok']
+        );
+
+      } else {
+
+        var confirm = window.confirm(this.SUBMIT_CONFIRM_TITLE);
+
+        if (confirm === true) {
+          this.reportSubmittedOnConfirm(1);
+        }
+
+      }
+
+    },
+    reportSubmittedOnConfirm: function (buttonIndex) {
+
+      console.log('reportSubmittedOnConfirm ' + buttonIndex);
+
+      switch (buttonIndex) {
+        case 1 : {
+          canteenreport.storage.deleteReport();
+          this.changeScreen(this.HOME_SCREEN);
+          break;
+        }
+      }
 
     },
 

@@ -33,8 +33,9 @@
 
 			initialized = true;
 
-			amplify.subscribe('request.success', reportSaved);
-			amplify.subscribe('request.error', reportError);
+			$.subscribe('submit-report', $.proxy(reportSubmitting, this));
+			$.subscribe('report-error', $.proxy(reportError, this));
+			$.subscribe('report-submitted', $.proxy(reportSubmitted, this));
 
 			initEvents();
 
@@ -46,7 +47,7 @@
 
 	};
 
-	function reportError() {
+	function reportError () {
 
 		enable();
 
@@ -55,12 +56,19 @@
 
 	}
 
-	function reportSaved() {
+	function reportSubmitted () {
 
 		enable();
+		form.reset();
 
 		$('#js-submit-button').removeClass('disabled');
 		$('#js-form-message').html(SUBMITTED_MESSAGE);
+
+	}
+
+	function reportSubmitting () {
+
+		disable();
 
 	}
 
@@ -72,9 +80,6 @@
 		$('#js-delete-button').hide();
 
 		form.initialize();
-
-		// console.group('form.createNewReport');
-		// console.info('incident-id: ' + id);
 
 		// clear the old form
 		form.reset();
@@ -106,11 +111,18 @@
 			var value = report[i].value;
 			var $field = $form.find('[name="' + name + '"]');
 			if ($field[0]) {
+
 				var fieldType = $field[0].type;
-				if (fieldType === 'checkbox' || fieldType === 'radio') {
-					$field.prop('checked', 'checked');
-				} else {
-					$field.val(value);
+
+				switch (fieldType) {
+					case 'checkbox' :
+					case 'radio' : {
+						$field.prop('checked', 'checked');
+						break;
+					}
+					default: {
+						$field.val(value);
+					}
 				}
 			}
 		}
@@ -122,8 +134,7 @@
 	 */
 	form.reset = function () {
 
-		$form.find('input:text, input:password, input:file, select, textarea').val('');
-		$form.find('input:radio, input:checkbox').removeAttr('checked').removeAttr('selected');
+		$form[0].reset();
 
 		$('#js-tabs a:first').tab('show');
 		$('#incident-state').val('PA');
@@ -134,6 +145,39 @@
 	/**
 	 * Private Functions
 	 */
+
+
+	var submit = function (event) {
+
+		console.log('form.submit');
+
+		var valid = $form[0].checkValidity();
+		//var valid = false;
+		console.log('valid: ' + valid);
+
+		if (valid) {
+
+			// sets a cookie for the last used unit number
+			document.cookie = 'unitNumber=' + $('#incident-unit-number').val();
+			console.log('document.cookie: ' + document.cookie);
+
+			$(this).addClass('disabled');
+			$('#final').val('true'); // sets the report as final
+
+			$.publish('submit-report');
+
+		} else {
+
+			enable();
+
+			$('#js-form-message').html(FIELDS_ERROR_MESSAGE);
+			$.publish('report-not-complete');
+
+		}
+
+		return false;
+
+	};
 
 
 	/**
@@ -216,13 +260,13 @@
 	 */
 	var disable = function () {
 
-	 	//$('input, button, textarea, select').attr('disabled', 'disabled');
+	 	$('input, button, textarea, select').attr('disabled', 'disabled');
 
 	};
 
 	var enable = function () {
 
-		//$('input, button, textarea, select').removeAttr('disabled');
+		$('input, button, textarea, select').removeAttr('disabled');
 
 	};
 
@@ -360,33 +404,7 @@
 		/**
 		* form submit
 		*/
-		$('#js-submit-button').on('touchstart', function (event) {
-
-			var valid = $form[0].checkValidity();
-			disable();
-
-			if (valid) {
-
-				// sets a cookie for the last used unit number
-				document.cookie = 'unitNumber=' + $('#incident-unit-number').val();
-				//console.log('document.cookie: ' + document.cookie);
-
-				$(this).addClass('disabled');
-				$('#final').val('true'); // sets the report as final
-				$.publish('submit-report');
-
-			} else {
-
-				enable();
-
-				$('#js-form-message').html(FIELDS_ERROR_MESSAGE);
-				$.publish('report-not-complete');
-
-			}
-
-			return false;
-
-		});
+		$('#js-submit-button').on('touchstart', $.proxy(submit, this));
 
 	};
 

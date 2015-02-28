@@ -11,6 +11,8 @@
     var BACKUP_STORE_NAME = 'canteenReportBackupStore';
     var ACTIVE_REPORT_STORE_NAME = 'canteenReportActiveStore';
 
+    var currentReportId;
+
     // return the public api
 	var storage = canteenreport.storage = function () {
 		return;
@@ -18,7 +20,7 @@
 
 	function getFormJson() {
 
-		//console.info('getFormJson');
+		console.info('getFormJson');
 
 		var formValues = $('#form').serializeArray();
         var formValuesJSON = JSON.parse(JSON.stringify(formValues));
@@ -68,8 +70,6 @@
 
         amplify.store(BACKUP_STORE_NAME, formBackupArray);
 
-        //console.groupEnd();
-
     }
 
 
@@ -86,8 +86,10 @@
 		console.log('submitReport');
 
 		var formValuesJSON = getFormJson();
+        currentReportId = $('#incident-id').val();
 
         console.log(formValuesJSON);
+        console.log('currentReportId: ' + currentReportId);
 
         $.ajax({
             crossDomain: true,
@@ -95,11 +97,18 @@
             url: API_URL,
             data: formValuesJSON
         }).done(function () {
-            console.log('done');
+
+            $.publish('report-submitted', {
+                id: currentReportId
+            });
+
         }).fail(function (jqXHR, textStatus) {
-            console.log('fail');
-            console.log(jqXHR);
-            console.log(textStatus);
+
+            $.publish('report-error', {
+                jqXHR: jqXHR,
+                textStatus: textStatus
+            });
+
         });
 
 	};
@@ -144,6 +153,10 @@
     storage.deleteReport = function (id) {
 
         console.log('storage.deleteReport ' + id);
+
+        if (typeof id === 'undefined') {
+            id = currentReportId;
+        }
 
         var formBackupStore = amplify.store(BACKUP_STORE_NAME);
         var formBackupArray = [];
@@ -195,7 +208,6 @@
     */
 	storage.findBackupFormById = function (id) {
 
-		//console.group('storage.findBackupFormById: ' + id);
         console.log('findBackupFormById ' + id);
 
 		var formBackupStore = amplify.store(BACKUP_STORE_NAME);
@@ -217,8 +229,6 @@
 			});
 
 		}
-
-		//console.groupEnd();
 
 		return formBackup;
 
