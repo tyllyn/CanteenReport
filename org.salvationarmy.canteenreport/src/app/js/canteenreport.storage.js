@@ -8,6 +8,8 @@
 	'use strict';
 
 	var API_URL = 'http://72.22.29.60/Canteen/add';
+    var BACKUP_STORE_NAME = 'canteenReportBackupStore';
+    var ACTIVE_REPORT_STORE_NAME = 'canteenReportActiveStore';
 
     // return the public api
 	var storage = canteenreport.storage = function () {
@@ -33,8 +35,8 @@
 		//console.group('backupReport');
         console.log('backupReport');
 
-        var formStore = amplify.store(canteenreport.ACTIVE_REPORT_STORE_NAME);
-        var formBackupStore = amplify.store(canteenreport.BACKUP_STORE_NAME);
+        var formStore = amplify.store(ACTIVE_REPORT_STORE_NAME);
+        var formBackupStore = amplify.store(BACKUP_STORE_NAME);
         var formBackupArray = [];
         var formBackupJSON;
 
@@ -64,11 +66,16 @@
 
         console.log(formBackupArray);
 
-        amplify.store(canteenreport.BACKUP_STORE_NAME, formBackupArray);
+        amplify.store(BACKUP_STORE_NAME, formBackupArray);
 
         //console.groupEnd();
 
     }
+
+
+    //
+    // Private Functions
+    //
 
 
 	/**
@@ -103,7 +110,7 @@
 	storage.newReport = function () {
 
 		//console.info('storage.newReport');
-		amplify.store(canteenreport.ACTIVE_REPORT_STORE_NAME, {});
+		amplify.store(ACTIVE_REPORT_STORE_NAME, {});
 
 	};
 
@@ -126,16 +133,19 @@
         console.log(formValuesJSON);
         console.groupEnd();
 
-        amplify.store(canteenreport.ACTIVE_REPORT_STORE_NAME, formValuesJSON);
+        amplify.store(ACTIVE_REPORT_STORE_NAME, formValuesJSON);
         amplify.publish('report-saved');
 
 	};
 
+    /**
+     * Deletes a report by its id
+     */
     storage.deleteReport = function (id) {
 
         console.log('storage.deleteReport ' + id);
 
-        var formBackupStore = amplify.store(canteenreport.BACKUP_STORE_NAME);
+        var formBackupStore = amplify.store(BACKUP_STORE_NAME);
         var formBackupArray = [];
 
         if (typeof formBackupStore !== 'undefined') {
@@ -151,7 +161,7 @@
 
                     if (backedUpFormId === id) {
                         formBackupArray.splice(index, 1);
-                        amplify.store(canteenreport.BACKUP_STORE_NAME, formBackupArray);
+                        amplify.store(BACKUP_STORE_NAME, formBackupArray);
                         $.publish('report-deleted');
                         return;
                     }
@@ -163,7 +173,7 @@
     };
 
 	/**
-	 * Saves the report.
+	 * Saves the current report
 	 */
 	storage.saveReport = function () {
 
@@ -171,6 +181,14 @@
 		backupReport();
 
 	};
+
+    /**
+     */
+    storage.getBackedUpReports = function () {
+
+        return amplify.store(BACKUP_STORE_NAME);
+
+    };
 
 	/**
     * Will find a backed up form by its ID
@@ -180,7 +198,7 @@
 		//console.group('storage.findBackupFormById: ' + id);
         console.log('findBackupFormById ' + id);
 
-		var formBackupStore = amplify.store(canteenreport.BACKUP_STORE_NAME);
+		var formBackupStore = amplify.store(BACKUP_STORE_NAME);
 		var formBackup;
 
 		if (typeof formBackupStore !== 'undefined') {
@@ -210,7 +228,7 @@
      */
     storage.findBackupFormIndexById = function (id) {
 
-        var formBackupStore = amplify.store(canteenreport.BACKUP_STORE_NAME);
+        var formBackupStore = amplify.store(BACKUP_STORE_NAME);
         var backupIndex;
 
         $.each(formBackupStore, function (index, value) {
