@@ -7,40 +7,29 @@
 
 	'use strict';
 
+	var SUBMIT_MESSAGE = 'Ready to submit? Please check all fields before submitting.';
+    var DELETE_TITLE = 'Delete This Report?';
+    var DELETE_MESSAGE = 'Delete this report and return to the home screen?';
+    var SUBMITTED_MESSAGE = 'Your report has been submitted.';
+    var ERROR_MESSAGE = 'There was an error submitting your report.';
+    var FIELDS_ERROR_MESSAGE = 'You have errors in your form. Please make sure all required fields are filled out.';
+
 	var initialized = false;
 
 	var $form;
 	var $activeFuelLevelBtn;
 	var $activeWaterLevelBtn;
 
+	// return the public api
 	var form = canteenreport.form = function () {
 		return this;
 	};
-
-	function reportError() {
-
-		enable();
-
-		$('#js-submit-button').removeClass('disabled');
-		$('#js-form-message').html(canteenreport.FORM_ERROR_MESSAGE);
-
-	}
-
-	function reportSaved() {
-
-		enable();
-
-		$('#js-submit-button').removeClass('disabled');
-		$('#js-form-message').html(canteenreport.FORM_SUBMITTED_MESSAGE);
-
-	}
 
 	form.initialize = function () {
 
 		if (!initialized) {
 
-			$form = $('#form');
-			$form.on('focusout', $.proxy(onfocus, this));
+			$form = $('#form').on('focusout', $.proxy(onfocus, this));
 
 			initialized = true;
 
@@ -53,9 +42,27 @@
 
 		this.reset();
 
-		canteenreport.publish('form-initialized');
+		$.publish('form-initialized');
 
 	};
+
+	function reportError() {
+
+		enable();
+
+		$('#js-submit-button').removeClass('disabled');
+		$('#js-form-message').html(ERROR_MESSAGE);
+
+	}
+
+	function reportSaved() {
+
+		enable();
+
+		$('#js-submit-button').removeClass('disabled');
+		$('#js-form-message').html(SUBMITTED_MESSAGE);
+
+	}
 
 	/**
 	* Creates a new report
@@ -80,7 +87,7 @@
 		//console.groupEnd();
 
 		// announce that we created a new report
-		canteenreport.publish('new-report');
+		$.publish('new-report');
 
 	};
 
@@ -93,9 +100,8 @@
 
 		form.initialize();
 
-		var i;
-
-		for (i in report) {
+		// restores all of the data to the form
+		for (var i in report) {
 			var name = report[i].name;
 			var value = report[i].value;
 			var $field = $form.find('[name="' + name + '"]');
@@ -128,6 +134,48 @@
 	/**
 	 * Private Functions
 	 */
+
+
+	/**
+	 * Confirms and notifies that we want to delete this report
+	 */
+	var deleteReport = function () {
+
+		console.log('form.deleteReport');
+
+		if (!form.debug) {
+
+			navigator.notification.confirm (
+				DELETE_MESSAGE,
+				$.proxy(deleteReportOnConfirm, this),
+				DELETE_TITLE,
+				['Yes', 'No']
+			);
+
+		} else {
+
+			var confirm = window.confirm(DELETE_MESSAGE);
+			if (confirm === true) {
+				deleteReportOnConfirm(1);
+			}
+
+		}
+
+		return false;
+
+	};
+	var deleteReportOnConfirm = function (buttonIndex) {
+
+		switch (buttonIndex) {
+
+	        case 1 : {
+	        	var id = $('#incident-id').val();
+				$.publish('delete-report', {id: id});
+			}
+
+		}
+
+	};
 
 	/**
 	 */
@@ -183,7 +231,7 @@
  	 */
  	var onfocus = function () {
 
- 	 	canteenreport.publish('form-focused', $form);
+ 	 	$.publish('form-focused', $form);
 
  	};
 
@@ -307,52 +355,32 @@
 		/**
 		* Deletes the active report
 		*/
-		$('#js-delete-button').on('touchstart', function (event) {
-
-			navigator.notification.confirm (
-				canteenreport.FORM_DELETE_MESSAGE,
-				function (buttonIndex) {
-					if (buttonIndex === 1) {
-						var id = $('#incident-id').val();
-						canteenreport.storage.deleteReport(id);
-					}
-				},
-				canteenreport.FORM_DELETE_TITLE,
-				['Yes', 'No']
-  			);
-
-		 	return false;
-
-		});
+		$('#js-delete-button').on('touchstart', $.proxy(deleteReport, this));
 
 		/**
 		* form submit
 		*/
 		$('#js-submit-button').on('touchstart', function (event) {
 
-			//var valid = $form[0].checkValidity();
 			var valid = $form[0].checkValidity();
-
 			disable();
 
 			if (valid) {
 
 				// sets a cookie for the last used unit number
 				document.cookie = 'unitNumber=' + $('#incident-unit-number').val();
-
 				//console.log('document.cookie: ' + document.cookie);
 
 				$(this).addClass('disabled');
 				$('#final').val('true'); // sets the report as final
-				canteenreport.publish('submit-report');
-				canteenreport.scrollToSectionById('#confirm', 4000, 'easeOutQuint');
+				$.publish('submit-report');
 
 			} else {
 
 				enable();
 
-				$('#js-form-message').html(canteenreport.FORM_FIELDS_ERROR_MESSAGE);
-				canteenreport.publish('report-not-complete');
+				$('#js-form-message').html(FIELDS_ERROR_MESSAGE);
+				$.publish('report-not-complete');
 
 			}
 

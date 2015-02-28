@@ -1,15 +1,18 @@
 (function (global, undefined) {
 
-  //'use strict';
+  'use strict';
 
-  var slice = [].slice,
-    subscriptions = {};
+  // var slice = [].slice,
+  //   subscriptions = {};
 
   var canteenreport = global.canteenreport = {
 
     debug: true,
     screenWidth: screen.width,
     screenHeight: screen.height,
+
+    SAVE_CONFIRM_TITLE: 'Save This Report',
+    SAVE_CONFIRM_MESSAGE: 'Save this report to edit later?',
 
     // save some constants
     BACKUP_STORE_NAME: 'canteenReportBackupStore',
@@ -18,14 +21,6 @@
     HOME_SCREEN: 'home',
     INPUT_SCREEN: 'form',
 
-    FORM_SUBMIT_MESSAGE: 'Ready to submit? Please check all fields before submitting.',
-    FORM_DELETE_TITLE: 'Delete This Report?',
-    FORM_DELETE_MESSAGE: 'Delete this report and return to the home screen?',
-    FORM_SUBMITTED_MESSAGE: 'Your report has been submitted.',
-    FORM_ERROR_MESSAGE: 'There was an error submitting your report.',
-    FORM_FIELDS_ERROR_MESSAGE: 'You have errors in your form. Please make sure all required fields are filled out.',
-    FORM_SAVE_CONFIRM_TITLE: 'Save This Report',
-    FORM_SAVE_CONFIRM_MESSAGE: 'Save this report to edit later?',
     UNSUBMITTED_REPORTS_MESSAGE: 'When you have unsubmitted reports, they will appear here.',
 
   	isOnline: false,
@@ -46,7 +41,6 @@
       // position the ui
       this.screenWidth = screen.width;
       this.screenHeight = screen.height;
-
       $('#container').css('width', this.screenWidth * 2).css('height', this.screenHeight);
       $('#start').css('left', 0).css('width', this.screenWidth).css('height', this.screenHeight);
       $('#app').css('left', this.screenWidth).css('width', this.screenWidth).css('height', this.screenHeight);
@@ -63,7 +57,6 @@
 
       // listens for Cordova's onDeviceReady event
       document.addEventListener('deviceready', this.onDeviceReady, false); // does not render the iPad app
-
 
       // watch for on and offline notifications
       window.addEventListener('offline', this.goOffline);
@@ -87,36 +80,30 @@
       // subscribe to amplify events
       amplify.subscribe('report-saved', $.proxy(this.reportSaved, this));
 
-      // amplify.subscribe('request.success', function (settings, data, status) {
-      //   console.group('request.success');
-      //   console.info(settings);
-      //   console.info(data);
-      //   console.info(status);
-      //   console.groupEnd();
-      // } );
-
-      // amplify.subscribe('request.error', function (settings, data, status) {
-      //   console.group('request.error');
-      //   console.info(settings);
-      //   console.info(data);
-      //   console.info(status);
-      //   console.groupEnd();
-      // } );
-
       //
       // Canteen report subscriptions
       //
 
       // subscribe to the submit report event
-      canteenreport.subscribe('submit-report', $.proxy(this.submitReport, this));
+      $.subscribe('submit-report', $.proxy(this.submitReport, this));
 
-      //
-      canteenreport.subscribe('report-submitted', $.proxy(this.reportSubmitted, this));
+      // delete reports
+      $.subscribe('delete-report', this.deleteReport)
 
-      canteenreport.subscribe('report-deleted', $.proxy(this.reportDeleted, this));
+      // subscribe to the submission confirmation
+      $.subscribe('report-submitted', $.proxy(this.reportSubmitted, this));
+
+      // subscribe to report deletion
+      $.subscribe('report-deleted', $.proxy(this.reportDeleted, this));
 
       // canteen report event subscriptions
-      canteenreport.subscribe('form-focused', $.proxy(this.formFocused, this));
+      $.subscribe('form-focused', $.proxy(this.formFocused, this));
+
+      //
+      // set any defaults on the modules
+      //
+      canteenreport.form.debug = this.debug;
+
 
       //
       // go
@@ -180,10 +167,10 @@
       var date = new Date();
       var newReportId = date.getTime();
 
-      this.changeScreen(this.INPUT_SCREEN);
-
       canteenreport.storage.newReport();
       canteenreport.form.newReport(newReportId, date);
+
+      this.changeScreen(this.INPUT_SCREEN);
 
     },
 
@@ -215,12 +202,27 @@
 
       console.log('app.closeReport');
 
-      navigator.notification.confirm (
-        this.FORM_SAVE_CONFIRM_MESSAGE,
-        $.proxy(this.closeReportOnConfirm, this),
-        this.FORM_SAVE_CONFIRM_TITLE,
-        ['Yes','No']
-      );
+      if (!this.debug) {
+
+        // cordova api call to an os specific confirmation dialog
+        navigator.notification.confirm (
+          this.SAVE_CONFIRM_MESSAGE,
+          $.proxy(this.closeReportOnConfirm, this),
+          this.SAVE_CONFIRM_TITLE,
+          ['Yes','No']
+        );
+
+      } else {
+
+        var confirm = window.confirm(this.SAVE_CONFIRM_TITLE);
+
+        if (confirm === true) {
+          this.closeReportOnConfirm(1);
+        } else {
+          this.closeReportOnConfirm();
+        }
+
+      }
 
     },
 
@@ -232,11 +234,11 @@
 
         case 1 : {
           canteenreport.storage.saveReport();
-          canteenreport.listUnsubmittedReports();
-          canteenreport.changeScreen(canteenreport.HOME_SCREEN);
+          this.listUnsubmittedReports();
+          this.changeScreen(canteenreport.HOME_SCREEN);
         }
         default : {
-          canteenreport.changeScreen(canteenreport.HOME_SCREEN);
+          this.changeScreen(canteenreport.HOME_SCREEN);
         }
 
       }
@@ -258,9 +260,16 @@
     submitReport: function () {
 
       canteenreport.storage.submitReport();
+      this.scrollToSectionById('#confirm', 4000, 'easeOutQuad');
 
     },
 
+    deleteReport: function (event, data) {
+
+      console.log('app.deleteReport');
+      canteenreport.storage.deleteReport(data.id);
+
+    },
 
     /**
      */
@@ -310,7 +319,7 @@
       setTimeout(function(){
         if (!canteenreport.isSyncing) {
           canteenreport.$body.removeClass('is-syncing');
-          canteenreport.publish('report-saved');
+          $.publish('report-saved');
         }
       }, 3000);
 
@@ -357,19 +366,20 @@
 
     goOffline: function () {
 
-  		canteenreport.publish('app-offline');
+  		$.publish('app-offline');
 
   	},
 
   	goOnline: function () {
 
-  		canteenreport.publish('app-online');
+  		$.publish('app-online');
 
   	},
 
     /**
      * publish, subscribe, and unsubscribe borowed from amplify.core
      */
+    /*
     publish: function (topic) {
       if ( typeof topic !== "string" ) {
         throw new Error( "You must provide a valid topic to publish." );
@@ -470,6 +480,7 @@
         }
       }
     },
+    */
 
     scrollToSection: function (event) {
 
@@ -513,18 +524,7 @@
 
       //console.groupEnd();
 
-    },
-
-    /**
-     * Log a message if debug is true
-     */
-    // log: function (message) {
-
-    //  	if (this.debug) {
-    //  		//console.log(message);
-    //  	}
-
-    // }
+    }
 
   };
 

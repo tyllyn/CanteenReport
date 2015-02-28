@@ -7,8 +7,9 @@
 
 	'use strict';
 
-	var apiUrl = 'http://72.22.29.60/Canteen/add';
+	var API_URL = 'http://72.22.29.60/Canteen/add';
 
+    // return the public api
 	var storage = canteenreport.storage = function () {
 		return;
 	};
@@ -84,7 +85,7 @@
         $.ajax({
             crossDomain: true,
             type: 'POST',
-            url: apiUrl,
+            url: API_URL,
             data: formValuesJSON
         }).done(function () {
             console.log('done');
@@ -93,16 +94,6 @@
             console.log(jqXHR);
             console.log(textStatus);
         });
-
-		//define the request
-        // amplify.request.define(canteenreport.REPORT_REQUEST_NAME, 'ajax', {
-        //     url: apiUrl,
-        //     dataType: 'jsonp'
-        //     type: 'POST'
-        // });
-
-        // execute the request
-        // amplify.request(canteenreport.REPORT_REQUEST_NAME, formValuesJSON);
 
 	};
 
@@ -142,13 +133,10 @@
 
     storage.deleteReport = function (id) {
 
-        //console.group('storage.deleteReport: ' + id);
+        console.log('storage.deleteReport ' + id);
 
         var formBackupStore = amplify.store(canteenreport.BACKUP_STORE_NAME);
         var formBackupArray = [];
-        //var formBackup;
-
-        //console.log(formBackupStore);
 
         if (typeof formBackupStore !== 'undefined') {
             formBackupArray = formBackupStore;
@@ -162,22 +150,15 @@
                     var backedUpFormId = value[0].value;
 
                     if (backedUpFormId === id) {
-
-                        //console.info('found the report at ' + index);
-
                         formBackupArray.splice(index, 1);
                         amplify.store(canteenreport.BACKUP_STORE_NAME, formBackupArray);
-                        canteenreport.publish('report-deleted');
-
-
+                        $.publish('report-deleted');
                         return;
                     }
                 }
             });
 
         }
-
-        //console.groupEnd();
 
     };
 
@@ -186,10 +167,8 @@
 	 */
 	storage.saveReport = function () {
 
-		//console.group('saveReport');
         console.log('saveReport');
 		backupReport();
-		//console.groupEnd();
 
 	};
 
