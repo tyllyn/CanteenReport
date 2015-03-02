@@ -1,3 +1,7 @@
+// $(function() {
+//   canteenreport.initialize();
+// });
+
 (function (global, undefined) {
 
   'use strict';
@@ -7,7 +11,7 @@
 
   var canteenreport = global.canteenreport = {
 
-    debug: true,
+    debug: false,
     screenWidth: screen.width,
     screenHeight: screen.height,
 
@@ -59,7 +63,7 @@
       );
 
       // listens for Cordova's onDeviceReady event
-      document.addEventListener('deviceready', this.onDeviceReady, false); // does not render the iPad app
+      //document.addEventListener('deviceready', this.onDeviceReady, false); // does not render the iPad app
 
       // watch for on and offline notifications
       window.addEventListener('offline', this.goOffline);
@@ -459,7 +463,3 @@
   };
 
 }(this) );
-
-$(function() {
-  canteenreport.initialize();
-});

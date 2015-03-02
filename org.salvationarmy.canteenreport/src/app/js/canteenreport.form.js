@@ -17,8 +17,8 @@
 	var initialized = false;
 
 	var $form;
-	var $activeFuelLevelBtn;
-	var $activeWaterLevelBtn;
+
+	var requiredFieldNames = [];
 
 	// return the public api
 	var form = canteenreport.form = function () {
@@ -36,6 +36,8 @@
 			$.subscribe('submit-report', $.proxy(reportSubmitting, this));
 			$.subscribe('report-error', $.proxy(reportError, this));
 			$.subscribe('report-submitted', $.proxy(reportSubmitted, this));
+
+			requiredFieldNames = $('input, textarea, select, datetime-local').filter('[required]');
 
 			initEvents();
 
@@ -127,6 +129,17 @@
 			}
 		}
 
+		//manually restore the fuel and water levels
+		var fuelLevel = $('#end-fuel-level').val();
+		if (fuelLevel !== '') {
+			$('#fuel-level-button-' + fuelLevel).addClass('btn-is-active');
+		}
+
+		var waterLevel = $('#end-water-level').val();
+		if (waterLevel !== '') {
+			$('#water-level-button-' + waterLevel).addClass('btn-is-active');
+		}
+
 	};
 
 	/**
@@ -138,6 +151,8 @@
 
 		$('#js-tabs a:first').tab('show');
 		$('#incident-state').val('PA');
+		$('.fuel-level-button').removeClass('btn-is-active');
+		$('.water-level-button').removeClass('btn-is-active');
 
 	};
 
@@ -151,9 +166,41 @@
 
 		console.log('form.submit');
 
-		var valid = $form[0].checkValidity();
-		//var valid = false;
-		console.log('valid: ' + valid);
+		var valid = true;
+
+		for (var i = 0; i < requiredFieldNames.length; i++) {
+
+			var $field = $(requiredFieldNames[i]);
+			var type = $field.attr('type');
+
+			if (type === 'text') {
+
+				if ($field[0].checkValidity()) {
+					$field.removeClass('invalid');
+				} else {
+					valid = false;
+					$field.addClass('invalid');
+				}
+
+			}
+
+			if (type === 'datetime-local') {
+
+				if ($field.val() === '') {
+					valid = false;
+					$field.addClass('invalid');
+				} else {
+					$field.removeClass('invalid');
+				}
+
+			}
+
+		}
+
+		// validate the incident-type
+		if ($('input[type="checkbox"][name="incident-type"]:checked').length === 0) {
+			valid = false;
+		}
 
 		if (valid) {
 
@@ -167,8 +214,6 @@
 			$.publish('submit-report');
 
 		} else {
-
-			enable();
 
 			$('#js-form-message').html(FIELDS_ERROR_MESSAGE);
 			$.publish('report-not-complete');
@@ -320,13 +365,9 @@
 		*/
 		$('.fuel-level-button').on('touchstart', function (event) {
 
-			if (typeof $activeFuelLevelBtn != 'undefined') {
-				$activeFuelLevelBtn.removeClass('btn-is-active');
-			}
-			$activeFuelLevelBtn = $(event.currentTarget).addClass('btn-is-active');
-
-			// add the value to the hidden input so it can be hidden
-			$('#end-fuel-level').val($activeFuelLevelBtn.data().level);
+			$('.fuel-level-button').removeClass('btn-is-active');
+			$(this).addClass('btn-is-active');
+			$('#end-fuel-level').val($(this).data().level);
 
 			onfocus();
 
@@ -339,13 +380,9 @@
 		*/
 	   	$('.water-level-button').on('touchstart', function (event) {
 
-			if (typeof $activeWaterLevelBtn != 'undefined') {
-				$activeWaterLevelBtn.removeClass('btn-is-active');
-			}
-			$activeWaterLevelBtn = $(event.currentTarget).addClass('btn-is-active');
-
-			// add the value to the hidden input so it can be hidden
-			$('#end-water-level').val($activeWaterLevelBtn.data().level);
+			$('.water-level-button').removeClass('btn-is-active');
+			$(this).addClass('btn-is-active');
+			$('#end-water-level').val($(this).data().level);
 
 			onfocus();
 

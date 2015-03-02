@@ -298,8 +298,8 @@ module.exports = function (grunt) {
         'copy:dist',
         'usemin',
         'clean:deploy',
-        'copy:deploy'
-        //'exec:build_ios'
+        'copy:deploy',
+        'exec:build_ios'
     ]);
 
     grunt.registerTask('check', [
