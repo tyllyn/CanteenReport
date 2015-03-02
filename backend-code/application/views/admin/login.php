@@ -6,12 +6,12 @@
 
         <div class="form-group">
             <label for="inputEmail" class="sr-only">Email address</label>
-            <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required="" autofocus="">
+            <input type="email" id="inputEmail" name="inputEmail" class="form-control" placeholder="Email address" required="" autofocus="">
         </div>
 
         <div class="form-group">
             <label for="inputPassword" class="sr-only">Password</label>
-            <input type="password" id="inputPassword" class="form-control" placeholder="Password" required="">
+            <input type="password" id="inputPassword" name="inputPassword" class="form-control" placeholder="Password" required="">
         </div>
 
         <div class="checkbox">
@@ -20,8 +20,11 @@
             </label>
         </div>
 
-        <!-- this should obviously only display if you coouldn't authenticate the user -->
-        <div class="alert alert-danger" role="alert">Your email address or password was not correct.</div>
+<?php
+	if ($failed) {
+		echo '<div class="alert alert-danger" role="alert">Your email address or password was not correct.</div>';
+	}
+?>
 
         <div class="form-group">
             <button class="btn btn-lg btn-default" type="submit">Sign in</button>
