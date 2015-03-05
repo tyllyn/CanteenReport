@@ -104,6 +104,9 @@
 
         }).fail(function (jqXHR, textStatus) {
 
+            console.log(jqXHR);
+            console.log(textStatus);
+
             $.publish('report-error', {
                 jqXHR: jqXHR,
                 textStatus: textStatus
@@ -204,8 +207,8 @@
     };
 
 	/**
-    * Will find a backed up form by its ID
-    */
+     * Will find a backed up form by its ID
+     */
 	storage.findBackupFormById = function (id) {
 
         console.log('findBackupFormById ' + id);

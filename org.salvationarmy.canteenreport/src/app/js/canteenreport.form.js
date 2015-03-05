@@ -198,7 +198,12 @@
 		}
 
 		// validate the incident-type
-		if ($('input[type="checkbox"][name="incident-type"]:checked').length === 0) {
+		// if ($('input[type="checkbox"][name="incident-type"]:checked').length === 0) {
+		// 	valid = false;
+		// }
+
+		if ($('#js-incident-type input[type="checkbox"]:checked').length === 0) {
+			console.log('NOTHIGN IS CHECKED')
 			valid = false;
 		}
 
