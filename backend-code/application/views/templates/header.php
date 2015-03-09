@@ -1,9 +1,11 @@
 <?php
 
 function getNavClass($url) {
-	$path = $_SERVER['SCRIPT_NAME'];
-	$path = explode("?", $path)[0];
-	$path = explode("#", $path)[0];
+	$path = "/".$_GET['c']."/".$_GET['m'];
+	$path = explode("?", $path, 1);
+	$path = $path[0];
+	$path = explode("#", $path, 1);
+	$path = $path[0];
 	$path = strtolower($path);
 	if ($path == $url) {
 		return "active";
