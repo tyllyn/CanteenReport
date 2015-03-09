@@ -22,7 +22,7 @@
     <preference name="fullscreen" value="true" />
     <preference name="webviewbounce" value="true" />
 
-    <preference name="AutoHideSplashScreen" value="true" />
+    <preference name="AutoHideSplashScreen" value="false" />
 
     <preference name="StatusBarOverlaysWebView" value="false" />
     <preference name="StatusBarBackgroundColor" value="#DAD7D2" />

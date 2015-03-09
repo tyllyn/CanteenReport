@@ -7,15 +7,20 @@
 
 	'use strict';
 
-	var apiUrl = 'http://72.22.29.60/Canteen/add';
+	var API_URL = 'http://72.22.29.60/Canteen/add';
+    var BACKUP_STORE_NAME = 'canteenReportBackupStore';
+    var ACTIVE_REPORT_STORE_NAME = 'canteenReportActiveStore';
 
+    var currentReportId;
+
+    // return the public api
 	var storage = canteenreport.storage = function () {
 		return;
 	};
 
 	function getFormJson() {
 
-		//console.info('getFormJson');
+		console.info('getFormJson');
 
 		var formValues = $('#form').serializeArray();
         var formValuesJSON = JSON.parse(JSON.stringify(formValues));
@@ -32,8 +37,8 @@
 		//console.group('backupReport');
         console.log('backupReport');
 
-        var formStore = amplify.store(canteenreport.ACTIVE_REPORT_STORE_NAME);
-        var formBackupStore = amplify.store(canteenreport.BACKUP_STORE_NAME);
+        var formStore = amplify.store(ACTIVE_REPORT_STORE_NAME);
+        var formBackupStore = amplify.store(BACKUP_STORE_NAME);
         var formBackupArray = [];
         var formBackupJSON;
 
@@ -63,11 +68,14 @@
 
         console.log(formBackupArray);
 
-        amplify.store(canteenreport.BACKUP_STORE_NAME, formBackupArray);
-
-        //console.groupEnd();
+        amplify.store(BACKUP_STORE_NAME, formBackupArray);
 
     }
+
+
+    //
+    // Private Functions
+    //
 
 
 	/**
@@ -75,32 +83,36 @@
 	 */
 	storage.submitReport = function () {
 
-		//console.group('submitReport');
+		console.log('submitReport');
 
 		var formValuesJSON = getFormJson();
+        currentReportId = $('#incident-id').val();
 
         console.log(formValuesJSON);
+        console.log('currentReportId: ' + currentReportId);
 
         $.ajax({
             crossDomain: true,
             type: 'POST',
-            url: apiUrl,
+            url: API_URL,
             data: formValuesJSON
         }).done(function () {
-            console.log('done');
+
+            $.publish('report-submitted', {
+                id: currentReportId
+            });
+
+        }).fail(function (jqXHR, textStatus) {
+
+            console.log(jqXHR);
+            console.log(textStatus);
+
+            $.publish('report-error', {
+                jqXHR: jqXHR,
+                textStatus: textStatus
+            });
+
         });
-
-		//define the request
-        // amplify.request.define(canteenreport.REPORT_REQUEST_NAME, 'ajax', {
-        //     url: apiUrl,
-        //     dataType: 'jsonp'
-        //     type: 'POST'
-        // });
-
-        // execute the request
-        // amplify.request(canteenreport.REPORT_REQUEST_NAME, formValuesJSON);
-
-		//console.groupEnd('submitReport');
 
 	};
 
@@ -110,7 +122,7 @@
 	storage.newReport = function () {
 
 		//console.info('storage.newReport');
-		amplify.store(canteenreport.ACTIVE_REPORT_STORE_NAME, {});
+		amplify.store(ACTIVE_REPORT_STORE_NAME, {});
 
 	};
 
@@ -133,20 +145,24 @@
         console.log(formValuesJSON);
         console.groupEnd();
 
-        amplify.store(canteenreport.ACTIVE_REPORT_STORE_NAME, formValuesJSON);
+        amplify.store(ACTIVE_REPORT_STORE_NAME, formValuesJSON);
         amplify.publish('report-saved');
 
 	};
 
+    /**
+     * Deletes a report by its id
+     */
     storage.deleteReport = function (id) {
 
-        //console.group('storage.deleteReport: ' + id);
+        console.log('storage.deleteReport ' + id);
 
-        var formBackupStore = amplify.store(canteenreport.BACKUP_STORE_NAME);
+        if (typeof id === 'undefined') {
+            id = currentReportId;
+        }
+
+        var formBackupStore = amplify.store(BACKUP_STORE_NAME);
         var formBackupArray = [];
-        //var formBackup;
-
-        //console.log(formBackupStore);
 
         if (typeof formBackupStore !== 'undefined') {
             formBackupArray = formBackupStore;
@@ -160,14 +176,9 @@
                     var backedUpFormId = value[0].value;
 
                     if (backedUpFormId === id) {
-
-                        //console.info('found the report at ' + index);
-
                         formBackupArray.splice(index, 1);
-                        amplify.store(canteenreport.BACKUP_STORE_NAME, formBackupArray);
-                        canteenreport.publish('report-deleted');
-
-
+                        amplify.store(BACKUP_STORE_NAME, formBackupArray);
+                        $.publish('report-deleted');
                         return;
                     }
                 }
@@ -175,42 +186,44 @@
 
         }
 
-        //console.groupEnd();
+    };
+
+	/**
+	 * Saves the current report
+	 */
+	storage.saveReport = function () {
+
+        console.log('saveReport');
+		backupReport();
+
+	};
+
+    /**
+     */
+    storage.getBackedUpReports = function () {
+
+        return amplify.store(BACKUP_STORE_NAME);
 
     };
 
 	/**
-	 * Saves the report.
-	 */
-	storage.saveReport = function () {
-
-		//console.group('saveReport');
-        console.log('saveReport');
-		backupReport();
-		//console.groupEnd();
-
-	};
-
-	/**
-    * Will find a backed up form by its ID
-    */
+     * Will find a backed up form by its ID
+     */
 	storage.findBackupFormById = function (id) {
 
-		//console.group('storage.findBackupFormById: ' + id);
         console.log('findBackupFormById ' + id);
 
-		var formBackupStore = amplify.store(canteenreport.BACKUP_STORE_NAME);
+		var formBackupStore = amplify.store(BACKUP_STORE_NAME);
 		var formBackup;
 
 		if (typeof formBackupStore !== 'undefined') {
-
-			console.log('!== null');
 
 			$.each(formBackupStore, function (index, value) {
 
 				if (value.length > 0) {
 					var backedUpFormId = value[0].value;
 					if (backedUpFormId == id) {
+                        console.log('found the backup!');
 						formBackup = value;
 						return;
 					}
@@ -220,8 +233,6 @@
 
 		}
 
-		//console.groupEnd();
-
 		return formBackup;
 
     };
@@ -230,7 +241,7 @@
      */
     storage.findBackupFormIndexById = function (id) {
 
-        var formBackupStore = amplify.store(canteenreport.BACKUP_STORE_NAME);
+        var formBackupStore = amplify.store(BACKUP_STORE_NAME);
         var backupIndex;
 
         $.each(formBackupStore, function (index, value) {

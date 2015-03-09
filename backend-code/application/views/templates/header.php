@@ -1,3 +1,17 @@
+<?php
+
+function getNavClass($url) {
+	$path = $_SERVER['SCRIPT_NAME'];
+	$path = explode("?", $path)[0];
+	$path = explode("#", $path)[0];
+	$path = strtolower($path);
+	if ($path == $url) {
+		return "active";
+	}
+	return "";
+}
+?>
+
 <!DOCTYPE html>
 <html>
 
@@ -27,6 +41,17 @@
 			</a>
 
 		</div>
+		<ul class="nav nav-pills nav-canteen navbar-right">
+			<li role="presentation" class="<?php echo getNavClass('/admin/reportsearch'); ?>">
+				<a href="/admin/reportsearch">Reports</a>
+			</li>
+			<li role="presentation" class="<?php echo getNavClass('/admin/summary'); ?>">
+				<a href="/admin/summary">Summary</a>
+			</li>
+			<li role="presentation" class="<?php echo getNavClass('/admin/logout'); ?>">
+				<a href="/admin/logout">Logout</a>
+			</li>
+		</ul>
 
 	</div>
 

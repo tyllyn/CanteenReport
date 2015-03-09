@@ -12,6 +12,8 @@ module.exports = function (grunt) {
     // load all grunt tasks
     require('matchdep').filterDev('grunt-*').forEach(grunt.loadNpmTasks);
 
+    grunt.loadNpmTasks('grunt-exec');
+
     // configurable paths
     var yeomanConfig = {
         app: 'app',
@@ -130,8 +132,10 @@ module.exports = function (grunt) {
         compass: {
             options: {
                 sassDir: '<%= yeoman.app %>/sass',
-                cssDir: '.tmp/css',
-                generatedImagesDir: '.tmp/img/generated',
+                //cssDir: '.tmp/css',
+                cssDir: '<%= yeoman.app %>/css',
+                //generatedImagesDir: '.tmp/img/generated',
+                generatedImagesDir: '<%= yeoman.app %>/img/generated',
                 imagesDir: '<%= yeoman.app %>/img',
                 javascriptsDir: '<%= yeoman.app %>/js',
                 fontsDir: '<%= yeoman.app %>/css/fonts',
@@ -250,6 +254,12 @@ module.exports = function (grunt) {
                 'imagemin',
                 'svgmin'
             ]
+        },
+        exec: {
+            build_ios: {
+                cwd: '../',
+                cmd: 'cordova build ios'
+            }
         }
     });
 
@@ -276,6 +286,20 @@ module.exports = function (grunt) {
         'uglify',
         'copy:dist',
         'usemin'
+    ]);
+
+    grunt.registerTask('test', [
+        'clean:dist',
+        'useminPrepare',
+        'concurrent:dist',
+        'autoprefixer',
+        'concat',
+        'uglify',
+        'copy:dist',
+        'usemin',
+        'clean:deploy',
+        'copy:deploy',
+        'exec:build_ios'
     ]);
 
     grunt.registerTask('check', [

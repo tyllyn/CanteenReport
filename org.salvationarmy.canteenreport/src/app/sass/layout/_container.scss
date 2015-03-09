@@ -1,10 +1,7 @@
 #container {
 
-	// width: 1536px;
-	// height: 768px;
-
 	@include transition-duration(0.5s);
-	@include transition-property(left);
+	@include transition-property(translateZ(0));
 
 	position: absolute;
 	top: 0;

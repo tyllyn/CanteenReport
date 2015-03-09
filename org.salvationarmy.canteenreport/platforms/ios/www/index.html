@@ -20,6 +20,8 @@
 
         function onDeviceReady() {
 
+            console.log('onDeviceReady');
+
             if (window.cordova.logger) {
                 window.cordova.logger.__onDeviceReady();
             }
@@ -128,7 +130,7 @@
                         			</label>
 
                         			<div class="input-group input-group-lg">
-                        				<input class="form-control form-control-date" name="incident-start" id="incident-start" type="datetime-local" />
+                        				<input class="form-control form-control-date" name="incident-start" id="incident-start" type="datetime-local" required />
                         				<label class="input-group-addon glyphicon glyphicon-calendar" for="incident-start"></label>
                         			</div>
 
@@ -145,7 +147,7 @@
                                     </label>
 
                                     <div class="input-group input-group-lg">
-                                        <input class="form-control form-control-date" name="incident-inroute" id="incident-inroute" type="datetime-local" />
+                                        <input class="form-control form-control-date" name="incident-inroute" id="incident-inroute" type="datetime-local" required />
                                         <label class="input-group-addon glyphicon glyphicon-calendar" for="incident-inroute"></label>
                                     </div>
 
@@ -158,7 +160,7 @@
                                     </label>
 
                                     <div class="input-group input-group-lg">
-                                        <input class="form-control form-control-date" name="incident-onscene" id="incident-onscene" type="datetime-local" />
+                                        <input class="form-control form-control-date" name="incident-onscene" id="incident-onscene" type="datetime-local" required />
                                         <label class="input-group-addon glyphicon glyphicon-calendar" for="incident-onscene"></label>
                                     </div>
 
@@ -179,7 +181,7 @@
                             			</label>
 
                                         <div class="input-group input-group-lg">
-                                            <input class="input-xlarge form-control" name="incident-address" id="incident-address" type="text" />
+                                            <input class="input-xlarge form-control" name="incident-address" id="incident-address" type="text" required />
                                         </div>
 
                                     </div>
@@ -195,7 +197,7 @@
                                         </label>
 
                                         <div class="input-group input-group-lg">
-                                            <input class="input-xlarge form-control" name="incident-city" id="incident-city" type="text" />
+                                            <input class="input-xlarge form-control" name="incident-city" id="incident-city" type="text" required />
                                         </div>
 
                                     </div>
@@ -246,7 +248,7 @@
                                                 <option value="OH">OH</option>
                                                 <option value="OK">OK</option>
                                                 <option value="OR">OR</option>
-                                                <option value="PA">PA</option>
+                                                <option value="PA" selected>PA</option>
                                                 <option value="RI">RI</option>
                                                 <option value="SC">SC</option>
                                                 <option value="SD">SD</option>
@@ -271,7 +273,7 @@
                                         </label>
 
                                         <div class="input-group input-group-lg">
-                                            <input class="input-xlarge form-control" name="incident-zipcode" id="incident-zipcode" type="text" />
+                                            <input class="input-xlarge form-control" name="incident-zipcode" id="incident-zipcode" type="text" required />
                                         </div>
 
                                     </div>
@@ -288,7 +290,7 @@
                         				Type of Call<abbr title="required">*</abbr>
                         			</label>
 
-                        			<div class="type-container">
+                        			<div id="js-incident-type" class="type-container">
 
                         				<div class="row">
 
@@ -411,18 +413,18 @@
                                         <div class="input-group input-group-lg team-member team-member-1">
                                             <input class="form-control" placeholder="Staff/Volunteer (Optional)" name="team-member" id="team-member-1" type="text" />
                                             <span class="input-group-btn js-remove-member-container">
-                                                <button class="btn btn-primary glyphicon glyphicon-minus js-remove-member" type="button"></button>
+                                                <button class="btn btn-primary glyphicon glyphicon-minus js-remove-member-btn" type="button"></button>
                                             </span>
-                                            <span class="input-group-btn js-add-member-container">
+                                            <!-- <span class="input-group-btn js-add-member-container">
                                                 <button class="btn btn-primary glyphicon glyphicon-plus js-add-member" type="button"></button>
-                                            </span>
+                                            </span> -->
                                         </div>
 
                                     </div>
 
-                                    <!-- <button id="js-add-member-btn" class="btn btn-primary">
+                                    <button id="js-add-member-btn" class="btn btn-primary">
                                         Add Team Member
-                                    </button> -->
+                                    </button>
 
                                 </div>
 
@@ -496,11 +498,11 @@
 
                                 <div class="col-sm-12">
 
-                            		<ul class="nav nav-tabs">
+                            		<ul id="js-tabs" class="nav nav-tabs">
                             			<li class="active"><a href="#beverage" data-toggle="tab">Beverage</a></li>
                             			<li><a href="#food" data-toggle="tab">Food</a></li>
                             			<li><a href="#clothing" data-toggle="tab">Clothing</a></li>
-                            			<li><a href="#other" data-toggle="tab">Other</a></li>
+                            			<!-- <li><a href="#other" data-toggle="tab">Other</a></li> -->
                             		</ul>
 
                             		<div class="tab-content">
@@ -566,7 +568,7 @@
                                         			</div>
 
                                         			<div class="col-sm-4">
-                                        				<select class="form-control" id="team-drink-cocoa-unit" id="team-drink-cocoa-unit">
+                                        				<select class="form-control" id="team-drink-cocoa-unit" name="team-drink-cocoa-unit">
                                         					<option value="gallon">Gallon</option>
                                         					<option value="pot">Pot</option>
                                         				</select>
@@ -659,7 +661,7 @@
                                         			</div>
 
                                         			<div class="col-sm-4">
-                                        				<select class="form-control" id="team-drink-water-unit" id="team-drink-water-unit">
+                                        				<select class="form-control" id="team-drink-water-unit" name="team-drink-water-unit">
                                         					<option value="gallon">Gallon</option>
                                         					<option value="pot">Pot</option>
                                         				</select>
@@ -829,7 +831,7 @@
                                         			</div>
 
                                         			<div class="col-sm-3">
-                                        				<select class="form-control" id="team-food-snacks-unit" id="team-food-snacks-unit">
+                                        				<select class="form-control" id="team-food-snacks-unit" name="team-food-snacks-unit">
                                         					<option value="gallon">Each</option>
                                         					<option value="pot">Dozen</option>
                                         				</select>
@@ -951,8 +953,10 @@
                                         <!--
                                             OTHER
                                         -->
+                                        <!--
                                         <div class="tab-pane" id="other">
                                         </div>
+                                        -->
 
                                     </div>
 
@@ -1027,13 +1031,13 @@
 
                             </div>
 
-                            <div class="row">
+                            <!-- <div class="row">
                                 <div class="col-sm-6">
                                     <button class="btn btn-primary">
                                         Add More
                                     </button>
                                 </div>
-                            </div>
+                            </div> -->
 
                         </fieldset>
 
@@ -1075,7 +1079,7 @@
                             			</label>
 
                             			<div class="input-group input-group-lg">
-                            				<input class="form-control form-control-date" name="end-time" id="end-time" type="datetime-local" />
+                            				<input class="form-control form-control-date" name="end-time" id="end-time" type="datetime-local" required />
                             				<label for="end-time" class="input-group-addon glyphicon glyphicon-calendar"></label>
                             			</div>
 
@@ -1100,7 +1104,7 @@
                                         </label>
 
                             			<div class="input-group input-group-lg">
-                            				<input class="form-control" name="end-total-mileage" id="end-total-mileage" type="text" />
+                            				<input class="form-control" name="end-total-mileage" id="end-total-mileage" type="text" required />
                             			</div>
 
                             		</div>
@@ -1133,19 +1137,19 @@
 
     	                    	<div class="btn-group btn-group-justified">
     	                    		<div class="btn-group">
-    	                    			<button type="button" class="btn btn-default fuel-level-button" data-level="100">Full</button>
+    	                    			<button type="button" id="fuel-level-button-100" class="btn btn-default fuel-level-button" data-level="100">Full</button>
     	                    		</div>
     	                    		<div class="btn-group">
-    	                    			<button type="button" class="btn btn-default fuel-level-button" data-level="75">3/4</button>
+    	                    			<button type="button" id="fuel-level-button-75" class="btn btn-default fuel-level-button" data-level="75">3/4</button>
     	                    		</div>
     	                    		<div class="btn-group">
-    	                    			<button type="button" class="btn btn-default fuel-level-button" data-level="50">1/2</button>
+    	                    			<button type="button" id="fuel-level-button-50" class="btn btn-default fuel-level-button" data-level="50">1/2</button>
     	                    		</div>
     	                    		<div class="btn-group">
-    	                    			<button type="button" class="btn btn-default fuel-level-button" data-level="25">1/4</button>
+    	                    			<button type="button" id="fuel-level-button-25" class="btn btn-default fuel-level-button" data-level="25">1/4</button>
     	                    		</div>
     	                    		<div class="btn-group">
-    	                    			<button type="button" class="btn btn-default fuel-level-button" data-level="0">Empty</button>
+    	                    			<button type="button" id="fuel-level-button-0" class="btn btn-default fuel-level-button" data-level="0">Empty</button>
     	                    		</div>
     	                    	</div>
 
@@ -1161,19 +1165,19 @@
 
     	                    	<div class="btn-group btn-group-justified">
     	                    		<div class="btn-group">
-    	                    			<button type="button" class="btn btn-default water-level-button" data-level="100">Full</button>
+    	                    			<button type="button" id="water-level-button-100" class="btn btn-default water-level-button" data-level="100">Full</button>
     	                    		</div>
     	                    		<div class="btn-group">
-    	                    			<button type="button" class="btn btn-default water-level-button" data-level="75">3/4</button>
+    	                    			<button type="button" id="water-level-button-75" class="btn btn-default water-level-button" data-level="75">3/4</button>
     	                    		</div>
     	                    		<div class="btn-group">
-    	                    			<button type="button" class="btn btn-default water-level-button" data-level="50">1/2</button>
+    	                    			<button type="button" id="water-level-button-50" class="btn btn-default water-level-button" data-level="50">1/2</button>
     	                    		</div>
     	                    		<div class="btn-group">
-    	                    			<button type="button" class="btn btn-default water-level-button" data-level="25">1/4</button>
+    	                    			<button type="button" id="water-level-button-25" class="btn btn-default water-level-button" data-level="25">1/4</button>
     	                    		</div>
     	                    		<div class="btn-group">
-    	                    			<button type="button" class="btn btn-default water-level-button" data-level="0">Empty</button>
+    	                    			<button type="button" id="water-level-button-0" class="btn btn-default water-level-button" data-level="0">Empty</button>
     	                    		</div>
     	                    	</div>
 
