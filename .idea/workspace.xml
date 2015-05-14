@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="c2b1683f-20b3-4984-a5f3-8bc4c1fc0610" name="Default" comment="Ordered report model's item_search&#10;">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/backend-code/application/models/report.php" afterPath="$PROJECT_DIR$/backend-code/application/models/report.php" />
+    <list default="true" id="c2b1683f-20b3-4984-a5f3-8bc4c1fc0610" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="CanteenReport.iws" />
@@ -474,6 +473,13 @@
       <option name="number" value="Default" />
       <updated>1421989902123</updated>
     </task>
+    <task id="LOCAL-00001" summary="* Ordered report model's item_search&#10;* Fixed a bug (thanks for catching that, phpstorm!)">
+      <created>1431577280218</created>
+      <option name="number" value="00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1431577280218</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -518,7 +524,8 @@
       <TodoPanelSettings />
     </option>
     <MESSAGE value="Ordered report model's item_search&#10;" />
-    <option name="LAST_COMMIT_MESSAGE" value="Ordered report model's item_search&#10;" />
+    <MESSAGE value="* Ordered report model's item_search&#10;* Fixed a bug (thanks for catching that, phpstorm!)" />
+    <option name="LAST_COMMIT_MESSAGE" value="* Ordered report model's item_search&#10;* Fixed a bug (thanks for catching that, phpstorm!)" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
