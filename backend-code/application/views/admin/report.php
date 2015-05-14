@@ -1,31 +1,48 @@
+<style>
+    .todo {
+        font-size: 0.9em;
+        color: #000;
+        background-color: #ffff00;
+        border: 1px solid #202020;
+        padding: 2px;
+        margin: 2px;
+    }
+    .todo:before {
+        content: "TODO: ";
+        font-weight: bold;
+    }
+</style>
+
+
 <?php
 
-// $report
-// $reportmembers;
-// $reportitems;
-global $report, $reportmembers, $reportitems;
+// making phpstorm aware
+$report;
+$reportmembers;
+$reportitems;
 
-/**
- * Prints an item.
- * @param $report
- * @param null $key
- */
-function p($key = null) {
-    global $report;
-    echo $report[0][$key];
+
+
+class helper {
+    public $report;
+
+    function p($key) {
+        echo $this->report[0][$key];
+    }
+
+    function get($key) {
+        return $this->report[0][$key];
+    }
 }
 
-function get($key) {
-    global $report;
-    return $report[0][$key];
-}
+$h = new helper();
+$h->report = $report;
 
 function debug($title, $obj) {
     print "<b>$title:</b><textarea rows=\"5\" cols=\"80\">" . var_export($obj, true) . "</textarea><br/><br/>";
 }
 
 if (array_key_exists("debug", $_GET)) {
-
 
     debug("Report",$report);
     debug("Items",$reportitems);
@@ -67,7 +84,7 @@ if (array_key_exists("debug", $_GET)) {
                             <?php
 
                                 // label-default, label-success, label-primary, label-danger, label-info, label-warning
-                                if (get('final') == 'true') {
+                                if ($h->get('final') == 'true') {
                                     $statusCss = 'label-success';
                                     $status = 'Complete';
                                 } else {
@@ -78,13 +95,30 @@ if (array_key_exists("debug", $_GET)) {
                             ?>
                             <span class="label <?php echo $statusCss; ?>"><?php echo $status; ?></span>
                         </li>
-                        <li class="list-group-item"><strong>Report ID Number:</strong> <?php p('ID') ?></li>
-                        <li class="list-group-item"><strong>Unit Number:</strong> <?php p('incident_unit_number') ?></li>
-                        <li class="list-group-item"><strong>Dispatch:</strong> 01/01/2015, 9:00am</li>
-                        <li class="list-group-item"><strong>In Route:</strong> 01/01/2015, 9:00am</li>
-                        <li class="list-group-item"><strong>On the Scene:</strong> 01/01/2015, 9:00am</li>
-                        <li class="list-group-item"><strong>Location of Incident:</strong> 123 Address Street, Pittsburgh, PA 15222</li>
-                        <li class="list-group-item"><strong>Type of Call:</strong> Fire/ Alarm/ Companies, Hazmat</li>
+                        <li class="list-group-item"><strong>Report ID Number:</strong> <?php $h->p('ID') ?></li>
+                        <li class="list-group-item"><strong>Unit Number:</strong> <?php $h->p('incident_unit_number') ?></li>
+                        <li class="list-group-item"><strong>Dispatch:</strong> <?php $h->p('incident_start'); ?><span class="todo">format date (01/01/2015, 9:00am)</span></li>
+                        <li class="list-group-item"><strong>In Route:</strong> <?php $h->p('incident_inroute'); ?><span class="todo">format date (01/01/2015, 9:00am)</span></li>
+                        <li class="list-group-item"><strong>On the Scene:</strong> <?php $h->p('incident_onscene'); ?><span class="todo">format date (01/01/2015, 9:00am)</span></li>
+                        <li class="list-group-item"><strong>Location of Incident:</strong>
+                            <?php $h->p('incident_address'); ?>, <?php $h->p('incident_city'); ?>
+                            <?php $h->p('incident_state'); ?> <?php $h->p('incident_zipcode'); ?>
+                        </li>
+                        <?php
+                            $reportTypeAry = array();
+                            if ($h->get('incident_type_fire') !== null) { $reportTypeAry[] = 'Fire'; }
+                            if ($h->get('incident_type_flood') !== null) { $reportTypeAry[] = 'Flood'; }
+                            if ($h->get('incident_type_hazmat') !== null) { $reportTypeAry[] = 'Hazmat'; }
+                            if ($h->get('incident_type_special_event') !== null) { $reportTypeAry[] = 'Special Event'; }
+                            if ($h->get('incident_type_maintenence') !== null) { $reportTypeAry[] = 'Maintenance'; }
+                            if ($h->get('incident_type_other') == 'on') { $reportTypeAry[] = "Other: ".$h->get('incident_other'); }
+                            if (count($reportTypeAry) == 0) {
+                                $reportType = "Not Set";
+                            } else {
+                                $reportType = implode(", ", $reportTypeAry);
+                            }
+                        ?>
+                        <li class="list-group-item"><strong>Type of Call:</strong> <?php echo $reportType; ?></li>
                     </ul>
 
                 </div>
@@ -114,7 +148,7 @@ EOD;
 				<div class="panel panel-default">
 				
 					<div class="panel-heading">
-						<h3 class="panel-title">Items</h3>
+						<h3 class="panel-title">Items <span class="todo">Replace item number with the appropriate name.</span></h3>
 					</div>
 					
 					<ul class="list-group">

@@ -104,6 +104,7 @@ class Report extends CI_Model {
 	function get_entry_members($id) {
 		//incident_unit_number
 		$this->db->where('ReportID',$id);
+        $this->db->where("ifnull(Name,'')<>''", null, false);
 		$q = $this->db->get('ReportMembers');
 		return $q->result();
 	}
