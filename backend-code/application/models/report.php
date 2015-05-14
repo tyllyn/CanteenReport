@@ -124,7 +124,7 @@ class Report extends CI_Model {
 			$query = $this->db->get('Reports');
 		}
 
-		return $q->result();
+		return $query->result();
 	}
 	function get_item_by_date($start, $end){
 		$this->db->where('incident_start', $start);
@@ -152,6 +152,8 @@ class Report extends CI_Model {
 		if(isset($params['incident-unit-number']) && $params["incident-unit-number"] != '') {
 			$this->db->where('incident_unit_number',$params['incident-unit-number']);
 		}
+
+        $this->db->order_by('incident_start desc');
 
 		$q = $this->db->get();
 		
