@@ -2,8 +2,12 @@
 	$r = $report;
 	$rm = $reportmembers;
     $ri = $reportitems;
-	function p($report, $key) {
-		echo $report[0][$key];
+	function p($report, $key = null) {
+        if ($key === null) {
+            echo $report;
+        } else {
+            echo $report[0][$key];
+        }
 	}
     function debug($title, $obj) {
         print "<b>$title:</b><textarea rows=\"5\" cols=\"80\">" . var_export($obj, true) . "</textarea><br/><br/>";
@@ -47,7 +51,21 @@
                     </div>
 
                     <ul class="list-group">
-                        <li class="list-group-item"><strong>Report Status:</strong> <span class="label label-danger">Active</span></li>
+                        <li class="list-group-item"><strong>Report Status:</strong>
+                            <?php
+
+                                // label-default, label-success, label-primary, label-danger, label-info, label-warning
+                                if (p($r, 'final') == 'true') {
+                                    $statusCss = 'label-success';
+                                    $status = 'Complete';
+                                } else {
+                                    $statusCss = 'label-danger';
+                                    $status = 'Incomplete';
+                                }
+
+                            ?>
+                            <span class="label <?php p($statusCss); ?>"><?php p($status); ?></span>
+                        </li>
                         <li class="list-group-item"><strong>Report ID Number:</strong> <?php p($r,'ID') ?></li>
                         <li class="list-group-item"><strong>Unit Number:</strong> <?php p($r, 'incident_unit_number') ?></li>
                         <li class="list-group-item"><strong>Dispatch:</strong> 01/01/2015, 9:00am</li>
