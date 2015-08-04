@@ -33,6 +33,12 @@ class helper {
     function get($key) {
         return $this->report[0][$key];
     }
+
+    function date($dt) {
+        $date = new DateTime($dt);
+        return $date->format('Y-m-d, H:i:s');
+    }
+
 }
 
 $h = new helper();
@@ -97,7 +103,7 @@ if (array_key_exists("debug", $_GET)) {
                         </li>
                         <li class="list-group-item"><strong>Report ID Number:</strong> <?php $h->p('ID') ?></li>
                         <li class="list-group-item"><strong>Unit Number:</strong> <?php $h->p('incident_unit_number') ?></li>
-                        <li class="list-group-item"><strong>Dispatch:</strong> <?php $h->p('incident_start'); ?><span class="todo">format date (01/01/2015, 9:00am)</span></li>
+                        <li class="list-group-item"><strong>Dispatch:</strong> <?php $h->date($h->get('incident_start')); ?><span class="todo">format date (01/01/2015, 9:00am)</span></li>
                         <li class="list-group-item"><strong>In Route:</strong> <?php $h->p('incident_inroute'); ?><span class="todo">format date (01/01/2015, 9:00am)</span></li>
                         <li class="list-group-item"><strong>On the Scene:</strong> <?php $h->p('incident_onscene'); ?><span class="todo">format date (01/01/2015, 9:00am)</span></li>
                         <li class="list-group-item"><strong>Location of Incident:</strong>
