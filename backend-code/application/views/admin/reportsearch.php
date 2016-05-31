@@ -51,7 +51,7 @@ function getReportTypeString($report) {
 					
                     <div id="js-sort-container" class="sort-form-container">
 
-                        <form>
+                        <form method="post">
 
                             <div class="form-group">
                                 <label for="start-date">Start Date</label>

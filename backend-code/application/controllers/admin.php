@@ -70,8 +70,8 @@ class Admin extends CI_Controller {
 	public function reportsearch() { 
 	
 		$this->load->model('Report');
-		$data['params'] = $_GET;
-		$data['reports'] = $this->Report->item_search($_GET); //$this->Report->get_entries();
+		$data['params'] = $_POST;
+		$data['reports'] = $this->Report->item_search($_POST); //$this->Report->get_entries();
 	
 		$this->view('reportsearch',$data); 
 	}

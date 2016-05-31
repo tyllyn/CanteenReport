@@ -1,0 +1,7 @@
+RewriteEngine on
+
+#RewriteCond $1 !^(index\.php|images|robots\.txt)
+#RewriteRule ^(.*)$ /index.php/$1 [L,R]
+
+RewriteCond $1 !^(index\.php|images|img|css|fonts|robots\.txt)
+RewriteRule ^(.+)/(.+)$ /index.php?c=$1&m=$2 [L]

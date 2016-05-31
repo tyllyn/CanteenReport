@@ -134,17 +134,26 @@ class Report extends CI_Model {
 		return $q->result();
 	}
 	function item_search($params){
-		$this->db->select('r.*'); //, i.Name, i.Category, l.quantity
-		$this->db->from("Reports r");
-		//$this->db->join("ReportMembers rm","rm.ReportID=r.ID","left outer");
-		//$this->db->join("LinkReportItem l","l.ReportID=r.ID","left outer");
-		//$this->db->join('Items i', 'l.ItemID=i.ID', 'left outer');
-		//linkreportitem ReportID
-		//reportmembers ReportID
 
-		//print_r($params);
+		//echo "<pre>".var_export($params, true)."</pre>";
+
+		$paramsBool = array();
+		foreach ($params as $k => $v) {
+			if ($v == "on") {
+				$paramsBool[$k] = "on";
+			}
+		}
+
+		//echo "<pre>".var_export($paramsBool, true)."</pre>";
+
+
+		$sql = "SELECT r.* FROM Reports r WHERE 1=1 ";
+		$sqlParams = array();
+
+		/*$this->db->select('r.*'); //, i.Name, i.Category, l.quantity
+		$this->db->from("Reports r");*/
 		
-		if(isset($params['month']) && $params['month'] != ''){
+		/*if(isset($params['month']) && $params['month'] != ''){
 			$this->db->where('MONTH(r.incident_start)', $params['month']);
 		}
 		if(isset($params['year']) && $params['year'] != ''){
@@ -152,11 +161,28 @@ class Report extends CI_Model {
 		}
 		if(isset($params['incident-unit-number']) && $params["incident-unit-number"] != '') {
 			$this->db->where('incident_unit_number',$params['incident-unit-number']);
+		}*/
+
+		if (count($paramsBool) > 0) {
+			$sql .= "AND (";
+			foreach ($paramsBool as $k => $v) {
+				$k = str_replace('-', '_', $k); // keys passed on form have dashes, DB has underscores
+
+				$sql .= $this->db->escape_str($k) . " = ? OR ";
+				$sqlParams[] = $v;
+
+			}
+			$sql .= "1=0) ";
 		}
 
-        $this->db->order_by('incident_start desc');
+        //$this->db->order_by('incident_start desc');
 
-		$q = $this->db->get();
+		//$q = $this->db->get();
+
+		echo "<pre>".var_export($sql, true)."</pre>";
+		echo "<pre>".var_export($sqlParams, true)."</pre>";
+
+		$q = $this->db->query($sql, $sqlParams);
 		
 		$this->load->model('Item');
 		$results = $q->result();
