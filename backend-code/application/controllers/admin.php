@@ -1,5 +1,9 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
 //require(APPPATH.'libraries/REST_Controller.php');
 
 function redirect($path) {
@@ -46,23 +50,36 @@ class Admin extends CI_Controller {
 		$this->User->logout();
 		redirect('/Admin/index');
 	}
+
+	private function getParamFromRequestUrl($key) {
+
+		$url = $_SERVER['REQUEST_URI'];
+		$params = explode('?', $url);
+		$params = $params[1];
+		$params = explode('&', $params);
+
+		foreach ($params as $p) {
+			$p = explode('=', $p);
+			if ($p[0] == $key) {
+				return $p[1];
+			}
+		}
+		return null;
+
+	}
+
 	public function report() {
 
-		if (!array_key_exists('id', $_GET)) {
+		$id = $this->getParamFromRequestUrl('id');
+
+		if ($id == null || !is_numeric($id)) {
 			redirect('/Admin/reportsearch');
-		}
-	
-		$id = $_GET['id'];
-		if (!is_numeric($id)) {
-			$this->view('login');
-			return;
 		}
 
 		$this->load->model('Report');
 		$data['report'] = $this->Report->get_entry($id);
 		$data['reportitems'] = $this->Report->get_entry_items($id);
 		$data['reportmembers'] = $this->Report->get_entry_members($id);
-		//die(var_export($data));
 
 		$this->view('report', $data);
 
@@ -78,7 +95,7 @@ class Admin extends CI_Controller {
 	public function summary() { $this->view('summary'); }
 
 	public function view($page = 'index', $data = array()) {
-		
+
 		if (!file_exists(APPPATH . '/views/admin/'.$page.'.php')) {
 			show_404();
 		}

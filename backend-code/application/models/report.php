@@ -135,7 +135,7 @@ class Report extends CI_Model {
 	}
 	function item_search($params){
 
-		//echo "<pre>".var_export($params, true)."</pre>";
+		echo "<pre>".var_export($params, true)."</pre>";
 
 		$paramsBool = array();
 		foreach ($params as $k => $v) {
@@ -149,6 +149,24 @@ class Report extends CI_Model {
 
 		$sql = "SELECT r.* FROM Reports r WHERE 1=1 ";
 		$sqlParams = array();
+
+		// start-date
+		if (!empty($params['start-date'])) {
+			$sql .= "AND incident_start >= ? ";
+			$sqlParams[] = $params['start-date'];
+		}
+
+		// end-date
+		if (!empty($params['end-date'])) {
+			$sql .= "AND incident_start <= ? ";
+			$sqlParams[] = $params['end-date'];
+		}
+
+		// unit #
+		if (!empty($params['incident-unit-number'])) {
+			$sql .= "AND incident_unit_number = ? ";
+			$sqlParams[] = $params['incident-unit-number'];
+		}
 
 		/*$this->db->select('r.*'); //, i.Name, i.Category, l.quantity
 		$this->db->from("Reports r");*/

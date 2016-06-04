@@ -55,12 +55,12 @@ function getReportTypeString($report) {
 
                             <div class="form-group">
                                 <label for="start-date">Start Date</label>
-                                <input id="start-date" class="form-control" name="start-date" type="date">
+                                <input id="start-date" class="form-control datepicker" name="start-date" style="position: relative; z-index: 2;" >
                             </div>
 
                             <div class="form-group">
                                 <label for="end-date">End Date</label>
-                                <input id="end-date" class="form-control" name="end-date" type="date">
+                                <input id="end-date" class="form-control datepicker" name="end-date" style="position: relative; z-index: 2;">
                             </div>
 
                             <div class="form-group">

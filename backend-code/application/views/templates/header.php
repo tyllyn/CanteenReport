@@ -27,10 +27,22 @@ function getNavClass($url) {
 	<title>Emergency Disaster Services - Canteen Report</title>
 
 	<link rel="stylesheet" href="/css/main.css">
+	<link rel="stylesheet" href="/js/jquery-ui-1.11.4.custom/jquery-ui.min.css" />
+	<script src="/js/jquery-ui-1.11.4.custom/external/jquery/jquery.js"></script>
+	<script src="/js/jquery-ui-1.11.4.custom/jquery-ui.js"></script>
+	<script>
+
+		$(document).ready(function() {
+
+			$( ".datepicker" ).datepicker({
+			});
+
+		});
+
+	</script>
 </head>
 
 <body>
-
 <nav class="navbar navbar-default navbar-canteen navbar-login">
 
 	<div class="container-fluid">

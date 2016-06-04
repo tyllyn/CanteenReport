@@ -1,7 +1,9 @@
 RewriteEngine on
 
+RewriteRule ^Admin/report?id=(.+)$ /index.php?c=Admin&m=report&id=$1 [L]
+
 #RewriteCond $1 !^(index\.php|images|robots\.txt)
 #RewriteRule ^(.*)$ /index.php/$1 [L,R]
 
-RewriteCond $1 !^(index\.php|images|img|css|fonts|robots\.txt)
+RewriteCond $1 !^(index\.php|images|img|css|js|fonts|robots\.txt)
 RewriteRule ^(.+)/(.+)$ /index.php?c=$1&m=$2 [L]
