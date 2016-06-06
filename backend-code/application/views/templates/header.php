@@ -1,7 +1,12 @@
 <?php
 
 function getNavClass($url) {
-	$path = "/".$_GET['c']."/".$_GET['m'];
+
+	$c = empty($_GET['c']) ? 'Admin' : $_GET['c'];
+	$m = empty($_GET['m']) ? 'index' : $_GET['m'];
+
+
+	$path = "/".$c."/".$m;
 	$path = explode("?", $path, 1);
 	$path = $path[0];
 	$path = explode("#", $path, 1);
